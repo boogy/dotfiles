@@ -1,0 +1,337 @@
+{
+    //
+    // EDITOR CONFIG
+    //
+    "editor.fontFamily": "Source Code Pro for Powerline",
+    // "editor.fontFamily": "Ubuntu Mono derivative Powerline",
+    // "editor.fontFamily": "Source Code Pro Regular",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 0,
+    "editor.lineNumbers": "on",
+    "editor.tabSize": 4,
+    "editor.quickSuggestions": true,
+    "editor.quickSuggestionsDelay": 10,
+    "editor.autoClosingBrackets": "always",
+    "editor.cursorStyle": "line-thin",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.fontWeight": "normal",
+    "editor.minimap.maxColumn": 300,
+    "editor.wordWrapColumn": 80,
+    "editor.mouseWheelZoom": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    //
+    // VIM CONFIG
+    //
+    // What key should <leader> map to in remappings?
+    "vim.leader": ",",
+    // Option to delegate certain key combinations back to VSCode to be handled natively
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-w>": false,
+        "<C-c>": false,
+        "<C-b>": false,
+        "<C-d>": true,
+        "<C-j>": false,
+        // enable zenmode CTRL+k+z
+        "<C-k>": false,
+        "<C-o>": false,
+    },
+    // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
+    "vim.insertModeKeyBindings": [
+        // bind jj to <ESC> in insert mode
+        {
+            "before": [ "j", "j" ],
+            "after": [ "<Esc>" ]
+        },
+        {
+            "before": [ "k", "k" ],
+            "after": [ "<Esc>" ]
+        },
+        {
+            "before": [ "C-v" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.clipboardPasteAction",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [ "C-x" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.clipboardCutAction",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [ "C-c" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.clipboardCopyAction",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [ "C-d" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.addSelectionToNextFindMatch",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [ "C-k", "C-d" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.moveSelectionToNextFindMatch",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "<leader>", "d" ],
+            "after": [ "d", "d" ]
+        },
+        {
+            // "before": [ "<C-n>" ],
+            "before": [ "<leader>", "<Enter>" ],
+            "commands": [ ":nohl" ]
+        },
+        {
+            "before": [";"],
+            "commands": [
+                "workbench.action.showCommands",
+            ]
+        },
+        {
+            "before": ["Z", "Z"],
+            "commands": [ ":wq" ]
+        },
+        {
+            "before": ["<leader>", "w"],
+            "commands": [ "workbench.action.files.save", ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "<Delete>",],
+            "commands": [ "editor.action.deleteLines"],
+        },
+        // Bind p in visual mode to paste without overriding the current register
+        {
+            "before": [ "p", ],
+            "after": [ "p", "g", "v", "y" ]
+        },
+        // Bind > and < in visual mode to indent/outdent lines (repeatable)
+        {
+            "before": [ ">" ],
+            "commands": [ "editor.action.indentLines" ]
+        },
+        {
+            "before": [ "<" ],
+            "commands": [ "editor.action.outdentLines" ]
+        },
+    ],
+    // Allow VSCodeVim to change status bar color based on mode
+    "vim.statusBarColorControl": true,
+    "vim.mouseSelectionGoesIntoVisualMode": false,
+    // Enable some vim ctrl key commands that override otherwise common operations, like ctrl+c
+    "vim.useCtrlKeys": true,
+    // Color of the search highlight.
+    "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
+    // Use system clipboard for unnamed register.
+    "vim.useSystemClipboard": false,
+    // Override VSCode's copy command with our own copy command, which works better with VSCodeVim. Turn this off if copying is not working.
+    "vim.overrideCopy": true,
+    // Non-recursive keybinding overrides to use for insert mode. Allows mapping to vim commands or vscode actions. See README for more.
+    "vim.insertModeKeyBindingsNonRecursive": [],
+    // Width to word-wrap to when using gq.
+    "vim.textwidth": 80,
+    // Timeout in milliseconds for remapped commands
+    "vim.timeout": 1000,
+    // Number of lines to scroll with CTRL-U and CTRL-D commands.
+    "vim.scroll": 20,
+    // Show the text of any command you are in the middle of writing.
+    "vim.showcmd": true,
+    // keywords contain alphanumeric characters and '_'
+    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    // Ignore case in search patterns.
+    "vim.ignorecase": true,
+    // Override the 'ignorecase' option if the search pattern contains upper case characters.
+    "vim.smartcase": true,
+    // Enable the EasyMotion plugin for Vim.
+    "vim.easymotion": true,
+    // Set a custom background color for EasyMotion markers.
+    "vim.easymotionMarkerBackgroundColor": "#000000",
+    // Set a custom color for the text on one character long markers.
+    "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
+    // Set a custom color for the text on two character long markers.
+    "vim.easymotionMarkerForegroundColorTwoChar": "#ffa500",
+    // Set the width (in pixels) allocated to each character in the match.
+    "vim.easymotionMarkerWidthPerChar": 8,
+    // Set the height of the marker.
+    "vim.easymotionMarkerHeight": 14,
+    // Set the font family of the marker text.
+    "vim.easymotionMarkerFontFamily": "Consolas",
+    // Set the font size of the marker text.
+    "vim.easymotionMarkerFontSize": "12",
+    // Set the font weight of the marker text.
+    "vim.easymotionMarkerFontWeight": "normal",
+    // Set the Y offset of the marker text (the distance from the top).
+    "vim.easymotionMarkerYOffset": 11,
+    // Enable the Surround plugin for Vim.
+    "vim.surround": true,
+    // Show all matches of the most recent search pattern
+    "vim.hlsearch": true,
+    // Show where a / search matches as you type it.
+    "vim.incsearch": true,
+    // How much search or command history should be remembered
+    "vim.history": 100,
+    // Indent code automatically.
+    "vim.autoindent": true,
+    // Start in Insert Mode.
+    "vim.startInInsertMode": false,
+    // In visual mode, start a search with * or # using the current selection
+    "vim.visualstar": false,
+    // Uses a hack to move around folds properly
+    "vim.foldfix": false,
+    // Use neovim on backend. (only works for Ex commands right now). You should restart VScode after enable/disabling this for the changes to take effect. NOTE: Neovim must be installed and neovimPath must be set the executable in order for this setting to work. Otherwise, vscodevim will crash.
+    "vim.enableNeovim": false,
+    // Path to run neovim executable. For example, /usr/bin/nvim, or
+    "vim.neovimPath": "nvim",
+    //
+    // FILE CONFIG
+    //
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.swp": true
+    },
+    "files.watcherExclude": {
+        "**/.git/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true
+    },
+    "files.hotExit": "off",
+    "files.trimTrailingWhitespace": true,
+    "files.associations": {
+        "**/defautls/**/*": "ansible",
+        "**/tasks/**/*.yml": "ansible",
+        "**/handler/*.yml": "ansible",
+        "**/*_vars/**/*.yml": "ansible",
+        "**/roles/**/*.yml": "ansible",
+        "**/playbooks/**/*.yml": "ansible",
+        "**/*ansible*/**/*.yml": "ansible",
+        "**/vars/**/*.yml": "ansible",
+        "**/inventory/*/*": "ansible",
+        "*.yml": "yaml"
+    },
+    "files.autoSave": "off",
+    // Configure editor settings to be overridden for [yaml] language.
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "[ansible]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    //
+    // TERMINAL CONFIG
+    //
+    "terminal.integrated.fontFamily": "Ubuntu Mono derivative Powerline",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.external.linuxExec": "termite",
+    "terminal.integrated.shell.linux": "/usr/sbin/zsh",
+    "terminal.integrated.scrollback": 100000,
+    //
+    // TELEMETRY
+    //
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": true,
+    //
+    // WINDOW CONFIG
+    //
+    "window.zoomLevel": 0,
+    "window.menuBarVisibility": "hidden",
+    "window.titleBarStyle": "native",
+    "window.openFilesInNewWindow": "off",
+    "window.openFoldersInNewWindow": "off",
+    "window.enableMenuBarMnemonics": true,
+    //
+    // WORKBENCH CONFIG
+    //
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.activityBar.visible": false,
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.colorTheme": "Flatland Monokai",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "workbench.startupEditor": "newUntitledFile",
+    //
+    //EXPLORER CONFIG
+    //
+    "explorer.autoReveal": false,
+    //
+    "material-icon-theme.showUpdateMessage": false,
+    "extensions.ignoreRecommendations": false,
+    //
+    // RUST config
+    //
+    "rust.racerPath": "/home/boogy/.cargo/bin/racer",
+    "rust.rustfmtPath": "/home/boogy/.cargo/bin/rustfmt",
+    "rust.rustsymPath": "/home/boogy/.cargo/bin/rustsym",
+    "rust.mode": "rls",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "markdown-pdf.executablePath": "/usr/sbin/chromium",
+    "markdown-pdf.highlightStyle": "monokai.css",
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    //
+    // Python config
+    //
+    "python.sortImports.path": "/usr/sbin/isort",
+    "python.pythonPath": "/usr/bin/python2",
+    "python.jediPath": "/usr/lib/python3.7/site-packages/jedi",
+    "python.jediEnabled": false,
+    "python.linting.pylintEnabled": true,
+    "markdown-pdf.breaks": true,
+    "terminal.integrated.shell.osx": "/usr/sbin/zsh",
+    "terminal.integrated.copyOnSelection": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
