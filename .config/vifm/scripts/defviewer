@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 filename"
+    exit 1
+fi
+
+# upper limit of lines to display for text files
+nlines=150
+# upper limit of bytes to display for binary files
+nbytes=2048
+# language of text files
+language=russian
+# output encoding for text files
+encoding=utf-8
+
+if test -d "$1"; then
+    tree "$1"
+else
+
+    info=$(head -$nlines "$1" | file --mime -)
+    charset=${info#*=}
+
+    if [ "x$charset" == "xbinary" ]; then
+        hexdump -e '"%08_ax: "' -e '8/1 "%02x " "  " 8/1 "%02x "' -e '" |" 16/1 "%_p"' -e '"\n"' -v -n $nbytes "$1"
+    else
+        head -$nlines "$1" | enconv -g -L $language -x $encoding
+    fi
+
+fi
+

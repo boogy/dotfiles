@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Gives a dmenu prompt to search DuckDuckGo.
+# Without input, will open DuckDuckGo.com.
+# Anything else, it search it.
+BROWSER=chromium
+
+pgrep -x dmenu && exit
+
+# choice=$(echo "🦆" | dmenu -i -p "Search DuckDuckGo:") || exit 1
+choice=$(echo "Google " | dmenu -i -p "Search Google:") || exit 1
+
+if [ "$choice" = "Google "  ]; then
+    $BROWSER "https://google.com"
+else
+    $BROWSER "https://google.com/search?q=$choice"
+fi

@@ -1,0 +1,99 @@
+{
+	"Code section bash": {
+		"prefix": "`bash",
+		"body": [
+			"```bash",
+			"$1",
+			"```"
+		],
+		"description": "insert bash code"
+	},
+	"Code section java": {
+		"prefix": "`java",
+		"body": [
+			"```java",
+			"$1",
+			"```"
+		]
+	},
+	"Code section html": {
+		"prefix": "`html",
+		"body": [
+			"```html",
+			"$1",
+			"```"
+		]
+	},
+	"Code section http": {
+		"prefix": "`http",
+		"body": [
+			"```http",
+			"$1",
+			"```"
+		]
+	},
+	"Code section xml": {
+		"prefix": "`xml",
+		"body": [
+			"```xml",
+			"$1",
+			"```"
+		]
+	},
+	"Code section python": {
+		"prefix": "`python",
+		"body": [
+			"```python",
+			"$1",
+			"```"
+		]
+	},
+	"Code section powershell": {
+		"prefix": "`powershell",
+		"body": [
+			"```powershell",
+			"$1",
+			"```"
+		]
+	},
+	"Code section json": {
+		"prefix": "`json",
+		"body": [
+			"```json",
+			"$1",
+			"```"
+		]
+	},
+	"Insert 2#": {
+		"prefix": "#2",
+		"body": [
+			"## ",
+		]
+	},
+	"Insert 3#": {
+		"prefix": "#3",
+		"body": [
+			"### ",
+		]
+	},
+	"Insert 4#": {
+		"prefix": "#4",
+		"body": [
+			"#### ",
+		]
+	},
+	"Insert 5#": {
+		"prefix": "#5",
+		"body": [
+			"##### ",
+		]
+	},
+	"Code section rubuy": {
+		"prefix": "`ruby",
+		"body": [
+			"```ruby",
+			"$1",
+			"```"
+		]
+	}
+}

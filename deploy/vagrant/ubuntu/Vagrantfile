@@ -1,0 +1,56 @@
+$script_root = <<-SCRIPT
+export DEBIAN_FRONTEND=noninteractive
+
+## 32bit
+# dpkg --add-architecture i386
+# apt-get update
+# apt-get -yq install libc6:i386 libc6-dev-i386 libncurses5:i386 libstdc++6:i386
+
+## 64bit
+# apt-get -yq install software-properties-common apt-transport-https \
+#     python2.7 python-pip python-dev python3-dev python3-pip python3-cryptography python-openssl python-virtualenv virtualenvwrapper python-scapy \
+#     make cmake stunnel socat hydra p7zip rar unrar unzip strace ltrace bzip2 rdesktop libssl-dev libffi-dev \
+#     whois samba-common samba-common-bin yasm nasm sslsplit gdb gdb-multiarch \
+#     gdbserver gcc gcc-multilib gcc-mingw-w64 python3-scapy python3-requests python-requests
+# apt-get autoremove -y
+# apt-get autoclean -y
+
+python2 -m pip install --upgrade pip
+python2 -m pip install --upgrade pwntools
+SCRIPT
+
+$script_vagrant = <<-SCRIPT
+# mkdir -p /home/vagrant/tools && cd /home/vagrant/tools
+# git clone https://github.com/pwndbg/pwndbg.git
+# cd pwndbg && ./setup.sh
+
+test -d ~/dotfiles \
+    || git clone https://github.com/boogy/dotfiles ~/dotfiles
+
+test -f /vagrant/bash_local \
+    && cp /vagrant/bash_local ~/.bash_local \
+    && chmod +x ~/.bash_local
+
+~/dotfiles/install.sh &>/dev/null
+SCRIPT
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "boogy/ubuntu1804"
+    config.vm.hostname = "ubuntu1804"
+    config.vm.network "private_network", type: "dhcp"
+
+    config.vm.provider "virtualbox" do |vm|
+        vm.name = "ubuntu1804"
+        vm.gui = false
+        vm.customize ["modifyvm"     , :id      , "--memory"             , 2048            ]
+        vm.customize ["modifyvm"     , :id      , "--cpus"               , 2               ]
+        vm.customize ["modifyvm"     , :id      , "--vram"               , "32"            ]
+        vm.customize ["modifyvm"     , :id      , "--nicpromisc2"        , "allow-all"     ]
+        vm.customize ["modifyvm"     , :id      , "--clipboard"          , "bidirectional" ]
+        vm.customize ["modifyvm"     , :id      , "--draganddrop"        , "bidirectional" ]
+        vm.customize ["setextradata" , "global" , "GUI/SuppressMessages" , "all"           ]
+    end
+    config.vm.provision "shell", inline: $script_root   , privileged: true
+    config.vm.provision "shell", inline: $script_vagrant, privileged: false
+    config.vm.synced_folder "/home/boogy", "/home/vagrant/share/"
+end

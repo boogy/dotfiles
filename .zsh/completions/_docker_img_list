@@ -1,0 +1,16 @@
+# #compdef docker
+#
+# _docker_img_list() {
+#   local -a commands
+#   commands=(
+#     $(docker images|sed -e '/REPOSITORY/d'|awk '{print $1}')
+#   )
+#
+#   if (( CURRENT == 2 )); then
+#     _describe -t commands 'commands' commands
+#   fi
+#
+#   return 0
+# }
+# _docker_img_list
+

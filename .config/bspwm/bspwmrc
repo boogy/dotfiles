@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+
+_bc() {
+	bspc config "$@"
+}
+
+_add_rule() {
+    bspc rule -a "$@"
+}
+
+_subscribe_to_actions(){
+    local _script_running=$(ps -ef|grep "\./[b]spwm-subscribe-actions.sh")
+
+    [[ ! -z $_script_running ]] && {
+        kill -9 $_script_running
+    } || {
+        $(which bspwm-subscribe-actions.sh)
+    }
+}
+
+## Remove all the rules before loading
+bspc rule -r "*"
+
+## Set environment path
+export BSPWM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm"
+
+##
+## BSPWM configuration
+##
+
+## longest_side || alternate || spiral
+_bc automatic_scheme              alternate
+#_bc border_radius                8
+_bc border_width                  1
+_bc window_gap                    4
+_bc top_padding                   0
+_bc bottom_padding                20
+_bc left_padding                  0
+_bc right_padding                 0
+## monocle mode for single windows
+_bc single_monocle                true
+_bc click_to_focus                true
+_bc split_ratio                   0.50
+_bc borderless_monocle            true
+_bc gapless_monocle               true
+_bc focus_by_distance             true
+_bc focus_follows_pointer         true
+_bc pointer_follows_focus         false
+_bc pointer_follows_monitor       true
+_bc history_aware_focus           true
+_bc remove_disabled_monitors      true
+_bc remove_unplugged_monitors     true
+_bc merge_overlapping_monitors    true
+_bc center_pseudo_tiled           true
+## Ignore EWMH focus requests coming from applications
+_bc ignore_ewmh_focus             false
+## commnands: xmodmap -pke | xmodmap -pm
+## shift, control, lock, mod1, mod2, mod3, mod4, mod5
+## mod1=Alt, mod4=super, mod5=AltGr
+_bc pointer_modifier mod1
+_bc pointer_action1 move
+_bc pointer_action2 resize_side
+_bc pointer_action3 resize_corner
+
+##
+## BSPWM Colors
+##
+# _bc focused_border_color	"#5e81ac"
+_bc normal_border_color		 "#4c566a"
+_bc active_border_color	   "#1e1e1e"
+_bc focused_border_color	 "#00ff00"
+_bc presel_feedback_color	 "#5e81ac"
+_bc urgent_border_color 	 "#dd2727"
+
+##
+## BSPWM monitors
+##
+"$(which bspwm-setup-monitors.sh)" &
+
+## Use monocle layout on desktop 1
+# _bc '^1' --layout monocle
+
+## Script for external rules
+_bc external_rules_command "$(which bspwm-external-rules.sh)"
+
+## Send to desktop
+_add_rule Vmware                  monitor=1 desktop=5  state=tiled follow=on
+_add_rule Libreoffice             monitor=1 desktop=6  state=tiled follow=on
+_add_rule '*:soffice'             monitor=1 desktop=6  state=tiled follow=on
+_add_rule Hexchat                 monitor=1 desktop=10 state=tiled follow=on
+_add_rule Xchat                   monitor=1 desktop=10 state=tiled follow=on
+
+## Other floating windows
+_add_rule mpv                     state=floating center=on
+_add_rule Blueman-manager         state=floating center=on
+_add_rule Shutter                 state=floating center=on
+_add_rule Solaar                  state=floating center=on
+_add_rule Arandr                  state=floating center=on
+_add_rule Display                 state=floating center=on
+_add_rule Empathy                 state=floating center=on
+_add_rule KeePassXC               state=floating center=on
+_add_rule mpv                     state=floating center=on
+_add_rule Nautilus                state=floating center=on
+_add_rule Pavucontrol             state=floating center=on
+_add_rule Transmission-gt         state=floating center=on
+
+## Load session
+. "$BSPWM_CONFIG/restore.cfg"
+if [ -e "$BSPWM_STATE" ] ; then
+    bspc wm --load-state "$BSPWM_STATE"
+    bspc wm --adopt-orphans
+    rm "$BSPWM_STATE"
+fi
+
+##
+## SUBSCRIPTIONS
+##
+"_subscribe_to_actions"
+
+##
+## AUTOSTART
+##
+"$(which bspwm-autostart.sh)" &
+

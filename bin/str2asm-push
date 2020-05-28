@@ -1,0 +1,22 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+# Output a string that can be used directly in asembly
+import sys
+try:
+    input = sys.argv[1]
+    chunk = sys.argv[2]
+except IndexError:
+    print("Usage: {} input chunk\n".format(sys.argv[0]))
+    sys.exit(1)
+
+# Reverse the string
+rev_input = input[::-1]
+
+# Encode it in hex
+rev_input_hex = rev_input.encode('hex')
+
+print "\n[+] Hex string : \n" + rev_input_hex
+print "\n[+] asm output:"
+for item in map( "".join, zip(*[iter(rev_input_hex)]*int(chunk))):
+    print("push 0x" + item)
+

@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "offensive-security/kali-linux"
+    config.vm.hostname = "kali"
+    config.vm.network "private_network", type: "dhcp"
+    config.vm.synced_folder "/home/boogy", "/share"
+    config.vm.boot_timeout = 600
+
+    config.vm.provider "virtualbox" do |vb|
+        vb.name = "kaliroling"
+        vb.gui = false
+        vm.customize ["modifyvm"     , :id      , "--memory"             , 2048            ]
+        vm.customize ["modifyvm"     , :id      , "--cpus"               , 2               ]
+        vm.customize ["modifyvm"     , :id      , "--vram"               , "32"            ]
+        vm.customize ["modifyvm"     , :id      , "--nicpromisc2"        , "allow-all"     ]
+        vm.customize ["modifyvm"     , :id      , "--clipboard"          , "bidirectional" ]
+        vm.customize ["modifyvm"     , :id      , "--draganddrop"        , "bidirectional" ]
+        vm.customize ["setextradata" , "global" , "GUI/SuppressMessages" , "all"           ]
+    end
+
+    config.vm.provision "shell", inline: <<-SHELL
+    export DEBIAN_FRONTEND=noninteractive
+    apt update
+    apt install -y python python-pip python3 python3-pip \
+    clang cmake binutils-mingw-w64 binutils-mingw-w64-i686 binutils-mingw-w64-x86-64 \
+    g++-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 mingw-w64-x86-64-dev \
+    mingw-w64-tools mingw-w64-i686-dev mingw-w64-common mingw-w64
+
+    cd /home/vagrant/
+    sudo -H -u vagrant git clone https://github.com/boogy/dotfiles
+    sudo -H -u vagrant bash -c "echo y|/home/vagrant/dotfiles/install.sh" &>/dev/null
+    SHELL
+end

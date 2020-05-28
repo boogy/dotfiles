@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# tab completion for cd in home dir
+hcd(){ cd ~/$1;}
+_hcd() {
+    local cur opts
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    #opts=$(cd ~/ ; ls -d */. | sed 's|/./||')
+    # this must list the dirs on mac os
+    opts=$(cd ~/ ; ls -d */. | sed -e 's|/./||' -e 's|\.$||g' -e 's|/$||')
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+
+# tab completion for cd in Dropbox
+dcd(){ cd ~/Dropbox/$1;}
+_dcd() {
+    local cur opts
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$(cd ~/Dropbox ; ls -d */. | sed -e 's|/./||' -e 's|\.$||g' -e 's|/$||')
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+complete -F _hcd hcd
+complete -F _dcd dcd
+## FUNCTIONS ##

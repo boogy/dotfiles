@@ -1,0 +1,49 @@
+*.log
+.DS_Store
+*.o
+*.pyc
+*~
+.rop*
+.mc-lists.el
+.gdb*
+!.gdbinit
+*.swap
+__pycache__
+Pipefile.lock
+Pipefile
+.venv
+
+## VIM / NVIM
+.vim/plugged/*
+.vim/autoload/*
+.vim/.netrwhist
+.vim/spell
+.vim/view
+.config/vifm/vifminfo
+.config/nvim/autoload/*
+!.config/nvim/autoload/plug.vim
+.config/nvim/plugged/*
+.config/nvim/.netrwhist
+
+copyright.pandoc
+pandoc
+pandoc-citeproc
+
+## Vagrant
+.vagrant/
+
+## Visual Studio Code
+.vscode/
+.config/Code/*
+!.config/Code/User
+.config/Code/User/*
+!.config/Code/User/settings.json
+!.config/Code/User/keybindings.json
+!.config/Code/User/snippets/
+
+## VIFM
+.config/vifm/*
+!.config/vifm/colors/
+!.config/vifm/scripts/
+!.config/vifm/vifmrc
+
