@@ -144,12 +144,6 @@ bindkey -s "^g" "vifm $PWD\n"
 bindkey -s "^o" "open_with_fzf\n"
 bindkey -s "^g" "cd_with_fzf\n"
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
-#source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
-## load prompt
-source ~/.zsh/prompt/prompt-simple.zsh
-
 ## source plugins from oh-my-zsh
 ## and custom will take precedence
 zsh_plugins=(
@@ -204,3 +198,14 @@ fi
 if [ -f "$HOME/.bash_local" ]; then
     source_bash "$HOME/.bash_local" &>/dev/null
 fi
+
+##
+## Source other files
+##
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+#source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
+
+## load prompt
+source ~/.zsh/prompt/prompt-simple.zsh
+

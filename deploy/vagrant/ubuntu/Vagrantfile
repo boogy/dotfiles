@@ -1,37 +1,41 @@
 $script_root = <<-SCRIPT
 export DEBIAN_FRONTEND=noninteractive
 
-## 32bit
-# dpkg --add-architecture i386
-# apt-get update
-# apt-get -yq install libc6:i386 libc6-dev-i386 libncurses5:i386 libstdc++6:i386
+apt-get -y install zsh zsh-common zsh-syntax-highlighting curl wget software-properties-common apt-transport-https gcc g++ make \
+python3-dev python3-requests python3-cryptography python3-pip \
+neovim python3-neovim golang
 
-## 64bit
-# apt-get -yq install software-properties-common apt-transport-https \
-#     python2.7 python-pip python-dev python3-dev python3-pip python3-cryptography python-openssl python-virtualenv virtualenvwrapper python-scapy \
-#     make cmake stunnel socat hydra p7zip rar unrar unzip strace ltrace bzip2 rdesktop libssl-dev libffi-dev \
-#     whois samba-common samba-common-bin yasm nasm sslsplit gdb gdb-multiarch \
-#     gdbserver gcc gcc-multilib gcc-mingw-w64 python3-scapy python3-requests python-requests
-# apt-get autoremove -y
-# apt-get autoclean -y
+## setup nodejs
+#sudo apt -y install dirmngr lsb-release ca-certificates
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash
+sudo apt -y install nodejs
 
-python2 -m pip install --upgrade pip
-python2 -m pip install --upgrade pwntools
+## setup yarn for neovim
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt -y install yarn
+
+## add latest neovim ppa
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+sudo apt -y install neovim
+
+apt-get autoremove -y
+apt-get autoclean -y
 SCRIPT
 
 $script_vagrant = <<-SCRIPT
-# mkdir -p /home/vagrant/tools && cd /home/vagrant/tools
-# git clone https://github.com/pwndbg/pwndbg.git
-# cd pwndbg && ./setup.sh
+[ -d ~/dotfiles ] || git clone https://github.com/boogy/dotfiles ~/dotfiles
 
-test -d ~/dotfiles \
-    || git clone https://github.com/boogy/dotfiles ~/dotfiles
-
-test -f /vagrant/bash_local \
+[ -f /vagrant/bash_local ] \
     && cp /vagrant/bash_local ~/.bash_local \
     && chmod +x ~/.bash_local
 
-~/dotfiles/install.sh &>/dev/null
+## this script will take too long to wait for
+~/dotfiles/install.sh &>/dev/null &
+
+(cd ~/.config/nvim/autoload/plugged/vim-hexokinase/ && make hexokinase) &>/dev/null
+sudo chsh --shell /bin/zsh vagrant
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -50,7 +54,18 @@ Vagrant.configure("2") do |config|
         vm.customize ["modifyvm"     , :id      , "--draganddrop"        , "bidirectional" ]
         vm.customize ["setextradata" , "global" , "GUI/SuppressMessages" , "all"           ]
     end
+
+    ## run provisioning script as root
     config.vm.provision "shell", inline: $script_root   , privileged: true
+
+    ## run provisioning script as vagrant
     config.vm.provision "shell", inline: $script_vagrant, privileged: false
-    config.vm.synced_folder "/home/boogy", "/home/vagrant/share/"
+    config.vm.synced_folder ENV['HOME'], "/home/vagrant/share/"
+
+    ## copy our own ssh key
+    config.vm.provision "file", source: "~/.ssh/id_ed25519.pub", destination: "~/.ssh/me.pub"
+    config.vm.provision "shell", inline: <<-SHELL
+      grep ssh-ed25519 /home/vagrant/.ssh/authorized_keys || \
+      cat /home/vagrant/.ssh/me.pub >> /home/vagrant/.ssh/authorized_keys
+    SHELL
 end
