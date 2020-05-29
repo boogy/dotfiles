@@ -39,12 +39,12 @@ sudo chsh --shell /bin/zsh vagrant
 SCRIPT
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "boogy/ubuntu1804"
-    config.vm.hostname = "ubuntu1804"
+    config.vm.box = "boogy/ubuntu2004"
+    config.vm.hostname = "ubuntu2004"
     config.vm.network "private_network", type: "dhcp"
 
     config.vm.provider "virtualbox" do |vm|
-        vm.name = "ubuntu1804"
+        vm.name = "ubuntu2004"
         vm.gui = false
         vm.customize ["modifyvm"     , :id      , "--memory"             , 2048            ]
         vm.customize ["modifyvm"     , :id      , "--cpus"               , 2               ]
