@@ -62,6 +62,15 @@ window_id="$1"
 window_class="$2"
 window_instance="$3"
 window_title="$(xwininfo -id "$window_id" | sed ' /^xwininfo/!d ; s,.*"\(.*\)".*,\1,')"
+windows_instance_class=${window_instance}:${window_class}
+
+
+case "$windows_instance_class" in
+    [Pp]laces:[Ff]irefox)
+        echo "state=floating"
+        echo "center=on"
+        ;;
+esac
 
 
 case "$window_class" in
