@@ -1,36 +1,81 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "python"],
-
-  // python config
-  // if false, microsoft python engine will be used
-  "python.jediEnabled": false,
-  //"python.pythonPath": "/usr/sbin/python3",
-  //"python.jediPath": "/usr/lib/python3.8/site-packages/jedi",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintPath": "/usr/sbin/pylint",
-  "python.sortImports.path": "/usr/sbin/isort",
-  "python.venvFolders": ["envs", ".pyenv", ".venv"],
-
-  "snippets.ultisnips.directories":
-  [
-    "UltiSnips",
-    "gosnippets/UltiSnips",
-    "~/.config/nvim/utils/snips"
-  ],
-
-  "json.enable": true,
-  "json.format.enable": true,
-
-  // explorer
-  "explorer.width": 50,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.quitOnOpen": true,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit",
-    "o": "open:tab"
-  }
-
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "javascript",
+        "graphql",
+        "html",
+        "yaml",
+        "json",
+        "python"
+    ],
+    // python config
+    // if false, microsoft python engine will be used
+    "python.jediEnabled": false,
+    //"python.pythonPath": "/usr/sbin/python3",
+    //"python.jediPath": "/usr/lib/python3.8/site-packages/jedi",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "/usr/sbin/pylint",
+    "python.sortImports.path": "/usr/sbin/isort",
+    "python.venvFolders": [
+        "envs",
+        ".pyenv",
+        ".venv"
+    ],
+    "snippets.ultisnips.directories": [
+        "UltiSnips",
+        "gosnippets/UltiSnips",
+        "~/.config/nvim/utils/snips"
+    ],
+    "json.enable": true,
+    "json.format.enable": true,
+    // explorer
+    "explorer.width": 50,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.quitOnOpen": false,
+    "explorer.keyMappings": {
+        "*": "toggleSelection",
+        "<tab>": "actionMenu",
+        "h": "collapse",
+        "l": [
+            "expandable?",
+            "expand",
+            "open"
+        ],
+        "J": [
+            "toggleSelection",
+            "nodeNext"
+        ],
+        "K": [
+            "toggleSelection",
+            "nodePrev"
+        ],
+        "gl": "expandRecursive",
+        "gh": "collapseRecursive",
+        "<cr>": [
+            "expandable?",
+            "expand",
+            "open"
+        ],
+        "y": "copyFilepath",
+        "Y": "copyFilename",
+        "c": "copyFile",
+        "x": "cutFile",
+        "p": "pasteFile",
+        "d": "delete",
+        "D": "deleteForever",
+        "a": "addFile",
+        "A": "addDirectory",
+        ".": "toggleHidden",
+        "R": "refresh",
+        "[c": "gitPrev",
+        "]c": "gitNext",
+        "<<": "gitStage",
+        ">>": "gitUnstage",
+        "r": "rename",
+        "v": "open:vsplit",
+        "o": "open:tab"
+    }
 }
