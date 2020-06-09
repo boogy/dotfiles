@@ -48,7 +48,7 @@ set lazyredraw                          " Don't redraw while executing macros (b
 
 " timeout or commentary is not working properly
 set ttimeout
-set timeoutlen=350
+set timeoutlen=250
 set ttimeoutlen=0
 
 if exists('+termguicolors')
