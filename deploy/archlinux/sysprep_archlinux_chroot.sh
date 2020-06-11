@@ -337,6 +337,10 @@ function configure_mkinitcpio_hooks
         sed -i "/#HOOKS=(base/a HOOKS=(base systemd udev autodetect modconf block keyboard keymap filesystems resume fsck)" /etc/mkinitcpio.conf
     fi
 
+    ## enable mkinitcpio compression
+    sed -i "s/#COMPRESSION=\"xz\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
+    sed -i "s/#COMPRESSION_OPTIONS=.*/COMPRESSION_OPTIONS=(-0 -T 0)/" /etc/mkinitcpio.conf
+
     msg_ok "Generate kernel images with 'mkinitcpio -P'"
     mkinitcpio -P
 }
