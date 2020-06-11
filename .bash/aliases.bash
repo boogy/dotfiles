@@ -195,8 +195,9 @@ alias nvidia-check32="optirun glxspheres32"
 ##
 ## MISC
 ##
-alias ipa="ip --color=always a s"
-alias ipr="ip --color=always route"
+alias ip="ip --color=always"
+alias ipa="ip a s"
+alias ipr="ip route"
 alias dfh='df -h'
 alias grep='grep --color=always'
 alias lesss="$(which less) -R"
