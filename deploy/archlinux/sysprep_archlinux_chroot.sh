@@ -22,7 +22,7 @@ echo "$(tput setaf 2)[+] Information required for the chroot environment$(tput s
 read -p "$(tput setaf 2) [?] Enter hostname:$(tput sgr0)                                              " tmp_HOSTNAME
 read -p "$(tput setaf 2) [?] Enter username:$(tput sgr0)                                              " tmp_USERNAME
 read -p "$(tput setaf 2) [?] Boot loader to install ([grub] OR [default: systemd-boot] ):$(tput sgr0) " tmp_BOOT_TYPE
-read -p "$(tput setaf 2) [?] Swap file size (default: 32G):$(tput sgr0)                               " tmp_SWAP_SIZE
+read -p "$(tput setaf 2) [?] Swap file size in Gb (default: 32):$(tput sgr0)                          " tmp_SWAP_SIZE
 read -p "$(tput setaf 2) [?] Locales to use for the system (default: fr_CH-latin1):$(tput sgr0)       " tmp_LOCALES
 
 ## if using nvme change the names
@@ -53,7 +53,7 @@ fi
 HOSTNAME=${tmp_HOSTNAME:-"archhostname"}
 USERNAME=${tmp_USERNAME:-"boogy"}
 BOOT_TYPE=${tmp_BOOT_TYPE:-"systemd-boot"}
-SWAP_SIZE=${tmp_SWAP_SIZE:-"32G"}
+SWAP_SIZE=${tmp_SWAP_SIZE:-"32"}
 LOCALES=${tmp_LOCALES:-"fr_CH-latin1"}
 HOME_DIR="/home/${USERNAME}"
 
@@ -91,10 +91,10 @@ function is_virtual_machine
 function create_swapfile
 {
     ## /etc/fstab: /swapfile none swap defaults 0 0
-    ## equivalent to: dd if=/dev/zero of=/swapfile bs=1M count=1024
     if [[ ! -f /swapfile ]]; then
         msg_ok "Creating a ${SWAP_SIZE} swap file /swapfile"
-        fallocate -l ${SWAP_SIZE} /swapfile
+        ## when generating with fallocate swapon complains so use dd
+        dd if=/dev/zero of=/swapfile bs=1G count=${SWAP_SIZE} status=progress
         chmod 600 /swapfile
         mkswap /swapfile
         swapon /swapfile
