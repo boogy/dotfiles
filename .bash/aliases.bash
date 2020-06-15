@@ -236,3 +236,7 @@ alias keyboard-speed="xset r rate 200 50"
 alias fr-keyboard="setxkbmap -model pc105 -layout ch -variant fr -option lv3:ralt_switch"
 #alias sound-latency="pactl set-port-latency-offset $(pacmd list-sinks | egrep -o 'bluez_card[^>]*') headset-output 125000"
 
+##
+## FZF magic
+##
+alias list-notes="fzf --preview=\"cat {}\" --preview-window=right:70%:wrap --bind=\"space:toggle-preview\""
