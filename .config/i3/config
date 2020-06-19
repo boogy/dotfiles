@@ -309,6 +309,7 @@ bindsym button8 move right
 bindsym XF86AudioRaiseVolume $exec ~/.config/i3/scripts/volume.sh +5%
 bindsym XF86AudioLowerVolume $exec ~/.config/i3/scripts/volume.sh -5%
 bindsym XF86AudioMute        $exec ~/.config/i3/scripts/volume.sh mute
+bindsym F12                  $exec amixer set Capture toggle
 # bindsym XF86AudioRaiseVolume $exec amixer -q sset Master 5%+
 # bindsym XF86AudioLowerVolume $exec amixer -q sset Master 5%-
 # bindsym XF86AudioMute        $exec amixer -q sset Master toggle
