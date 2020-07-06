@@ -61,7 +61,7 @@ tray-position = ${env:TRAY_POSITION:right}
 tray-padding = 1
 tray-detached = false
 tray-scale = 1.0
-tray-transparent = false
+# tray-transparent = false
 tray-maxsize = 16
 ; tray-background = #0063ff
 tray-background = ${root.background}
@@ -87,7 +87,7 @@ tray-position = ${env:TRAY_POSITION:right}
 tray-padding = 1
 tray-detached = false
 tray-scale = 1.0
-tray-transparent = false
+# tray-transparent = false
 tray-maxsize = 16
 tray-background = ${root.background}
 

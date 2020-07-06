@@ -75,6 +75,3 @@ gome-keyring-daemon --start --daemonize --components=gpg,pkcs10,secrets,ssh &
 
 ## compozitor
 _run picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible
-
-## reload bspwm to detect the screens in multi-monitor layout
-bspc wm -r
