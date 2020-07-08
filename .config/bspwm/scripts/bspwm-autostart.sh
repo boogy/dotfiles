@@ -26,6 +26,24 @@ xrdb -merge ~/.Xresources
 xset r rate 200 70
 xhost +local:
 
+##Daemon mode for filemanager makes mounting volumes easier
+#thunar --daemon &
+
+##enable local fonts in .fonts directory
+xset +fp /usr/share/fonts/local &
+xset +fp /usr/share/fonts/misc &
+xset +fp ~/.fonts &
+xset fp rehash &
+fc-cache -fv &
+
+##powersaving options
+xset s off &
+xset s noblank &
+xset s noexpose &
+xset c on &
+xset -dpms &
+xbacklight -set 15 &
+
 ## Launch keybinding daemon after setting the keyboard layout
 _run sxhkd -m -1 > /tmp/sxhkd.log
 

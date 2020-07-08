@@ -190,6 +190,9 @@ alt + w
 control + alt + p
 	rofi -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
 
+control + alt + o
+	bolt --rofi-search
+
 ## Launch dmenu
 alt + d
 	j4-dmenu-desktop --display-binary --dmenu="dmenu -i" --term=termite

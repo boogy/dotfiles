@@ -75,7 +75,8 @@ alias ln="ln -i"    # prompt whether to remove destinations
 alias chown="chown --preserve-root"
 alias chmod="chmod --preserve-root"
 alias chgrp="chgrp --preserve-root"
-alias batp="bat -p --paging=never"
+alias batpp="bat -p --paging=never"
+alias batp="bat --paging=never"
 
 ##
 ## bash config shortcuts
@@ -100,14 +101,14 @@ alias t-conf="$EDITOR ~/.tmux.conf"
 ##
 alias ~="cd ~"
 alias cd-="cd -"
-alias cd..="cd .."
-alias cd...="cd ../../"
-alias cd....="cd ../../../"
-alias ..="cd .."
-alias .2="cd ../../"
-alias .3="cd ../../../"
-alias .4="cd ../../../../"
-alias .5="cd ../../../../../"
+# alias cd..="cd .."
+# alias cd...="cd ../../"
+# alias cd....="cd ../../../"
+# alias ..="cd .."
+# alias .2="cd ../../"
+# alias .3="cd ../../../"
+# alias .4="cd ../../../../"
+# alias .5="cd ../../../../../"
 
 ##
 ## debian/ubuntu aliases
