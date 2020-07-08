@@ -1,0 +1,2 @@
+## reload bspwm when a screen is added or removed
+ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", RUN+="/usr/bin/bspc wm -r"

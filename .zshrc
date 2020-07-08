@@ -45,6 +45,7 @@ export PATH=${PATH}:${HOME}/bin
 export PATH=${PATH}:/home/boogy/.cargo/bin
 export PATH=${PATH}:${HOME}/.local/bin
 
+export BROWSER=firefox
 export LANG=en_US.UTF-8
 # export EDITOR='vim'
 export VIEW="$EDITOR"
@@ -141,8 +142,10 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 ## Control bindings for programs
 bindkey -s "^g" "vifm $PWD\n"
-bindkey -s "^o" "open_with_fzf\n"
+# bindkey -s "^o" "open_with_fzf\n"
 bindkey -s "^g" "cd_with_fzf\n"
+bindkey -s '^o' "bolt --fzf-search\n"
+bindkey -s '^s' "bolt --rofi-search\n"
 
 ## source plugins from oh-my-zsh
 ## and custom will take precedence

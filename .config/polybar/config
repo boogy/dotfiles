@@ -12,7 +12,6 @@ alert = #bd2c40
 ; DEFAULT BAR (i3)
 ;###############################################################
 [bar/bar-i3]
-; monitor = ${env:MONITOR:eDP1}
 monitor = ${env:POLYBAR_PRIMARY_MONITOR:DP2-1}
 ; monitor-fallback = eDP-1
 monitor-strict = false
@@ -54,7 +53,7 @@ font-6 = "NotoEmoji Nerd Font:style=Book:size=10"
 font-7 = "Noto Color Emoji:style=Regular:size=10"
 
 modules-left = i3
-; modules-center = bitcoin litecoin ethereum
+; modules-center = windowlist
 modules-right = powermenu xbacklight pulseaudio bluetooth memory cpu wlan vpn eth battery date
 
 tray-position = ${env:TRAY_POSITION:right}
@@ -69,9 +68,6 @@ tray-background = ${root.background}
 wm-restack = i3
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-
-; The separator will be inserted between the output of each module
-; separator =
 locale = fr_CH.UTF-8
 
 
@@ -125,14 +121,12 @@ font-6 = NotoEmoji Nerd Font:style=Book:size=10
 font-7 = Noto Color Emoji:style=Regular:size=10
 
 modules-left = bspwm bspwm-monocle-nb-windows
-; modules-center = bspwm-monocle-nb-windows
+; modules-center = windowlist
 modules-right = powermenu xbacklight pulseaudio bluetooth memory cpu wlan vpn eth battery date
 
 wm-restack = bspwm
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
-; scroll-up = bspc desktop -f prev.local
-; scroll-down = bspc desktop -f next.local
 
 locale = fr_CH.UTF-8
 
@@ -169,31 +163,17 @@ label-mounted = %{A1:xfce4-taskmanager -f &:}%{T5} %{T-} %{F#0a81f5}%mountpoi
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
-
 ;###############################################################
 [module/bspwm]
 type = internal/bspwm
-; Only show workspaces defined on the same output as the bar
-; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
-; But if you rename your bspwm monitors with bspc -n this option will no longer
-; behave correctly.
-; Default: true
 pin-workspaces = true
 strip-wsnumbers = false
 
 enable-click = true
 enable-scroll = true
 reverse-scroll = true
-
-; Output mode flags after focused state label
-; Default: false
 inline-mode = false
 
-; Use fuzzy (partial) matching on labels when assigning
-; icons to workspaces
-; Example: code;♚ will apply the icon to all workspaces
-; containing 'code' in the label
-; Default: false
 fuzzy-match = false
 index-sort = true
 
@@ -215,8 +195,8 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 label-monitor = %name%
-; format = <label-state> <label-monitor><label-mode>
-format = <label-state> <label-mode>
+; format = <label-state> [<label-monitor> <label-mode>]
+format = <label-state> [<label-mode>]
 wrapping-scroll = false
 
 label-monocle = M
@@ -330,11 +310,6 @@ label-urgent = %{T4}%index%%icon%%{T-}
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
-; Separator in between workspaces
-; label-separator = |
-; label-separator-padding = 0
-; label-separator-foreground = #ffb52a
-
 
 ;###############################################################
 ;                           mpd Module
@@ -352,14 +327,12 @@ icon-next = 
 label-song-maxlen = 25
 label-song-ellipsis = true
 
-
 ;###############################################################
 ;                       xbacklight Module
 ;###############################################################
 [module/xbacklight]
 type = internal/xbacklight
 enable-scroll = true
-; output = eDP-1
 
 format = <label> <bar>
 label = "%{T5}%{T-} %percentage%% "
@@ -376,34 +349,23 @@ bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
 
-
 ;###############################################################
 ;                       backlight Module
 ;###############################################################
 [module/backlight]
-; inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
 
-; Available tags:
-;   <label> (default)
-;   <ramp>
-;   <bar>
 format = <label> <ramp>
 enable-scroll = true
 
-; Available tokens:
-;   %percentage% (default)
 label = %{T5}%{T-} %percentage%%
-
-; Only applies if <ramp> is used
 ramp-0 = 🌕
 ramp-1 = 🌔
 ramp-2 = 🌓
 ramp-3 = 🌒
 ramp-4 = 🌑
 
-; Only applies if <bar> is used
 bar-width = 10
 bar-indicator = |
 bar-indicator-foreground = #ff
@@ -416,17 +378,14 @@ bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
 
-
 ;###############################################################
 [module/cpu]
 type = internal/cpu
 interval = 5
 format = %{A1:termite -e 'htop --sort-key=PERCENT_CPU' &:}<label>%{A}
-; format = %{A1:i3-sensible-terminal -e htop -t &:}<label> <ramp-coreload>%{A}
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-; label = CPU %percentage%%
 label = %{T5}%{T-} %percentage%%
 
 ramp-coreload-0 = ▁
@@ -451,21 +410,10 @@ ramp-coreload-7-foreground = #ff5555
 [module/memory]
 type = internal/memory
 interval = 10
-format = %{A1:xfce4-taskmanager &:}<label> <bar-used>%{A}
+format = %{A1:xfce4-taskmanager &:}<label>%{A}
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
-; Available tokens:
-; ;   %percentage_used% (default)
-; ;   %percentage_free%
-; ;   %gb_used%
-; ;   %gb_free%
-; ;   %gb_total%
-; ;   %mb_used%
-; ;   %mb_free%
-; ;   %mb_total%
-; label = RAM %{T5}%{T-} %{T4}%gb_used%/%gb_free%%{T-}
-; label = RAM %{T5}%{T-} %{T4}%gb_used%%{T-}
 label = %{T5}%{T-} %{T4}%gb_used%%{T-}
 
 ; Only applies if <bar-used> is used
@@ -480,7 +428,6 @@ bar-used-empty = ▐
 bar-used-empty-foreground = #444444
 
 
-
 ;###############################################################
 [module/wlan]
 type = internal/network
@@ -489,15 +436,6 @@ interval = 5.0
 
 format-connected = %{A1:nm-connection-editor &:}<ramp-signal> <label-connected>%{A}
 format-connected-underline = #9f78e1
-; Available tokens:
-; ;   %ifname%    [wireless+wired]
-; ;   %local_ip%  [wireless+wired]
-; ;   %essid%     [wireless]
-; ;   %signal%    [wireless]
-; ;   %upspeed%   [wireless+wired]
-; ;   %downspeed% [wireless+wired]
-; ;   %linkspeed% [wired]
-; ; Default: %ifname% %local_ip%
 label-connected = %{T5}%{T-} %essid% %signal%% %local_ip%
 
 format-disconnected =
@@ -555,7 +493,6 @@ date = " %d.%m.%Y"
 time = "%H:%M "
 ; time-alt = %H:%M:%S
 
-;format-date = %{A3:gnome-calendar &:}%{A}<label>
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
@@ -573,15 +510,12 @@ headphone-soundcard = default
 master-mixer = Master
 mapped = false
 
-; format-volume = %{A3:pavucontrol &:}<ramp-volume> <label-volume>%{A}
 format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
 label-volume = %{T5} %{T-} %percentage%%
 label-volume-foreground = ${root.foreground}
 
 format-muted = <ramp-volume> <label-muted>
 format-muted-prefix = " "
-; format-muted-foreground = ${colors.foreground-alt}
-; label-muted-foreground = #66
 format-muted-foreground = ${colors.secondary}
 label-muted = %{T5}%{T-} 0%
 
@@ -675,7 +609,6 @@ animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
 
-
 ;###############################################################
 [module/temperature]
 type = internal/temperature
@@ -743,35 +676,11 @@ menu-4-0-exec = menu-open-0
 
 menu-5-0 = Lock Screen
 menu-5-0-exec = ~/.config/i3/scripts/lock
-; menu-5-0 = cancel
-; menu-5-0-exec = menu-open-0
 
 
-;###############################################################
-; [module/vpn]
-; type = ~/.config/i3/scripts/openvpn
-; exec = echo vpn
-; exec-if = pgrep -x openvpn
-; interval = 5
-; format = <label>
-; label = %output:0:15%...
-; format-underline = #268bd2
-; format-prefix = "🖧 "
-; format-prefix-foreground = #5b
-
-
-;###############################################################
-; [module/vlc]
-; type = custom/script
-; exec = ~/.config/i3/scripts/vlc-get-song.sh
-; exec-if = wmctrl -lp|grep $(pgrep -x vlc)
-; interval = 10
-; format = <label>
-; label = %{T5}%{T-} %output%
-; format-underline = #268bd2
-; format-prefix-foreground = ${root.background-alt}
-; format-prefix-foreground = #5b
-
+################################################################
+## Modules
+################################################################
 
 ;###############################################################
 [module/bluetooth]
@@ -782,41 +691,7 @@ format = %{A1:blueman-manager &:}<label>%{A}
 format-underline = #268bd2
 format-prefix-foreground = ${root.background-alt}
 
-
 ;###############################################################
-[module/bitcoin]
-type = custom/script
-interval = 10
-format = <label>
-format-prefix = " "
-tail = true
-format-underline = #268bd2
-; format-underline = #f90000
-format-prefix-foreground = ${colors.foreground}
-exec = ~/.config/i3/scripts/crypto_prices.py btcusd
-
-[module/ripple]
-type = custom/script
-interval = 10
-format = <label>
-format-prefix = " XRP "
-tail = true
-format-underline = #268bd2
-; format-underline = #f90000
-format-prefix-foreground = ${colors.foreground}
-exec = ~/.config/i3/scripts/crypto_prices.py rpcusd
-
-[module/ethereum]
-type = custom/script
-interval = 10
-format = <label>
-format-prefix = " ETH "
-tail = true
-format-underline = #268bd2
-; format-underline = #f90000
-format-prefix-foreground = ${colors.foreground}
-exec = ~/.config/i3/scripts/crypto_prices.py ethusd
-
 [module/litecoin]
 type = custom/script
 interval = 10
@@ -828,45 +703,23 @@ format-underline = #268bd2
 format-prefix-foreground = ${colors.foreground}
 exec = ~/.config/i3/scripts/crypto_prices.py ltcusd
 
-; [module/bspwm-monocle-nb-windows]
-; type = custom/script
-; interval = 2
-; format = <label>
-; format-prefix = " "
-; tail = true
-; format-underline = #268bd2
-; ; format-underline = #f90000
-; format-prefix-foreground = ${colors.foreground}
-; exec-if = [[ $(bspc query -T -d|jq -r .layout) == "monocle" ]]
-; ; exec-if = [[ $(bspc query -T -d | jq ".|select(.id == $(printf '%d' $(bspc query -D -d))).layout"|tr -d '"') == "monocle" ]]
-; exec = ~/.config/bspwm/scripts/bspwm-show-nb-of-windows.sh
-
+;###############################################################
 [module/bspwm-monocle-nb-windows]
 type = custom/ipc
 hook-0 = ~/.config/bspwm/scripts/bspwm-show-nb-of-windows.sh
 hook-1 = echo ""
 format-prefix = " "
 initial = 1
-click-right = bspc node --focus next.local
-click-left = bspc node --focus prev.local
-
+click-right = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
+click-left = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
+scroll-up = bspc node --focus next.local
+scroll-down = bspc node --focus prev.local
 
 ;###############################################################
 [settings]
 screenchange-reload = false
 throttle-output = 5
 throttle-output-for = 10
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
-; compositing-background = over
-; compositing-foreground = over
-; compositing-overline = over
-; compositing-underline = over
-; compositing-border = over
-
 
 ;###############################################################
 [global/wm]

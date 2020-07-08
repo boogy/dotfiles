@@ -175,9 +175,7 @@ fwupd
 scrot
 flameshot
 nitrogen
-# alacritty
-# thunderbird
-# thunderbird-i18n-fr
+alacritty
 sxiv
 vifm
 neovim
@@ -222,3 +220,8 @@ bluez-utils
 bspwm
 sxhkd
 xdo
+lsw
+## hide mouse when not used
+unclutter
+## Light system tray to use with lemonbar
+# stalonetray

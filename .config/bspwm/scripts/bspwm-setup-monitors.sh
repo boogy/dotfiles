@@ -21,3 +21,6 @@ for MONITOR in ${OUTPUTS[@]}; do
             ;;
     esac
 done
+
+## relaunch polybar
+~/.config/polybar/launch-polybar.sh
