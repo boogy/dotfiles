@@ -20,5 +20,7 @@ do
         else
             echo "$icon_disabled"
         fi
+    else
+        echo "$icon_disabled"
     fi
 done
