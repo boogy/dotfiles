@@ -8,6 +8,9 @@
 alt + {shift + e, shift + q}
 	{bspwm-dmenu-logout.sh,bspc node --close}
 
+alt + Escape
+	bspc node --close
+
 ## Move next,prev desktop on screen
 ## alt + n | alt + p
 alt + {n,p}

@@ -70,6 +70,10 @@ case "$windows_instance_class" in
         echo "state=floating"
         echo "center=on"
         ;;
+    [Ss]office:[Ss]office*|[Ll]ibreoffice:[Ll]ibreoffice*|*:[Ll]ibreoffice*)
+        echo "state=tiled"
+        echo "desktop=focused:^6"
+        ;;
 esac
 
 
