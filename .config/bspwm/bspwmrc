@@ -85,8 +85,8 @@ _bc external_rules_command "$(which bspwm-external-rules.sh)"
 
 ## Send to desktop
 _add_rule Vmware                  monitor=1 desktop=5  state=tiled follow=on
-_add_rule Libreoffice             monitor=1 desktop=6  state=tiled follow=on
-_add_rule '*:soffice'             monitor=1 desktop=6  state=tiled follow=on
+# _add_rule Libreoffice             monitor=1 desktop=6  state=tiled follow=on
+# _add_rule '*:soffice'             monitor=1 desktop=6  state=tiled follow=on
 _add_rule Hexchat                 monitor=1 desktop=10 state=tiled follow=on
 _add_rule Xchat                   monitor=1 desktop=10 state=tiled follow=on
 
