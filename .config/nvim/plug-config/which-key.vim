@@ -86,3 +86,17 @@ let g:which_key_map.c = {
   \ 'n'     : [":let @+ = expand('%:t')"                    , 'copy-file-name'],
   \ 'p'     : [":let @+ = expand('%:p')"                    , 'copy-full-path'],
   \ }
+
+" GitGutter shortcuts
+let g:which_key_map.g = {
+  \ 'name'  : 'Git Gutter',
+  \ 't'     : [":GitGutterToggle"                   , 'GitGutter Toggle On/Off'],
+  \ 's'     : [":GitGutterSignsToggle"              , 'Turn the signs On and Off'],
+  \ 'h'     : [":GitGutterLineHighlightsToggle"     , 'Line highlighting On/Off'],
+  \ 'n'     : [":GitGutterLineNrHighlightsToggle"   , 'Line number highlighting On/Off'],
+  \ 'N'     : ["<Plug>(GitGutterNextHunk)"          , 'Git Gutter Next Hunk'],
+  \ 'P'     : ["<Plug>(GitGutterPrevHunk)"          , 'Git Gutter Previous Hunk'],
+  \ 'S'     : ["<Plug>(GitGutterStageHunk)"         , 'GitGutter Stage Hunk'],
+  \ 'U'     : ["<Plug>(GitGutterUndoHunk)"          , 'GitGutter Undo Hunk'],
+  \ 'p'     : ["<Plug>(GitGutterPreviewHunk)"       , 'GitGutter Preview Hunk'],
+  \ }
