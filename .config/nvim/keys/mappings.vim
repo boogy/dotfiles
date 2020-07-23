@@ -67,16 +67,3 @@ nnoremap <leader>w :w!<cr>
 nnoremap <leader>wq :w<bar>bd!<cr>
 nnoremap <leader>D :bdelete!<cr>
 
-" GitGutter mappings
-nnoremap <F10> :GitGutterLineHighlightsToggle<CR>
-nnoremap <F9> :GitGutterLineNrHighlightsToggle<CR>
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-
-" stage a hunk with <Leader>hs or
-" undo a hink with <Leader>hu.
-" change these mappings
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
-

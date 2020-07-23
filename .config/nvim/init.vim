@@ -24,6 +24,7 @@ source $HOME/.config/nvim/plug-config/vim-multiline-cursors.vim
 source $HOME/.config/nvim/plug-config/coc-snippets.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
+source $HOME/.config/nvim/plug-config/vim-gitgutter.vim
 
 " Themes
 source $HOME/.config/nvim/themes/material-monokai.vim
