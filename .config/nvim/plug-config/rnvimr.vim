@@ -30,9 +30,6 @@ let g:rnvimr_action = {
             \ 'yw': 'EmitRangerCwd'
             \ }
 
-" leader + r Toogle Ranger window
-nmap <space>r :RnvimrToggle<CR>
-vmap <space>r :RnvimrToggle<CR>
 " Make Ranger replace netrw and be the file explorer
 let g:rnvimr_ex_enable = 1
 
@@ -66,6 +63,6 @@ let g:rnvimr_action = {
             \ }
 
 " leader + r Toogle Ranger window
-nmap <space>r :RnvimrToggle<CR>
-vmap <space>r :RnvimrToggle<CR>
+nmap <space>R :RnvimrToggle<CR>
+vmap <space>R :RnvimrToggle<CR>
 
