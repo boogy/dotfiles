@@ -76,6 +76,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'voldikss/vim-floaterm'
     Plug 'liuchengxu/vim-which-key'
 
+    " Install Terraform LSP server
+    " Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 " Load plugins on insert

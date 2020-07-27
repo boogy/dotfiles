@@ -312,6 +312,10 @@ function manage_services
     ## pulseaudio will be started in i3 config
     msg_ok "Disable pulseaudio.socket for the user ${USERNAME}"
     sudo -u ${USERNAME} systemctl --user disable pulseaudio.socket
+
+    ## avoid user@974.service service to fail
+    ## https://github.com/canonical/lightdm/issues/90
+    sudo chage -E -1 lightdm
 }
 
 
