@@ -23,6 +23,15 @@
         ".pyenv",
         ".venv"
     ],
+    "languageserver": {
+        "terraform": {
+            "command": "terraform-lsp",
+            "filetypes": [
+                "terraform"
+            ],
+            "initializationOptions": {}
+        }
+    },
     "snippets.ultisnips.directories": [
         "UltiSnips",
         "gosnippets/UltiSnips",
