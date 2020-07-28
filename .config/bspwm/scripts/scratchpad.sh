@@ -2,6 +2,25 @@
 #
 # A scratchpad utility for bspwm that depends on: bspc, cat, echo, grep, sed, touch and xdotool
 
+# sxhkd config:
+# super + p ; {p,n}
+# 	~/.config/bspwm/scripts/scratchpad.sh --toggle "{scratchpad,notescantata}"
+
+# Close or kill the active node and unregister it from the scratchpad
+# super + {q,Q}
+# 	id="$(bspc query --nodes --node .active)" \
+#         && bspc node --{close,kill} \
+#         && scratchpad --remove "$id"
+
+# Cycle through the scratchpad's nodes
+# super + alt + Tab
+# 	~/.config/bspwm/scripts/scratchpad.sh --cycle
+
+# Add or remove nodes to/from the scratchpad
+# super + s ; {a,r,R}
+# 	~/.config/bspwm/scripts/scratchpad.sh --{add,remove,remove --remain-floating}
+
+
 registry="/tmp/scratchpad-registry"
 
 # Initialise the scratchpad register if it wasn't already
@@ -72,8 +91,7 @@ case "$1" in
 
         # Bring out the last registered node from the scratchpad
         if [ -z "$id" ]; then
-            id="${ids%%
-*}"
+            id="${ids%%*}"
 
             [ "$2" = "--no-focus" ] && focus="" || focus="--focus"
 

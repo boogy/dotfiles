@@ -97,34 +97,6 @@ alt + m ; {1-3} ; {1-9,0}
 alt + m ; shift + {1-3} ; {1-9,0}
   bspc desktop -f ^{1-3}:^{1-9,10}
 
-## tag window as sratchpad
-super + shift + u
-	id=$(bspc query -N -n "focused");\
-	if [ -n "$id" ];then \
-		xprop -id $id -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
-		bspc node -t "floating";\
-		xdotool windowunmap $id;\
-	fi
-## toggle between scratch windows
-super + u
-	i=$(bspc query -N -n "focused.floating");\
-	if [ -n "$i" ];then \
-		xprop -id $i -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
-		xdotool windowunmap $i;\
-	else;\
-		i=$(for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
-			t=$(xprop -id $w _SCRATCHPAD | grep ' = \(.*\)');\
-			if [ -n "$t" ];then \
-				echo $t $w;\
-			fi;\
-		done|sort -n|head -n1|cut -d" " -f 5);\
-		if [ -n "$i" ];then \
-			xprop -id $i -remove _SCRATCHPAD;\
-			bspc rule --add \* state=floating center=on --one-shot;\
-			xdotool windowmap $i;\
-			bspc node -f $i;\
-		fi;\
-	fi
 
 ## Bring the windows of the given desktop to the current one.  With
 ## shift, send the current window to the given one.
@@ -267,11 +239,46 @@ button2 + alt
 XF86HomePage
 	firefox
 
-# XF86TouchpadToggle
-# XF86RFKill
-# XF86Sleep
-# XF86WakeUp
-# XF86LaunchF
+##
+## Scratchpad options
+##
+
+# Toggle Scratchpad
+super + u
+	~/.config/bspwm/scripts/bspwm-toggle-visibility scratchpad \
+        "termite --class scratchpad --name scratchpad --exec='tmux new-session -A -s SCRATCHPAD'"
+
+# ## tag window as sratchpad
+# super + shift + u
+# 	id=$(bspc query -N -n "focused");\
+# 	if [ -n "$id" ];then \
+# 		xprop -id $id -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
+# 		bspc node -t "floating";\
+# 		xdotool windowunmap $id;\
+# 	fi
+# ## toggle between scratch windows
+# super + u
+# 	i=$(bspc query -N -n "focused.floating");\
+# 	if [ -n "$i" ];then \
+# 		xprop -id $i -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
+# 		xdotool windowunmap $i;\
+# 	else;\
+# 		i=$(for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
+# 			t=$(xprop -id $w _SCRATCHPAD | grep ' = \(.*\)');\
+# 			if [ -n "$t" ];then \
+# 				echo $t $w;\
+# 			fi;\
+# 		done|sort -n|head -n1|cut -d" " -f 5);\
+# 		if [ -n "$i" ];then \
+# 			xprop -id $i -remove _SCRATCHPAD;\
+# 			bspc rule --add \* state=floating center=on --one-shot;\
+# 			xdotool windowmap $i;\
+# 			bspc node -f $i;\
+# 		fi;\
+# 	fi
+
+
+#### OLD ####
 
 ## Move desktop to monitor {Left,Right}
 # alt + shift + {Left,Right}
@@ -281,24 +288,6 @@ XF86HomePage
 # 	bspc desktop -f $desk; \
 # 	bspc config monitor {prev,next}
 
-
-## focus next, prev monitor
-## alt + comma || alt + period
-# alt + {comma,period}
-# 	bspc monitor -f {next,prev}
-
-## i3 like scratchpad
-# super + u
-# 	id=$(bspc query -N -n "focused");\
-# 	bspwm-scratchpad.sh dropdown $id
-
-## Focus next/previous desktop
-# super + {_,shift} + Tab
-# 	bspc desktop --focus {prev,next}.occupied
-
-## Focus left/right occupied desktop
-# ctrl + alt + {Left,Right}
-# 	bspc desktop --focus {prev,next}.occupied
 
 ## Circulate the leaves of the tree
 # super + {_,shift + }c
@@ -311,10 +300,6 @@ XF86HomePage
 ## Make split ratios balanced
 # super + minus
 # 	bspc node @/ --balance
-
-## Swap window with last window
-# super + apostrophe
-# 	bspc node --swap last
 
 ## Flip layout vertically/horizontally
 # super + {_,shift + }s
