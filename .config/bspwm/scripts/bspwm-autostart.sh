@@ -69,8 +69,10 @@ libinput-gestures-setup start &
 
 ## start pulseaudio
 pulseaudio --start
-(ps -ef|grep -o "[p]ulseaudio -D") || pulseaudio -k; pulseaudio -D
-start-pulseaudio-x11
+(ps -ef|grep "[p]ulseaudio --daemonize=no") || {
+    pulseaudio -k; pulseaudio -D
+    start-pulseaudio-x11
+}
 
 ## launch polybar after pulseaudio
 ~/.config/polybar/launch-polybar.sh &

@@ -74,6 +74,13 @@ case "$windows_instance_class" in
         echo "state=tiled"
         echo "desktop=focused:^6"
         ;;
+    [Ss]cratchpad:[Ss]cratchpad*)
+        echo "state=floating"
+        echo "hidden=on"
+        echo "sticky=off"
+        echo "rectangle=1910x1040+0+0"
+        echo "center=true"
+        ;;
 esac
 
 

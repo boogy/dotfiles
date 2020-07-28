@@ -174,7 +174,7 @@ def hexdump(src, length=16, sep='.'):
         subSrc = src[i:i+length]
         hexa = ''
         isMiddle = False
-        for h in xrange(0,len(subSrc)):
+        for h in xrange(0, len(subSrc)):
             if h == length/2:
                 hexa += ' '
             h = subSrc[h]
@@ -193,7 +193,8 @@ def hexdump(src, length=16, sep='.'):
                 text += chr(c)
             else:
                 text += sep
-        result.append(('%08X:  %-'+str(length*(2+1)+1)+'s  |%s|') % (i, hexa, text))
+        result.append(('%08X:  %-'+str(length*(2+1)+1)+'s  |%s|') %
+                      (i, hexa, text))
     return '\n'.join(result)
 
 
@@ -205,7 +206,8 @@ def get_interfaces(family=4):
         - 4 => shortcut for -family link
     """
     d = subprocess.check_output('ip -%s -o addr' % str(family), shell=True)
-    ifs = re.findall(r'^\S+:\s+(\S+)\s+inet[6]?\s+([^\s/]+)', decode_utf(d), re.MULTILINE)
+    ifs = re.findall(
+        r'^\S+:\s+(\S+)\s+inet[6]?\s+([^\s/]+)', decode_utf(d), re.MULTILINE)
     return [i for i in ifs if i[0] != 'lo']
 
 
@@ -240,7 +242,7 @@ def write(path, data, create_dir=False):
 
 
 def xor(data, key):
-    return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in zip(data, itertools.cycle(key)))
+    return ''.join(chr(ord(x) ^ ord(y)) for (x, y) in zip(data, itertools.cycle(key)))
 
 
 def contains_not(x, bad):

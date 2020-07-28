@@ -3,20 +3,26 @@
 import sys
 import base64
 
-b64d = lambda x: base64.b64decode(x.encode('utf-8', errors='replace'))
-b64e = lambda x: base64.b64encode(x.encode('utf-8', errors='replace'))
+
+def b64d(x): return base64.b64decode(x.encode('utf-8', errors='replace'))
+
+
+def b64e(x): return base64.b64encode(x.encode('utf-8', errors='replace'))
+
 
 if sys.argv[1] == "d":
     try:
         print("")
-        print(str(b64d(sys.argv[2]), encoding='ascii', errors='backslashreplace'))
+        print(str(b64d(sys.argv[2]), encoding='ascii',
+                  errors='backslashreplace'))
     except Exception as e:
         print("ERROR: {}".format(e))
 
 elif sys.argv[1] == "e":
     try:
         print("")
-        print(str(b64e(sys.argv[2]), encoding='ascii', errors="backslashreplace"))
+        print(str(b64e(sys.argv[2]), encoding='ascii',
+                  errors="backslashreplace"))
     except Exception as e:
         print("ERROR: {}".format(e))
 

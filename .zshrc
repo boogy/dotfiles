@@ -64,8 +64,12 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 # Auto complete with case insenstivity
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 ## ../../ completion
-zstyle ':completion:*' special-dirs true
+# zstyle ':completion:*' special-dirs true
+
+## avoid ./ and ../ being proposed
+zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 
 zmodload zsh/complist
 compinit
