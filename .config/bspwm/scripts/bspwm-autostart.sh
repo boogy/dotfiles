@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 _run() {
-    if ! pgrep -x "$1" &>/dev/null ; then
+    if ! pgrep -x "${1}" &>/dev/null; then
         "$@" &
     fi
 }
@@ -54,6 +54,9 @@ _run sxhkd -m -1 > /tmp/sxhkd.log
 ## set proper cursor (bspwm)
 xsetroot -cursor_name left_ptr &
 
+## set screen brightness to 100%
+xbacklight -set 100%
+
 ## add mousepad gestures
 libinput-gestures-setup start &
 
@@ -69,13 +72,19 @@ libinput-gestures-setup start &
 
 ## start pulseaudio
 pulseaudio --start
-(ps -ef|grep "[p]ulseaudio --daemonize=no") || {
+ps -ef|grep "[p]ulseaudio" || {
     pulseaudio -k; pulseaudio -D
     start-pulseaudio-x11
 }
 
 ## launch polybar after pulseaudio
 ~/.config/polybar/launch-polybar.sh &
+
+bsp-layout set tall 1
+bsp-layout set monocle 2
+bsp-layout set monocle 4
+bsp-layout set monocle 8
+bsp-layout set monocle 10
 
 ## run applets
 _run nm-applet
@@ -87,11 +96,14 @@ _run xfce4-power-manager
 _run firefox
 
 ## start tmux session or join if present
-(tmux list-sessions|grep -Eo WORK) || termite -e "tmux new-session -A -s 'WORK'" &
-# (termite -e "vim +qall!" ) &>/dev/null &
+(tmux list-sessions|grep -Eo WORK) || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
+
+## run polkit agent
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ## run gnome keyring daemon
 gome-keyring-daemon --start --daemonize --components=gpg,pkcs10,secrets,ssh &
 
 ## compozitor
 _run picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible
+

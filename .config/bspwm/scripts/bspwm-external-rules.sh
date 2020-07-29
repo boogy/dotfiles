@@ -77,7 +77,7 @@ case "$windows_instance_class" in
     [Ss]cratchpad:[Ss]cratchpad*)
         echo "state=floating"
         echo "hidden=on"
-        echo "sticky=off"
+        echo "sticky=on"
         echo "rectangle=1910x1040+0+0"
         echo "center=true"
         ;;
