@@ -188,6 +188,7 @@ cifs-utils
 smbclient
 impacket
 qt5ct
+seahorse
 ##
 ## fonts
 otf-font-awesome

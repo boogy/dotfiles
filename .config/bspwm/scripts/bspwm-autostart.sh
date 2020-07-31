@@ -82,6 +82,7 @@ ps -ef|grep "[p]ulseaudio" || {
 
 bsp-layout set tall 1
 bsp-layout set monocle 2
+bsp-layout set tall 3
 bsp-layout set monocle 4
 bsp-layout set monocle 5
 bsp-layout set tiled 6
@@ -104,10 +105,10 @@ _run firefox
 (tmux list-sessions|grep -Eo WORK) || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
 
 ## run polkit agent
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ## run gnome keyring daemon
-gome-keyring-daemon --start --daemonize --components=gpg,pkcs10,secrets,ssh &
+gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,ssh &
 
 ## compozitor
 _run picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible
