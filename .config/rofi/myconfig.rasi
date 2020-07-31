@@ -1,6 +1,5 @@
 configuration {
-     modi: "window,drun,run,ssh";
-        bw: 1;
+     modi: "window,drun,run,ssh,windowcd";
         theme: "Arc-Dark";
         icon-theme: "Arc";
         hide-scrollbar: true;
@@ -8,7 +7,6 @@ configuration {
         location: 0;
         yoffset: 0;
         xoffset: 0;
-        opacity: 90;
         show-icons: true;
         fullscreen: false;
         terminal: "termite";

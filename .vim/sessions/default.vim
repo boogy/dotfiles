@@ -2,16 +2,16 @@ let SessionLoad = 1
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/dotfiles/.config/bspwm/scripts
+cd ~/
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 tdrop
+badd +0 dotfiles/.config/rofi/config.rasi
 argglobal
 %argdel
-$argadd tdrop
-edit tdrop
+$argadd dotfiles/.config/rofi/config.rasi
+edit dotfiles/.config/rofi/config.rasi
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -28,12 +28,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 923 - ((60 * winheight(0) + 30) / 61)
+let s:l = 2 - ((1 * winheight(0) + 46) / 92)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-923
-normal! 0
+2
+normal! 031|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

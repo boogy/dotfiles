@@ -372,3 +372,16 @@ function expand-ip()
   nmap -sL -n "$1" | awk '/Nmap scan report/{print $NF}'
 }
 
+ssh-forward-local(){
+    local BIND_PORT="$1"
+    local DEST_HOST="$2"
+    local DEST_PORT="$3"
+    local SSH_USER="${4:-${USERNAME}}"
+
+    if [ $# -le 2 ]; then
+        echo "Usage: ${0} <local bind port> <dest host> <dest address>"
+        echo "       transaltes to: ssh -L [bind address (localhost)]:[port]:[dsthost]:[dstport] [user]@[dest host]"
+    else
+        ssh -L 127.0.0.1:"${BIND_PORT}":"${DEST_HOST}":"${DEST_PORT}" "${USER}"@"${DEST_HOST}"
+    fi
+}
