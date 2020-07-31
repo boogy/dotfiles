@@ -216,5 +216,5 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev
 #source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
 
 ## load prompt
-source ~/.zsh/prompt/prompt-simple.zsh
+source ~/.zsh/prompt/prompt.zsh
 
