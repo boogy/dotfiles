@@ -19,11 +19,13 @@ Pipefile
 .vim/.netrwhist
 .vim/spell
 .vim/view
+.vim/sessions
 .config/vifm/vifminfo
 .config/nvim/autoload/*
 !.config/nvim/autoload/plug.vim
 .config/nvim/plugged/*
 .config/nvim/.netrwhist
+.config/nvim/spell
 
 copyright.pandoc
 pandoc
