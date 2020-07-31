@@ -1,1 +1,0 @@
-/home/bnicorici/dotfiles/.config/rofi/scripts/battery.sh

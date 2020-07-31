@@ -154,16 +154,19 @@ alt + o ; {a,v,f,p,g,l}
 
 ## Launch rofi menu
 super + d
-	rofi -show drun -show-icons -lines 10 -columns 2 \
-	-opacity "80" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#2f343f" -hlfg "#9575cd" -font "Ubuntu 11" -width 50 -sidebar-mode -theme Arc-Dark
+	rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode
+	# rofi -show drun -show-icons -lines 10 -columns 2 \
+	# -opacity "80" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#2f343f" -hlfg "#9575cd" -font "Ubuntu 11" -width 50 -sidebar-mode -theme Arc-Dark
 
 ## Rofi select window
 alt + w
-	rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
+	rofi -show window
+	# rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
 
 ## run rofi with 1password script ~/.local/bin/rofi-1pass
 control + alt + p
-	rofi -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
+	rofi -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
+	# rofi -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
 
 control + alt + o
 	bolt --rofi-search

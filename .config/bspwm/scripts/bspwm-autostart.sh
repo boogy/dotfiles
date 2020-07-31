@@ -83,8 +83,13 @@ ps -ef|grep "[p]ulseaudio" || {
 bsp-layout set tall 1
 bsp-layout set monocle 2
 bsp-layout set monocle 4
+bsp-layout set monocle 5
+bsp-layout set tiled 6
 bsp-layout set monocle 8
+bsp-layout set tiled 7
 bsp-layout set monocle 10
+
+bolt --generate &>/dev/null
 
 ## run applets
 _run nm-applet
