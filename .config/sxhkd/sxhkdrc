@@ -3,25 +3,18 @@
 ##
 
 ## Exit bspwm OR close window
-# alt + {shift + e, Escape}
-# 	{bspwm-dmenu-logout.sh,bspc node --close}
 alt + {shift + e, shift + q}
 	{bspwm-dmenu-logout.sh,bspc node --close}
 
-# alt + Escape
-# 	bspc node --close
-
-## Move next,prev desktop on screen
-## alt + n | alt + p
+## Move next,prev desktop on monitor
 alt + {n,p}
 	bspc desktop -f {next,prev}.local
-## Move next,prev desktop on all screens
+
+## Move next,prev desktop on all monitor
 alt + shift + {n,p}
 	bspc desktop -f {next,prev}
 
-## Toggle fullscreen of window
-## Toogle pseudo tiling of window
-## alt + Shift | alt + space | alt + space + f
+## Toggle fullscreen/tiled/floating of window
 alt + {shift + space,space,f}
 	bspc node --state \~{pseudo_tiled,floating,fullscreen}
 
@@ -70,8 +63,8 @@ super + g ; minus
 
 ## toogle window compozitor
 super + k + c
-	pgrep -x picom && pkill picom \
-	|| picom -bcCGf -D 1 -I 0.02 -O 0.02 --no-fading-openclose --unredir-if-possible
+	(pgrep -x picom && pkill picom) \
+	|| picom -bcCGf -D 1 -I 0.02 -O 0.02 --no-fading-openclose --unredir-if-possible &
 
 ## printscreen / screenshot
 {_,shift} + Print
@@ -97,7 +90,6 @@ alt + m ; {1-3} ; {1-9,0}
 alt + m ; shift + {1-3} ; {1-9,0}
   bspc desktop -f ^{1-3}:^{1-9,10}
 
-
 ## Bring the windows of the given desktop to the current one.  With
 ## shift, send the current window to the given one.
 super + w ; super + {_, shift + }{0-9}
@@ -115,15 +107,11 @@ super + w ; super + {_, shift + }r
 super + w ; m
 	bspwm-multifaceted-operation.sh --summon-all-marked
 
-## Set the node flags. Locked is a node that cannot be closed with `bspc
-## node --close`. Marked is a specific selector that allows operating on
-## the given item (such as sending the marked item to the newest
-## preselection). Sticky stays in the focused desktop. Private tries to
-## keep its dimensions and tiling position.
+## Set flags on the node {Locked,Marked,Sticky,Private}
 super + a ; {l,m,s,p}
 	bspc node -g {locked,marked,sticky,private}
 
-## move a floating window
+## Move a floating window
 super + {h,j,k,l}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
@@ -132,15 +120,24 @@ super + {_,shift + }r
 	bspc node @/ --rotate {90,-90}
 
 ## Focus left/right occupied desktop
-super + {Left,Right}
-	bspc desktop --focus {prev,next}.occupied
+# super + {Left,Right}
+# 	bspc desktop --focus {prev,next}.occupied
+
+## Move desktop to monitor and reorder desktops
+# alt + control + {Left,Right}
+alt + control + {Left,Down,Up,Right}
+  desk=$(bspc query -D -d focused); \
+  bspc desktop -m {west,south,north,east}; \
+  bspc monitor -f {west,south,north,east}; \
+  bspc desktop -f $desk; \
+  ~/.config/bspwm/scripts/bspwm-reorder-desktops.sh &
 
 ## Move node to monitor
-alt + control + {Left,Down,Up,Right}
+super + control + {Left,Down,Up,Right}
 	bspc node --to-monitor {west,south,north,east}
 	# bspc node --to-monitor next.\!focused
 
-## focus next, prev monitor
+## Focus next, prev monitor
 alt + e
 	bspc monitor -f {next,prev}
 
@@ -148,32 +145,29 @@ alt + e
 super + {_, shift + }s
 	bspc desktop --swap next.active {_,--follow}
 
-## shortcut for running applications
-alt + o ; {a,v,f,p,g,l}
-	{alacritty,gvim,firefox,pavucontrol,chromium,lxappearance}
+## Shortcut for running applications
+alt + o ; {a,v,f,p,g,l,z}
+	{alacritty,gvim,firefox,pavucontrol,chromium,lxappearance, QT_SCALE_FACTOR=0.5 zoom} &
 
 ## Launch rofi menu
 super + d
 	rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode
-	# rofi -show drun -show-icons -lines 10 -columns 2 \
-	# -opacity "80" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#2f343f" -hlfg "#9575cd" -font "Ubuntu 11" -width 50 -sidebar-mode -theme Arc-Dark
 
 ## Rofi select window
 alt + w
 	rofi -show window
-	# rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
 
-## run rofi with 1password script ~/.local/bin/rofi-1pass
+## Run rofi with 1password script ~/.local/bin/rofi-1pass
 control + alt + p
 	rofi -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
-	# rofi -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark -modi 1pass:~/.local/bin/rofi-1pass -show 1pass
 
+## search for files with bolt
 control + alt + o
 	bolt --rofi-search
 
 ## Launch dmenu
 alt + d
-	j4-dmenu-desktop --display-binary --dmenu="dmenu -i" --term=termite
+	dmenu_run -p "Program: "
 
 ## Lock the screen
 super + alt + l
@@ -183,8 +177,7 @@ super + alt + l
 alt + i
 	~/.config/i3/scripts/select-screen-layout.sh
 
-## Launch terminal (tmux with shift)
-## alt + Return | alt + shift + Return
+## Launch terminal (+tmux with shift)
 alt + {_,shift + } Return
 	{termite,termite -e "tmux new-session -A -s 'WORK'"}
 
@@ -197,12 +190,10 @@ super + shift + p
 	~/.config/polybar/launch-polybar.sh &
 
 ## reload bspwm
-# alt + shift + {c,q}
-# 	bspc {wm -r && dunstify "bspwm" "Reloaded", quit}
-alt + shift + {c}
+alt + shift + c
 	bspc {wm -r && dunstify "bspwm" "Reloaded"}
 
-## make sxhkd reload its configuration files:
+## reload sxhkd
 alt + shift + r
 	pkill -9 -x sxhkd && sleep 1; sxhkd &; dunstify "sxhkd" "Reloaded"
 	# pkill -USR1 -x sxhkd && dunstify "sxhkd" "Reloaded"
@@ -282,15 +273,6 @@ super + u
 
 
 #### OLD ####
-
-## Move desktop to monitor {Left,Right}
-# alt + shift + {Left,Right}
-# 	desk=$(bspc query -D -d focused); \
-# 	bspc desktop -m {prev,next}; \
-# 	bspc monitor -f {prev,next}; \
-# 	bspc desktop -f $desk; \
-# 	bspc config monitor {prev,next}
-
 
 ## Circulate the leaves of the tree
 # super + {_,shift + }c

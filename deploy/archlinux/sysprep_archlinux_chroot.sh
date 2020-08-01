@@ -637,20 +637,17 @@ function install_aur_packages
         sudo -u ${USERNAME} -s /bin/bash -- <<-EOF
 			(echo -n ${USERNAME}|sudo -S id) &>/dev/null
 			yay -S --sudoloop --noconfirm systemd-boot-pacman-hook
-			yay -S --sudoloop --noconfirm chromium-widevine
 			yay -S --sudoloop --noconfirm dropbox
 			yay -S --sudoloop --noconfirm polybar
 			yay -S --sudoloop --noconfirm libinput-gestures
 			yay -S --sudoloop --noconfirm vmware-workstation
 			yay -S --sudoloop --noconfirm visual-studio-code-bin
-			yay -S --sudoloop --noconfirm jre8-openjdk jdk8-openjdk jre10-openjdk jdk10-openjdk
+			yay -S --sudoloop --noconfirm jre10-openjdk jdk10-openjdk
 			yay -S --sudoloop --noconfirm gksu otf-font-awesome-4 otf-font-awesome-5-free ttf-ms-fonts
 			yay -S --sudoloop --noconfirm xcursor-oxygen xcursor-breeze-serie-obsidian
-			yay -S --sudoloop --noconfirm j4-dmenu-desktop
 			yay -S --sudoloop --noconfirm i3lock-color-git
 			yay -S --sudoloop --noconfirm nerd-fonts-complete
-			yay -S --sudoloop --noconfirm 1password-cli
-      yay -S --sudoloop --noconfirm ttf-ms-fonts
+            yay -S --sudoloop --noconfirm ttf-ms-fonts
     EOF
         ## if dropbox is installed disable this service
         systemctl --user disable dropbox.service

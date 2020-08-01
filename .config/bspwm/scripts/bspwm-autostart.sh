@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-_run() {
-    if ! pgrep -x "${1}" &>/dev/null; then
-        "$@" &
+_check() {
+    PROG_TO_CHECK=$1
+    PROG_TO_RUN=${2:-$PROG_TO_CHECK}
+    if ! pidof -s -o '%PPID' "$1" &>/dev/null ; then
+        echo "Running program $PROG_TO_RUN"
+        bash -c "$PROG_TO_RUN" &
     fi
 }
 
@@ -10,7 +13,7 @@ _run() {
 autorandr -c
 
 ##
-## settings
+## SETTINGS
 ##
 
 ## set keyboard layout (also in: /etc/X11/xorg.conf.d/00-keyboard.conf)
@@ -26,17 +29,17 @@ xrdb -merge ~/.Xresources
 xset r rate 200 70
 xhost +local:
 
-##Daemon mode for filemanager makes mounting volumes easier
+## daemon mode for filemanager makes mounting volumes easier
 #thunar --daemon &
 
-##enable local fonts in .fonts directory
+## enable local fonts in .fonts directory
 xset +fp /usr/share/fonts/local &
 xset +fp /usr/share/fonts/misc &
 xset +fp ~/.fonts &
 xset fp rehash &
 fc-cache -fv &
 
-##powersaving options
+## powersaving options
 xset s off &
 xset s noblank &
 xset s noexpose &
@@ -44,8 +47,8 @@ xset c on &
 xset -dpms &
 xbacklight -set 15 &
 
-## Launch keybinding daemon after setting the keyboard layout
-_run sxhkd -m -1 > /tmp/sxhkd.log
+## launch keybinding daemon after setting the keyboard layout
+_check sxhkd "sxhkd -m -1 > /tmp/sxhkd.log"
 
 ## Caps Lock is Espace key
 # xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -90,26 +93,31 @@ bsp-layout set monocle 8
 bsp-layout set tiled 7
 bsp-layout set monocle 10
 
+## generate list of files to search with bolt
 bolt --generate &>/dev/null
 
 ## run applets
-_run nm-applet
-_run /opt/dropbox/dropboxd
-_run blueman-applet
-_run xfce4-power-manager
-
-## always have a web browser
-_run firefox
+_check nm-applet
+_check dropbox /opt/dropbox/dropboxd
+_check blueman-applet
+_check firefox
+# _check xfce4-power-manager
 
 ## start tmux session or join if present
-(tmux list-sessions|grep -Eo WORK) || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
+(tmux list-sessions|grep -Eo WORK) \
+    || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
 
-## run polkit agent
-usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+## run polkit agent (don't need to check if already running)
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ## run gnome keyring daemon
-gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,ssh &
+_check gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,ssh &
 
-## compozitor
-_run picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible
+## compositor
+_check picom "picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible"
+
+##
+## SUBSCRIBE TO BSPWM ACTIONS
+##
+bspwm-subscribe-actions.sh &
 
