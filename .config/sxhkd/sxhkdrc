@@ -4,7 +4,7 @@
 
 ## Exit bspwm OR close window
 alt + {shift + e, shift + q}
-	{bspwm-dmenu-logout.sh,bspc node --close}
+	{bspwm-dmenu-actions.sh,bspc node --close}
 
 ## Move next,prev desktop on monitor
 alt + {n,p}
