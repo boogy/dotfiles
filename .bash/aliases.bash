@@ -155,14 +155,20 @@ alias cd-="cd -"
 
     ## AUR
     alias pa-search="yay "
-    alias yaysearch=pa-search
+    alias psearch=pa-search
+    alias ysearch=pa-search
+
     alias pa-install="yay -S"
-    alias yayinstall=pa-install
+    alias yinstall=pa-install
+    alias pinstall=pa-install
     alias pa-install-silent="yay -S --noconfirm"
+
     alias pa-update="yay -Syyuu --topdown --cleanafter"
-    alias yayupdate=pa-update
+    alias pupdate=pa-update
+    alias yupdate=pa-update
+
     alias pa-remove="yay -R"
-    alias yayremove=pa-remove
+    alias yremove=pa-remove
 }
 
 ##
