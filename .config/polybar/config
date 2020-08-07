@@ -712,8 +712,8 @@ format-prefix = " "
 initial = 1
 click-right = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
 click-left = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
-scroll-up = bspc node --focus next.local
-scroll-down = bspc node --focus prev.local
+scroll-up = bspc node --focus next.local.window.!floating
+scroll-down = bspc node --focus prev.local.window.!floating
 
 ;###############################################################
 [settings]

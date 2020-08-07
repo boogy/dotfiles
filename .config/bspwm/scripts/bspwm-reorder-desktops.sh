@@ -23,10 +23,17 @@
 _desk_order() {
 	while read -r line; do
 		printf "%s\\n" "$line"
-	done < <(bspc query -D -m "${1:-focused}" --names) | sort -g | paste -d ' ' -s
+	done < <(bspc query -D -m "${1}" --names) | sort -g | paste -d ' ' -s
 }
 
-bspc monitor -o $(eval _desk_order) # do not quote! we want term splitting here
+# do not quote! we want term splitting here
+bspc monitor -o $(eval _desk_order "${1:-focused}")
 
 # Accepts an argument for targeting a monitor:
 #bspc monitor -o $(eval _desk_order next)
+
+# for MONITOR in $(bspc query -M)
+# do
+#     echo "(bspc monitor $MONITOR -o $(eval _desk_order $MONITOR))"
+#     bspc monitor $MONITOR -o $(eval _desk_order $MONITOR)
+# done

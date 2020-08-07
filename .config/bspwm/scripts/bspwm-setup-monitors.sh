@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# declare -a a_monitor
+# monitors=0
+# for m in $(xrandr --listactivemonitors|awk '{print $4}'|sed '/^$/d'); do
+# 	a_monitor[$monitors]=$m
+# 	((monitors++))
+# done
+
 _desk_order() {
     while read -r line; do
         printf "%s\\n" "$line"
@@ -23,11 +30,16 @@ for MONITOR in ${OUTPUTS[@]}; do
             fi
             ;;
         *)
-            bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
+            if [[ ${MONITOR} == ${PRIMARY_MONITOR} ]]; then
+                bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
+            else
+                bspc monitor $MONITOR -d 1 2 3
+            fi
             ;;
     esac
 
-    _desk_order $MONITOR
+    ## reorder the desktops for each monitor
+    bspc monitor $MONITOR -o $(eval _desk_order $MONITOR)
 done
 
 ## relaunch polybar

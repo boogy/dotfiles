@@ -21,6 +21,7 @@ case "$windows_instance_class" in
     [Ss]office:[Ss]office*|[Ll]ibreoffice:[Ll]ibreoffice*|*:[Ll]ibreoffice*)
         echo "state=tiled"
         echo "desktop=6"
+        echo "follow=on"
         ;;
     [Ss]cratchpad:[Ss]cratchpad*)
         echo "state=floating"
@@ -28,6 +29,10 @@ case "$windows_instance_class" in
         echo "sticky=on"
         echo "rectangle=1910x1040+0+0"
         echo "center=true"
+        ;;
+    [Ww]ork:[Ww]ork*)
+        echo "desktop=1"
+        echo "state=tiled"
         ;;
 esac
 
@@ -47,10 +52,6 @@ case "$window_class" in
     * )
         case "$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE)" in
             *_NET_WM_WINDOW_TYPE_DIALOG*|*_NET_WM_WINDOW_TYPE_SPLASH*|*_NET_WM_WINDOW_TYPE_TOOLTIP*|*_NET_WM_WINDOW_TYPE_NOTIFICATION*)
-                echo "state=floating"
-                ;;
-            *_KDE_NET_WM_WINDOW_TYPE_OVERRIDE*)
-                echo "center=on"
                 echo "state=floating"
                 ;;
             *)
