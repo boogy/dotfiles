@@ -112,13 +112,14 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = fixed:pixelsize=9;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=9;1
 font-3 = Font Awesome 5 Free:style=Solid:size=9;1:pixelsize=10
 font-4 = Font Awesome 5 Brands:style=Solid:size=9;1:pixelsize=10
-font-5 = Ubuntu Mono derivative Powerline:size=9;1
-font-6 = NotoEmoji Nerd Font:style=Book:size=10
-font-7 = Noto Color Emoji:style=Regular:size=10
+font-5 = Font Awesome 5 Free Solid:pixelsize=10;1
+font-6 = Ubuntu Mono derivative Powerline:size=9;1
+font-7 = NotoEmoji Nerd Font:style=Book:size=10
+font-8 = Noto Color Emoji:style=Regular:size=10
 
 modules-left = bspwm bspwm-monocle-nb-windows
 ; modules-center = windowlist
@@ -256,18 +257,6 @@ ws-icon-7 = 7; 
 ws-icon-8 = 8; 
 ws-icon-9 = 9; 
 ws-icon-10 = 10; 
-ws-icon-11 = 11; 
-ws-icon-12 = 12; 
-ws-icon-13 = 13; 
-ws-icon-14 = 14; 
-ws-icon-15 = 15; 
-ws-icon-16 = 16; 
-ws-icon-17 = 17; 
-ws-icon-18 = 18; 
-ws-icon-19 = 19; 
-ws-icon-20 = 20; 
-ws-icon-21 = 21; 
-ws-icon-22 = 22; 
 ws-icon-default = 
 
 ; Sort the workspaces by index instead of the default

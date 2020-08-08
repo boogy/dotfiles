@@ -124,14 +124,9 @@ super + {_,shift + }r
 # 	bspc desktop --focus {prev,next}.occupied
 
 ## Move desktop to monitor and reorder desktops
-# alt + control + {Left,Right}
 alt + control + {Left,Down,Up,Right}
-  desk=$(bspc query -D -d focused); \
-  monitor=$(bspc query -M --monitor {west,south,north,east}); \
-  bspc desktop -m {west,south,north,east}; \
-  bspc monitor -f {west,south,north,east}; \
-  bspc desktop -f $desk; \
-  ~/.config/bspwm/scripts/bspwm-reorder-desktops.sh $monitor &
+	bspc desktop -m {west,south,north,east} --follow && \
+	bspwm-reorder-desktops.sh
 
 ## Move node to monitor
 super + control + {Left,Down,Up,Right}
