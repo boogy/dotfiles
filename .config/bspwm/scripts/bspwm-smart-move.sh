@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # A more fluid way of moving windows with BSPWM, which is meant to be
-# implemented in SXHKD.  If there is a window in the given direction,
-# swap places with it.  Else if there is a receptacle move to it
-# ("consume" its place).  Otherwise create a receptacle in the given
+# implemented in SXHKD. If there is a window in the given direction,
+# swap places with it. Else if there is a receptacle move to it
+# ("consume" its place). Otherwise create a receptacle in the given
 # direction by splitting the entire viewport (circumvents the tiling
-# scheme while respecting the current split ratio configuration).  In
+# scheme while respecting the current split ratio configuration). In
 # the latter scenario, inputting the direction twice will thus move the
 # focused window out of its current layout and into the receptacle.
 #

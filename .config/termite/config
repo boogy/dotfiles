@@ -61,7 +61,7 @@ cursor              = #f5f4f1
 cursor_foreground   = #272822
 # background          = #262626
 # background          = #282C34
-background = rgba(26, 26, 26, 0.96)
+background = rgba(26, 26, 26, 0.95)
 ## 16 color space
 # Black, Gray, Silver, White
 color0  = #272822
@@ -92,66 +92,5 @@ color17 = #cc6633
 color18 = #383830
 color19 = #49483e
 color20 = #a59f85
-
-
-# Project:    Nord Termite
-# Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
-# Copyright (c) 2016-present Sven Greb <code@svengreb.de>
-# Repository: https://github.com/arcticicestudio/nord-termite
-# License:    MIT
-# [colors]
-# cursor = #d8dee9
-# cursor_foreground = #2e3440
-# foreground = #d8dee9
-# foreground_bold = #d8dee9
-# background = #2e3440
-# highlight = #4c566a
-# color0  = #3b4252
-# color1  = #bf616a
-# color2  = #a3be8c
-# color3  = #ebcb8b
-# color4  = #81a1c1
-# color5  = #b48ead
-# color6  = #88c0d0
-# color7  = #e5e9f0
-# color8  = #4c566a
-# color9  = #bf616a
-# color10 = #a3be8c
-# color11 = #ebcb8b
-# color12 = #81a1c1
-# color13 = #b48ead
-# color14 = #8fbcbb
-# color15 = #eceff4
-
-# [colors]
-# # One Dark
-# # special
-# foreground      = #abb2bf
-# foreground_bold = #abb2bf
-# cursor          =
-# background      = #282c34
-# # black
-# color0  = #282c34
-# color8  = #5c6370
-# # red
-# color1  = #e06c75
-# color9  = #be5046
-# # green
-# color2  = #98c379
-# color10 = #7a9f60
-# # yellow
-# color3  = #e5c07b
-# color11 = #d19a66
-# # blue
-# color4  = #61afef
-# # magenta
-# color5  = #c678dd
-# color13 = #9a52af
-# # cyan
-# color6  = #56b6c2
-# color14 = #3c909b
-# # white
-# color7  = #abb2bf
-# color15 = #828997
 
 # vim: ft=dosini cms=#%s
