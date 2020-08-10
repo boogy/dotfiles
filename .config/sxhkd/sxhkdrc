@@ -3,7 +3,7 @@
 ##
 
 ## Exit bspwm OR close window
-alt + {shift + e, shift + q}
+alt + {shift + e, shift + c}
 	{bspwm-dmenu-actions.sh,bspc node --close}
 
 ## Move next,prev desktop on monitor
@@ -30,13 +30,10 @@ alt + Tab
 	bspc desktop --focus last
 
 ## Focus/swap windows by direction
-## alt + {h,j,k,l} | alt + shift + {h,j,k,l}
-## {bspc node --focus,bspwm-smart-move.sh} {west,south,north,east}
 alt + {_,shift + }{h,j,k,l}
 	{bspwm-focus-swap.sh focus,bspwm-focus-swap.sh swap} {west,south,north,east}
 
 ## Preselect the splitting area for next window on leaf/parent
-## control + alt + {h,j,k,l}
 control + alt + {h,j,k,l}
 	bspc node --presel-dir \~{west,south,north,east}
 
@@ -48,12 +45,7 @@ super + ctrl + space
 super + shift + {h,j,k,l}
 	bspwm-resize.sh {west,south,north,east} 50
 
-## Equalize all nodes
-control + shift + @equal
-	bspc node @/ --equalize
-
 ## Mode for dynamic gaps.
-# super + g : bracket{left,right}
 super + g : {comma,period}
 	bspc config -d focused window_gap "$(($(bspc config -d focused window_gap) {-,+} 5 ))"
 
@@ -97,11 +89,11 @@ super + w ; super + {_, shift + }{0-9}
 
 ## Kill/remove the first matching receptacle from the current desktop.
 ## With shift, kill them all at once.
-super + w ; super + {_, shift + }r
-	{ \
-	bspc node 'any.leaf.!window.local' -k, \
-	bspwm-multifaceted-operation.sh --kill-all-receptacles \
-	}
+# super + w ; super + {_, shift + }r
+# 	{ \
+# 	bspc node 'any.leaf.!window.local' -k, \
+# 	bspwm-multifaceted-operation.sh --kill-all-receptacles \
+# 	}
 
 ## Summon all marked windows across all desktops to the current desktop.
 super + w ; m
@@ -119,9 +111,13 @@ super + {h,j,k,l}
 super + {_,shift + }r
 	bspc node @/ --rotate {90,-90}
 
-## Focus left/right occupied desktop
-# super + {Left,Right}
-# 	bspc desktop --focus {prev,next}.occupied
+## Make split ratios equal
+super + question
+	bspc node @/ --equalize
+
+## Make split ratios balanced
+super + dead_grave
+	bspc node @/ --balance
 
 ## Move desktop to monitor and reorder desktops
 alt + control + {Left,Down,Up,Right}
@@ -177,6 +173,10 @@ alt + i
 alt + {_,shift + } Return
 	{termite,termite -e "tmux new-session -A -s 'WORK'"}
 
+## reset screens
+alt + F7
+	bspwm-setup-monitors.sh &
+
 ## open file explorer
 super + e
 	thunar
@@ -186,13 +186,12 @@ super + shift + p
 	~/.config/polybar/launch-polybar.sh &
 
 ## reload bspwm
-alt + shift + c
-	bspc {wm -r && dunstify "bspwm" "Reloaded"}
+alt + control + r
+	bspc wm -r && dunstify "bspwm" "Reloaded"
 
 ## reload sxhkd
 alt + shift + r
 	pkill -9 -x sxhkd && sleep 1; sxhkd &; dunstify "sxhkd" "Reloaded"
-	# pkill -USR1 -x sxhkd && dunstify "sxhkd" "Reloaded"
 
 ## Brightness
 XF86MonBrightness{Up,Down}
@@ -229,6 +228,7 @@ button2 + alt
 XF86HomePage
 	firefox
 
+
 ##
 ## Scratchpad options
 ##
@@ -238,49 +238,12 @@ super + u
 	~/.config/bspwm/scripts/bspwm-toggle-visibility scratchpad \
         "termite --class scratchpad --name scratchpad --exec='tmux new-session -A -s SCRATCHPAD'"
 
-# ## tag window as sratchpad
-# super + shift + u
-# 	id=$(bspc query -N -n "focused");\
-# 	if [ -n "$id" ];then \
-# 		xprop -id $id -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
-# 		bspc node -t "floating";\
-# 		xdotool windowunmap $id;\
-# 	fi
-# ## toggle between scratch windows
-# super + u
-# 	i=$(bspc query -N -n "focused.floating");\
-# 	if [ -n "$i" ];then \
-# 		xprop -id $i -f _SCRATCHPAD 32ii -set _SCRATCHPAD $(date +%s,%N);\
-# 		xdotool windowunmap $i;\
-# 	else;\
-# 		i=$(for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]\+" -o);do \
-# 			t=$(xprop -id $w _SCRATCHPAD | grep ' = \(.*\)');\
-# 			if [ -n "$t" ];then \
-# 				echo $t $w;\
-# 			fi;\
-# 		done|sort -n|head -n1|cut -d" " -f 5);\
-# 		if [ -n "$i" ];then \
-# 			xprop -id $i -remove _SCRATCHPAD;\
-# 			bspc rule --add \* state=floating center=on --one-shot;\
-# 			xdotool windowmap $i;\
-# 			bspc node -f $i;\
-# 		fi;\
-# 	fi
-
 
 #### OLD ####
 
 ## Circulate the leaves of the tree
 # super + {_,shift + }c
 # 	bspc node @/ --circulate {backward,forward}
-
-## Make split ratios equal
-# super + equal
-# 	bspc node @/ --equalize
-
-## Make split ratios balanced
-# super + minus
-# 	bspc node @/ --balance
 
 ## Flip layout vertically/horizontally
 # super + {_,shift + }s

@@ -4,9 +4,13 @@
 # Set environment
 export BSPWM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm"
 
-dump_bspwm_state(){
+dump_bspwm_state() {
     bspc wm --dump-state > "$BSPWM_STATE" \
         && dunstify "BSPWM Wm" "Window manager dumped into $BSPWM_STATE"
+}
+
+lock_screen() {
+    ~/.config/i3/scripts/betterlockscreen.sh --lock
 }
 
 # Function to kill programs
@@ -68,11 +72,11 @@ case $selection in
         logout
         ;;
     hibernate)
-        ~/.config/i3/scripts/betterlockscreen.sh --lock \
+        lock_screen \
         && sudo systemctl hibernate
         ;;
     suspend)
-        ~/.config/i3/scripts/betterlockscreen.sh --lock \
+        lock_screen \
         && sudo systemctl suspend
         ;;
     reboot)
@@ -87,11 +91,11 @@ case $selection in
         dump_bspwm_state
         ;;
     lock)
-        ~/.config/i3/scripts/betterlockscreen.sh --lock
+        lock_screen
         ;;
     reset-monitors)
         ## reset monitors without restarting bspwm
-        ~/.config/bspwm/scripts/bspwm-setup-monitors.sh
+        bspwm-setup-monitors.sh
         ;;
 esac
 

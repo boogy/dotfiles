@@ -83,15 +83,15 @@ ps -ef|grep "[p]ulseaudio" || {
 ## launch polybar after pulseaudio
 ~/.config/polybar/launch-polybar.sh &
 
-bsp-layout set tall 1
-bsp-layout set monocle 2
-bsp-layout set tall 3
-bsp-layout set monocle 4
-bsp-layout set monocle 5
-bsp-layout set tiled 6
-bsp-layout set monocle 8
-bsp-layout set tiled 7
-bsp-layout set monocle 10
+# bsp-layout set tall 1
+# bsp-layout set monocle 2
+# bsp-layout set tall 3
+# bsp-layout set monocle 4
+# bsp-layout set monocle 5
+# bsp-layout set tiled 6
+# bsp-layout set monocle 8
+# bsp-layout set tiled 7
+# bsp-layout set monocle 10
 
 ## generate list of files to search with bolt
 bolt --generate &>/dev/null

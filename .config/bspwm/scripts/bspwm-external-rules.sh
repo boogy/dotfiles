@@ -55,9 +55,8 @@ case "$window_class" in
                 echo "state=floating"
                 ;;
             *)
-                ## commented out for floating windows
-                ## or they will be tiled when focused
-                # echo "state=tiled"
+                ## do nothing
+                exit 0
                 ;;
         esac
         ;;
