@@ -9,6 +9,10 @@ _check() {
     fi
 }
 
+_set_layout() {
+    bspc desktop "${1}" --layout "${2}"
+}
+
 ## detect screen layout automatically
 autorandr -c
 
@@ -83,14 +87,27 @@ ps -ef|grep "[p]ulseaudio" || {
 ## launch polybar after pulseaudio
 ~/.config/polybar/launch-polybar.sh &
 
+## set desktop layouts
+_set_layout 1 tiled
+_set_layout 2 monocle
+_set_layout 3 tiled
+_set_layout 4 monocle
+_set_layout 5 monocle
+_set_layout 6 tiled
+_set_layout 7 tiled
+_set_layout 8 monocle
+_set_layout 9 tiled
+_set_layout 10 monocle
+
 # bsp-layout set tall 1
 # bsp-layout set monocle 2
 # bsp-layout set tall 3
 # bsp-layout set monocle 4
 # bsp-layout set monocle 5
 # bsp-layout set tiled 6
-# bsp-layout set monocle 8
 # bsp-layout set tiled 7
+# bsp-layout set monocle 8
+# bsp-layout set tall 9
 # bsp-layout set monocle 10
 
 ## generate list of files to search with bolt
@@ -104,8 +121,10 @@ _check firefox
 # _check xfce4-power-manager
 
 ## start tmux session or join if present
+# (tmux list-sessions|grep -Eo WORK) \
+#     || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
 (tmux list-sessions|grep -Eo WORK) \
-    || termite --class work --name work -e "tmux new-session -A -s 'WORK'" &
+    || alacritty --class work --title work -e tmux new-session -A -s WORK &
 
 ## run polkit agent (don't need to check if already running)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -114,7 +133,8 @@ _check firefox
 _check gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,ssh &
 
 ## compositor
-_check picom "picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible"
+# _check picom "picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible"
+_check picom "picom -b"
 
 ##
 ## SUBSCRIBE TO BSPWM ACTIONS

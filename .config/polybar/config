@@ -178,20 +178,25 @@ inline-mode = false
 fuzzy-match = false
 index-sort = true
 
-label-focused = %{T4}%name%%icon%%{T-}
+; label-focused = %{T4}%name%%icon%%{T-}
+label-focused = %{T4}%icon%%{T-}
 label-focused-background = ${colors.background-alt}
 ## color for mode menus
 label-focused-underline= ${colors.primary2}
+; label-focused-underline= #fba922
 label-focused-padding = 2
 
-label-occupied = %{T4}%name%%icon%%{T-}
+; label-occupied = %{T4}%name%%icon%%{T-}
+label-occupied = %{T4}%icon%%{T-}
 label-occupied-padding = 2
 
-label-urgent = %{T4}%name%%icon%%{T-} 
+; label-urgent = %{T4}%name%%icon%%{T-} 
+label-urgent = %{T4}%icon%%{T-} 
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
-label-empty = %name%%icon%
+; label-empty = %name%%icon%
+label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
@@ -536,6 +541,7 @@ type = internal/pulseaudio
 use-ui-max = true
 interval = 5
 format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+format-volume-underline = #55aa55
 label-muted = %{T5}%{T-} 0%
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -627,7 +633,9 @@ format-spacing = 1
 
 label-open = %{T5} %{T-}
 label-open-foreground = ${colors.secondary}
+label-open-underline = #268bd2
 label-close =  cancel
+label-close-underline = #268bd2
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}

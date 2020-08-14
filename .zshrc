@@ -40,15 +40,17 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 ## disable the XON/XOFF tty flow feature [ctrl-S|ctrl-Q]
 stty -ixon
+
+## set PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH=${PATH}:${HOME}/bin
 export PATH=${PATH}:/home/boogy/.cargo/bin
 export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/.cargo/bin
 
-export BROWSER=firefox
 export LANG=en_US.UTF-8
-# export EDITOR='vim'
+export BROWSER=firefox
+export TERMINAL=alacritty
 export VIEW="$EDITOR"
 export FZF_DEFAULT_OPTS='--history-size=100000 '
 export FZF_CTRL_R_OPTS="--reverse --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"

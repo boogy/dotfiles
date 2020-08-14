@@ -163,7 +163,7 @@ alt + d
 
 ## Lock the screen
 super + alt + l
-	~/.config/i3/scripts/betterlockscreen.sh --lock
+	betterlockscreen.sh --lock
 
 ## select screen layout from autorandr
 alt + i
@@ -171,7 +171,8 @@ alt + i
 
 ## Launch terminal (+tmux with shift)
 alt + {_,shift + } Return
-	{termite,termite -e "tmux new-session -A -s 'WORK'"}
+	{alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
+	# {termite,termite -e "tmux new-session -A -s 'WORK'"}
 
 ## reset screens
 alt + F7
