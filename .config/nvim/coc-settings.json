@@ -32,11 +32,11 @@
             "initializationOptions": {}
         }
     },
-    "snippets.ultisnips.directories": [
-        "UltiSnips",
-        "gosnippets/UltiSnips",
-        "~/.config/nvim/utils/snips"
-    ],
+    //"snippets.ultisnips.directories": [
+    //    "~/.config/nvim/snips",
+    //    "gosnippets/UltiSnips"
+    //],
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "json.enable": true,
     "json.format.enable": true,
     // explorer

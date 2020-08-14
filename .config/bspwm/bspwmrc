@@ -19,7 +19,7 @@ export BSPWM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm"
 ##
 
 ## longest_side || alternate || spiral
-_bc automatic_scheme              alternate
+_bc automatic_scheme              longest_side
 #_bc border_radius                8
 _bc border_width                  1
 _bc window_gap                    4

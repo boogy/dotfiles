@@ -18,6 +18,7 @@ reset=$(tput setaf 7)       # Norma
 command -v -p exa &>/dev/null && {
     alias ls="exa -g --color=auto --time-style=long-iso"
     alias ll="ls -l --color=auto"
+    alias l=ll
     alias la="ls -la --color=always"
     alias llm="ls -l -s modified"
     alias llmr="ls -lr -s modified"
@@ -26,6 +27,7 @@ command -v -p exa &>/dev/null && {
 } || {
     alias ls="ls --color=always"
     alias ll="ls -l"
+    alias l=ll
     alias sl="ls"
     alias la="ls -Al"          # show hidden files
     alias lx="ls -lXB"         # sort by extension

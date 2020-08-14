@@ -99,6 +99,12 @@ cd ${INSTALLDIR}/powerline_fonts
 rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
 
 
+## Copy firefox user.js in all profiles
+FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
+for P in ${FF_PROFILES_PATHS[@]}; do
+    cp ${THIS_DIR}/deploy/firefox/user.js ~/.mozilla/firefox/${P}/
+done
+
 ## Make sure that .bash_aliases is loaded
 [ $(uname) = 'Linux' ] && {
   grep -qEo ".bash_aliases" ~/.bashrc || echo "source ~/.bash_aliases" >> ~/.bashrc

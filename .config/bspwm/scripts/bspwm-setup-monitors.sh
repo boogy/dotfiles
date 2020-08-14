@@ -13,6 +13,15 @@ _desk_order() {
     done < <(bspc query -D -m "${1:-focused}" --names) | sort -g | paste -d ' ' -s
 }
 
+_set_bspwm_config() {
+    bspc config border_width               1
+    bspc config window_gap                 4
+    bspc config top_padding                0
+    bspc config bottom_padding             20
+    bspc config left_padding               0
+    bspc config right_padding              0
+}
+
 PRIMARY_MONITOR=$(xrandr | grep primary | cut -d ' ' -f 1)
 OUTPUTS=($(xrandr --listactivemonitors|awk '{print $4}'|sed '/^$/d'))
 NB_OF_MONITORS=${#OUTPUTS[@]}
@@ -41,6 +50,8 @@ for MONITOR in ${OUTPUTS[@]}; do
     ## reorder the desktops for each monitor
     bspc monitor $MONITOR -o $(eval _desk_order $MONITOR)
 done
+
+_set_bspwm_config
 
 ## relaunch polybar
 ~/.config/polybar/launch-polybar.sh

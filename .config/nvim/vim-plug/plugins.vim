@@ -25,7 +25,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
     " code snippets
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'honza/vim-snippets'
+    " Plug 'SirVer/ultisnips'
 
     " Replace vim-airline with a lighter equivalent
     Plug 'itchyny/lightline.vim'
@@ -57,6 +58,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'racer-rust/vim-racer'    , { 'for': ['rust'      , 'rs']                          }
     " Markdown
     Plug 'plasticboy/vim-markdown' , { 'for': 'markdown'                                    }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     " Syntax plugins and themes
     Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile']                  }
