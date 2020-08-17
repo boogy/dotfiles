@@ -34,7 +34,7 @@ alt + {_,shift + }{h,j,k,l}
 	{bspwm-focus-swap.sh focus,bspwm-focus-swap.sh swap} {west,south,north,east}
 
 ## Preselect the splitting area for next window on leaf/parent
-control + alt + {h,j,k,l}
+alt + control + {h,j,k,l}
 	bspc node --presel-dir \~{west,south,north,east}
 
 ## Kill all receptacles
@@ -54,9 +54,9 @@ super + g ; minus
 	bspc config -d focused window_gap 4
 
 ## toogle window compozitor
-super + k + c
-	(pgrep -x picom && pkill picom) \
-	|| picom -bcCGf -D 1 -I 0.02 -O 0.02 --no-fading-openclose --unredir-if-possible &
+# super + k + c
+# 	(pgrep -x picom && pkill picom) \
+# 	|| picom -bcCGf -D 1 -I 0.02 -O 0.02 --no-fading-openclose --unredir-if-possible &
 
 ## printscreen / screenshot
 {_,shift} + Print
@@ -209,6 +209,7 @@ XF86AudioMute
 ## Mute microphone
 XF86AudioMicMute
 	amixer set Capture toggle
+
 ## Mute micro without XF86AudioMute key
 F12
 	amixer set Capture toggle
