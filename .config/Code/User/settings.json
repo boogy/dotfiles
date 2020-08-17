@@ -398,5 +398,6 @@
         ".venv"
     ],
     "instantmarkdown.autoOpenBrowser": false,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.languageServer": "Microsoft"
 }

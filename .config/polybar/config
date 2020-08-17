@@ -123,7 +123,7 @@ font-8 = Noto Color Emoji:style=Regular:size=10
 
 modules-left = bspwm bspwm-monocle-nb-windows
 ; modules-center = windowlist
-modules-right = powermenu xbacklight pulseaudio bluetooth memory cpu wlan vpn eth battery date
+modules-right = powermenu xbacklight pulseaudio pulseaudio-microphone bluetooth memory cpu wlan vpn eth battery date
 
 wm-restack = bspwm
 scroll-up = bspwm-desknext
@@ -157,7 +157,6 @@ label-indicator-underline = ${colors.secondary}
 [module/filesystem]
 type = internal/fs
 interval = 240
-
 mount-0 = /
 
 label-mounted = %{A1:xfce4-taskmanager -f &:}%{T5} %{T-} %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%%{A}
@@ -225,14 +224,14 @@ label-separator-foreground = #ffb52a
 
 ws-icon-0 = 0; 
 ws-icon-1 = 1; 
-ws-icon-2 = 2; 
-ws-icon-3 = 3; 
+ws-icon-2 = 2; 
+ws-icon-3 = 3; 
 ws-icon-4 = 4; 
 ws-icon-5 = 5; 
 ws-icon-6 = 6; 
 ws-icon-7 = 7; 
-ws-icon-8 = 8; 
-ws-icon-9 = 9; 
+ws-icon-8 = 8; 
+ws-icon-9 = 9; 
 ws-icon-10 = 10; 
 ws-icon-default = 
 
@@ -253,14 +252,14 @@ fuzzy-match = false
 ; NOTE: The label needs to match the name of the i3 workspace
 ws-icon-0 = 0; 
 ws-icon-1 = 1; 
-ws-icon-2 = 2; 
-ws-icon-3 = 3; 
+ws-icon-2 = 2; 
+ws-icon-3 = 3; 
 ws-icon-4 = 4; 
 ws-icon-5 = 5; 
 ws-icon-6 = 6; 
 ws-icon-7 = 7; 
-ws-icon-8 = 8; 
-ws-icon-9 = 9; 
+ws-icon-8 = 8; 
+ws-icon-9 = 9; 
 ws-icon-10 = 10; 
 ws-icon-default = 
 
@@ -403,7 +402,7 @@ ramp-coreload-7-foreground = #ff5555
 ;###############################################################
 [module/memory]
 type = internal/memory
-interval = 10
+interval = 20
 format = %{A1:xfce4-taskmanager &:}<label>%{A}
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
@@ -430,7 +429,8 @@ interval = 5.0
 
 format-connected = %{A1:nm-connection-editor &:}<ramp-signal> <label-connected>%{A}
 format-connected-underline = #9f78e1
-label-connected = %{T5}%{T-} %essid% %signal%% %local_ip%
+; label-connected = %{T5}%{T-} %essid% %signal%% %local_ip%
+label-connected = %{T5}%{T-} %signal%% %local_ip%
 
 format-disconnected =
 ; format-disconnected = <label-disconnected>
@@ -457,7 +457,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 [module/eth]
 type = internal/network
 interface = ${env:DEFAULT_NETWORK_INTERFACE:eth0}
-interval = 5.0
+interval = 10
 
 format-connected-underline = #55aa55
 format-connected-prefix = " "
@@ -474,7 +474,7 @@ format-disconnected =
 [module/vpn]
 type = custom/script
 exec = ~/.config/i3/scripts/vpn-openvpn-status.sh
-interval = 5
+interval = 8
 
 
 ;###############################################################
@@ -494,45 +494,45 @@ label = %{A3:gnome-calendar &:}%{T5}%{T-}%date% %{T5}%{T-} %time% %{A}
 
 
 ;###############################################################
-[module/volume]
-type = internal/volume
+; [module/volume]
+; type = internal/volume
 
-master-soundcard = default
-speaker-soundcard = default
-headphone-soundcard = default
+; master-soundcard = default
+; speaker-soundcard = default
+; headphone-soundcard = default
 
-master-mixer = Master
-mapped = false
+; master-mixer = Master
+; mapped = false
 
-format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
-label-volume = %{T5} %{T-} %percentage%%
-label-volume-foreground = ${root.foreground}
+; format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+; label-volume = %{T5} %{T-} %percentage%%
+; label-volume-foreground = ${root.foreground}
 
-format-muted = <ramp-volume> <label-muted>
-format-muted-prefix = " "
-format-muted-foreground = ${colors.secondary}
-label-muted = %{T5}%{T-} 0%
+; format-muted = <ramp-volume> <label-muted>
+; format-muted-prefix = " "
+; format-muted-foreground = ${colors.secondary}
+; label-muted = %{T5}%{T-} 0%
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+; bar-volume-width = 10
+; bar-volume-foreground-0 = #55aa55
+; bar-volume-foreground-1 = #55aa55
+; bar-volume-foreground-2 = #55aa55
+; bar-volume-foreground-3 = #55aa55
+; bar-volume-foreground-4 = #55aa55
+; bar-volume-foreground-5 = #f5a70a
+; bar-volume-foreground-6 = #ff5555
+; bar-volume-gradient = false
+; bar-volume-indicator = |
+; bar-volume-indicator-font = 2
+; bar-volume-fill = ─
+; bar-volume-fill-font = 2
+; bar-volume-empty = ─
+; bar-volume-empty-font = 2
+; bar-volume-empty-foreground = ${colors.foreground-alt}
 
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
+; ramp-volume-0 = 🔈
+; ramp-volume-1 = 🔉
+; ramp-volume-2 = 🔊
 
 
 ;###############################################################
@@ -540,7 +540,8 @@ ramp-volume-2 = 🔊
 type = internal/pulseaudio
 use-ui-max = true
 interval = 5
-format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+; format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume> <bar-volume>%{A}
+format-volume = %{A3:pavucontrol &:}<label-volume> <ramp-volume>%{A}
 format-volume-underline = #55aa55
 label-muted = %{T5}%{T-} 0%
 bar-volume-width = 10
@@ -570,7 +571,7 @@ ramp-volume-2 = 
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 99
+full-at = 98
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
@@ -629,7 +630,7 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-format-spacing = 1
+format-spacing = 2
 
 label-open = %{T5} %{T-}
 label-open-foreground = ${colors.secondary}
@@ -707,10 +708,24 @@ hook-0 = ~/.config/bspwm/scripts/bspwm-show-nb-of-windows.sh
 hook-1 = echo ""
 format-prefix = " "
 initial = 1
-click-right = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
-click-left = rofi -show window -show-icons -opacity "90" -bw 1 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#42f4aa" -hlfg "#9575cd" -font "Ubuntu 11" -theme Arc-Dark
+click-right = rofi -show window -show-icons -opacity "90"
+click-left = rofi -show window -show-icons -opacity "90"
 scroll-up = bspc node --focus next.local.window.!floating
 scroll-down = bspc node --focus prev.local.window.!floating
+
+;###############################################################
+; [module/pulseaudio-microphone]
+; type = custom/ipc
+; initial = 1
+; hook-0 = ~/.config/bspwm/scripts/pulseaudio-microphone.sh
+; click-left = amixer set Capture toggle && polybar-msg hook pulseaudio-microphone 1 &>/dev/null
+; click-right = amixer set Capture toggle && polybar-msg hook pulseaudio-microphone 1 &>/dev/null
+; format-underline = #f5a70a
+[module/pulseaudio-microphone]
+type = custom/script
+exec = ~/.config/bspwm/scripts/pulseaudio-microphone.sh
+tail = true
+click-left = ~/.config/bspwm/scripts/pulseaudio-microphone.sh --toggle &
 
 ;###############################################################
 [settings]

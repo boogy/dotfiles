@@ -30,7 +30,7 @@ autorandr -c
 
 xrdb -merge ~/.Xresources
 /usr/bin/numlockx on
-xset r rate 200 70
+xset r rate 200 80
 xhost +local:
 
 ## daemon mode for filemanager makes mounting volumes easier
