@@ -24,9 +24,7 @@ window:
 
   # Window class (Linux/BSD only):
   class:
-    # Application instance name
     instance: Alacritty
-    # General application class
     general: Alacritty
 
   # GTK theme variant (Linux/BSD only)
@@ -39,17 +37,20 @@ scrolling:
   multiplier: 3
 
 ## Font configuration
+## Cool fonts
+## Cousine for Powerline style=Regular
+## Cousine Nerd Font Mono style=Regular
 font:
   normal:
-    family: "Cousine for Powerline"
+    family: "Cousine Nerd Font"
     style: Regular
 
   bold:
-    family: "Cousine for Powerline"
+    family: "Cousine Nerd Font"
     style: Bold
 
   italic:
-    family: "Cousine for Powerline"
+    family: "Cousine Nerd Font"
     style: Italic
 
   ## Point size
