@@ -33,9 +33,9 @@ for MONITOR in ${OUTPUTS[@]}; do
             ;;
         2)
             if [[ ${MONITOR} == ${PRIMARY_MONITOR} ]]; then
-                bspc monitor $MONITOR -d 4 5 6 7 8 10
+                bspc monitor $MONITOR -d 4 5 6 7 8 9 10
             else
-                bspc monitor $MONITOR -d 1 2 3 9
+                bspc monitor $MONITOR -d 1 2 3
             fi
             ;;
         *)

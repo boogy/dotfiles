@@ -1,5 +1,5 @@
 [options]
-font = Cousine for Powerline 10
+font = Cousine Nerd Font 10
 
 allow_bold = true
 audible_bell = false

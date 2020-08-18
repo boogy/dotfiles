@@ -6,7 +6,8 @@ if !has('gui_running')
 endif
 
 " Cool Themes
-" PaperColor, womabt, nord, one_dark
+" PaperColor, wombat, nord, one_dark, jellybeans, PaperColor_dark, seoul256
+" deus, material, molokai, materia, ayu_{light,dark,mirage}
 let g:lightline = {
       \ 'colorscheme': 'nord',
       \ 'active': {
