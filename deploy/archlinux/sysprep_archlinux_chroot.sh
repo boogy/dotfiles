@@ -342,8 +342,9 @@ function configure_mkinitcpio_hooks
     fi
 
     ## enable mkinitcpio compression
-    sed -i "s/#COMPRESSION=\"xz\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
-    sed -i "s/#COMPRESSION_OPTIONS=.*/COMPRESSION_OPTIONS=(-0 -T 0)/" /etc/mkinitcpio.conf
+    sed -i "s/#COMPRESSION=\"lz4\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
+    # sed -i "s/#COMPRESSION=\"xz\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
+    # sed -i "s/#COMPRESSION_OPTIONS=.*/COMPRESSION_OPTIONS=(-0 -T 0)/" /etc/mkinitcpio.conf
 
     msg_ok "Generate kernel images with 'mkinitcpio -P'"
     mkinitcpio -P

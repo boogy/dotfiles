@@ -88,7 +88,7 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
 nvim -c 'CocInstall -sync coc-python coc-json coc-snippets coc-explorer coc-rls coc-html coc-go coc-tsserver coc-vimlsp coc-css coc-lists coc-sh coc-xml coc-yaml|q'
-pip3 install --user jedi-language-server jedi
+# pip3 install --user jedi-language-server jedi
 
 ##
 ## Install powerline fonts

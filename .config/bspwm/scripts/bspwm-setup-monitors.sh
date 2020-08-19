@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
-# declare -a a_monitor
-# monitors=0
-# for m in $(xrandr --listactivemonitors|awk '{print $4}'|sed '/^$/d'); do
-# 	a_monitor[$monitors]=$m
-# 	((monitors++))
-# done
+## Notify BSPWM to run this script for all changes by adding it to:
+## ~/.config/autorandr/postswitch
+## See Hook scripts: https://github.com/phillipberndt/autorandr
+##
+## autorandr installs a udev rule which is triggered when monitor state is changed
+## rule file: /usr/lib/udev/rules.d/40-monitor-hotplug.rules
+## autorandr udev rule:
+##   ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/systemctl start --no-block autorandr.service"
+
+## BUG: device on /sys/class/drm does not update without forcing an update with xrandr
+xrandr > /dev/null
 
 _desk_order() {
     while read -r line; do
@@ -14,12 +19,10 @@ _desk_order() {
 }
 
 _set_bspwm_config() {
-    bspc config border_width               1
-    bspc config window_gap                 4
-    bspc config top_padding                0
-    bspc config bottom_padding             20
-    bspc config left_padding               0
-    bspc config right_padding              0
+    ## apply the bspwm configs escept external_rules_command
+    ## or the desktops will look funny if monitors have changed
+    grep --color=never -P '(?=^((?!external_rules_command).)*$)bspc config ' \
+        ~/.config/bspwm/bspwmrc | while read line; do (eval $line); done
 }
 
 PRIMARY_MONITOR=$(xrandr | grep primary | cut -d ' ' -f 1)
@@ -54,4 +57,4 @@ done
 _set_bspwm_config
 
 ## relaunch polybar
-~/.config/polybar/launch-polybar.sh
+~/.config/polybar/launch-polybar.sh &

@@ -181,8 +181,9 @@ index-sort = true
 label-focused = %{T4}%icon%%{T-}
 label-focused-background = ${colors.background-alt}
 ## color for mode menus
-label-focused-underline= ${colors.primary2}
+; label-focused-underline= ${colors.primary2}
 ; label-focused-underline= #fba922
+label-focused-underline= #ffb52a
 label-focused-padding = 2
 
 ; label-occupied = %{T4}%name%%icon%%{T-}
@@ -222,17 +223,17 @@ label-marked = M
 label-separator-padding = 2
 label-separator-foreground = #ffb52a
 
-ws-icon-0 = 0; 
-ws-icon-1 = 1; 
-ws-icon-2 = 2; 
-ws-icon-3 = 3; 
-ws-icon-4 = 4; 
-ws-icon-5 = 5; 
-ws-icon-6 = 6; 
-ws-icon-7 = 7; 
-ws-icon-8 = 8; 
-ws-icon-9 = 9; 
-ws-icon-10 = 10; 
+ws-icon-0 = 0;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = 3;
+ws-icon-4 = 4;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
+ws-icon-7 = 7;
+ws-icon-8 = 8;
+ws-icon-9 = 9;
+ws-icon-10 = 10;
 ws-icon-default = 
 
 
@@ -250,17 +251,17 @@ fuzzy-match = false
 
 ; ws-icon-[0-9]+ = label;icon
 ; NOTE: The label needs to match the name of the i3 workspace
-ws-icon-0 = 0; 
-ws-icon-1 = 1; 
-ws-icon-2 = 2; 
-ws-icon-3 = 3; 
-ws-icon-4 = 4; 
-ws-icon-5 = 5; 
-ws-icon-6 = 6; 
-ws-icon-7 = 7; 
-ws-icon-8 = 8; 
-ws-icon-9 = 9; 
-ws-icon-10 = 10; 
+ws-icon-0 = 0;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = 3;
+ws-icon-4 = 4;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
+ws-icon-7 = 7;
+ws-icon-8 = 8;
+ws-icon-9 = 9;
+ws-icon-10 = 10;
 ws-icon-default = 
 
 ; Sort the workspaces by index instead of the default
