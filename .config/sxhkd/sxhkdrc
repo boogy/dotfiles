@@ -174,10 +174,6 @@ alt + {_,shift + } Return
 	{alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
 	# {termite,termite -e "tmux new-session -A -s 'WORK'"}
 
-## reset screens
-alt + F7
-	bspwm-setup-monitors.sh &
-
 ## open file explorer
 super + e
 	thunar
@@ -213,6 +209,10 @@ XF86AudioMicMute
 ## Mute micro without XF86AudioMute key
 F12
 	amixer set Capture toggle
+
+## reset screens
+F7
+	(bspwm-setup-monitors.sh && dunstify "Bspwm" "Screen configuration reloaded") &
 
 ## Audio
 XF86Audio{Play,Prev,Next,Stop}
