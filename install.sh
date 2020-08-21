@@ -59,14 +59,14 @@ for DOT_FILE in $(ls .config); do
     ln -sf $THIS_DIR/.config/$DOT_FILE ~/.config/
 done
 
-## Link bspwm && i3 config scripts
-if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
-    for RM_FILE in $(ls $THIS_DIR/.config/bspwm/scripts); do
-        rm -f /usr/local/bin/$RM_FILE
-    done
-fi
-for FILE in $(ls $THIS_DIR/.config/bspwm/scripts); do
-    sudo ln -sf $THIS_DIR/.config/bspwm/scripts/$FILE /usr/local/bin/
+## Link confiuration scripts to /usr/local/bin/
+# if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
+#     for RM_FILE in $(ls $THIS_DIR/.config/scripts); do
+#         rm -f /usr/local/bin/$RM_FILE
+#     done
+# fi
+for FILE in $(ls $THIS_DIR/.config/scripts); do
+    sudo ln -sf $THIS_DIR/.config/scripts/$FILE /usr/local/bin/
 done
 
 
@@ -102,18 +102,26 @@ rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
 ## Copy firefox user.js in all profiles
 FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
 for P in ${FF_PROFILES_PATHS[@]}; do
-    cp ${THIS_DIR}/deploy/firefox/user.js ~/.mozilla/firefox/${P}/
+    cp ${THIS_DIR}/deploy/conf/firefox/user.js ~/.mozilla/firefox/${P}/
 done
 
-## Make sure that .bash_aliases is loaded
-[ $(uname) = 'Linux' ] && {
-  grep -qEo ".bash_aliases" ~/.bashrc || echo "source ~/.bash_aliases" >> ~/.bashrc
-  (test -f ~/.bashrc && chmod 0700 $_ && source $_) &>/dev/null
-}
+## Make sure .bash_aliases is loaded
+case $(uname) in
+    [Ll]inux)
+        grep -qEo ".bash_aliases" ~/.bashrc \
+            || echo "source ~/.bash_aliases" >> ~/.bashrc
+        (test -f ~/.bashrc && chmod 0700 $_ && source $_) &>/dev/null
+        ;;
 
-[ $(uname) = 'Darwin' ] && {
-  test -f ~/.profile || touch ~/.profile && chmod 0700 $_
-  grep -qEo ".bash_aliases" ~/.bashrc || echo "source ~/.bash_aliases" >> ~/.profile
-  (test -f ~/.profile && chmod 0700 $_ && source $_) &>/dev/null
-}
+    [Dd]arwin)
+        test -f ~/.profile \
+            || touch ~/.profile \
+            && chmod 0700 $_
+        grep -qEo ".bash_aliases" ~/.bashrc \
+            || echo "source ~/.bash_aliases" >> ~/.profile
+        (test -f ~/.profile && chmod 0700 $_ && source $_) &>/dev/null
+        ;;
+    *)
+        echo "These dotfiles do not support $(uname)"
+esac
 

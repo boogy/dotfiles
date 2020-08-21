@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
-if [ -z "$DEFAULT_NETWORK_INTERFACE" ]; then
-    export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
+# if [ -z "$DEFAULT_NETWORK_INTERFACE" ]; then
+#     export DEFAULT_NETWORK_INTERFACE=$(command -p ip route | grep '^default' | awk '{print $5}' | head -n1)
+# fi
+
+if [ -z "$DEFAULT_NIC_INTERFACE" ]; then
+    export DEFAULT_NIC_INTERFACE=$(command -p ip link ls|awk '/[0-9]+.*eth[0-9]+:.*state UP/ { gsub(":", "");print $2 }')
+fi
+
+if [ -z "$DEFAULT_WLAN_INTERFACE" ]; then
+    export DEFAULT_WLAN_INTERFACE=$(command -p ip link ls|awk '/[0-9]+.*wlan[0-9]+:.*state UP/ { gsub(":", "");print $2 }')
 fi
 
 if [ -z "$POLYBAR_PRIMARY_MONITOR" ]; then

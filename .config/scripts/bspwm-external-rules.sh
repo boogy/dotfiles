@@ -17,12 +17,15 @@ case "$windows_instance_class" in
     [Pp]laces:[Ff]irefox)
         echo "state=floating"
         echo "center=on"
+        echo "focus=on"
         ;;
+
     [Ss]office:[Ss]office*|[Ll]ibreoffice:[Ll]ibreoffice*|*:[Ll]ibreoffice*)
         echo "state=tiled"
         echo "desktop=6"
         echo "follow=on"
         ;;
+
     [Ss]cratchpad:[Ss]cratchpad*)
         echo "state=floating"
         echo "hidden=on"
@@ -30,6 +33,7 @@ case "$windows_instance_class" in
         echo "rectangle=1910x1040+0+0"
         echo "center=true"
         ;;
+
     [Ww]ork:[Ww]ork*|[Ww]ork:[Aa]lacritty*)
         echo "desktop=1"
         echo "state=tiled"
@@ -42,13 +46,16 @@ case "$window_class" in
         echo "state=floating"
         echo "center=on"
         ;;
+
     [Ee]vince|[Pp]inentry-gtk-2|[Aa]randr|*[Rr]emmina*|[Ff]ile-roller|[Pp]iper|[Nn]m-connection-editor)
         echo "state=floating"
         echo "center=on"
         ;;
+
     [Gg]nome-calculator|[Gg]picview|[Ll]xappearance)
         echo "state=floating"
         ;;
+
     * )
         case "$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE)" in
             *_NET_WM_WINDOW_TYPE_DIALOG*|*_NET_WM_WINDOW_TYPE_SPLASH*|*_NET_WM_WINDOW_TYPE_TOOLTIP*|*_NET_WM_WINDOW_TYPE_NOTIFICATION*)

@@ -53,11 +53,6 @@ super + g : {comma,period}
 super + g ; minus
 	bspc config -d focused window_gap 4
 
-## toogle window compozitor
-# super + k + c
-# 	(pgrep -x picom && pkill picom) \
-# 	|| picom -bcCGf -D 1 -I 0.02 -O 0.02 --no-fading-openclose --unredir-if-possible &
-
 ## printscreen / screenshot
 {_,shift} + Print
 	{flameshot gui,shutter -s}
@@ -167,7 +162,7 @@ super + alt + l
 
 ## select screen layout from autorandr
 alt + i
-	~/.config/i3/scripts/select-screen-layout.sh
+	select-screen-layout.sh
 
 ## Launch terminal (+tmux with shift)
 alt + {_,shift + } Return
@@ -181,6 +176,11 @@ super + e
 ## reload polybar
 super + shift + p
 	~/.config/polybar/launch-polybar.sh &
+
+
+## config file selection with rofi
+super + shift + c
+	dmenu-edit-configs.sh &
 
 ## reload bspwm
 alt + control + r
@@ -216,7 +216,7 @@ F7
 
 ## Audio
 XF86Audio{Play,Prev,Next,Stop}
-	~/.config/i3/scripts/audio_manage.sh {play,previous,next,stop}
+	audio_manage.sh {play,previous,next,stop}
 
 XF86Calculator
 	gnome-calculator
@@ -237,8 +237,8 @@ XF86HomePage
 
 # Toggle Scratchpad
 super + u
-	~/.config/bspwm/scripts/bspwm-toggle-visibility scratchpad \
-        "termite --class scratchpad --name scratchpad --exec='tmux new-session -A -s SCRATCHPAD'"
+	bspwm-toggle-visibility scratchpad \
+	"termite --class scratchpad --name scratchpad --exec='tmux new-session -A -s SCRATCHPAD'"
 
 
 #### OLD ####
