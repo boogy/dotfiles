@@ -10,7 +10,7 @@
 ##   ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/systemctl start --no-block autorandr.service"
 
 ## BUG: device on /sys/class/drm does not update without forcing an update with xrandr
-xrandr > /dev/null
+# xrandr > /dev/null
 
 _desk_order() {
     while read -r line; do
@@ -21,8 +21,9 @@ _desk_order() {
 _set_bspwm_config() {
     ## apply the bspwm configs escept external_rules_command
     ## or the desktops will look funny if monitors have changed
-    grep --color=never -P '(?=^((?!external_rules_command).)*$)bspc config ' \
-        ~/.config/bspwm/bspwmrc | while read line; do (eval $line); done
+    while read line ; do
+        $line
+    done < <(grep --color=never -P '(?=^((?!external_rules_command|_color).)*$)bspc config' ~/.config/bspwm/bspwmrc)
 }
 
 PRIMARY_MONITOR=$(xrandr | grep primary | cut -d ' ' -f 1)

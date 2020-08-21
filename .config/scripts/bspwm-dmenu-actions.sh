@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # Set environment
 export BSPWM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm"
 
@@ -48,52 +47,53 @@ logout() {
 }
 
 # Load dmenu config
-[ -f "$HOME/.dmenurc" ] && . "$HOME/.dmenurc" || DMENU='dmenu -i'
+# [ -f "$HOME/.dmenurc" ] && source "$HOME/.dmenurc" || DMENU='dmenu -i'
 
 # Menu items
-items="restart
-logout
-hibernate
-suspend
-reboot
-poweroff
-save
-lock
-reset-monitors"
+items="Restart
+Logout
+Hibernate
+Suspend
+Reboot
+Poweroff
+Save
+Lock
+Monitors-Reset"
 
 # Open menu
-selection=$(printf '%s' "$items" | $DMENU)
+# selection=$(printf '%s' "$items" | $DMENU)
+selection=$(printf '%s' "$items" | dmenu -p "Select Action: " -i -fn 'Droid Sans Mono-10' -nb '#1e1e1e' -sf '#1e1e1e' -sb '#f4800d' -nf '#fffefc')
 
 case $selection in
-    restart)
+    Restart)
         restart
         ;;
-    logout)
+    Logout)
         logout
         ;;
-    hibernate)
+    Hibernate)
         lock_screen \
         && sudo systemctl hibernate
         ;;
-    suspend)
+    Suspend)
         lock_screen \
         && sudo systemctl suspend
         ;;
-    reboot)
+    Reboot)
         logout
         sudo systemctl reboot
         ;;
-    halt|poweroff|shutdown)
+    Halt|Poweroff|Shutdown)
         logout
         sudo systemctl poweroff
         ;;
-    save|dump|save_state)
+    Save|Dump|Save_state)
         dump_bspwm_state
         ;;
-    lock)
+    Lock)
         lock_screen
         ;;
-    reset-monitors)
+    Monitors-Reset)
         ## reset monitors without restarting bspwm
         bspwm-setup-monitors.sh
         ;;
