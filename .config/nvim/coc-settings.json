@@ -9,11 +9,8 @@
         "json",
         "python"
     ],
-    // python config
     // if false, microsoft python engine will be used
     "python.jediEnabled": false,
-    //"python.pythonPath": "/usr/sbin/python3",
-    //"python.jediPath": "/usr/lib/python3.8/site-packages/jedi",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintPath": "/usr/sbin/pylint",
@@ -32,13 +29,14 @@
             "initializationOptions": {}
         }
     },
-    //"snippets.ultisnips.directories": [
-    //    "~/.config/nvim/snips",
-    //    "gosnippets/UltiSnips"
-    //],
+    // coc-snippets
     "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "json.enable": true,
     "json.format.enable": true,
+    // coc-highlight
+    "highlight.disableLanguages": [
+        "markdown"
+    ],
     // explorer
     "explorer.width": 50,
     "explorer.icon.enableNerdfont": true,
