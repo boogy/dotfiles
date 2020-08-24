@@ -23,7 +23,8 @@ _set_bspwm_config() {
     ## or the desktops will look funny if monitors have changed
     while read line ; do
         $line
-    done < <(grep --color=never -P '(?=^((?!external_rules_command|_color).)*$)bspc config' ~/.config/bspwm/bspwmrc)
+    done < <(grep --color=never -E \
+        '(split_ratio|border_width|window_gap|top_padding|bottom_padding|left_padding|right_padding)' ~/.config/bspwm/bspwmrc)
 }
 
 PRIMARY_MONITOR=$(xrandr | grep primary | cut -d ' ' -f 1)

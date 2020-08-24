@@ -167,7 +167,6 @@ alt + i
 ## Launch terminal (+tmux with shift)
 alt + {_,shift + } Return
 	{alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
-	# {termite,termite -e "tmux new-session -A -s 'WORK'"}
 
 ## open file explorer
 super + e
@@ -238,7 +237,7 @@ XF86HomePage
 # Toggle Scratchpad
 super + u
 	bspwm-toggle-visibility scratchpad \
-	"termite --class scratchpad --name scratchpad --exec='tmux new-session -A -s SCRATCHPAD'"
+	"alacritty --class scratchpad,scratchpad --title scratchpad -e tmux new-session -A -s SCRATCHPAD"
 
 
 #### OLD ####

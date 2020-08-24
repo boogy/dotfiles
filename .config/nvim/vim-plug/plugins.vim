@@ -41,7 +41,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'godlygeek/tabular'
 
     " Show hex, css colors
-    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+    " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
     " Use release branch (Recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

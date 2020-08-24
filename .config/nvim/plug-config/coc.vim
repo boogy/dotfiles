@@ -139,6 +139,23 @@ nnoremap <silent> <leader><space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <leader><space>p  :<C-u>CocListResume<CR>
 
+" coc extensions to always isntall
+let g:coc_global_extensions = [
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-html',
+\ 'coc-css',
+\ 'coc-yaml',
+\ 'coc-highlight',
+\ 'coc-python',
+\ 'coc-snippets',
+\ 'coc-explorer',
+\ 'coc-rls',
+\ 'coc-go',
+\ 'coc-vimlsp',
+\ 'coc-lists',
+\ 'coc-xml',
+\ ]
 
 " Explorer
 let g:coc_explorer_global_presets = {
