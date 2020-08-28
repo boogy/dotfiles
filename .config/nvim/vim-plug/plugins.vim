@@ -59,6 +59,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Markdown
     Plug 'plasticboy/vim-markdown' , { 'for': 'markdown'                                    }
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+    Plug 'dhruvasagar/vim-table-mode'
     " Syntax plugins and themes
     Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile']                  }
