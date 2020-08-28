@@ -56,6 +56,10 @@ case "$window_class" in
         echo "state=floating"
         ;;
 
+    [Ss]eahorse)
+        echo "state=floating"
+        ;;
+
     * )
         case "$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE)" in
             *_NET_WM_WINDOW_TYPE_DIALOG*|*_NET_WM_WINDOW_TYPE_SPLASH*|*_NET_WM_WINDOW_TYPE_TOOLTIP*|*_NET_WM_WINDOW_TYPE_NOTIFICATION*)

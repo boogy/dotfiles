@@ -602,7 +602,7 @@ ramp-volume-2 = 
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 94
+full-at = 90
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a

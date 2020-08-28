@@ -1,5 +1,5 @@
 " vim-markdown
-set conceallevel=2
+set conceallevel=0
 let g:vim_markdown_folding_disabled = 1
 " 0 to disable conceallevel
 let g:vim_markdown_conceal = 0
