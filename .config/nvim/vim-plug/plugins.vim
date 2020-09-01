@@ -79,6 +79,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'voldikss/vim-floaterm'
     Plug 'liuchengxu/vim-which-key'
 
+    " Vim show indent lines
+    Plug 'Yggdroot/indentLine'
+
     " Install Terraform LSP server
     " Plug 'hashivim/vim-terraform'
 

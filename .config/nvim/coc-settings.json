@@ -9,6 +9,9 @@
         "json",
         "python"
     ],
+    // coc-yaml settings
+    "yaml.format.enable": true,
+    "yaml.completion": true,
     // if false, microsoft python engine will be used
     "python.jediEnabled": false,
     "python.linting.enabled": true,
