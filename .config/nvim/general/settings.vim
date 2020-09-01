@@ -8,9 +8,9 @@ set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
-set ruler              			            " Show the cursor position all the time
+set ruler                               " Show the cursor position all the time
 set cmdheight=2                         " More space for displaying messages
-set iskeyword+=-                      	" treat dash separated words as a word text object"
+set iskeyword+=-                        " treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set mousehide                           " Hide mouse after chars are typed
 set splitbelow                          " Horizontal splits will automatically be below
@@ -45,6 +45,9 @@ set incsearch                           " Makes search act like search in modern
 set showmatch                           " Show matching brackets when text indicator is over them
 set backspace=eol,start,indent          " Configure backspace so it acts as it should
 set lazyredraw                          " Don't redraw while executing macros (better performance config)
+" set lcs+=space:·                        " Character to show for spaces when `set list` is active
+set lcs+=space:-                        " Character to show for spaces when `set list` is active
+" set listchars=tab:\|\                   " Character to show for tabs
 
 " timeout or commentary is not working properly
 set ttimeout
