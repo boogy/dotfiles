@@ -67,3 +67,20 @@ nnoremap <leader>w :w!<cr>
 nnoremap <leader>wq :w<bar>bd!<cr>
 nnoremap <leader>D :bdelete!<cr>
 
+
+" https://ddrscott.github.io/blog/2016/vim-toggle-movement/
+" These mapping depend on the ToggleMovement function in general/functions.vim
+" The original carat 0 swap
+nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
+
+" How about ; and ,
+" nnoremap <silent> ; :call ToggleMovement(';', ',')<CR>
+" nnoremap <silent> , :call ToggleMovement(',', ';')<CR>
+
+" How about H and L
+nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
+nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
+
+" How about G and gg
+nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
+nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
