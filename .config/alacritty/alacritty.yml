@@ -73,29 +73,29 @@ background_opacity: 0.90
 ## Colors (Monokai Perso)
 colors:
   cursor:
-    text: '0x000000'
-    cursor: '0xffffff'
+    text: "0x000000"
+    cursor: "0xffffff"
   primary:
-    background: '#191919'
-    foreground: '#d8dee9'
+    background: "#191919"
+    foreground: "#d8dee9"
   normal:
-   black:   '0x5D5B57'
-   red:     '0xF92672'
-   green:   '0xA6E22E'
-   yellow:  '0xF4BF75'
-   blue:    '0x66D9EF'
-   magenta: '0xAE81FF'
-   cyan:    '0x2AA198'
-   white:   '0xF9F8F5'
+    black: "0x5D5B57"
+    red: "0xF92672"
+    green: "0xA6E22E"
+    yellow: "0xF4BF75"
+    blue: "0x66D9EF"
+    magenta: "0xAE81FF"
+    cyan: "0x2AA198"
+    white: "0xF9F8F5"
   bright:
-   black:   '0x75715E'
-   red:     '0xF92672'
-   green:   '0xA6E22E'
-   yellow:  '0xF4BF75'
-   blue:    '0x66D9EF'
-   magenta: '0xAE81FF'
-   cyan:    '0x2AA198'
-   white:   '0xF9F9F5'
+    black: "0x75715E"
+    red: "0xF92672"
+    green: "0xA6E22E"
+    yellow: "0xF4BF75"
+    blue: "0x66D9EF"
+    magenta: "0xAE81FF"
+    cyan: "0x2AA198"
+    white: "0xF9F9F5"
 
 selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -128,19 +128,18 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-  - { key: V,        mods: Control|Shift,    action: Paste            }
-  - { key: C,        mods: Control|Shift,    action: Copy             }
-  - { key: Paste,                            action: Paste            }
-  - { key: Copy,                             action: Copy             }
-  - { key: Insert,   mods: Shift,            action: PasteSelection   }
-  - { key: Key0,     mods: Control,          action: ResetFontSize    }
-  - { key: Add,      mods: Control|Shift,    action: IncreaseFontSize }
-  - { key: Equals,   mods: Control|Shift,    action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,          action: DecreaseFontSize }
-  - { key: L,        mods: Control,          action: ClearLogNotice   }
-  - { key: L,        mods: Control,          chars: "\x0c"            }
-  - { key: PageUp,                           action: ScrollPageUp     }
-  - { key: PageDown,                         action: ScrollPageDown   }
-  - { key: Home,                             action: ScrollToTop      }
-  - { key: End,                              action: ScrollToBottom   }
-
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Add, mods: Control|Shift, action: IncreaseFontSize }
+  - { key: Equals, mods: Control|Shift, action: IncreaseFontSize }
+  - { key: Subtract, mods: Control, action: DecreaseFontSize }
+  - { key: L, mods: Control, action: ClearLogNotice }
+  - { key: L, mods: Control, chars: "\x0c" }
+  - { key: PageUp, action: ScrollPageUp }
+  - { key: PageDown, action: ScrollPageDown }
+  - { key: Home, action: ScrollToTop }
+  - { key: End, action: ScrollToBottom }

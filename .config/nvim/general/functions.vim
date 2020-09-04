@@ -40,3 +40,11 @@ if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running
 	endfunction
 endif
 command! DeleteHiddenBuffers call DeleteHiddenBuffers()
+
+function! ToggleMovement(firstOp, thenOp)
+  let pos = getpos('.')
+  execute "normal! " . a:firstOp
+  if pos == getpos('.')
+    execute "normal! " . a:thenOp
+  endif
+endfunction

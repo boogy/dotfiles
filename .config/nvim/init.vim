@@ -30,6 +30,7 @@ source $HOME/.config/nvim/plug-config/coc-highlight.vim
 source $HOME/.config/nvim/plug-config/indentLine.vim
 
 " Themes
+" source $HOME/.config/nvim/themes/nord.vim
 source $HOME/.config/nvim/themes/material-monokai.vim
 source $HOME/.config/nvim/themes/lightline.vim
 

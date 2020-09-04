@@ -3,10 +3,10 @@
 " Delete trailing whitespaces on save
 autocmd BufWritePre * %s/\s\+$//e
 
-augroup TerminalStuff
-  "au! " Clear old autocommands
-  autocmd TermOpen * setlocal nonumber norelativenumber
-augroup END
+" augroup TerminalStuff
+"   "au! " Clear old autocommands
+"   autocmd TermOpen * setlocal nonumber norelativenumber
+" augroup END
 
 " Smarter cursorline
 " Disabled when in insert mode
