@@ -7,7 +7,6 @@
         "html",
         "yaml",
         "json",
-        "python"
     ],
     // coc-yaml settings
     "yaml.format.enable": true,
