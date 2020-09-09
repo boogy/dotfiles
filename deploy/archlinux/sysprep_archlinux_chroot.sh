@@ -617,8 +617,8 @@ function install_aur_wrapper
     cd  ${HOME_DIR}/yay
     makepkg -si --noconfirm --clean" > ${HOME_DIR}/install_yay.sh
 
-    chown -R ${USERNAME}: ${HOME_DIR}; cd ${HOME_DIR}
-    sudo -u ${USERNAME} bash install_yay.sh
+    chown -R ${USERNAME}:${USERNAME} ${HOME_DIR}; cd ${HOME_DIR}
+    sudo -u ${USERNAME} bash -c "install_yay.sh"
     rm -rf ${HOME_DIR}/yay
     cd /
 
@@ -662,13 +662,21 @@ function install_aur_packages
 function cleanup()
 {
     msg_ok "Make sure the file is owned by the user ${USERNAME}"
-    chown -R ${USERNAME}:$(id -g ${USERNAME}) ${HOME_DIR}/
+    chown -R "${USERNAME}":"$(id -g ${USERNAME})" "${HOME_DIR}/${USERNAME}"
 
     msg_ok "Exiting installation in chroot environment ..."
     msg_ok "Removing install script $(basename $0)"
 
-    test -f /sysprep_archlinux_chroot.sh && rm -f /sysprep_archlinux_chroot.sh
-    test -f /etc/sudoers.d/install.sudo  && rm -f /etc/sudoers.d/install.sudo
+    for FILE in /sysprep_archlinux.sh \
+                /sysprep_archlinux_chroot.sh \
+                /etc/sudoers.d/install.sudo \
+                /install-packages.sh \
+                /archlinux \
+                /packages.txt \
+                /install_yay.sh
+    do
+        (test -f $FILE && rm -f $FILE) &>/dev/null
+    done
 }
 ## make sure you clean before you exit
 ## if you dont want CTRL+c to kill the process use SIGINT
