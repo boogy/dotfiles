@@ -21,6 +21,7 @@ Pipefile
 .vim/view
 .vim/sessions
 .config/vifm/vifminfo
+.config/nvim/sessions/*
 .config/nvim/autoload/*
 !.config/nvim/autoload/plug.vim
 .config/nvim/plugged/*
