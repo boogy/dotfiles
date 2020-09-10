@@ -61,3 +61,36 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+colorscheme material-monokai
+set background=dark
+
+if has("gui")
+  " Check if gvim is running
+  if has('gui_running')
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=e
+
+    set t_Co=256
+    set term=xterm-256color
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+
+    set guitablabel=%M\ %t
+    set lines=50 columns=160
+
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ Regular\ 11
+    colorscheme material-monokai
+    set background=dark
+
+    hi Visual guifg=Black guibg=LightGreen gui=none
+  endif
+endif
+
+if has('vim')
+    set t_Co=256
+endif
+

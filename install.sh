@@ -67,18 +67,8 @@ for FILE in $(ls $THIS_DIR/.config/scripts); do
     sudo ln -sf $THIS_DIR/.config/scripts/$FILE /usr/local/bin/
 done
 
-
 ##
-## Install Plug for plugin management
-##
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +PlugInstall +qall
-ln -sf $HOME/.vim/custom-snippets $HOME/.vim/UltiSnips
-rm ~/.vim/custom-snippets/custom-snippets
-
-##
-## Install for neovim
+## Install Plug for neovim
 ##
 mkdir -p $HOME/.config/nvim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
@@ -87,6 +77,16 @@ nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
 nvim -c 'CocInstall -sync coc-python coc-json coc-snippets coc-explorer coc-rls coc-html coc-go coc-tsserver coc-vimlsp coc-css coc-lists coc-sh coc-xml coc-yaml|q'
 # pip3 install --user jedi-language-server jedi
+
+## map all the configuration for vim
+ln -sf ~/.config/nvim/init.vim ~/.vimrc
+ln -sf ~/.config/nvim ~/.vim
+
+# curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# vim +PlugInstall +qall
+# ln -sf $HOME/.vim/custom-snippets $HOME/.vim/UltiSnips
+# rm ~/.vim/custom-snippets/custom-snippets
 
 ##
 ## Install powerline fonts
