@@ -20,8 +20,8 @@ Pipefile
 .vim/spell
 .vim/view
 .vim/sessions
+.config/nvim/sessions/
 .config/vifm/vifminfo
-.config/nvim/sessions/*
 .config/nvim/autoload/*
 !.config/nvim/autoload/plug.vim
 .config/nvim/plugged/*
