@@ -84,3 +84,7 @@ nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
 " How about G and gg
 nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
 nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
+
+" ZoomIn & ZoomOut text (Gnvim || nvim-qt)
+nnoremap <C-Up> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', 'g')<CR>
+nnoremap <C-Down> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', 'g')<CR>
