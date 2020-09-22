@@ -5,8 +5,7 @@
         "javascript",
         "graphql",
         "html",
-        "yaml",
-        "json",
+        "json"
     ],
     // coc-yaml settings
     "yaml.format.enable": true,

@@ -64,6 +64,11 @@ endif
 colorscheme material-monokai
 set background=dark
 
+" detect if we use gnvim (rust <3)
+if exists('g:gnvim')
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular:h12
+endif
+
 if has("gui")
   " Check if gvim is running
   if has('gui_running')

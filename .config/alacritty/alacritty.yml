@@ -128,18 +128,25 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-  - { key: V, mods: Control|Shift, action: Paste }
-  - { key: C, mods: Control|Shift, action: Copy }
-  - { key: Paste, action: Paste }
-  - { key: Copy, action: Copy }
-  - { key: Insert, mods: Shift, action: PasteSelection }
-  - { key: Key0, mods: Control, action: ResetFontSize }
-  - { key: Add, mods: Control|Shift, action: IncreaseFontSize }
-  - { key: Equals, mods: Control|Shift, action: IncreaseFontSize }
-  - { key: Subtract, mods: Control, action: DecreaseFontSize }
-  - { key: L, mods: Control, action: ClearLogNotice }
-  - { key: L, mods: Control, chars: "\x0c" }
-  - { key: PageUp, action: ScrollPageUp }
-  - { key: PageDown, action: ScrollPageDown }
-  - { key: Home, action: ScrollToTop }
-  - { key: End, action: ScrollToBottom }
+  - { key: V          , mods: Control|Shift     , action: Paste            }
+  - { key: C          , mods: Control|Shift     , action: Copy             }
+  - { key: Paste      , action: Paste                                      }
+  - { key: Copy       , action: Copy                                       }
+  - { key: Insert     , mods: Shift             , action: PasteSelection   }
+  - { key: Key0       , mods: Control           , action: ResetFontSize    }
+  - { key: Add        , mods: Control|Shift     , action: IncreaseFontSize }
+  - { key: Equals     , mods: Control|Shift     , action: IncreaseFontSize }
+  - { key: Subtract   , mods: Control           , action: DecreaseFontSize }
+  - { key: L          , mods: Control           , action: ClearLogNotice   }
+  - { key: L          , mods: Control           , chars: "\x0c"            }
+  # - { key: PageUp   , action: ScrollPageUp                               }
+  # - { key: PageDown , action: ScrollPageDown                             }
+  # - { key: Home     , action: ScrollToTop                                }
+  # - { key: End      , action: ScrollToBottom                             }
+  - { key: PageUp     , chars: "\x1b[5~"                                   }
+  - { key: PageDown   , chars: "\x1b[6~"                                   }
+  - { key: Home       , chars: "\x1b[H"         , mode: ~AppCursor         }
+  - { key: Home       , chars: "\x1b[1~"        , mode: AppCursor          }
+  - { key: End        , chars: "\x1b[F"         , mode: ~AppCursor         }
+  - { key: End        , chars: "\x1b[4~"        , mode: AppCursor          }
+
