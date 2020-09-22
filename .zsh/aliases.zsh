@@ -19,6 +19,8 @@ alias -g DN="&> /dev/null"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
 alias -g P="2>&1| pygmentize -l pytb"
+alias -g to-lower="|tr '[A-Z]' '[a-z]'"
+alias -g to-upper="|tr '[a-z]' '[A-Z]'"
 
 alias zshrc='${=EDITOR} ~/.zshrc'
 alias zshrc_alias='${=EDITOR} ~/.zsh/aliases.zsh'
@@ -32,6 +34,21 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 alias go-root="sudo -u root -s"
 alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
+
+## directory shortcuts
+hash -d dunst=~/.config/dunst
+hash -d rofi=~/.config/rofi
+hash -d ranger=~/.config/ranger
+hash -d termite=~/.config/termite
+hash -d tmux=~/.config/tmux
+hash -d alacritty=~/.config/alacritty
+hash -d nvim=~/.config/nvim/
+hash -d polybar=~/.config/polybar
+hash -d bspwm=~/.config/bspwm
+hash -d sxhkd=~/.config/sxhkd
+hash -d sxiv=~/.config/sxiv/
+hash -d sxiv=~/.config/sxiv/
+hash -d conf-scripts=~/.config/scripts
 
 ## use delete key to delete
 bindkey "^[[3~"  delete-char
