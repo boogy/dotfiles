@@ -3,7 +3,7 @@
 ! #########################################
 
 Xft.dpi: 96
-! Xft.dpi: 110
+/* Xft.dpi: 196 */
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
