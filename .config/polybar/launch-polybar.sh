@@ -16,6 +16,15 @@ if [ -z "$POLYBAR_PRIMARY_MONITOR" ]; then
     export POLYBAR_PRIMARY_MONITOR=$(xrandr | grep primary | cut -d ' ' -f 1)
 fi
 
+## set DPI value
+AUTORANDR_CONFIG=$(autorandr --detect)
+case $AUTORANDR_CONFIG in
+    home*)
+        export POLYBAR_DPI_VALUE=130 ;;
+    *)
+        export POLYBAR_DPI_VALUE=0 ;;
+esac
+
 killall -q polybar
 
 while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
