@@ -64,11 +64,6 @@ endif
 colorscheme material-monokai
 set background=dark
 
-" detect if we use gnvim (rust <3)
-if exists('g:gnvim')
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular:h12
-endif
-
 if has("gui")
   " Check if gvim is running
   if has('gui_running')
@@ -78,16 +73,16 @@ if has("gui")
     set guioptions-=l
     set guioptions-=L
     set guioptions-=e
-
     set t_Co=256
     set term=xterm-256color
+
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
 
     set guitablabel=%M\ %t
     set lines=50 columns=160
-
     set gfn=Source\ Code\ Pro\ for\ Powerline\ Regular\ 11
+
     colorscheme material-monokai
     set background=dark
 
