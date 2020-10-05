@@ -160,7 +160,7 @@ bindkey -s '^s' "bolt --rofi-search\n"
 ## and custom will take precedence
 zsh_plugins=(
     sudo
-    ssh-agent
+    # ssh-agent
     autojump
     fzf
     virtualenvwrapper

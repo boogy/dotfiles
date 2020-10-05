@@ -85,7 +85,8 @@ case $selection in
         ;;
     Halt|Poweroff|Shutdown)
         logout
-        sudo systemctl poweroff
+        # sudo systemctl poweroff
+        sudo poweroff -f
         ;;
     Save|Dump|Save_state)
         dump_bspwm_state

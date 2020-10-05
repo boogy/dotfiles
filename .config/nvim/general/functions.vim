@@ -54,7 +54,7 @@ let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
 let s:maxfontsize = 56
 function! AdjustFontSize(amount)
-  if has("gui_running") || has('gui') || has('gui_gtk2') || has('gui_gtk3') || exists('g:gnvim')
+  if has("gui_running") || has('gui') || has('gui_gtk2') || has('gui_gtk3') || exists('g:gnvim') || exists('g:nvim-qt')
     let fontname = substitute(&guifont, s:pattern, '\1', '')
     let cursize = substitute(&guifont, s:pattern, '\2', '')
     let newsize = cursize + a:amount
