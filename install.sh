@@ -91,10 +91,10 @@ ln -sf ~/.config/nvim ~/.vim
 ##
 ## Install powerline fonts
 ##
-git clone https://github.com/powerline/fonts.git --depth=1 ${INSTALLDIR}/powerline_fonts
-cd ${INSTALLDIR}/powerline_fonts
-./install.sh
-rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
+# git clone https://github.com/powerline/fonts.git --depth=1 ${INSTALLDIR}/powerline_fonts
+# cd ${INSTALLDIR}/powerline_fonts
+# ./install.sh
+# rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
 
 
 ## Copy firefox user.js in all profiles

@@ -139,13 +139,13 @@ function set_localtime
 function write_localhost_file
 {
     msg_ok "Writing /etc/hosts file"
-    cat <<-EOF > /etc/hosts
-		# Static table lookup for hostnames.
-		# See hosts(5) for details.
-		127.0.0.1       localhost
-		::1             localhost
-		127.0.0.1       ${HOSTNAME}.localdomain ${HOSTNAME}
-	EOF
+    cat <<EOF > /etc/hosts
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+127.0.0.1       localhost
+::1             localhost
+127.0.0.1       ${HOSTNAME}.localdomain ${HOSTNAME}
+EOF
 }
 
 
@@ -178,22 +178,22 @@ function install_bootloader
         fi
 
         msg_ok "Adding first entry to loader: /boot/loader/entries/arch.conf"
-        cat <<-EOF > /boot/loader/entries/arch.conf
-			title Arch Linux
-			linux /vmlinuz-linux
-			initrd /intel-ucode.img
-			initrd /initramfs-linux.img
-			${SYSTEMD_BOOT_OPTIONS}
-		EOF
+        cat <<EOF > /boot/loader/entries/arch.conf
+title Arch Linux
+linux /vmlinuz-linux
+initrd /intel-ucode.img
+initrd /initramfs-linux.img
+${SYSTEMD_BOOT_OPTIONS}
+EOF
 
         msg_ok "Adding first entry to loader: /boot/loader/entries/arch-lts.conf"
-        cat <<-EOF > /boot/loader/entries/arch-lts.conf
-			title Arch Linux LTS
-			linux /vmlinuz-linux-lts
-			initrd /intel-ucode.img
-			initrd /initramfs-linux-lts.img
-			${SYSTEMD_BOOT_OPTIONS}
-		EOF
+        cat <<EOF > /boot/loader/entries/arch-lts.conf
+title Arch Linux LTS
+linux /vmlinuz-linux-lts
+initrd /intel-ucode.img
+initrd /initramfs-linux-lts.img
+${SYSTEMD_BOOT_OPTIONS}
+EOF
     else
         # bootctl remove &>/dev/null
         msg_ok "Installing GRUB ..."
@@ -354,20 +354,20 @@ function configure_mkinitcpio_hooks
 function add_systemd_tty_rate_service
 {
     msg_ok "Add systemd service for keyboard tty rate"
-    cat <<-EOF > /etc/systemd/system/kbdrate.service
-		[Unit]
-		Description=Keyboard repeat rate in tty.
+    cat <<EOF > /etc/systemd/system/kbdrate.service
+[Unit]
+Description=Keyboard repeat rate in tty.
 
-		[Service]
-		Type=oneshot
-		RemainAfterExit=yes
-		StandardInput=tty
-		StandardOutput=tty
-		ExecStart=/usr/sbin/kbdrate -s -d 200 -r 60
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+StandardInput=tty
+StandardOutput=tty
+ExecStart=/usr/sbin/kbdrate -s -d 200 -r 60
 
-		[Install]
-		WantedBy=multi-user.target
-	EOF
+[Install]
+WantedBy=multi-user.target
+EOF
     msg_ok "Enable kbdrate.service"
     systemctl enable kbdrate.service
 }
@@ -375,17 +375,17 @@ function add_systemd_tty_rate_service
 
 function configure_xorg_keaboard
 {
-    msg_ok "Configure keyboard in xorg"
-    cat <<-EOF > /etc/X11/xorg.conf.d/00-keyboard.conf
-		Section "InputClass"
-		        Identifier "system-keyboard"
-		        MatchIsKeyboard "on"
-		        Option "XkbLayout" "ch"
-		        Option "XkbModel" "pc105"
-		        Option "XkbVariant" ",fr"
-		        Option "XkbOptions" "lv3:ralt_switch"
-		EndSection
-	EOF
+        msg_ok "Configure keyboard in xorg"
+    cat <<EOF > /etc/X11/xorg.conf.d/00-keyboard.conf
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "ch"
+        Option "XkbModel" "pc105"
+        Option "XkbVariant" ",fr"
+        Option "XkbOptions" "lv3:ralt_switch"
+EndSection
+EOF
     msg_warning "The keyboard is configured in /etc/X11/xorg.conf.d/00-keyboard.conf"
     msg_warning "Please change keyboard configuration if you don't use Suiss French layout"
 }
@@ -394,18 +394,18 @@ function configure_xorg_keaboard
 function add_libinput_xorg_config
 {
     msg_ok "Writing libinput X11 configuration"
-    cat <<-EOF > /etc/X11/xorg.conf.d/30-touchpad.conf
-		Section "InputClass"
-		    Identifier "MyTouchpad"
-		    MatchIsTouchpad "on"
-		    Driver "libinput"
-		    Option "Tapping" "on"
-		    Option "Natural Scrolling" "off"
-		    Option "AccelSpeed" "0.5"
-		    Option "ClickMethod" "buttonareas"
-		    Option "DisableWhileTyping" "on"
-		EndSection
-	EOF
+    cat <<EOF > /etc/X11/xorg.conf.d/30-touchpad.conf
+Section "InputClass"
+    Identifier "MyTouchpad"
+    MatchIsTouchpad "on"
+    Driver "libinput"
+    Option "Tapping" "on"
+    Option "Natural Scrolling" "off"
+    Option "AccelSpeed" "0.5"
+    Option "ClickMethod" "buttonareas"
+    Option "DisableWhileTyping" "on"
+EndSection
+EOF
 }
 
 function add_xorg_graphics
@@ -422,12 +422,12 @@ function add_xorg_graphics
 
     if [[ $USE_INTEL_GRAPHICS =~ [Y|y] ]]; then
         msg_ok "Writing X11 intel configuration"
-        cat <<-EOF > /etc/X11/xorg.conf.d/20-intel.conf
-			Section "Device"
-			        Identifier "Intel Graphics"
-			        Driver "intel"
-			EndSection
-		EOF
+        cat <<EOF > /etc/X11/xorg.conf.d/20-intel.conf
+Section "Device"
+        Identifier "Intel Graphics"
+        Driver "intel"
+EndSection
+EOF
     fi
 }
 
@@ -436,21 +436,21 @@ function add_libinput_gestures_config
 {
     msg_ok "Adding lininput configuration file in users ${HOME_DIR}"
     mkdir -p ${HOME_DIR}/.config
-    cat <<-EOF > ${HOME_DIR}/.config/libinput-gestures.conf
-		# ~/.config/libinput-gestures.conf
+    cat <<EOF > ${HOME_DIR}/.config/libinput-gestures.conf
+# ~/.config/libinput-gestures.conf
 
-		# Go back/forward in chrome
-		gesture: swipe right 3 xdotool key Alt+Left
-		gesture: swipe left 3 xdotool key Alt+Right
+# Go back/forward in chrome
+gesture: swipe right 3 xdotool key Alt+Left
+gesture: swipe left 3 xdotool key Alt+Right
 
-		# Zoom in / Zoom out
-		gesture: pinch out xdotool key Ctrl+plus
-		gesture: pinch in xdotool key Ctrl+minus
+# Zoom in / Zoom out
+gesture: pinch out xdotool key Ctrl+plus
+gesture: pinch in xdotool key Ctrl+minus
 
-		# Switch between desktops
-		gesture: swipe right 4 xdotool set_desktop --relative 1
-		gesture: swipe left 4 xdotool set_desktop --relative -- -1
-	EOF
+# Switch between desktops
+gesture: swipe right 4 xdotool set_desktop --relative 1
+gesture: swipe left 4 xdotool set_desktop --relative -- -1
+EOF
 }
 
 
@@ -459,18 +459,21 @@ function configure_lightdm
     ## https://wiki.archlinux.org/index.php/LightDM
     msg_ok "Configure lightdm"
     cp /etc/lightdm/lightdm.conf{,.backup}
-    cat <<-EOF > /etc/lightdm/lightdm.conf
-		[LightDM]
-		run-directory=/run/lightdm
+    cat <<EOF > /etc/lightdm/lightdm.conf
+[LightDM]
+run-directory=/run/lightdm
 
-		[Seat:*]
-		greeter-session=lightdm-gtk-greeter
-		session-wrapper=/etc/lightdm/Xsession
+[Seat:*]
+autologin-user=${USERNAME}
+autologin-user-timeout=0
+user-session=bspwm
+greeter-session=lightdm-gtk-greeter
+session-wrapper=/etc/lightdm/Xsession
 
-		[XDMCPServer]
+[XDMCPServer]
 
-		[VNCServer]
-	EOF
+[VNCServer]
+EOF
 
     ## https://wiki.archlinux.org/index.php/LightDM#GTK.2B_greeter
     msg_ok "Configure lightdm-gtk-greeter"
@@ -478,24 +481,24 @@ function configure_lightdm
     msg_ok "Setting default lightdm background to: /usr/share/pixmaps/lightdm_background.jpg"
     msg_ok "Change lightdm configuration with: sudo lightdm-gtk-greeter-settings"
     cp /etc/lightdm/lightdm-gtk-greeter.conf{,.backup}
-    cat <<-EOF > /etc/lightdm/lightdm-gtk-greeter.conf
-		[greeter]
-		theme-name = Arc
-		icon-theme-name = Arc
-		background = /usr/share/pixmaps/lightdm_background.jpg
-		default-user-image = /var/lib/AccountsService/icons/icon.png
-		screensaver-timeout = 0
-		user-background = false
+    cat <<EOF > /etc/lightdm/lightdm-gtk-greeter.conf
+[greeter]
+theme-name = Arc
+icon-theme-name = Arc
+background = /usr/share/pixmaps/lightdm_background.jpg
+default-user-image = /var/lib/AccountsService/icons/icon.png
+screensaver-timeout = 0
+user-background = false
 
-		[monitor: eDP1]
-		background = /usr/share/pixmaps/lightdm_background.jpg
+[monitor: eDP1]
+background = /usr/share/pixmaps/lightdm_background.jpg
 
-		[monitor: DP2-1]
-		background = /usr/share/pixmaps/lightdm_background.jpg
+[monitor: DP2-1]
+background = /usr/share/pixmaps/lightdm_background.jpg
 
-		[monitor: DP1-2]
-		background = /usr/share/pixmaps/lightdm_background.jpg
-	EOF
+[monitor: DP1-2]
+background = /usr/share/pixmaps/lightdm_background.jpg
+EOF
 }
 
 
@@ -503,45 +506,45 @@ function add_sudoers_configuration
 {
     msg_ok "Add user ${USERNAME} to sudoers"
     cp /etc/sudoers{,.backup}
-    cat <<-EOF > /etc/sudoers
-		##
-		## Defaults
-		##
-		Defaults !tty_tickets
-		Defaults !mail_badpass
-		Defaults editor=/usr/sbin/vim, !env_editor
-		Defaults passwd_timeout=620
-		Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-		##
-		## User privilege specification
-		##
-		root    ALL=(ALL) ALL
-		${USERNAME}   ALL=(ALL:ALL) ALL, NOPASSWD: /usr/sbin/pacman -Syu, \\
-		                                       /usr/sbin/pacman -Syy, \\
-		                                       /usr/sbin/yay -Syy, \\
-		                                       /usr/sbin/yay -Syu, \\
-		                                       /usr/sbin/yay -Syu --topdown --cleanafter, \\
-		                                       /usr/sbin/systemctl start [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl status [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl restart [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl stop [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl list-unit-files [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl list-units [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl is-enabled [a-z0-9_-]*, \\
-		                                       /usr/sbin/systemctl shutdown, \\
-		                                       /usr/sbin/systemctl suspend, \\
-		                                       /usr/sbin/systemctl hibernate, \\
-		                                       /usr/sbin/systemctl reboot, \\
-		                                       /usr/sbin/systemctl poweroff, \\
-		                                       /usr/sbin/reboot, \\
-		                                       /usr/sbin/poweroff, \\
-		                                       /usr/sbin/lsof, \\
-		                                       /usr/sbin/dmidecode, \\
-		                                       /usr/sbin/openfortivpn
-		## Read drop-in files from /etc/sudoers.d
-		## (the '#' here does not indicate a comment)
-		#includedir /etc/sudoers.d
-	EOF
+    cat <<EOF > /etc/sudoers
+##
+## Defaults
+##
+Defaults !tty_tickets
+Defaults !mail_badpass
+Defaults editor=/usr/sbin/vim, !env_editor
+Defaults passwd_timeout=620
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+##
+## User privilege specification
+##
+root    ALL=(ALL) ALL
+${USERNAME}   ALL=(ALL:ALL) ALL, NOPASSWD: /usr/sbin/pacman -Syu, \\
+                                       /usr/sbin/pacman -Syy, \\
+                                       /usr/sbin/yay -Syy, \\
+                                       /usr/sbin/yay -Syu, \\
+                                       /usr/sbin/yay -Syu --topdown --cleanafter, \\
+                                       /usr/sbin/systemctl start [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl status [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl restart [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl stop [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl list-unit-files [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl list-units [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl is-enabled [a-z0-9_-]*, \\
+                                       /usr/sbin/systemctl shutdown, \\
+                                       /usr/sbin/systemctl suspend, \\
+                                       /usr/sbin/systemctl hibernate, \\
+                                       /usr/sbin/systemctl reboot, \\
+                                       /usr/sbin/systemctl poweroff, \\
+                                       /usr/sbin/reboot, \\
+                                       /usr/sbin/poweroff, \\
+                                       /usr/sbin/lsof, \\
+                                       /usr/sbin/dmidecode, \\
+                                       /usr/sbin/openfortivpn
+## Read drop-in files from /etc/sudoers.d
+## (the '#' here does not indicate a comment)
+#includedir /etc/sudoers.d
+EOF
 }
 
 
@@ -574,110 +577,110 @@ function add_pacman_cache_clean
 {
     msg_ok "Setting up pacman cache cleanup with hooks"
     mkdir -p /etc/pacman.d/hooks/
-    cat <<-EOF > /etc/pacman.d/hooks/clean_package_cache.hook
-		[Trigger]
-		Operation = Upgrade
-		Operation = Install
-		Operation = Remove
-		Type = Package
-		Target = *
-		[Action]
-		Description = Cleaning pacman cache...
-		When = PostTransaction
-		Exec = /usr/bin/paccache -rk 2
-    EOF
-}
+        cat <<EOF > /etc/pacman.d/hooks/clean_package_cache.hook
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+[Action]
+Description = Cleaning pacman cache...
+When = PostTransaction
+Exec = /usr/bin/paccache -rk 2
+EOF
+    }
 
 
-function clone_dot_config
-{
-    local DOT_CONFIGS=${1:-"https://github.com/${USERNAME}/dotfiles"}
-    msg_ok "Setting up the ${USERNAME}'s dotfiles environment"
-    sudo -u ${USERNAME} bash -c "git clone ${DOT_CONFIGS} ${HOME_DIR}/${DOT_CONFIGS##*/}"
-}
+    function clone_dot_config
+    {
+        local DOT_CONFIGS=${1:-"https://github.com/${USERNAME}/dotfiles"}
+        msg_ok "Setting up the ${USERNAME}'s dotfiles environment"
+        sudo -u ${USERNAME} bash -c "git clone ${DOT_CONFIGS} ${HOME_DIR}/${DOT_CONFIGS##*/}"
+    }
 
 
-function install_powerline_fonts
-{
-    msg_ok "Installing powerline fonts"
-    cd ${HOME_DIR}
-    git clone https://github.com/powerline/fonts.git --depth=1
-    cd fonts \
-        && ./install.sh \
-        && cd .. \
-        && rm -rf fonts
-}
+    function install_powerline_fonts
+    {
+        msg_ok "Installing powerline fonts"
+        cd ${HOME_DIR}
+        git clone https://github.com/powerline/fonts.git --depth=1
+        cd fonts \
+            && ./install.sh \
+            && cd .. \
+            && rm -rf fonts
+    }
 
 
-function install_aur_wrapper
-{
-    # pacman -U --noconfirm ${HOME_DIR}/yay/yay-*-x86_64.pkg.tar.xz
-    echo -e "(echo -n ${USERNAME}|sudo -S id) &>/dev/null
-    git clone https://aur.archlinux.org/yay.git ${HOME_DIR}/yay
-    cd  ${HOME_DIR}/yay
-    makepkg -si --noconfirm --clean" > ${HOME_DIR}/install_yay.sh
+    function install_aur_wrapper
+    {
+        # pacman -U --noconfirm ${HOME_DIR}/yay/yay-*-x86_64.pkg.tar.xz
+        echo -e "(echo -n ${USERNAME}|sudo -S id) &>/dev/null
+        git clone https://aur.archlinux.org/yay.git ${HOME_DIR}/yay
+        cd  ${HOME_DIR}/yay
+        makepkg -si --noconfirm --clean" > ${HOME_DIR}/install_yay.sh
 
-    chown -R ${USERNAME}:${USERNAME} ${HOME_DIR}; cd ${HOME_DIR}
-    sudo -u ${USERNAME} bash -c "install_yay.sh"
-    rm -rf ${HOME_DIR}/yay
-    cd /
+        chown -R ${USERNAME}:${USERNAME} ${HOME_DIR}; cd ${HOME_DIR}
+        sudo -u ${USERNAME} bash -c "install_yay.sh"
+        rm -rf ${HOME_DIR}/yay
+        cd /
 
-    if command -v yay &>/dev/null; then
-        msg_ok "AUR wrapper successfully installed"
-    else
-        msg_error "AUR wrapper not installed"
-        msg_warning "AUR packages will not be installed"
-    fi
-}
+        if command -v yay &>/dev/null; then
+            msg_ok "AUR wrapper successfully installed"
+        else
+            msg_error "AUR wrapper not installed"
+            msg_warning "AUR packages will not be installed"
+        fi
+    }
 
 
-function install_aur_packages
-{
-    ## Install AUR packages
-    if command -v yay &>/dev/null; then
-        sudo -u ${USERNAME} -s /bin/bash -- <<-EOF
-			(echo -n ${USERNAME}|sudo -S id) &>/dev/null
-			yay -S --sudoloop --noconfirm systemd-boot-pacman-hook
-			yay -S --sudoloop --noconfirm dropbox
-			yay -S --sudoloop --noconfirm polybar
-			yay -S --sudoloop --noconfirm libinput-gestures
-			yay -S --sudoloop --noconfirm vmware-workstation
-			yay -S --sudoloop --noconfirm visual-studio-code-bin
-			yay -S --sudoloop --noconfirm jre10-openjdk jdk10-openjdk
-			yay -S --sudoloop --noconfirm gksu otf-font-awesome-4 otf-font-awesome-5-free ttf-ms-fonts
-			yay -S --sudoloop --noconfirm xcursor-oxygen xcursor-breeze-serie-obsidian
-			yay -S --sudoloop --noconfirm i3lock-color-git
-			yay -S --sudoloop --noconfirm nerd-fonts-complete
-            yay -S --sudoloop --noconfirm ttf-ms-fonts
-    EOF
-        ## if dropbox is installed disable this service
-        systemctl --user disable dropbox.service
-    else
-        msg_warning "Can't install AUR packages: there is no AUR helper installed"
-        msg_warning "Check out this documentation: https://wiki.archlinux.org/index.php/AUR_helpers"
-        msg_warning "Install yay manualy: https://aur.archlinux.org/yay.git"
-    fi
-}
+    function install_aur_packages
+    {
+        ## Install AUR packages
+        if command -v yay &>/dev/null; then
+            sudo -u ${USERNAME} -s /bin/bash -- <<EOF
+(echo -n ${USERNAME}|sudo -S id) &>/dev/null
+yay -S --sudoloop --noconfirm systemd-boot-pacman-hook
+yay -S --sudoloop --noconfirm dropbox
+yay -S --sudoloop --noconfirm polybar
+yay -S --sudoloop --noconfirm libinput-gestures
+yay -S --sudoloop --noconfirm vmware-workstation
+yay -S --sudoloop --noconfirm visual-studio-code-bin
+yay -S --sudoloop --noconfirm jre10-openjdk jdk10-openjdk
+yay -S --sudoloop --noconfirm gksu otf-font-awesome-4 otf-font-awesome-5-free ttf-ms-fonts
+yay -S --sudoloop --noconfirm xcursor-oxygen xcursor-breeze-serie-obsidian
+yay -S --sudoloop --noconfirm i3lock-color-git
+yay -S --sudoloop --noconfirm nerd-fonts-complete
+yay -S --sudoloop --noconfirm ttf-ms-fonts
+EOF
+            ## if dropbox is installed disable this service
+            systemctl --user disable dropbox.service
+        else
+            msg_warning "Can't install AUR packages: there is no AUR helper installed"
+            msg_warning "Check out this documentation: https://wiki.archlinux.org/index.php/AUR_helpers"
+            msg_warning "Install yay manualy: https://aur.archlinux.org/yay.git"
+        fi
+    }
 
-function cleanup()
-{
-    msg_ok "Make sure the file is owned by the user ${USERNAME}"
-    chown -R "${USERNAME}":"$(id -g ${USERNAME})" "${HOME_DIR}/${USERNAME}"
+    function cleanup()
+    {
+        msg_ok "Make sure the file is owned by the user ${USERNAME}"
+        chown -R "${USERNAME}":"$(id -g ${USERNAME})" "${HOME_DIR}/${USERNAME}"
 
-    msg_ok "Exiting installation in chroot environment ..."
-    msg_ok "Removing install script $(basename $0)"
+        msg_ok "Exiting installation in chroot environment ..."
+        msg_ok "Removing install script $(basename $0)"
 
-    for FILE in /sysprep_archlinux.sh \
-                /sysprep_archlinux_chroot.sh \
-                /etc/sudoers.d/install.sudo \
-                /install-packages.sh \
-                /archlinux \
-                /packages.txt \
-                /install_yay.sh
-    do
-        (test -f $FILE && rm -f $FILE) &>/dev/null
-    done
-}
+        for FILE in /sysprep_archlinux.sh \
+                    /sysprep_archlinux_chroot.sh \
+                    /etc/sudoers.d/install.sudo \
+                    /install-packages.sh \
+                    /archlinux \
+                    /packages.txt \
+                    /install_yay.sh
+        do
+            (test -f $FILE && rm -f $FILE) &>/dev/null
+        done
+    }
 ## make sure you clean before you exit
 ## if you dont want CTRL+c to kill the process use SIGINT
 trap cleanup EXIT SIGTERM
