@@ -81,9 +81,7 @@ libinput-gestures-setup start &
 pulseaudio --start
 ps -ef|grep "[p]ulseaudio" || {
     pulseaudio -k
-    sleep 2
     pulseaudio -D
-    sleep 1
     start-pulseaudio-x11
 }
 

@@ -9,7 +9,7 @@ dump_bspwm_state() {
 }
 
 lock_screen() {
-    ~/.config/i3/scripts/betterlockscreen.sh --lock
+    ~/.config/scripts/betterlockscreen.sh --lock
 }
 
 # Function to kill programs

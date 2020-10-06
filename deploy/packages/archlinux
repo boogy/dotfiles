@@ -216,6 +216,9 @@ bluez-utils
 # mesa
 # hashcat
 # bumblebee
+## Light system tray to use with lemonbar
+# stalonetray
+#
 ##
 ## BSPWM
 bspwm
@@ -224,5 +227,10 @@ xdo
 lsw
 ## hide mouse when not used
 unclutter
-## Light system tray to use with lemonbar
-# stalonetray
+ccid
+yubikey-personalization
+yubikey-personalization-gui
+yubikey-manager
+yubikey-manager-qt
+yubico-pam
+imagemagick
