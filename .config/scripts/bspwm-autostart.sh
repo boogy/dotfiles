@@ -137,6 +137,8 @@ _check gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,
 # _check picom "picom -bcCGf -D 1 -I 0.05 -O 0.02 --no-fading-openclose --unredir-if-possible"
 _check picom "picom -b"
 
+~/.config/scripts/xinput-config.sh &
+
 ##
 ## SUBSCRIBE TO BSPWM ACTIONS
 ##
