@@ -133,8 +133,8 @@ super + {_, shift + }s
 	bspc desktop --swap next.active {_,--follow}
 
 ## Shortcut for running applications
-alt + o ; {a,v,f,p,g,l,z}
-	{alacritty,gvim,firefox,pavucontrol,chromium,lxappearance, QT_SCALE_FACTOR=0.5 zoom} &
+alt + o ; {a,v,f,p,g,l,z, w}
+	{alacritty,gvim,firefox,pavucontrol,chromium,lxappearance, QT_SCALE_FACTOR=0.5 zoom,VBoxManage startvm "Windows10" --type gui} &
 
 ## Launch rofi menu
 super + d

@@ -385,3 +385,15 @@ ssh-forward-local(){
         ssh -L 127.0.0.1:"${BIND_PORT}":"${DEST_HOST}":"${DEST_PORT}" "${USER}"@"${DEST_HOST}"
     fi
 }
+
+to-lower(){
+    echo "$1" | awk '{print tolower($0)}'
+}
+
+to-upper(){
+    echo "$1" | awk '{print toupper($0)}'
+}
+
+cpu-usage-percentage(){
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
+}
