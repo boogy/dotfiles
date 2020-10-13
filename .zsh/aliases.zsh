@@ -19,8 +19,6 @@ alias -g DN="&> /dev/null"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
 alias -g P="2>&1| pygmentize -l pytb"
-alias -g to-lower="|tr '[A-Z]' '[a-z]'"
-alias -g to-upper="|tr '[a-z]' '[A-Z]'"
 
 alias zshrc='${=EDITOR} ~/.zshrc'
 alias zshrc_alias='${=EDITOR} ~/.zsh/aliases.zsh'

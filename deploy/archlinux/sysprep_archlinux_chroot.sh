@@ -287,7 +287,7 @@ function create_user_account
 {
     msg_ok "Creating username: ${USERNAME}"
     msg_ok "Adding supplementary groups: wheel,games,power,optical,storage,scanner,lp,audio,video,docker"
-    useradd -m -g users -G wheel,games,power,optical,storage,scanner,lp,audio,video,docker -s /bin/bash ${USERNAME}
+    useradd -m -g users -G wheel,games,power,optical,storage,scanner,lp,audio,video,docker -s /usr/sbin/zsh ${USERNAME}
     msg_warning "Setting password for ${USERNAME} to ${USERNAME}"
     msg_warning "Please change the password after the installation"
     echo -e "${USERNAME}\n${USERNAME}" | passwd ${USERNAME}

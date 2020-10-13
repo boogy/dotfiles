@@ -78,12 +78,13 @@ libinput-gestures-setup start &
 [ -f ~/.fehbg ] && ~/.fehbg &
 
 ## start pulseaudio
+start-pulseaudio-x11
 pulseaudio --start
-ps -ef|grep "[p]ulseaudio" || {
-    pulseaudio -k
-    pulseaudio -D
-    start-pulseaudio-x11
-}
+#ps -ef|grep "[p]ulseaudio" || {
+#    start-pulseaudio-x11
+#    pulseaudio --start
+#    #pulseaudio -D
+#}
 
 ## launch polybar after pulseaudio
 ~/.config/polybar/launch-polybar.sh &

@@ -19,15 +19,18 @@ vagrant_box_path=$HOME/tools/vagrant/
 alias vbox-list-vms="vboxmanage list vms"
 alias vbox-list-running="vboxmanage list runningvms"
 
+
 function _list_vbox_vms_name
 {
     vboxmanage list vms|awk -F'"' '{print $2}'
 }
 
+
 function _list_vbox_vms_uuid
 {
     vboxmanage list vms|awk '{print $2}'
 }
+
 
 function start-vagrant
 {
@@ -66,6 +69,7 @@ function cd-vagrant
 }
 compdef '_arguments "1: :($(ls ${vagrant_box_path}))"' cd-vagrant
 
+
 function ssh-vagrant
 {
     USERINPUT=$1
@@ -84,6 +88,7 @@ function ssh-vagrant
 }
 compdef '_arguments "1: :($(ls ${vagrant_box_path}))"' ssh-vagrant
 
+
 function vbox-snapshot-vm
 {
     local UUID=$1
@@ -98,6 +103,7 @@ function vbox-snapshot-vm
 }
 compdef '_arguments "1: :($(_list_vbox_vms_name))"' vbox-snapshot-vm
 
+
 function vbox-list-snapshots
 {
     local UUID=$1
@@ -110,6 +116,7 @@ function vbox-list-snapshots
     vboxmanage snapshot $UUID list --details
 }
 compdef '_arguments "1: :($(_list_vbox_vms_name))"' vbox-list-snapshots
+
 
 function vbox-restore-snapshot
 {
@@ -124,6 +131,7 @@ function vbox-restore-snapshot
     vboxmanage snapshot $UUID restore $SNAPNAME
 }
 
+
 function vbox-show-vm-info
 {
     local UUID=$1
@@ -136,3 +144,16 @@ function vbox-show-vm-info
 }
 compdef '_arguments "1: :($(_list_vbox_vms_name))"' vbox-show-vm-info
 
+
+function vbox-start-vm
+{
+    local UUID=$1
+    if [ -z $1 ]; then
+        echo "Usage: $0 <uuid|vmname>"
+        echo "\nAvailable VMs:\n$(vbox-list-vms)"
+        return 0
+    fi
+    VBoxManage startvm $UUID --type gui
+
+}
+compdef '_arguments "1: :($(_list_vbox_vms_name))"' vbox-start-vm

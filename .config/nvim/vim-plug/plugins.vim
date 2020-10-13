@@ -67,7 +67,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'arcticicestudio/nord-vim'
 
     " FZF magic
-    Plug '/usr/local/opt/fzf'
     Plug 'junegunn/fzf.vim'
 
     " Distraction-free writing in Vim
