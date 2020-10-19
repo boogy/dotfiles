@@ -2,7 +2,7 @@
     //
     // EDITOR CONFIG
     //
-    "editor.fontFamily": "Source Code Pro for Powerline",
+    "editor.fontFamily": "Cousine Nerd Font",
     "editor.lineHeight": 0,
     "editor.lineNumbers": "on",
     "editor.tabSize": 4,
@@ -399,5 +399,5 @@
     "instantmarkdown.autoOpenBrowser": false,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "python.languageServer": "Microsoft",
-    "workbench.colorTheme": "Flatland Monokai"
+    "workbench.colorTheme": "Gruvbox Dark (Hard)"
 }

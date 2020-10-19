@@ -9,7 +9,7 @@ endif
 " PaperColor, wombat, nord, one_dark, jellybeans, PaperColor_dark, seoul256
 " deus, material, molokai, materia, ayu_{light,dark,mirage}
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'lightline_hunks','readonly', 'absolutepath', 'modified' ] ],
