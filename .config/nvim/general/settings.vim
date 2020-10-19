@@ -49,6 +49,7 @@ set lazyredraw                          " Don't redraw while executing macros (b
 set lcs+=space:-                        " Character to show for spaces when `set list` is active
 " set listchars=tab:\|\                   " Character to show for tabs
 set redrawtime=20000                    " For syntax highlighting the time applies per window
+set hlsearch
 
 " timeout or commentary is not working properly
 set ttimeout

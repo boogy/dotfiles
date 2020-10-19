@@ -82,6 +82,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Vim show indent lines
     Plug 'Yggdroot/indentLine'
 
+    " NERDTree
+    Plug 'preservim/nerdtree'
+
     " Install Terraform LSP server
     " Plug 'hashivim/vim-terraform'
 
