@@ -24,6 +24,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
+
     " code snippets
     Plug 'honza/vim-snippets'
     " Plug 'SirVer/ultisnips'
@@ -65,6 +66,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile']                  }
     Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']                               }
     Plug 'arcticicestudio/nord-vim'
+    Plug 'morhetz/gruvbox'
+    " Plug 'shinchu/lightline-gruvbox.vim'
 
     " FZF magic
     Plug 'junegunn/fzf.vim'

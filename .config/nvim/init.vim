@@ -44,6 +44,8 @@ source $HOME/.config/nvim/plug-config/NerdTree.vim
 
 " Themes
 " source $HOME/.config/nvim/themes/nord.vim
-source $HOME/.config/nvim/themes/material-monokai.vim
+
+" source $HOME/.config/nvim/themes/material-monokai.vim
+source $HOME/.config/nvim/themes/gruvbox.vim
 source $HOME/.config/nvim/themes/lightline.vim
 
