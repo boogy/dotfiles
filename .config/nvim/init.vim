@@ -40,6 +40,7 @@ source $HOME/.config/nvim/plug-config/vim-gitgutter.vim
 source $HOME/.config/nvim/plug-config/markdown-preview.vim
 source $HOME/.config/nvim/plug-config/coc-highlight.vim
 source $HOME/.config/nvim/plug-config/indentLine.vim
+source $HOME/.config/nvim/plug-config/NerdTree.vim
 
 " Themes
 " source $HOME/.config/nvim/themes/nord.vim

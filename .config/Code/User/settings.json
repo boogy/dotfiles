@@ -343,7 +343,7 @@
     //
     // WINDOW CONFIG
     //
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
@@ -351,7 +351,6 @@
     "window.enableMenuBarMnemonics": true,
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.colorTheme": "Flatland Monokai",
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
         "statusBar.noFolderBackground": "#005f5f",
@@ -399,5 +398,6 @@
     ],
     "instantmarkdown.autoOpenBrowser": false,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.languageServer": "Microsoft"
+    "python.languageServer": "Microsoft",
+    "workbench.colorTheme": "Flatland Monokai"
 }
