@@ -19,7 +19,7 @@ source $HOME/.config/nvim/general/functions.vim
 " Mappings
 source $HOME/.config/nvim/keys/mappings.vim
 
-" Plugins
+" Load plugins
 source $HOME/.config/nvim/vim-plug/plugins.vim
 
 " Plugin options
@@ -41,6 +41,7 @@ source $HOME/.config/nvim/plug-config/markdown-preview.vim
 source $HOME/.config/nvim/plug-config/coc-highlight.vim
 source $HOME/.config/nvim/plug-config/indentLine.vim
 source $HOME/.config/nvim/plug-config/NerdTree.vim
+source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 
 " Themes
 " source $HOME/.config/nvim/themes/nord.vim

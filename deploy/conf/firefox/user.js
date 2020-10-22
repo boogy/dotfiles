@@ -68,3 +68,5 @@ user_pref("plugin.state.java", 0);
 user_pref("devtools.debugger.remote-enabled", false);
 user_pref("devtools.chrome.enabled", false);
 user_pref("devtools.debugger.force-local", true);
+
+user_pref("extensions.pocket.enabled", false);

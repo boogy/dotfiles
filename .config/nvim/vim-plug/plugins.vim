@@ -12,22 +12,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
-    Plug 'tpope/vim-commentary'
     Plug 'airblade/vim-gitgutter'
 
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     Plug 'terryma/vim-multiple-cursors'
 
-    " File Explorer
-    Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
-
     " Auto pairs for '(' '[' '{'
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
 
     " code snippets
-    Plug 'honza/vim-snippets'
     " Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 
     " Replace vim-airline with a lighter equivalent
     Plug 'itchyny/lightline.vim'
@@ -41,33 +37,25 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Tabularize
     Plug 'godlygeek/tabular'
 
-    " Show hex, css colors
-    " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
     " Use release branch (Recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    " Python modules
-    " Plug 'klen/python-mode'             , { 'for': 'python' }
-    " Plug 'fisadev/vim-isort'            , { 'for': 'python' }
-    " Plug 'jmcantrell/vim-virtualenv'    , { 'for': 'python' }
-    " Plug 'vim-scripts/python_match.vim' , { 'for': 'python' }
-
     " Programming plugins
-    Plug 'fatih/vim-go'            , { 'for': 'go', 'do': ':GoUpdateBinaries'               }
-    Plug 'rust-lang/rust.vim'      , { 'for': ['rust'      , 'rs']                          }
-    Plug 'racer-rust/vim-racer'    , { 'for': ['rust'      , 'rs']                          }
+    " Plug 'fatih/vim-go'            , { 'for': 'go', 'do': ':GoUpdateBinaries'               }
+    " Plug 'rust-lang/rust.vim'      , { 'for': ['rust'      , 'rs']                          }
+    " Plug 'racer-rust/vim-racer'    , { 'for': ['rust'      , 'rs']                          }
+
     " Markdown
     Plug 'plasticboy/vim-markdown' , { 'for': 'markdown'                                    }
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dhruvasagar/vim-table-mode'
+
     " Syntax plugins and themes
-    Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
+    " Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile']                  }
     Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']                               }
     Plug 'arcticicestudio/nord-vim'
     Plug 'morhetz/gruvbox'
-    " Plug 'shinchu/lightline-gruvbox.vim'
 
     " FZF magic
     Plug 'junegunn/fzf.vim'
@@ -87,6 +75,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " NERDTree
     Plug 'preservim/nerdtree'
+    " NERDcomment - Comment functions
+    Plug 'preservim/nerdcommenter'
+    Plug 'ryanoasis/vim-devicons'
 
     " Install Terraform LSP server
     " Plug 'hashivim/vim-terraform'

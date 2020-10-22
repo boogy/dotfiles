@@ -7,7 +7,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " Close NERDTree if it's the only window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 noremap <C-p> :NERDTreeToggle<CR>
 " noremap <leader>t :NERDTreeToggle<CR>
@@ -19,4 +19,5 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeWinSize=50
 let g:NERDTreeShowBookmarks=1
 
-
+" Open NERDTree in new tabs
+" autocmd BufWinEnter * NERDTreeMirror
