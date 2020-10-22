@@ -52,8 +52,9 @@ case "$window_class" in
         echo "center=on"
         ;;
 
-    [Gg]nome-calculator|[Gg]picview|[Ll]xappearance)
+    [Gg]nome-calculator|[Gg]picview|[Ll]xappearance|1[Pp]assword)
         echo "state=floating"
+        echo "center=on"
         ;;
 
     [Ss]eahorse)

@@ -11,15 +11,34 @@ inoremap <expr> <c-k> ("\<C-p>")
 " nnoremap <M-h>    :vertical resize -2<CR>
 " nnoremap <M-l>    :vertical resize +2<CR>
 
-" TAB in general mode will move to text buffer
-nnoremap <TAB> :bnext<CR>
-" SHIFT-TAB will go back
-nnoremap <S-TAB> :bprevious<CR>
+" Move between tabs: TAB in general mode will move to text tab
+nnoremap <silent> <TAB> :tabnext<CR>
+nnoremap <silent> <S-TAB> :tabprevious<CR>
 
-" Move between tabs
-map <C-l> :tabn<CR>
-map <C-h> :tabp<CR>
+" New tab <C-t>
 map <C-t> :tabnew<CR>
+
+" Move between buffers
+" nnoremap <C-Left> :bp<CR>
+" nnoremap <C-Right> :bn<CR>
+
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" Easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
@@ -27,6 +46,7 @@ nnoremap <C-s> :w<CR>
 nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
+
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -88,3 +108,15 @@ nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
 " ZoomIn & ZoomOut text (Gnvim || nvim-qt)
 nnoremap <C-Up> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)+1)', 'g')<CR>
 nnoremap <C-Down> :silent! let &guifont = substitute(&guifont, ':h\zs\d\+', '\=eval(submatch(0)-1)', 'g')<CR>
+
+map <ScrollWheelUp> <C-Y>
+map <S-ScrollWheelUp> <C-U>
+map <ScrollWheelDown> <C-E>
+map <S-ScrollWheelDown> <C-D>
+
+" Move selected line / block of text in visual mode
+" shift + k to move up
+" shift + j to move down
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
+

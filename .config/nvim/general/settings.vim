@@ -91,7 +91,7 @@ if has("gui")
   endif
 endif
 
-if has('vim')
+if has('vim') || has('gui') || exists('g:nvim-qt')
     set t_Co=256
 endif
 
