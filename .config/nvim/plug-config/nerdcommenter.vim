@@ -25,8 +25,5 @@ let g:NERDToggleCheckAllLines = 1
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
-nmap <silent> gcc <plug>NERDCommenterToggle
-vmap <silent> gcc <plug>NERDCommenterToggle
-
 nmap <silent> gc <plug>NERDCommenterToggle
 vmap <silent> gc <plug>NERDCommenterToggle
