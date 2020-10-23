@@ -10,6 +10,9 @@ if !g:is_nvim && g:is_vim8
   let &packpath = &runtimepath
 endif
 
+" Load plugins
+source $HOME/.config/nvim/vim-plug/plugins.vim
+
 " Source our configurations
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/autocmds.vim
@@ -18,9 +21,6 @@ source $HOME/.config/nvim/general/functions.vim
 
 " Mappings
 source $HOME/.config/nvim/keys/mappings.vim
-
-" Load plugins
-source $HOME/.config/nvim/vim-plug/plugins.vim
 
 " Plugin options
 source $HOME/.config/nvim/plug-config/fzf.vim

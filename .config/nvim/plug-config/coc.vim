@@ -142,7 +142,6 @@ nnoremap <silent> <leader><space>p  :<C-u>CocListResume<CR>
 " coc extensions to always isntall
 let g:coc_global_extensions = [
 \ 'coc-json',
-\ 'coc-tsserver',
 \ 'coc-html',
 \ 'coc-css',
 \ 'coc-yaml',
