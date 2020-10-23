@@ -9,8 +9,8 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Most have plugins
-    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-git'
     Plug 'airblade/vim-gitgutter'
 
@@ -18,12 +18,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'sheerun/vim-polyglot'
     Plug 'terryma/vim-multiple-cursors'
 
-    " Auto pairs for '(' '[' '{'
-    " Plug 'jiangmiao/auto-pairs'
-
     " code snippets
     " Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+    " Plug 'honza/vim-snippets'
 
     " Replace vim-airline with a lighter equivalent
     Plug 'itchyny/lightline.vim'
@@ -46,9 +43,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'racer-rust/vim-racer'    , { 'for': ['rust'      , 'rs']                          }
 
     " Markdown
-    Plug 'plasticboy/vim-markdown' , { 'for': 'markdown'                                    }
+    Plug 'plasticboy/vim-markdown' , { 'for': 'markdown' }
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-    Plug 'dhruvasagar/vim-table-mode'
 
     " Syntax plugins and themes
     " Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
@@ -71,7 +67,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
 
     " Vim show indent lines
-    Plug 'Yggdroot/indentLine'
+    " Plug 'Yggdroot/indentLine'
 
     " NERDTree
     Plug 'preservim/nerdtree'
