@@ -11,9 +11,10 @@ let g:fern#disable_viewer_hide_cursor = 1
 " let g:fern#renderer#default#leaf_symbol      = ' '
 " let g:fern#renderer#default#root_symbol      = '~ '
 
-noremap <silent> ,d :Fern . -drawer -width=45 -toggle<CR><C-w>=
+noremap <silent> <C-p> :Fern . -drawer -width=45 -toggle<CR><C-w>=
 noremap <silent> ,f :Fern . -drawer -reveal=% -width=45 -toggle<CR><C-w>=
 noremap <silent> ,. :Fern %:h -drawer -width=45 -toggle<CR><C-w>=
+
 
 function! FernInit() abort
   nmap <buffer><expr>
