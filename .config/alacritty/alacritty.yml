@@ -55,7 +55,7 @@ font:
 
   ## Point size
   # size: 10
-  size: 12
+  size: 14
 
   offset:
     x: 0
