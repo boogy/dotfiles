@@ -17,7 +17,6 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/autocmds.vim
 source $HOME/.config/nvim/general/functions.vim
-" source $HOME/.config/nvim/general/paths.vim
 
 " Mappings
 source $HOME/.config/nvim/keys/mappings.vim
@@ -27,7 +26,6 @@ source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/coc-snippets.vim
 source $HOME/.config/nvim/plug-config/coc-highlight.vim
 source $HOME/.config/nvim/plug-config/coc-explorer.vim
-
 source $HOME/.config/nvim/plug-config/vim-slime.vim
 source $HOME/.config/nvim/plug-config/vim-visual-multi.vim
 source $HOME/.config/nvim/plug-config/vim-gitgutter.vim
@@ -44,11 +42,9 @@ source $HOME/.config/nvim/plug-config/indentLine.vim
 " source $HOME/.config/nvim/plug-config/NerdTree.vim
 source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/fern.vim
+source $HOME/.config/nvim/plug-config/vim-racer.vim
 
 " Themes
-" source $HOME/.config/nvim/themes/nord.vim
-" source $HOME/.config/nvim/themes/material-monokai.vim
-" source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/gruvbox.vim
 source $HOME/.config/nvim/themes/lightline.vim
 

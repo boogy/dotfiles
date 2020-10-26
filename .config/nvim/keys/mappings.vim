@@ -17,8 +17,12 @@ nnoremap <silent> <S-TAB> :bp<CR>
 
 " New tab <C-t>
 map <C-t> :tabnew<CR>
-nnoremap <Left> :tabnext<CR>
-nnoremap <Right> :tabnext<CR>
+
+" resize window with arrow keys
+nnoremap <Up> :resize +2<CR>
+nnoremap <Down> :resize -2<CR>
+nnoremap <Left> :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
 " Move between buffers
 " nnoremap <C-Left> :bp<CR>

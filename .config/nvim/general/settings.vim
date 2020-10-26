@@ -44,11 +44,11 @@ set incsearch                           " Makes search act like search in modern
 set showmatch                           " Show matching brackets when text indicator is over them
 set backspace=eol,start,indent          " Configure backspace so it acts as it should
 set lazyredraw                          " Don't redraw while executing macros (better performance config)
-" set lcs+=space:·                        " Character to show for spaces when `set list` is active
-set lcs+=space:-                        " Character to show for spaces when `set list` is active
+set lcs+=space:·                        " Character to show for spaces when `set list` is active
 " set listchars=tab:\|\                   " Character to show for tabs
 set redrawtime=20000                    " For syntax highlighting the time applies per window
 set hlsearch                            " Highlight searches
+set noswapfile                          " Disable swapfile creation
 set textwidth=120                       " I hate when vim wraps the text to 80 chars
 
 " timeout or commentary is not working properly
