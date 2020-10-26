@@ -68,7 +68,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'Yggdroot/indentLine'
 
     " NERDTree
-    Plug 'preservim/nerdtree'
+    " Plug 'preservim/nerdtree'
     " NERDcomment - Comment functions
     Plug 'preservim/nerdcommenter'
     Plug 'ryanoasis/vim-devicons'

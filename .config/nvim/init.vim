@@ -41,7 +41,7 @@ source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/vim-gitgutter.vim
 source $HOME/.config/nvim/plug-config/indentLine.vim
-source $HOME/.config/nvim/plug-config/NerdTree.vim
+" source $HOME/.config/nvim/plug-config/NerdTree.vim
 source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/fern.vim
 
