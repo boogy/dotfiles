@@ -32,6 +32,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
+    " Plug 'rust-lang/rust.vim'
+    " Plug 'racer-rust/vim-racer'
     " Plug 'deoplete-plugins/deoplete-jedi'
 
     " Tabularize
