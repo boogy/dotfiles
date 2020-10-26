@@ -1,7 +1,8 @@
+" gruvbox colors for lightline
 source $HOME/.config/nvim/colors/lightline-gruvbox.vim
 
 let g:gruvbox_contrast_dark="hard"
-" let g:gruvbox_termcolors=256
+let g:gruvbox_invert_selection='0'
 
 set bg=dark
 colorscheme gruvbox

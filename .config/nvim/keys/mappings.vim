@@ -11,12 +11,14 @@ inoremap <expr> <c-k> ("\<C-p>")
 " nnoremap <M-h>    :vertical resize -2<CR>
 " nnoremap <M-l>    :vertical resize +2<CR>
 
-" Move between tabs: TAB in general mode will move to text tab
-nnoremap <silent> <TAB> :tabnext<CR>
-nnoremap <silent> <S-TAB> :tabprevious<CR>
+" Move between buffers
+nnoremap <silent> <TAB> :bn<CR>
+nnoremap <silent> <S-TAB> :bp<CR>
 
 " New tab <C-t>
 map <C-t> :tabnew<CR>
+nnoremap <Left> :tabnext<CR>
+nnoremap <Right> :tabnext<CR>
 
 " Move between buffers
 " nnoremap <C-Left> :bp<CR>
@@ -61,8 +63,8 @@ vnoremap > >gv
 " nnoremap <C-l> <C-w>l
 
 " Use space to search
-map <space> /
-map <c-space> ?
+" map <space> /
+" map <c-space> ?
 
 " remove highlight
 map <silent> <leader><cr> :noh<cr>

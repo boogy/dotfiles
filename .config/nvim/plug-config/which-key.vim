@@ -100,3 +100,4 @@ let g:which_key_map.g = {
   \ 'U'     : ["<Plug>(GitGutterUndoHunk)"          , 'GitGutter Undo Hunk'],
   \ 'p'     : ["<Plug>(GitGutterPreviewHunk)"       , 'GitGutter Preview Hunk'],
   \ }
+
