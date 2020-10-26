@@ -16,20 +16,23 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
-    Plug 'terryma/vim-multiple-cursors'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-    " code snippets
+    " Code snippets
     " Plug 'SirVer/ultisnips'
-    " Plug 'honza/vim-snippets'
+    Plug 'honza/vim-snippets'
 
     " Replace vim-airline with a lighter equivalent
     Plug 'itchyny/lightline.vim'
+    Plug 'mengelbrecht/lightline-bufferline'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline-themes'
 
     " List files in directory in vim
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
-    Plug 'deoplete-plugins/deoplete-jedi'
+    " Plug 'deoplete-plugins/deoplete-jedi'
 
     " Tabularize
     Plug 'godlygeek/tabular'
@@ -37,21 +40,16 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Use release branch (Recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    " Programming plugins
-    " Plug 'fatih/vim-go'            , { 'for': 'go', 'do': ':GoUpdateBinaries'               }
-    " Plug 'rust-lang/rust.vim'      , { 'for': ['rust'      , 'rs']                          }
-    " Plug 'racer-rust/vim-racer'    , { 'for': ['rust'      , 'rs']                          }
-
     " Markdown
     Plug 'plasticboy/vim-markdown' , { 'for': 'markdown' }
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
     " Syntax plugins and themes
-    " Plug 'PProvost/vim-ps1'        , { 'for': ['ps1'       , 'powershell'         , 'psm1'] }
-    Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile']                  }
-    Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']                               }
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'morhetz/gruvbox'
+    Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile'] }
+    Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']              }
+    Plug 'gruvbox-community/gruvbox'
+    " Plug 'arcticicestudio/nord-vim'
+    " Plug 'morhetz/gruvbox'
 
     " FZF magic
     Plug 'junegunn/fzf.vim'
@@ -67,7 +65,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
 
     " Vim show indent lines
-    " Plug 'Yggdroot/indentLine'
+    Plug 'Yggdroot/indentLine'
 
     " NERDTree
     Plug 'preservim/nerdtree'
@@ -75,12 +73,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'preservim/nerdcommenter'
     Plug 'ryanoasis/vim-devicons'
 
-    " Install Terraform LSP server
-    " Plug 'hashivim/vim-terraform'
+    " Asynchronous file explorer
+    Plug 'lambdalisue/fern.vim'
+    Plug 'lambdalisue/fern-git-status.vim'
+    Plug 'lambdalisue/fern-renderer-devicons.vim'
 
 call plug#end()
 
-" Load plugins on insert
+" Load plugins on insert to speed up vim launch
 " augroup load_us_ycm
 "   autocmd!
 "   autocmd InsertEnter * call plug#load(

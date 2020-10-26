@@ -1,6 +1,6 @@
 " set leader key
-let mapleader = ","
-let g:mapleader = ","
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
 
 syntax enable                           " Enables syntax highlighing
 " set hidden                              " Required to keep multiple buffers open multiple buffers
@@ -28,7 +28,6 @@ set laststatus=0                        " Always display the status line
 set number                              " Line numbers
 set relativenumber                      " Show relative line numbers
 set cursorline                          " Enable highlighting of the current line
-set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
 set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
@@ -54,12 +53,12 @@ set textwidth=120                       " I hate when vim wraps the text to 80 c
 
 " timeout or commentary is not working properly
 set ttimeout
-set timeoutlen=250
+set timeoutlen=150
 set ttimeoutlen=0
 
 if exists('+termguicolors')
-  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
