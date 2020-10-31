@@ -1,5 +1,5 @@
 [options]
-font = Cousine Nerd Font 10
+font = Cousine Nerd Font 12
 
 allow_bold = true
 audible_bell = false
@@ -92,5 +92,31 @@ color17 = #cc6633
 color18 = #383830
 color19 = #49483e
 color20 = #a59f85
+
+# [colors]
+# ## termite gruvbox dark
+# # hard contrast: background = #1d2021
+# # background = #1d2021
+# background = rgba(29, 32, 33, 0.95)
+# # soft contrast: background = #32302f
+# # background = rgba(50, 48, 47, 0.95)
+# foreground = #ebdbb2
+# foreground_bold = #ebdbb2
+# color0 = #282828
+# color8 = #928374
+# color1 = #cc241d
+# color9 = #fb4934
+# color2 = #98971a
+# color10 = #b8bb26
+# color3 = #d79921
+# color11 = #fabd2f
+# color4 = #458588
+# color12 = #83a598
+# color5 = #b16286
+# color13 = #d3869b
+# color6 = #689d6a
+# color14 = #8ec07c
+# color7 = #a89984
+# color15 = #ebdbb2
 
 # vim: ft=dosini cms=#%s

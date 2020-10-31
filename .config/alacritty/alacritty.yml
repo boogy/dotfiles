@@ -38,8 +38,8 @@ scrolling:
 
 ## Font configuration
 ## Cool fonts
-## Cousine for Powerline style=Regular
-## Cousine Nerd Font Mono style=Regular
+##   Cousine for Powerline style=Regular
+##   Cousine Nerd Font Mono style=Regular
 font:
   normal:
     family: "Cousine Nerd Font"
@@ -54,8 +54,7 @@ font:
     style: Italic
 
   ## Point size
-  # size: 10
-  size: 14
+  size: 12
 
   offset:
     x: 0
@@ -68,35 +67,63 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
 
-## Background opacity
-background_opacity: 0.90
+background_opacity: 0.94
+# background_opacity: 1
 
-## Colors (Monokai Perso)
-colors:
-  cursor:
-    text: "0x000000"
-    cursor: "0xffffff"
-  primary:
-    background: "#191919"
-    foreground: "#d8dee9"
-  normal:
-    black: "0x5D5B57"
-    red: "0xF92672"
-    green: "0xA6E22E"
-    yellow: "0xF4BF75"
-    blue: "0x66D9EF"
-    magenta: "0xAE81FF"
-    cyan: "0x2AA198"
-    white: "0xF9F8F5"
-  bright:
-    black: "0x75715E"
-    red: "0xF92672"
-    green: "0xA6E22E"
-    yellow: "0xF4BF75"
-    blue: "0x66D9EF"
-    magenta: "0xAE81FF"
-    cyan: "0x2AA198"
-    white: "0xF9F9F5"
+schemes:
+  ## Colors (Monokai)
+  monokai: &monokai
+    cursor:
+      text: "#000000"
+      cursor: "#ffffff"
+    primary:
+      background: "#191919"
+      foreground: "#d8dee9"
+    normal:
+      black: "#5D5B57"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#2AA198"
+      white: "#F9F8F5"
+    bright:
+      black: "#75715E"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#2AA198"
+      white: "#F9F9F5"
+
+  ## Colors (Gruvbox dark)
+  gruvbox-dark: &gruvbox-dark
+    primary:
+      background: '#1d2021'
+      foreground: '#ebdbb2'
+    normal:
+      black:   '#282828'
+      red:     '#cc241d'
+      green:   '#98971a'
+      yellow:  '#d79921'
+      blue:    '#458588'
+      magenta: '#b16286'
+      cyan:    '#689d6a'
+      white:   '#a89984'
+    bright:
+      black:   '#928374'
+      red:     '#fb4934'
+      green:   '#b8bb26'
+      yellow:  '#fabd2f'
+      blue:    '#83a598'
+      magenta: '#d3869b'
+      cyan:    '#8ec07c'
+      white:   '#ebdbb2'
+
+colors: *monokai
+# colors: *gruvbox-dark
 
 selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

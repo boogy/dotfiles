@@ -39,7 +39,7 @@ source $HOME/.config/nvim/plug-config/rnvimr.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/indentLine.vim
-" source $HOME/.config/nvim/plug-config/NerdTree.vim
+source $HOME/.config/nvim/plug-config/NerdTree.vim
 source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/fern.vim
 source $HOME/.config/nvim/plug-config/vim-racer.vim
@@ -47,4 +47,6 @@ source $HOME/.config/nvim/plug-config/vim-racer.vim
 " Themes
 source $HOME/.config/nvim/themes/gruvbox.vim
 source $HOME/.config/nvim/themes/lightline.vim
+" source $HOME/.config/nvim/themes/material-monokai.vim
+" source $HOME/.config/nvim/themes/onedark.vim
 

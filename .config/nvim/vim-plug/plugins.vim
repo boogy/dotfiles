@@ -12,6 +12,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-git'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-eunuch'
     Plug 'airblade/vim-gitgutter'
 
     " Better Syntax Support
@@ -50,8 +52,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile'] }
     Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']              }
     Plug 'gruvbox-community/gruvbox'
-    " Plug 'arcticicestudio/nord-vim'
     " Plug 'morhetz/gruvbox'
+    Plug 'rakr/vim-one'
+    Plug 'joshdick/onedark.vim'
 
     " FZF magic
     Plug 'junegunn/fzf.vim'
@@ -70,7 +73,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'Yggdroot/indentLine'
 
     " NERDTree
-    " Plug 'preservim/nerdtree'
+    Plug 'preservim/nerdtree'
     " NERDcomment - Comment functions
     Plug 'preservim/nerdcommenter'
     Plug 'ryanoasis/vim-devicons'

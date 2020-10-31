@@ -40,7 +40,7 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-" Easier split navigations
+" Better window/split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -59,12 +59,6 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Better tabbing / indentation
 vnoremap < <gv
 vnoremap > >gv
-
-" Better window navigation
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
 
 " Use space to search
 " map <space> /
@@ -93,6 +87,9 @@ nnoremap <leader>w :w!<cr>
 nnoremap <leader>wq :w<bar>bd!<cr>
 nnoremap <leader>D :bdelete!<cr>
 
+" When you press <leader>r you can search and replace the selected text
+" function defined in general/functions.vim
+vnoremap <silent> <leader>vr :call VisualSelection('replace')<CR>
 
 " https://ddrscott.github.io/blog/2016/vim-toggle-movement/
 " These mapping depend on the ToggleMovement function in general/functions.vim

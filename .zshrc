@@ -155,6 +155,11 @@ bindkey -s "^g" "cd_with_fzf\n"
 bindkey -s '^o' "bolt --fzf-search\n"
 bindkey -s '^s' "bolt --rofi-search\n"
 
+## zsh bindings for HOME and END keys
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
+
 ## source plugins from oh-my-zsh
 ## and custom will take precedence
 zsh_plugins=(
