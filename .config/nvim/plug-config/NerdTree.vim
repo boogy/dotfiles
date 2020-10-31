@@ -19,5 +19,3 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeWinSize=50
 let g:NERDTreeShowBookmarks=1
 
-" Open NERDTree in new tabs
-" autocmd BufWinEnter * NERDTreeMirror

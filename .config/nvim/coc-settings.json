@@ -35,6 +35,8 @@
     "json.enable": true,
     "json.format.enable": true,
     // coc-highlight
+    "highlight.colorNames.enable": false,
+    "highlight.colors.enable": true,
     "highlight.disableLanguages": [
         "markdown"
     ],
