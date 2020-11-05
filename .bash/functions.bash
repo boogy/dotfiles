@@ -397,3 +397,16 @@ to-upper(){
 cpu-usage-percentage(){
     top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
 }
+
+aur-update(){
+    local $COMMIT_MESSAGE="$1"
+
+    if [ -z $COMMIT_MESSAGE]; then
+        echo "Usage: ${FUNCNAME[0]} <commit message>"
+    fi
+
+    makepkg --printsrcinfo > .SRCINFO
+    git add --all
+    git commit -v -a -m "${COMMIT_MESSAGE}"
+}
+

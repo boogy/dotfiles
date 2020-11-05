@@ -15,7 +15,5 @@ if echo $1|grep -Eo "true"; then
     echo -n balance_power > /sys/devices/system/cpu/cpufreq/policy?/energy_performance_preference
 
 else
-
     echo -n performance > /sys/devices/system/cpu/cpufreq/policy?/energy_performance_preference
-
 fi

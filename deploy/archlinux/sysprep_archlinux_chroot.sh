@@ -118,9 +118,7 @@ function write_persistent_locales
     msg_ok "Setting locales in /etc/locale.gen"
     cp /etc/locale.gen{,.backup}
     echo "en_US.UTF-8 UTF-8"    > /etc/locale.gen
-    echo "en_US ISO-8859-1"     >> /etc/locale.gen
     echo "fr_CH.UTF-8 UTF-8"    >> /etc/locale.gen
-    echo "fr_CH ISO-8859-1"     >> /etc/locale.gen
     echo "LANG=en_US.UTF-8"     > /etc/locale.conf
     echo "KEYMAP=${LOCALES}"    > /etc/vconsole.conf
     msg_ok "Generating locales with 'locale-gen'"
@@ -144,7 +142,7 @@ function write_localhost_file
 # See hosts(5) for details.
 127.0.0.1       localhost
 ::1             localhost
-127.0.0.1       ${HOSTNAME}.localdomain ${HOSTNAME}
+127.0.1.1       ${HOSTNAME}.localdomain ${HOSTNAME}
 EOF
 }
 
@@ -172,9 +170,11 @@ function install_bootloader
         echo "default arch-*" >> /boot/loader/loader.conf
 
         if [[ $SHOULD_ENCRYPT_DISK =~ [Yy] ]]; then
-            SYSTEMD_BOOT_OPTIONS="options cryptdevice=UUID=${ROOT_PARTITION_UUID}:root root=${PARTITION_LUKS} quiet rw net.ifnames=0 transparent_hugepage=never resume=${PARTITION_LUKS} resume_offset=${SWAP_FILE_OFFSET}"
+            # SYSTEMD_BOOT_OPTIONS="options cryptdevice=UUID=${ROOT_PARTITION_UUID}:root root=${PARTITION_LUKS} quiet rw net.ifnames=0 transparent_hugepage=never resume=${PARTITION_LUKS} resume_offset=${SWAP_FILE_OFFSET} intel_iommu=on"
+            SYSTEMD_BOOT_OPTIONS="options rd.luks.name=${ROOT_PARTITION_UUID}=root rd.luks.options=timeout=0 rootflags=x-systemd.device-timeout=0 root=${PARTITION_LUKS} quiet rw net.ifnames=0 transparent_hugepage=never resume=${PARTITION_LUKS} resume_offset=${SWAP_FILE_OFFSET} intel_iommu=on"
         else
-            SYSTEMD_BOOT_OPTIONS="options root=PARTUUID=${ROOT_PARTITION_UUID} quiet rw net.ifnames=0 transparent_hugepage=never resume=UUID=${ROOT_PARTITION_UUID} resume_offset=${SWAP_FILE_OFFSET}"
+            # SYSTEMD_BOOT_OPTIONS="options root=PARTUUID=${ROOT_PARTITION_UUID} quiet rw net.ifnames=0 transparent_hugepage=never resume=UUID=${ROOT_PARTITION_UUID} resume_offset=${SWAP_FILE_OFFSET} intel_iommu=on"
+            SYSTEMD_BOOT_OPTIONS="options root=PARTUUID=${ROOT_PARTITION_UUID} quiet rw net.ifnames=0 transparent_hugepage=never resume=UUID=${ROOT_PARTITION_UUID} resume_offset=${SWAP_FILE_OFFSET} intel_iommu=on"
         fi
 
         msg_ok "Adding first entry to loader: /boot/loader/entries/arch.conf"
@@ -330,16 +330,27 @@ function configure_mkinitcpio_hooks
     msg_warning "HOOKS=(base udev autodetect modconf block keyboard keymap encrypt filesystems fsck)"
     msg_warning "..."
 
-    msg_ok "Making a backup of /etc/mkinitcpio.conf"
-    cp /etc/mkinitcpio.conf{,.backup}
+    ## if systemd hook is used the bootloader entry must be changed from
+    ## cryptdevice=UUID=device-UUID:cryptroot root=/dev/mapper/cryptroot
+    ## to
+    ## rd.luks.name=device-UUID=root root=/dev/mapper/root
+    ## options can be specified using rd.luks.options=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX=options
 
-    msg_ok "Adding hooks to /etc/mkinitcpio.conf"
+    msg_ok "Backup /etc/mkinitcpio.conf"
+    cp /etc/mkinitcpio.conf{,.backup.$(date +'%Y-%m-%d-%H%M')}
+
+    msg_ok "Comment default HOOKS line in /etc/mkinitcpio.conf"
     sed -i "s/^\(HOOKS=\)/#\1/" /etc/mkinitcpio.conf
+
+    msg_ok "Adding the proper hooks to /etc/mkinitcpio.conf"
     if [[ $SHOULD_ENCRYPT_DISK =~ [yY] ]]; then
-        sed -i "/#HOOKS=(base/a HOOKS=(base udev autodetect modconf block keyboard keymap encrypt filesystems resume fsck)" /etc/mkinitcpio.conf
+        sed -i "/#HOOKS=(base/c HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt filesystems fsck)" /etc/mkinitcpio.conf
     else
-        sed -i "/#HOOKS=(base/a HOOKS=(base systemd udev autodetect modconf block keyboard keymap filesystems resume fsck)" /etc/mkinitcpio.conf
+        sed -i "/#HOOKS=(base/c HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole filesystems fsck)" /etc/mkinitcpio.conf
     fi
+
+    msg_ok "Clean up /etc/mkinitcpio.conf"
+    sed -i 's/#.*$//;/^$/d' /etc/mkinitcpio.conf
 
     ## enable mkinitcpio compression
     sed -i "s/#COMPRESSION=\"lz4\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
