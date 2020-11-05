@@ -1,0 +1,15 @@
+## ENV{SYSTEMD_WANTS}=="monitor-hotplug.service"
+## the above can be used to replace the RUN command
+# ACTION=="change", SUBSYSTEM=="drm", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/USERNAME/.Xauthority", RUN+="/bin/systemctl start monitor-hotplug.service"
+
+## test this rule with
+## udevadm test -a change /devices/pci0000:00/0000:00:02.0/drm/card0
+# ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/systemctl start monitor-hotplug.service"
+
+## If using autorandr there is already a udev rule in /usr/lib/udev/rules.d/40-monitor-hotplug.rules
+## add a postswitch script in ~/.config/autorandr/postswitch which is going to be run as follows:
+
+# * postswitch - is executed after a mode switch has taken place. This can be used to notify window managers or other applications about the switch.
+# * preswitch  - is executed before a mode switch takes place.
+# * postsave   - is executed after a profile was stored or altered.
+# * predetect  - is executed before autorandr attempts to run xrandr.
