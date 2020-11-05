@@ -141,7 +141,7 @@ alt + o ; {a,v,f,p,g,l,z,w,t}
     pavucontrol, \
     chromium, \
     lxappearance, \
-    QT_SCALE_FACTOR=0.5 zoom, \
+    QT_SCALE_FACTOR=2 zoom, \
     VBoxManage startvm "Windows10" --type gui, \
     termite \
     } &
@@ -176,7 +176,8 @@ alt + i
 
 ## Launch terminal (+tmux with shift)
 alt + {_,shift + } Return
-	{alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
+    {alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
+	# {termite,termite --class=work -t work -e 'tmux new-session -A -s WORK'}
 
 ## open file explorer
 super + e

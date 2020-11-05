@@ -71,3 +71,11 @@ user_pref("devtools.debugger.force-local", true);
 
 user_pref("extensions.pocket.enabled", false);
 user_pref("toolkit.zoomManager.zoomValues", ".3,.5,.67,.8,.9,1,1.1,1.2,1.25,1.3,1.4,1.5,1.7,2,2.4,3")
+
+//
+// Option to enable when using AMD graphics and hardware acceleration
+//
+user_pref("layers.acceleration.force-enabled", true);
+user_pref("webgl.force-enabled", true);
+user_pref("media.hardware-video-decoding.force-enabled", true);
+user_pref("browser.tabs.remote.autostart", true);
