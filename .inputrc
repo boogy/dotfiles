@@ -69,3 +69,6 @@ $endif
 # IPython needs this to appear at the bottom of the
 # file for clear-screen to work
 set keymap vi
+
+## dont press enter on multi-lines
+set enable-bracketed-paste
