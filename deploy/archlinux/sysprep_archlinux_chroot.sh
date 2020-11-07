@@ -374,7 +374,7 @@ Type=oneshot
 RemainAfterExit=yes
 StandardInput=tty
 StandardOutput=tty
-ExecStart=/usr/sbin/kbdrate -s -d 200 -r 60
+ExecStart=/usr/sbin/kbdrate -s -d 190 -r 80
 
 [Install]
 WantedBy=multi-user.target
@@ -393,7 +393,7 @@ Section "InputClass"
         MatchIsKeyboard "on"
         Option "XkbLayout" "ch"
         Option "XkbModel" "pc105"
-        Option "XkbVariant" ",fr"
+        Option "XkbVariant" "fr"
         Option "XkbOptions" "lv3:ralt_switch"
 EndSection
 EOF
@@ -434,10 +434,10 @@ function add_xorg_graphics
     if [[ $USE_INTEL_GRAPHICS =~ [Y|y] ]]; then
         msg_ok "Writing X11 intel configuration"
         cat <<EOF > /etc/X11/xorg.conf.d/20-intel.conf
-Section "Device"
-        Identifier "Intel Graphics"
-        Driver "intel"
-EndSection
+#Section "Device"
+#        Identifier "Intel Graphics"
+#        Driver "intel"
+#EndSection
 EOF
     fi
 }
@@ -657,8 +657,7 @@ yay -S --sudoloop --noconfirm polybar
 yay -S --sudoloop --noconfirm libinput-gestures
 yay -S --sudoloop --noconfirm vmware-workstation
 yay -S --sudoloop --noconfirm visual-studio-code-bin
-yay -S --sudoloop --noconfirm jre10-openjdk jdk10-openjdk
-yay -S --sudoloop --noconfirm gksu otf-font-awesome-4 otf-font-awesome-5-free ttf-ms-fonts
+yay -S --sudoloop --noconfirm gksu
 yay -S --sudoloop --noconfirm xcursor-oxygen xcursor-breeze-serie-obsidian
 yay -S --sudoloop --noconfirm i3lock-color-git
 yay -S --sudoloop --noconfirm nerd-fonts-complete
