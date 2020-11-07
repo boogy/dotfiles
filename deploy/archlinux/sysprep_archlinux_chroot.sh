@@ -353,7 +353,7 @@ function configure_mkinitcpio_hooks
     sed -i 's/#.*$//;/^$/d' /etc/mkinitcpio.conf
 
     ## enable mkinitcpio compression
-    sed -i "s/#COMPRESSION=\"lz4\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
+    # sed -i "s/#COMPRESSION=\"lz4\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
     # sed -i "s/#COMPRESSION=\"xz\"/COMPRESSION=\"xz\"/" /etc/mkinitcpio.conf
     # sed -i "s/#COMPRESSION_OPTIONS=.*/COMPRESSION_OPTIONS=(-0 -T 0)/" /etc/mkinitcpio.conf
 
