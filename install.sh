@@ -18,7 +18,6 @@ MANAGED_FILES=(
     ~/.tmux.conf
     ~/.pythonrc.py
     ~/.screenrc
-    # ~/.Xresources
 )
 
 test -d ${INSTALLDIR} || mkdir -p ${INSTALLDIR}

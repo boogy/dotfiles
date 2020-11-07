@@ -76,8 +76,8 @@ shadow-exclude = [
   "name *= 'picom'",
   "name *= 'Chromium'",
   "name *= 'Chrome'",
-  "class_g = 'Zoom'",
-  "class_g = 'zoom'",
+  "name *= 'Zoom'",
+  "name *= 'zoom'",
   "class_g = 'firefox' && argb",
   "class_g = 'Firefox' && argb",
   "class_g ?= 'Xfce4-power-manager'",
@@ -161,11 +161,7 @@ inactive-opacity-override = false;
 
 # Specify a list of conditions of windows that should always be considered focused.
 # focus-exclude = []
-focus-exclude = [
-  "class_g = 'Cairo-clock'",
-  "class_g = 'Zoom'",
-  "class_g = 'zoom'",
-];
+focus-exclude = [ "class_g = 'Cairo-clock'" ];
 
 # Use fixed inactive dim value, instead of adjusting according to window opacity.
 # inactive-dim-fixed = 1.0
@@ -178,8 +174,11 @@ focus-exclude = [
 #    opacity-rule = [ "80:class_g = 'URxvt'" ];
 #
 opacity-rule = [
+  # "90:class_g = 'Alacritty' && !focused",
   "100:class_g = 'firefox'",
   "100:class_g = 'Firefox'",
+  "100:class_g = 'Zoom'",
+  "100:class_g = 'zoom'",
   "95:class_g = 'URxvt' && !_NET_WM_STATE@:32a",
   "0:_NET_WM_STATE@[0]:32a *= '_NET_WM_STATE_HIDDEN'",
   "0:_NET_WM_STATE@[1]:32a *= '_NET_WM_STATE_HIDDEN'",
@@ -246,7 +245,7 @@ blur-background-exclude = [
 # Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
 # `xrender` is the default one.
 #
-# backend = "glx";
+# backend = 'glx'
 backend = "xrender";
 
 # Enable/disable VSync.
@@ -302,8 +301,8 @@ refresh-rate = 0
 # to maximize performance for full-screen windows. Known to cause flickering
 # when redirecting/unredirecting windows.
 #
-unredir-if-possible = false;
-# unredir-if-possible = true
+# unredir-if-possible = false
+unredir-if-possible = true
 
 # Delay before unredirecting the window, in milliseconds. Defaults to 0.
 # unredir-if-possible-delay = 0
@@ -453,9 +452,9 @@ log-level = "warn";
 #
 wintypes:
 {
-  tooltip = { fade = false; shadow = false; opacity = 0.75; focus = true; full-shadow = false; };
-  dock          = { shadow = false; };
-  dnd           = { shadow = false; };
+  tooltip = { fade = true; shadow = false; opacity = 0.75; focus = true; full-shadow = false; };
+  dock          = { shadow = false; }
+  dnd           = { shadow = false; }
   dropdown_menu = { shadow = false; };
   popup_menu    = { shadow = false; };
   utility       = { shadow = false; };
