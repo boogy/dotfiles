@@ -102,37 +102,4 @@ function drun
 compdef '_arguments "1: :($(_list_images_names))"' drun
 # compdef _docker_img_list drun
 
-##
-## Start a local rocket chat instance
-##
-function rocket-chat-start
-{
-    # local PORT=$1
-    # if test -z $PORT; then
-    #     echo "Usage: rocket-chat-start <PORT>"
-    #     return 0
-    # fi
-    docker run --name mongo -d mongo:4.0 mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
-    docker run --name mongo_replica -d --link mongo mongo:4.0 "bash -c \"for i in $(seq 1 30); do mongo mongo/rocketchat --eval \" rs.initiate({ _id: 'rs0', members: [ { _id: 0, host: 'localhost:27017' } ]})\" && s=$$? && break || s=$$?; echo \"Tried $$i times. Waiting 5 secs...\"; sleep 5; done; (exit $$s)\""
-
-    docker run --name rocketchat -p 3000:3000 --env ROOT_URL=https://localhost:3000 \
-    -e "MONGO_URL=mongodb://mongo:27017/rocketchat MONGO_OPLOG_URL=mongodb://mongo:27017/local" \
-    --link mongo:mongo -d rocketchat/rocket.chat "bash -c \"for i in $(seq 1 30); do node main.js && s=$$? && break || s=$$?; echo \"Tried $$i times. Waiting 5 secs...\"; sleep 5; done; (exit $$s)\""
-}
-
-
-##
-## Mono compile project
-##
-function mono-compile
-{
-    FILE_TO_COMPILE=$1
-    PLATFORM=${2:-"x64"}
-    docker run -it --rm \
-        -v $PWD:/share \
-        mono mcs -platform:${PLATFORM} /share/${FILE_TO_COMPILE}
-    # sudo chown ${USER}:${USER} "${FILE_TO_COMPILE%.*}"*
-}
-
-
 } # end check docker command

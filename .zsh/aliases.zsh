@@ -46,6 +46,7 @@ hash -d bspwm=~/.config/bspwm
 hash -d sxhkd=~/.config/sxhkd
 hash -d sxiv=~/.config/sxiv/
 hash -d sxiv=~/.config/sxiv/
+hash -d picom=~/.config/picom
 hash -d conf-scripts=~/.config/scripts
 
 ## use delete key to delete
