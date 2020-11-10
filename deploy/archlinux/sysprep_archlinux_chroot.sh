@@ -129,8 +129,10 @@ function write_persistent_locales
 function set_localtime
 {
     msg_ok "Configure localtime for Europe/Zurich"
-    ln -s -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+    # ln -s -f /usr/share/zoneinfo/Europe/Zurich /etc/localtime
     hwclock --systohc --utc
+    timedatectl set-timezone Europe/Zurich
+    timedatectl set-ntp true
 }
 
 
