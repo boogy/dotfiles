@@ -196,6 +196,8 @@ initrd /intel-ucode.img
 initrd /initramfs-linux-lts.img
 ${SYSTEMD_BOOT_OPTIONS}
 EOF
+    msg_ok "Set arch-lts as default boot option"
+    bootctl set-default arch-lts.conf &>/dev/null
     else
         # bootctl remove &>/dev/null
         msg_ok "Installing GRUB ..."
