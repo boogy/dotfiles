@@ -68,6 +68,18 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update && sudo apt install yarn
 
+## Install egpu-switcher
+# sudo add-apt-repository ppa:hertg/egpu-switcher
+# sudo apt update
+# sudo apt install egpu-switcher
+# sudo egpu-switcher setup
+
+## OR using git
+# git clone git@github.com:hertg/egpu-switcher.git
+# cd egpu-switcher
+# make install
+# sudo egpu-switcher setup
+
 ###
 ### Housekeeping
 ###
