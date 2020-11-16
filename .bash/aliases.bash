@@ -173,7 +173,7 @@ alias cd-="cd -"
     ## alternative to yay with some cool options
     ## option can be changed in /etc/paru.conf
     alias paru="paru --bottomup"
-    alias pupdate="paru -Syyu --bottomup --cleanafter --combinedupgrade"
+    alias pupdate="paru -Syyu --bottomup --cleanafter --nocombinedupgrade --useask"
     alias aur-show="paru -Gp"
     alias aur-download="paru -G"
     alias pinstall="paru"
