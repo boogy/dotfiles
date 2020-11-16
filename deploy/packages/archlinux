@@ -202,10 +202,10 @@ noto-fonts
 noto-fonts-emoji
 ##
 ## bluetooth utilities
+# bluez-firmware -> AUR
 blueman
 bluez
 bluez-libs
-# bluez-firmware -> AUR
 bluez-tools
 bluez-utils
 ##

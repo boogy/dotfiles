@@ -108,7 +108,8 @@ super + {_,shift + }r
 
 ## Make split ratios equal
 super + question
-	bspc node @/ --equalize
+	bspc node @/ -B
+	# bspc node @/ --equalize
 
 ## Make split ratios balanced
 super + dead_grave
