@@ -139,10 +139,9 @@ alias cd-="cd -"
     alias p-install="sudo pacman -S"
     alias pacinst=p-install
     alias p-remove="sudo pacman -R"
-    alias premove=p-remove
     alias pacremove=p-remove
     alias p-purge="sudo pacman -Rns"
-    alias ppurge=p-purge
+    alias pacpurge=p-purge
     alias p-update="sudo pacman -Syu"
     alias pacupdate=p-update
     alias p-search="pacman -Ss"
@@ -151,28 +150,36 @@ alias cd-="cd -"
     alias p-query-foreign="pacman -Qm"
     alias p-list-aur-packages="pacman -Qm"
     alias p-show="pacman -Si"
+    alias pacshow=p-show
     alias p-clean-cache="sudo pacman -Sc"
     alias p-clean-orphans='sudo pacman -Rns $(pacman -Qtdq)'
     alias p-list-orphans="pacman -Qtdq"
-    alias p-mirror-ranking="(curl -s \"https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on\"|sed -e \"s/^#Server/Server/\" -e \"/^#/d\" | rankmirrors -n 5 -) | sudo tee /etc/pacman.d/mirrorlist"
     alias pacbrowse="pacman -Qq | fzf --preview \"pacman -Qil {}\" --layout=reverse --bind \"enter:execute(pacman -Qil {} | less)\""
 
     ## AUR
-    alias pa-search="yay "
-    alias psearch=pa-search
+    alias y-search="yay "
     alias ysearch=pa-search
 
-    alias pa-install="yay -S"
+    alias y-install="yay -S"
     alias yinstall=pa-install
-    alias pinstall=pa-install
-    alias pa-install-silent="yay -S --noconfirm"
+    alias y-install-silent="yay -S --noconfirm"
 
-    alias pa-update="yay -Syyuu --topdown --cleanafter"
-    alias pupdate=pa-update
+    alias y-update="yay -Syyuu --topdown --cleanafter"
     alias yupdate=pa-update
 
-    alias pa-remove="yay -R"
+    alias y-remove="yay -R"
     alias yremove=pa-remove
+
+    ## alternative to yay with some cool options
+    ## option can be changed in /etc/paru.conf
+    alias paru="paru --bottomup"
+    alias pupdate="paru -Syyu --bottomup --cleanafter --combinedupgrade"
+    alias aur-show="paru -Gp"
+    alias aur-download="paru -G"
+    alias pinstall="paru"
+    alias pfm-install"paru -S --fm=vim"
+    alias psearch="paru --bottomup"
+    alias pshow="paru -Si"
 }
 
 ##
