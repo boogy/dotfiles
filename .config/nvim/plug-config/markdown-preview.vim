@@ -91,4 +91,4 @@ let g:mkdp_page_title = '「${name}」'
 " example
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+autocmd Filetype markdown nmap <C-p> <Plug>MarkdownPreviewToggle

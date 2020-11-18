@@ -12,7 +12,7 @@ let g:fern#disable_viewer_hide_cursor = 1
 " let g:fern#renderer#default#root_symbol      = '~ '
 
 noremap <silent> ,d :Fern . -drawer -width=45 -toggle<CR><C-w>=
-noremap <silent> <leader>p :Fern . -drawer -reveal=% -width=45 -toggle<CR><C-w>=
+noremap <silent> ,p :Fern . -drawer -reveal=% -width=45 -toggle<CR><C-w>=
 noremap <silent> ,f :Fern %:h -drawer -width=45 -toggle<CR><C-w>=
 
 
