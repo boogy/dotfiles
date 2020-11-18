@@ -9,7 +9,8 @@
 " Close NERDTree if it's the only window
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-noremap <C-p> :NERDTreeToggle<CR>
+" noremap <C-S-P> :NERDTreeToggle<CR>
+noremap <leader>p :NERDTreeToggle<CR>
 " noremap <leader>t :NERDTreeToggle<CR>
 
 let g:NERDTreeDirArrowExpandable = '▸'
