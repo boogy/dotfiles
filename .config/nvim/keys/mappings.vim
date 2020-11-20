@@ -19,10 +19,10 @@ nnoremap <silent> <S-TAB> :bp<CR>
 map <C-t> :tabnew<CR>
 
 " resize window with arrow keys
-nnoremap <Up> :resize +2<CR>
-nnoremap <Down> :resize -2<CR>
-nnoremap <Left> :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
+nnoremap <Up> :resize -2<CR>
+nnoremap <Down> :resize +2<CR>
+nnoremap <Left> :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>
 
 " Move between buffers
 " nnoremap <C-Left> :bp<CR>
