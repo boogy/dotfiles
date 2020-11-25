@@ -234,3 +234,5 @@ yubikey-manager
 yubikey-manager-qt
 yubico-pam
 imagemagick
+mpv
+xdotool
