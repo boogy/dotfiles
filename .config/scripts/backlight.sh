@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+## example usage
+## backlight.sh inc 50
+## backlight.sh dec 50
+
 max_value=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 actual_value=$(cat /sys/class/backlight/intel_backlight/brightness)
 WANTED_VALUE=0

@@ -201,6 +201,9 @@ alt + control + r
 alt + shift + r
 	pkill -9 -x sxhkd && sleep 1; sxhkd &; dunstify "sxhkd" "Reloaded"
 
+XF86Display
+	arandr &
+
 ## Brightness
 XF86MonBrightness{Up,Down}
 	xbacklight -{inc,dec} 5
@@ -239,7 +242,7 @@ button2 + alt
 
 ## duyk macro to open Browser
 XF86HomePage
-	firefox
+	firefox &
 
 
 ##

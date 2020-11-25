@@ -223,7 +223,7 @@ alias more="$(which less) -R"
 alias mkdir='mkdir -p'
 alias meminfo='free -m -l -t'
 alias cmount="mount | column -t"
-alias 'ps?'='ps -efx | grep -Ei --color=always '
+alias 'ps?'='ps -ef | grep -Ei --color=always '
 alias 'ps!'='ps -ef | grep -vEi --color=always '
 alias xclip="xclip -selection c"
 alias busy='my_file=$(find /usr/include -type f | sort -R | head -n 1); my_len=$(wc -l $my_file | awk "{print $1}"); let "r = $RANDOM % $my_len" 2>/dev/null; $EDITOR +$r $my_file'
