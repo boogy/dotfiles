@@ -162,9 +162,9 @@ key_bindings:
   - { key: Copy       , action: Copy                                       }
   - { key: Insert     , mods: Shift             , action: PasteSelection   }
   - { key: Key0       , mods: Control           , action: ResetFontSize    }
-  - { key: Add        , mods: Control|Shift     , action: IncreaseFontSize }
+  - { key: Plus       , mods: Control|Shift     , action: IncreaseFontSize }
   - { key: Equals     , mods: Control|Shift     , action: IncreaseFontSize }
-  - { key: Subtract   , mods: Control           , action: DecreaseFontSize }
+  - { key: Minus      , mods: Control           , action: DecreaseFontSize }
   - { key: L          , mods: Control           , action: ClearLogNotice   }
   - { key: L          , mods: Control           , chars: "\x0c"            }
   # - { key: PageUp   , action: ScrollPageUp                               }
