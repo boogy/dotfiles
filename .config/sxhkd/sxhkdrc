@@ -180,6 +180,10 @@ alt + {_,shift + } Return
     {alacritty,alacritty --class=work -t work -e tmux new-session -A -s WORK}
 	# {termite,termite --class=work -t work -e 'tmux new-session -A -s WORK'}
 
+## tabbed windows
+super + t; {h,j,k,l,d}
+	~/.config/scripts/bspwm-tabbs.sh {west,south,north,east,detach}
+
 ## open file explorer
 super + e
 	thunar
