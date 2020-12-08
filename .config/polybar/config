@@ -31,6 +31,70 @@ margin-top = 0
 ;   Used for top aligned bars
 margin-bottom = 0
 
+;###############################################################
+; BAR (xmonad)
+;###############################################################
+[bar/bar-xmonad]
+monitor = ${env:MONITOR:DP1-2}
+monitor-strict = false
+bottom = false
+
+; dpi-x = 0
+; dpi-y = 0
+; dpi = ${xrdb:Xft.dpi:0}
+dpi = ${env:POLYBAR_DPI_VALUE:0}
+
+tray-position = ${env:TRAY_POSITION:right}
+tray-padding = 1
+tray-detached = false
+tray-scale = 1.0
+tray-maxsize = 16
+tray-background = ${root.background}
+
+width = 100%
+height = 20
+offset-x = 0
+offset-y = 0
+radius = 0.0
+
+fixed-center = true
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+; font-N = <fontconfig pattern>;<vertical offset>
+; font-0 = fixed:pixelsize=9;2
+font-0 = "Noto Sans:size=10;2"
+font-1 = unifont:fontformat=truetype:size=9:antialias=true;0
+font-2 = Font Awesome 5 Free:style=Solid:size=9;2
+font-3 = Font Awesome 5 Brands:style=Solid:size=9;2
+font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
+font-5 = Ubuntu Mono derivative Powerline:size=9;1
+font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
+font-7 = Noto Color Emoji:style=Regular:size=10;2
+
+modules-left = xmonad
+; modules-center = xwindow
+modules-right = powermenu xbacklight pulseaudio pulseaudio-microphone bluetooth memory cpu temperature wlan vpn eth battery date
+
+; wm-restack = bspwm
+; scroll-up = bspwm-desknext
+; scroll-down = bspwm-deskprev
+locale = fr_CH.UTF-8
+
 
 ;###############################################################
 ; BAR (BSPWM)
@@ -779,5 +843,10 @@ exec = ~/.config/scripts/pulseaudio-microphone.sh
 tail = true
 click-left = ~/.config/scripts/pulseaudio-microphone.sh --toggle &
 format-underline = #f5a70a
+
+[module/xmonad]
+type = custom/script
+exec = xmonad-log
+tail = true
 
 ; vim:ft=dosini
