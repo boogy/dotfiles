@@ -46,4 +46,14 @@ case $DESKTOP_SESSION in
     i3)
         polybar --reload bar-i3 -c ~/.config/polybar/config &
         ;;
+    xmonad)
+        for m in $outputs; do
+            export MONITOR=$m
+            export TRAY_POSITION=none
+            if [[ ${m} == ${tray_output} ]]; then
+                TRAY_POSITION=right
+            fi
+            MONITOR=$m polybar --reload bar-xmonad -c ~/.config/polybar/config &
+        done
+        ;;
 esac
