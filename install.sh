@@ -96,6 +96,11 @@ ln -sf ~/.config/nvim ~/.vim
 # rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
 
 
+## setup xmonad
+mkdir -p $HOME/.local/share/xmonad
+ln -s ${THIS_DIR}/.config/xmonad $HOME/.xmonad
+
+
 ## Copy firefox user.js in all profiles
 FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
 for P in ${FF_PROFILES_PATHS[@]}; do
