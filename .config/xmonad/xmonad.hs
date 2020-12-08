@@ -514,7 +514,7 @@ myAdditionalKeys=
 
 -- execute when xmonad starts
 myStartupHook = do
-    spawn "$HOME/.xmonad/autostart.sh"
+    spawn "$HOME/.config/xmonad/autostart.sh"
     setWMName "LG3D"
     -- spawnOn myWS1 "alacritty --class=work -t work -e tmux new-session -A -s WORK"
     -- spawnOn myWS2 myBrowser
