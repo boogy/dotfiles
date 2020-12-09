@@ -14,11 +14,12 @@ import XMonad.ManageHook
 -- Hooks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, manageDocks, ToggleStruts(..), docksEventHook)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog,  doFullFloat, doCenterFloat, doRectFloat)
 import XMonad.Hooks.Minimize
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ServerMode
 
 -- Config
 import XMonad.Config.Desktop
@@ -75,6 +76,7 @@ import qualified Data.Map as M
 import qualified Data.ByteString as B
 import Control.Monad (liftM2)
 import Data.Ratio ((%)) -- for video
+import qualified Data.Text as T
 
 -- DBUS (for polybar)
 import qualified DBus as D
@@ -82,13 +84,14 @@ import qualified DBus.Client as D
 import qualified Codec.Binary.UTF8.String as UTF8
 
 
--- colours
+-- -------------------------------------------------------------------------------------------------------
+-- Variables
+-- -------------------------------------------------------------------------------------------------------
 normBord = "#4c566a"
 focdBord = "#5e81ac"
 fore     = "#DEE3E0"
-back     = "#282c34"
+black     = "#282c34"
 winType  = "#c678dd"
-
 -- fg        = "#ebdbb2"
 -- bg        = "#282828"
 -- gray      = "#a89984"
@@ -96,7 +99,6 @@ winType  = "#c678dd"
 -- bg2       = "#505050"
 -- bg3       = "#665c54"
 -- bg4       = "#7c6f64"
-
 green      = "#b8bb26"
 darkgreen  = "#98971a"
 red        = "#fb4934"
@@ -131,9 +133,9 @@ myAlt = myModMask
 mySup = mod4Mask
 
 
---
+-- -------------------------------------------------------------------------------------------------------
 -- Workspaces
---
+-- -------------------------------------------------------------------------------------------------------
 myWS1 = "\61728"
 myWS2 = "\57351"
 myWS3 = "\61632"
@@ -152,8 +154,12 @@ myWorkspaces =  [myWS1,myWS2,myWS3,myWS4,myWS5,myWS6,myWS7,myWS8,myWS9,myWS0]
 myBaseConfig = desktopConfig
 
 
--- window manipulations
--- actions: doFloat, doCenterFloat, doIgnore
+-- -------------------------------------------------------------------------------------------------------
+-- Window rules and manipulation (doFloat) (doCenterFloat) (doIgnore)
+-- -------------------------------------------------------------------------------------------------------
+myRectFloatRational = do
+    doRectFloat (W.RationalRect (0 % 4) (1 % 4) (1 % 2) (1 % 2))
+
 myManageHook = composeAll . concat $
     [ [ isDialog            --> doCenterFloat                    ]
     , [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
@@ -161,9 +167,10 @@ myManageHook = composeAll . concat $
     , [ resource  =? r      --> doFloat        | r <- myRFloats  ]
     , [ resource  =? i      --> doIgnore       | i <- myIgnores  ]
 
-    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account" --> doCenterFloat ]
     , [ className =? "firefox" <&&> title    =? "Library"                 --> doCenterFloat ]
     , [ className =? "Firefox" <&&> resource =? "Toolkit"                 --> doFloat       ]
+    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account" --> myRectFloatRational >> doCenterFloat]
+    , [ className =? "zoom"    <&&> title    =? "Settings"                --> myRectFloatRational >> doCenterFloat]
 
     , [ isFullscreen        --> doFullFloat     ]
     , [ namedScratchpadManageHook myScratchpads ]
@@ -182,9 +189,10 @@ myManageHook = composeAll . concat $
     where
         doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
         myCFloats = [   "Arandr",
-                        "Pavucontrol", "Places", "Galculator", "feh", "mpv",
+                        "Pavucontrol", "Places", "Nitrogen", "feh", "mpv",
                         "Xfce4-terminal", "Shutter", "Blueman-manager", "vlc",
-                        "Nm-connection-editor", "Gnome-calculator", "Eog", "Piper"
+                        "Nm-connection-editor", "Gnome-calculator", "Eog", "Piper",
+                        "Evince", "VirtualBox Manager", "Xfce4-taskmanager", "Xfrun4"
                     ]
         myTFloats = ["Downloads", "Save As..."]
         myRFloats = []
@@ -201,10 +209,9 @@ myManageHook = composeAll . concat $
         my10Shifts = []
 
 
-------------------------------------------------------------------------
--- scratchpads
-------------------------------------------------------------------------
-
+-- -------------------------------------------------------------------------------------------------------
+-- Scratchpads
+-- -------------------------------------------------------------------------------------------------------
 myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD" (title =? "scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
                 , NS "notes" spawnTerm findTerm manageTerm
                 , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad" (className=? "thunar-scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
@@ -216,24 +223,24 @@ myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e t
         manageTerm = nonFloating
 
 
-------------------------------------------------------------------------
+-- -------------------------------------------------------------------------------------------------------
 -- Tabbed config
-------------------------------------------------------------------------
-myTabConfig = def { activeColor = "#556064"
+-- -------------------------------------------------------------------------------------------------------
+myTabConfig = def { activeColor = "#282828"
                   , inactiveColor = "#2F3D44"
                   , urgentColor = "#FDF6E3"
                   , activeBorderColor = "#454948"
-                  , inactiveBorderColor = "#454948"
-                  , urgentBorderColor = "#268BD2"
-                  , activeTextColor = "#80FFF9"
-                  , inactiveTextColor = "#1ABC9C"
+                  , inactiveBorderColor = black
+                  , urgentBorderColor = red
+                  , activeTextColor = green
+                  , inactiveTextColor = "#2F3D44"
                   , urgentTextColor = red
                   , fontName = "xft:Noto Sans:size=12:antialias=true"
                   }
 
---
+-- -------------------------------------------------------------------------------------------------------
 -- Per workspace layouts
---
+-- -------------------------------------------------------------------------------------------------------
 perWS = onWorkspace myWS1 myFullFirst  $
         onWorkspace myWS2 myFullFirst  $
         onWorkspace myWS3 myTiledFirst $
@@ -275,7 +282,6 @@ myThreeCol = renamed [Replace "ThreeColMid"]
 -- myLayout = renamed [CutWordsLeft 1] . avoidStruts . minimize $ perWS
 myLayout = avoidStruts $ perWS
 
-
 -- myLayout = avoidStruts (full ||| tiled ||| tabs ||| threeCol)
 --   where
 --     full = renamed [Replace "Full"]
@@ -300,6 +306,9 @@ myLayout = avoidStruts $ perWS
 --     delta   = 3/100
 
 
+-- -------------------------------------------------------------------------------------------------------
+-- Mouse bindings
+-- -------------------------------------------------------------------------------------------------------
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -318,10 +327,16 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     ]
 
 
+-- -------------------------------------------------------------------------------------------------------
+-- Xmonad commands from dmenu prompt
+-- -------------------------------------------------------------------------------------------------------
 commands :: X [(String, X ())]
 commands = defaultCommands
 
--- keys config
+
+-- -------------------------------------------------------------------------------------------------------
+-- Key mappings
+-- -------------------------------------------------------------------------------------------------------
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
@@ -331,22 +346,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask , xK_c),       kill)
 
     -- Application menus
-    , ((modMask, xK_F11),                    spawn $ "rofi -show run -fullscreen" )
-    , ((mySup, xK_d    ),                    spawn $ "rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode" )
+    , ((modMask, xK_F11),                    spawn $ "rofi -show run -fullscreen -dpi 150" )
+    , ((mySup,   xK_d  ),                    spawn $ "rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode -dpi 150" )
     , ((modMask, xK_e  ),                    spawn $ "dmenu_run" )
     , ((modMask, xK_y  ),                    spawn $ "polybar-msg cmd toggle" )
-
     , ((mySup, xK_e    ),                    spawn $ "thunar")
 
     -- XMonad recompile / restart
     , ((modMask .|. shiftMask , xK_r ),      spawn $ "xmonad --recompile && xmonad --restart")
-    , ((modMask, xK_r                ),      spawn $ "xmonad --restart")
+    , ((modMask,                xK_r ),      spawn $ "xmonad --restart")
 
     -- , ((modMask .|. shiftMask , xK_x ), io (exitWith ExitSuccess))
 
-    , ((controlMask .|. mod1Mask , xK_g )      , spawn $ "chromium -no-default-browser-check")
-    , ((controlMask .|. mod1Mask , xK_u )      , spawn $ "pavucontrol")
-    , ((controlMask .|. shiftMask , xK_Escape ), spawn $ "xfce4-taskmanager")
+    , ((controlMask .|. mod1Mask ,  xK_u ),      spawn $ "pavucontrol")
+    , ((modMask     .|. shiftMask , xK_e ),      spawn $ "$HOME/.config/scripts/bspwm-dmenu-actions.sh")
 
     -- SCREENSHOTS
 
@@ -370,19 +383,22 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xK_f),     spawn "firefox")
         , ((0, xK_a),     spawn myTerminal)
         , ((0, xK_g),     spawn "gvim")
-        , ((0, xK_v),     spawn "VBoxManage startvm 'Windows10' --type gui")
+        , ((0, xK_w),     spawn "VBoxManage startvm Windows10 --type gui")
+        , ((0, xK_v),     spawn "virtualbox")
         ])
 
     , ((mySup, xK_l), submap . M.fromList $
-        [ ((0, xK_f),     sendMessage $ JumpToLayout "Full"  )
-        , ((0, xK_t),     sendMessage $ JumpToLayout "Tabbed")
-        , ((0, xK_l),     sendMessage $ JumpToLayout "Tall"  )
+        [ ((0, xK_f),     sendMessage $ JumpToLayout "Full"       )
+        , ((0, xK_t),     sendMessage $ JumpToLayout "Tabbed"     )
+        , ((0, xK_l),     sendMessage $ JumpToLayout "Tall"       )
         ])
 
     -- scratchpads
     , ((mySup  , xK_u), namedScratchpadAction myScratchpads "thunar-scratchpad")
-    , ((modMask, xK_u), namedScratchpadAction myScratchpads "terminal")
+    , ((modMask, xK_u), namedScratchpadAction myScratchpads "terminalxfce4-appfinder")
 
+    -- launch xfce application finder
+    , ((0, xK_F2), spawn $ "xfce4-appfinder")
 
     --------------------------------------------------------------------
     --  XMONAD LAYOUT KEYS
@@ -453,10 +469,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- XMonad.Layout.MultiToggle
     , ((modMask, xK_f), sendMessage $ MToggle.Toggle FULL)
 
-    , ((modMask, xK_g),                    spawn "rofi -show window") -- focus windows
-    , ((modMask .|. shiftMask, xK_b     ), bringMenu                ) -- bring windows to the current workspace
-    -- , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
+    , ((modMask, xK_g),                    spawn "rofi -show window -dpi 150")      -- focus windows
+    , ((modMask .|. shiftMask, xK_b     ), bringMenuConfig myWindowBringerConfig  ) -- bring windows to the current workspace
 
+    -- select xmonad commands with dmenu
     , ((modMask .|. controlMask, xK_y), commands >>= runCommand)
 
     -- toggle strucs for windows
@@ -483,14 +499,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 
+
+-- -------------------------------------------------------------------------------------------------------
+-- Additional Keys (simple form)
+-- -------------------------------------------------------------------------------------------------------
 -- Additional keys
 -- M4 == Sup
 -- M  == Alt
 myAdditionalKeys=
-    -- [("M-" ++ m ++ k, windows $ f i)
-    --     | (i, k) <- zip (myWorkspaces) (map show [1 :: Int ..])
-    --     , (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
-    -- ++
+    -- copy window to specific workspaces (dwm tag like) with MOD-CTRL-SHIFT-[0-9]
+    [("M-" ++ m ++ k, windows $ f i)
+        | (i, k) <- zip (myWorkspaces) (map show [1 :: Int ..])
+        , (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
+    ++
     [ ("S-C-a", windows copyToAll)   -- copy window to all workspaces
     , ("S-C-z", killAllOtherCopies)  -- kill copies of window on other workspaces
     , ("M4-a",  sendMessage MirrorExpand)
@@ -520,9 +541,9 @@ myStartupHook = do
     -- spawnOn myWS2 myBrowser
 
 
---
+-- -------------------------------------------------------------------------------------------------------
 -- MAIN FUNCTION
---
+-- -------------------------------------------------------------------------------------------------------
 main :: IO ()
 main = do
     dbus <- D.connectSession
@@ -543,7 +564,11 @@ main = do
                                     <+> manageHook myBaseConfig
             , modMask            = myModMask
             , borderWidth        = myBorderWidth
-            , handleEventHook    = fullscreenEventHook
+            , handleEventHook    = serverModeEventHookCmd
+                                    <+> serverModeEventHook
+                                    <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
+                                    <+> docksEventHook
+                                    <+> fullscreenEventHook
                                     <+> ewmhDesktopsEventHook
                                     <+> handleEventHook myBaseConfig
             , focusFollowsMouse  = myFocusFollowsMouse
@@ -557,11 +582,11 @@ main = do
 
 
 
------------------------------------------------------------------------------
--- LOGHOOK
------------------------------------------------------------------------------
--- %{F} == foreground
--- %{B} == background
+-- -------------------------------------------------------------------------------------------------------
+-- Log Hook
+-- -------------------------------------------------------------------------------------------------------
+-- %{F} == polybar foreground
+-- %{B} == polybar background
 myLogHook :: D.Client -> PP
 myLogHook dbus = def
     { ppOutput           = dbusOutput dbus
@@ -574,12 +599,12 @@ myLogHook dbus = def
     -- remove this to hide empty workspaces
     , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
     , ppHiddenNoWindows  = wrap " " " "
-    , ppLayout           = wrap "\63564 " ""
+    , ppLayout           = wrap "%{A1:$HOME/.config/xmonad/xmonadctl 27 &:}\63564 " "%{A}"
     , ppTitle            = myAddSpaces 30
 
     -- , ppExtras          = [logCmd "echo ASD", windowCount]
     -- add polybar actions from xmonad
-    , ppExtras           = [wrapL "%{A1:rofi -show window &:}\62162 %{A}" " " windowCount]
+    , ppExtras           = [wrapL "%{A1:rofi -show window &:}\62162 " "%{A}" windowCount]
     , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
     }
 
@@ -608,9 +633,9 @@ myAddSpaces len str = sstr ++ replicate (len - length sstr) ' '
 -- #################
 
 
---
+-- -------------------------------------------------------------------------------------------------------
 -- Toggle floating window in the center
---
+-- -------------------------------------------------------------------------------------------------------
 centreRect = W.RationalRect 0.25 0.25 0.5 0.5
 -- If the window is floating then (f), if tiled then (n)
 floatOrNot f n = withFocused $ \windowId -> do
@@ -638,15 +663,55 @@ toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused myCentreF
 -- toggleFloat w = windows (\s -> if M.member w (W.floating s)
 --             then W.sink w s
 --             else (W.float w (W.RationalRect (1/3) (1/4) (1/2) (4/5)) s))
-
 -- myCenterWindow :: Window -> X ()
 -- myCenterWindow win = do
 --     (_, W.RationalRect x y w h) <- floatLocation win
 --     windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
 --     return ()
 
+
+-- -------------------------------------------------------------------------------------------------------
+-- Window Count
+-- -------------------------------------------------------------------------------------------------------
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
+
+-- -------------------------------------------------------------------------------------------------------
+-- WindowBringer
+-- -------------------------------------------------------------------------------------------------------
+myWindowBringerConfig :: WindowBringerConfig
+myWindowBringerConfig = def
+    { menuCommand = "rofi"
+    , menuArgs = ["-dmenu", "-show-icons", "-dpi 150", "-i"]
+    , windowTitler = myWindowBringerTitler
+    }
+myWindowBringerColumnSize = 50
+
+myWindowBringerTitler :: WindowSpace -> Window -> X String
+myWindowBringerTitler ws w = do
+    description <- show <$> getName w
+    return $ descriptionToLine description
+
+descriptionToLine :: String -> String
+descriptionToLine d =
+  let (name, title) = splitInformation d
+      name' = fillWithSpaces myWindowBringerColumnSize name
+   in name' ++ title
+
+fillWithSpaces len str
+  | ls < len = str ++ replicate (len -  ls) ' '
+  | otherwise = str
+  where
+    ls = length str
+
+splitInformation :: String -> (String, String)
+splitInformation d = mapTuple (T.unpack . T.reverse . T.strip . T.pack) $ span (/= '-') (reverse d)
+
+mapTuple :: (a -> b) -> (a, a) -> (b, b)
+mapTuple f (a, b) = (f a, f b)
+
+
 
 --
 -- Example of multiple xmobar bars per screen
@@ -660,8 +725,6 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 --     xmonad def {
 --         logHook = [> use xmprocs, which is a list of pipes of type [Handle] <]
 --     }
-
-
 -- For multiple monitors I use XMonad.Hooks.DynamicBars. The way this package handles multiple monitors is to spawn a separate bar for each window with something like
 -- spawnPipe $ "xmobar -x " ++ show sid
 -- for each screen id (0,1..).The -x tells xmobar which screen to display the bar on.

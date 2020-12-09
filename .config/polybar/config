@@ -52,7 +52,7 @@ tray-maxsize = 16
 tray-background = ${root.background}
 
 width = 100%
-height = 20
+height = 24
 offset-x = 0
 offset-y = 0
 radius = 0.0
@@ -85,6 +85,7 @@ font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
 font-5 = Ubuntu Mono derivative Powerline:size=9;1
 font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
 font-7 = Noto Color Emoji:style=Regular:size=10;2
+font-8 = Siji:pixelsize=10;1
 
 modules-left = xmonad
 ; modules-center = xwindow
@@ -150,6 +151,7 @@ font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
 font-5 = Ubuntu Mono derivative Powerline:size=9;1
 font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
 font-7 = Noto Color Emoji:style=Regular:size=10;2
+font-8 = Siji:pixelsize=10;1
 
 modules-left = bspwm bspwm-monocle-nb-windows
 ; modules-center = xwindow
@@ -204,6 +206,7 @@ font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
 font-5 = Ubuntu Mono derivative Powerline:size=9;1
 font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
 font-7 = Noto Color Emoji:style=Regular:size=10;2
+font-8 = Siji:pixelsize=10;1
 
 modules-left = i3
 ; modules-center = windowlist
