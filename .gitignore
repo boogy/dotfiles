@@ -56,3 +56,4 @@ pandoc-citeproc
 .config/xmonad/xmonad-x86_64-linux
 .config/xmonad/xmonad.errors
 .config/xmonad/xmonad.o
+.config/xmonad/xmonadctl.hi
