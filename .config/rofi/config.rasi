@@ -11,7 +11,7 @@ configuration {
         /* opacity: 90; */
         show-icons: true;
         fullscreen: false;
-        terminal: "termite";
+        terminal: "alacritty";
         threads: 2;
         ssh-client: "ssh";
         ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";

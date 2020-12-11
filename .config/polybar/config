@@ -92,8 +92,8 @@ modules-left = xmonad
 modules-right = powermenu xbacklight pulseaudio pulseaudio-microphone bluetooth memory cpu temperature wlan vpn eth battery date
 
 ; wm-restack = bspwm
-; scroll-up = bspwm-desknext
-; scroll-down = bspwm-deskprev
+scroll-up = "xdotool key Alt+p"
+scroll-down = "xdotool key Alt+n"
 locale = fr_CH.UTF-8
 
 
