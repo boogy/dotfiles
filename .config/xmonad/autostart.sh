@@ -84,7 +84,8 @@ _check xfce4-notifyd /usr/lib/xfce4/notifyd/xfce4-notifyd
 _check gnome-keyring-daemon --start --daemonize --components=gpg,pkcs11,secrets,ssh &
 
 ## compositor
-_check picom "picom --experimental-backends -b"
+# _check picom "picom --experimental-backends -b"
+_check picom "picom -b"
 
 ## Launch polybar
 ~/.config/polybar/launch-polybar.sh &

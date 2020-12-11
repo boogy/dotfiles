@@ -99,6 +99,7 @@ ln -sf ~/.config/nvim ~/.vim
 ## setup xmonad
 mkdir -p $HOME/.local/share/xmonad
 ln -s ${THIS_DIR}/.config/xmonad $HOME/.xmonad
+cd $HOME/.config/xmonad/ && ghc -dynamic xmonadctl.hs
 
 
 ## Copy firefox user.js in all profiles
