@@ -14,13 +14,14 @@ import XMonad.ManageHook
 -- Hooks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, manageDocks, ToggleStruts(..), docksEventHook)
+import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, docks, manageDocks, ToggleStruts(..), docksEventHook)
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog,  doFullFloat, doCenterFloat, doRectFloat)
+import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog,  doFullFloat, doCenterFloat, doRectFloat, isInProperty)
 import XMonad.Hooks.Minimize
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
+-- import qualified XMonad.Hooks.InsertPosition as InsPosition (insertPosition, Focus(..), Position(..))
 
 -- Config
 import XMonad.Config.Desktop
@@ -67,7 +68,6 @@ import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Magnifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 
-
 -- actions
 import XMonad.Actions.CopyWindow    -- for dwm window style tagging
 import XMonad.Actions.UpdatePointer -- update mouse postion
@@ -82,6 +82,7 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.Commands
 import XMonad.Actions.MouseResize
+import qualified XMonad.Actions.FlexibleResize as Flex
 
 -- Graphics and Data
 import Graphics.X11.ExtraTypes.XF86
@@ -92,6 +93,7 @@ import Control.Monad (liftM2)
 import Data.Ratio ((%)) -- for video
 import qualified Data.Text as T
 import Data.Maybe (isJust)
+import Data.List (isInfixOf, isSuffixOf, isPrefixOf)
 
 -- DBUS (for polybar)
 import qualified DBus as D
@@ -102,18 +104,11 @@ import qualified Codec.Binary.UTF8.String as UTF8
 -- -------------------------------------------------------------------------------------------------------
 -- Variables
 -- -------------------------------------------------------------------------------------------------------
-normBord = "#4c566a"
-focdBord = "#5e81ac"
-fore     = "#DEE3E0"
-black     = "#282c34"
-winType  = "#c678dd"
--- fg        = "#ebdbb2"
--- bg        = "#282828"
--- gray      = "#a89984"
--- bg1       = "#3c3836"
--- bg2       = "#505050"
--- bg3       = "#665c54"
--- bg4       = "#7c6f64"
+normBord   = "#4c566a"
+focdBord   = "#5e81ac"
+fore       = "#DEE3E0"
+black      = "#282c34"
+winType    = "#c678dd"
 green      = "#3bff3b"
 darkgreen  = "#98971a"
 red        = "#fb4934"
@@ -135,26 +130,24 @@ background = "#2f343f"
 -- controlMask= ctrl key
 -- shiftMask= shift key
 myModMask = mod1Mask
-encodeCChar = map fromIntegral . B.unpack
 myFocusFollowsMouse = True
 myBorderWidth = 3
 
 myBrowser = "firefox"
 myTerminal = "alacritty"
--- myNormalBorderColor = "#4c566a"
--- myFocusedBorderColor = "#3bff3b"
-myNormalBorderColor = "#4c566a"
+myNormalBorderColor = normBord
 myFocusedBorderColor = yellow3
 
 myAlt = myModMask
 mySup = mod4Mask
-
 myFont = "xft:Mononoki Nerd Font:bold:size=9:antialias=true:hinting=true"
 
 
 -- -------------------------------------------------------------------------------------------------------
 -- Workspaces
 -- -------------------------------------------------------------------------------------------------------
+-- myWorkspaces ["", "", "", "", "", "", "", "", "", ""]
+--
 myWS1 = "\61728"
 myWS2 = "\57351"
 myWS3 = "\61632"
@@ -166,56 +159,78 @@ myWS8 = "\61450"
 myWS9 = "\61477"
 myWS0 = "\62440"
 
--- myWorkspaces ["", "", "", "", "", "", "", "", "", ""]
-myWorkspaces =  [myWS1,myWS2,myWS3,myWS4,myWS5,myWS6,myWS7,myWS8,myWS9,myWS0]
 
+-- -------------------------------------------------------------------------------------------------------
+-- Make workspaces clickable in polybar
+-- -------------------------------------------------------------------------------------------------------
+myWorkspaces :: [String]
+myWorkspaces =  clickable $ [myWS1,myWS2,myWS3,myWS4,myWS5,myWS6,myWS7,myWS8,myWS9,myWS0]
+        where
+            clickable l = [ "%{A1:xdotool key alt+" ++ show n ++ " &:}" ++ ws ++ "%{A-}" |
+                            (i, ws) <- zip [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] l,
+                            let n = i ]
+
+-- Generate list of workspaces to work with
+myWS01 = myWorkspaces !! 0
+myWS02 = myWorkspaces !! 1
+myWS03 = myWorkspaces !! 2
+myWS04 = myWorkspaces !! 3
+myWS05 = myWorkspaces !! 4
+myWS06 = myWorkspaces !! 5
+myWS07 = myWorkspaces !! 6
+myWS08 = myWorkspaces !! 7
+myWS09 = myWorkspaces !! 8
+myWS00 = myWorkspaces !! 9
+
+
+-- -------------------------------------------------------------------------------------------------------
 -- myBaseConfig = desktopConfig
+-- -------------------------------------------------------------------------------------------------------
 myBaseConfig = desktopConfig
 
 
 -- -------------------------------------------------------------------------------------------------------
 -- Window rules and manipulation (doFloat) (doCenterFloat) (doIgnore)
 -- -------------------------------------------------------------------------------------------------------
-myRectFloatRational = do
-    doRectFloat (W.RationalRect (0 % 4) (1 % 4) (1 % 2) (1 % 2))
-
 myManageHook = composeAll . concat $
     [ [ isDialog            --> doCenterFloat                    ]
+    , [ isFullscreen        --> doFullFloat                      ]
     , [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
     , [ title     =? t      --> doCenterFloat  | t <- myTFloats  ]
     , [ resource  =? r      --> doFloat        | r <- myRFloats  ]
     , [ resource  =? i      --> doIgnore       | i <- myIgnores  ]
 
-    , [ className =? "firefox" <&&> title    =? "Library"                 --> doCenterFloat ]
-    , [ className =? "Firefox" <&&> resource =? "Toolkit"                 --> doFloat       ]
-    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account" --> myRectFloatRational >> doCenterFloat]
-    , [ className =? "zoom"    <&&> title    =? "Settings"                --> myRectFloatRational >> doCenterFloat]
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"        --> doCenterFloat]
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_NOTIFICATION"  --> doCenterFloat]
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"  --> doCenterFloat]
 
-    -- , [ className =? "Polybar"  --> (doF W.focusDown <+> doIgnore)]
+    , [ className =? "firefox" <&&> title    =? "Library"                      --> doCenterFloat]
+    , [ className =? "Firefox" <&&> resource =? "Toolkit"                      --> doFloat]
+    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> myDoRectFloat >> doCenterFloat]
+    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> myDoRectFloat >> doCenterFloat]
 
-    , [ isFullscreen        --> doFullFloat     ]
+    , [ myIsPrefixOf "zoom"            className <&&> myIsPrefixOf "zoom"            title --> doShiftAndGo myWS09]
+    , [ myIsPrefixOf "Microsoft Teams" className <&&> myIsPrefixOf "Microsoft Teams" title --> doShiftAndGo myWS00]
+
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS01 | x <- my1Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS02 | x <- my2Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS03 | x <- my3Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS04 | x <- my4Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS05 | x <- my5Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS06 | x <- my6Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS07 | x <- my7Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS08 | x <- my8Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS09 | x <- my9Shifts ]
+    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS00 | x <- my10Shifts]
     , [ namedScratchpadManageHook myScratchpads ]
-
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS1 | x <- my1Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS2 | x <- my2Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS3 | x <- my3Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS4 | x <- my4Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS5 | x <- my5Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS6 | x <- my6Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS7 | x <- my7Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS8 | x <- my8Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS9 | x <- my9Shifts]
-    , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS0 | x <- my10Shifts]
-    -- Allows focusing other monitors without killing the fullscreen
-    --  [ isFullscreen --> (doF W.focusDown <+> doFullFloat)
     ]
     where
         doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
-        myCFloats = [   "Arandr"               , "Places"             , "Nitrogen"          , "feh"    , "mpv" ,
-                        "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"    ,
-                        "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"  ,
-                        "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfrun4" ,
-                        "Xfce4-appfinder"      , "Pavucontrol"
+        myCFloats = [   "Arandr"               , "Places"             , "Nitrogen"          , "feh"             , "mpv" ,
+                        "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"             ,
+                        "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           ,
+                        "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfce4-appfinder" ,
+                        "Pavucontrol"
                     ]
         myTFloats = ["Downloads", "Save As..."]
         myRFloats = []
@@ -228,7 +243,7 @@ myManageHook = composeAll . concat $
         my6Shifts = ["sofice", "Sofice", "libreoffice", "Libreoffice", "libreoffice-writer", "libreoffice-calc"]
         my7Shifts = ["Thunar"]
         my8Shifts = []
-        my9Shifts = ["zoom"]
+        my9Shifts = ["zoom", "Zoom Meeting", "Zoom - Licensed Account"]
         my10Shifts = []
 
 
@@ -236,14 +251,15 @@ myManageHook = composeAll . concat $
 -- Scratchpads
 -- -------------------------------------------------------------------------------------------------------
 myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD" (title =? "scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
+                , NS "music" "firefox --new-window --kiosk 'https://music.youtube.com'" (className =? "Firefox" <&&> fmap (isInfixOf "YouTube Music — Mozilla Firefox") title) (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
+                , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad" (className=? "thunar-scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
                 , NS "notes" spawnTerm findTerm manageTerm
-                -- , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad" (className=? "thunar-scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
                 ]
     where
         role = stringProperty "WM_WINDOW_ROLE"
         spawnTerm = myTerminal ++  " --class NOTES"
         findTerm = resource =? "scratchpad"
-        manageTerm = nonFloating
+        manageTerm = doCenterFloat
 
 
 -- -------------------------------------------------------------------------------------------------------
@@ -264,15 +280,15 @@ myTabConfig = def { activeColor = "#556064"
 -- -------------------------------------------------------------------------------------------------------
 -- Per workspace layouts
 -- -------------------------------------------------------------------------------------------------------
-perWS = onWorkspace myWS1 myFullFirst  $
-        onWorkspace myWS2 myFullFirst  $
-        onWorkspace myWS3 myTiledFirst $
-        onWorkspace myWS4 myFullFirst  $
-        onWorkspace myWS5 myFullFirst  $
-        onWorkspace myWS6 myFullFirst  $
-        onWorkspace myWS8 myTiledFirst $
-        onWorkspace myWS9 myFullFirst  $
-        onWorkspace myWS0 myFullFirst  $
+perWS = onWorkspace myWS01 myTiledFirst $
+        onWorkspace myWS02 myFullFirst  $
+        onWorkspace myWS03 myTiledFirst $
+        onWorkspace myWS04 myFullFirst  $
+        onWorkspace myWS05 myFullFirst  $
+        onWorkspace myWS06 myFullFirst  $
+        onWorkspace myWS08 myTiledFirst $
+        onWorkspace myWS09 myFullFirst  $
+        onWorkspace myWS00 myFullFirst  $
         myAll -- all layouts for all other workspaces
 
 -- -------------------------------------------------------------------------------------------------------
@@ -285,7 +301,7 @@ myAll        = myTiled ||| myFull  ||| myTabs ||| myThreeCol ||| myGrid ||| myBs
 -- -------------------------------------------------------------------------------------------------------
 -- Layout variables
 -- -------------------------------------------------------------------------------------------------------
-mySpacingRaw  = spacingRaw True (Border 10 0 10 0) True (Border 0 10 0 10) True
+mySpacingRaw  = spacingRaw True  (Border 10 0 10 0) True (Border 0 10 0 10) True
 mySpacingRaw' = spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True
 
 myFull = renamed [Replace "Full"]
@@ -341,16 +357,17 @@ myLayout = avoidStruts
 -- -------------------------------------------------------------------------------------------------------
 -- Mouse bindings
 -- -------------------------------------------------------------------------------------------------------
-myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modMask, 1), (\w -> focus w >> mouseMoveWindow w))
+    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w))
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modMask, 2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modMask, 3), (\w -> focus w >> mouseResizeWindow w))
+    -- , ((modm, button3), (\w -> focus w >> mouseResizeWindow w))
+    , ((modm, button3), (\w -> focus w >> Flex.mouseResizeWindow w))
 
     -- , ((mySup, 1), (\w -> focus w >> windows W.swapUp))
 
@@ -433,7 +450,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- scratchpads
     , ((myAlt, xK_u),     namedScratchpadAction myScratchpads "terminal")
-    , ((0,     xK_F2),    spawn $ "xfce4-appfinder")
+    , ((mySup, xK_F1),    namedScratchpadAction myScratchpads "music")
+    , ((0,     xK_F3),    spawn $ "xfce4-appfinder")
 
 
     -- ---------------------------------------------------------------------------------------------------
@@ -501,29 +519,35 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- XMonad.Layout.MultiToggle
     , ((myAlt, xK_f),                      sendMessage $ MT.Toggle NBFULL)          -- set fullscreen no borders
     , ((myAlt, xK_r),                      sendMessage $ MT.Toggle MIRROR)          -- mirror layout
-    , ((myAlt, xK_g),                      spawn "rofi -show window -dpi 150")      -- focus windows
-    , ((myAlt .|. shiftMask, xK_b),        bringMenuConfig myWindowBringerConfig  ) -- bring windows to the current workspace
+
+    -- , ((myAlt, xK_g),                      spawn "rofi -show window -dpi 150")      -- focus windows
+    , ((myAlt,               xK_g),        gotoMenuConfig  myWindowGoToConfig    >> myUpdatePointerCenter)
+    , ((myAlt .|. shiftMask, xK_b),        bringMenuConfig myWindowBringerConfig >> myUpdatePointerCenter) -- bring windows to the current workspace
+
     , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand)                 -- select xmonad commands from dmenu
     , ((mySup, xK_s),                      sendMessage ToggleStruts >> spawn "polybar-msg cmd toggle")                -- toggle struts
 
     ]
 
     ++
-    -- mod-[1..9],       Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
+    -- mod-[1..9],              Switch to workspace N
+    -- mod-shift-[1..9],        Move client to workspace N
+    -- mod-shift-control-[1..9] Move client and switch to workspace N
+    --
     [((m .|. myAlt, k), windows $ f i)
-    | (i, k) <- zip (XMonad.workspaces conf) [xK_1,xK_2,xK_3,xK_4,xK_5,xK_6,xK_7,xK_8,xK_9,xK_0]
-
-    , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)
-    , (\i -> W.greedyView i . W.shift i, shiftMask)]
-    ]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1,xK_2,xK_3,xK_4,xK_5,xK_6,xK_7,xK_8,xK_9,xK_0]
+        , (f, m) <- [(W.greedyView, 0),
+                     (W.shift, shiftMask)
+                    ,(\i -> W.greedyView i . W.shift i, controlMask .|. 0)
+    ]]
 
     ++
     -- ctrl-{comma,period,minus},       Switch to physical/Xinerama screens 1, 2, or 3
     -- ctrl-shift-{comma,period,minus}, Move client to screen 1, 2, or 3
+    --
     [((m .|. myAlt, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_period, xK_comma, xK_minus] [0..]
-      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+          | (key, sc) <- zip [xK_period, xK_comma, xK_minus] [0..]
+          , (f, m)    <- [(W.greedyView, 0), (W.shift, shiftMask)]
     ]
 
 
@@ -557,9 +581,11 @@ myStartupHook = do
     -- spawnOnce = "/usr/lib/xfce4/notifyd/xfce4-notifyd"
     -- spawnOnce = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
     setWMName "LG3D"
-    -- spawnOn myWS1 "alacritty --class=work -t work -e tmux new-session -A -s WORK"
-    -- spawnOn myWS2 myBrowser
+    -- spawnOn myWS01 "alacritty --class=work -t work -e tmux new-session -A -s WORK"
+    -- spawnOn myWS02 myBrowser
 
+-- XMonad.Hooks.InsertPosition
+-- myWindowInsertBelowMaster = InsPosition.insertPosition InsPosition.Above InsPosition.Newer
 
 -- -------------------------------------------------------------------------------------------------------
 -- MAIN FUNCTION
@@ -597,7 +623,7 @@ main = do
             , normalBorderColor  = myNormalBorderColor
             , keys               = myKeys
             , logHook            = workspaceHistoryHook
-                                    <+> dynamicLogWithPP (myLogHook dbus) >> myUpdatePointerCenter
+                                    <+> dynamicLogWithPP (myLogHook dbus) -- >> myUpdatePointerCenter
             , mouseBindings      = myMouseBindings
         } `additionalKeysP` myAdditionalKeys
 
@@ -617,15 +643,14 @@ myLogHook dbus = def
     , ppHidden           = wrap " " " "
     , ppWsSep            = " "
     , ppSep              = " | "
-    -- remove this to hide empty workspaces
     , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
     , ppHiddenNoWindows  = wrap " " " "
-    , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A}"
-    , ppTitle            = myAddSpaces 30
-    -- , ppExtras          = [logCmd "echo ASD", windowCount]
-    , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A}" windowCount]
+    , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A-}"
+    , ppTitle            = myAddSpaces 50
+    , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A-}" windowCount]
     , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
     }
+    -- , ppExtras          = [logCmd "echo ASD", windowCount]
 
 
 -- Emit a DBus signal on log updates
@@ -656,49 +681,51 @@ myAddSpaces len str = sstr ++ replicate (len - length sstr) ' '
 -- Toggle floating window in the center
 -- -------------------------------------------------------------------------------------------------------
 centreRect = W.RationalRect 0.25 0.25 0.5 0.5
+
 -- If the window is floating then (f), if tiled then (n)
 floatOrNot f n = withFocused $ \windowId -> do
-    floats <- gets (W.floating . windowset)
-    if windowId `M.member` floats -- if the current window is floating...
-       then f
-       else n
+                floats <- gets (W.floating . windowset)
+                if windowId `M.member` floats -- if the current window is floating...
+                   then f
+                   else n
+
 -- Centre and float a window (retain size)
 centreFloat win = do
-    (_, W.RationalRect x y w h) <- floatLocation win
-    windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
-    return ()
+                (_, W.RationalRect x y w h) <- floatLocation win
+                windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
+                return ()
+
 -- Float a window in the centre
 myCentreFloat w = windows $ W.float w centreRect
+
 -- Make a window my 'standard size' (half of the screen) keeping the centre of the window fixed
 standardSize win = do
-    (_, W.RationalRect x y w h) <- floatLocation win
-    windows $ W.float win (W.RationalRect x y 0.5 0.5)
-    return ()
+                (_, W.RationalRect x y w h) <- floatLocation win
+                windows $ W.float win (W.RationalRect x y 0.5 0.5)
+                return ()
+
 -- Float and centre a tiled window, sink a floating window
 toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused myCentreFloat)
 
--- toogle float window simple
--- toggleFloat w = windows (\s -> if M.member w (W.floating s)
---             then W.sink w s
---             else (W.float w (W.RationalRect (1/3) (1/4) (1/2) (4/5)) s))
--- myCenterWindow :: Window -> X ()
--- myCenterWindow win = do
---     (_, W.RationalRect x y w h) <- floatLocation win
---     windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
---     return ()
 
-
--- -------------------------------------------------------------------------------------------------------
--- Window Count
--- -------------------------------------------------------------------------------------------------------
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 
--- -------------------------------------------------------------------------------------------------------
 -- Update mouse pointer to the center of the focused window
--- -------------------------------------------------------------------------------------------------------
 myUpdatePointerCenter = updatePointer (0.5, 0.5) (0, 0)
+
+nonNSP          = WSIs (return (\ws -> W.tag ws /= "NSP"))
+nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "NSP"))
+
+myDoRectFloat = do
+    doRectFloat (W.RationalRect (0 % 4) (1 % 4) (1 % 2) (1 % 2))
+
+myIsInfixOf str = do
+    fmap $ isInfixOf str
+
+myIsPrefixOf str = do
+    fmap $ isPrefixOf str
 
 
 -- -------------------------------------------------------------------------------------------------------
@@ -707,7 +734,13 @@ myUpdatePointerCenter = updatePointer (0.5, 0.5) (0, 0)
 myWindowBringerConfig :: WindowBringerConfig
 myWindowBringerConfig = def
     { menuCommand = "rofi"
-    , menuArgs = ["-dmenu", "-show-icons", "-dpi 150", "-i"]
+    , menuArgs = ["-dmenu", "-show-icons", "-dpi 150", "-i", "-p", "Bring Window"]
+    , windowTitler = myWindowBringerTitler
+    }
+myWindowGoToConfig:: WindowBringerConfig
+myWindowGoToConfig = def
+    { menuCommand = "rofi"
+    , menuArgs = ["-dmenu", "-show-icons", "-dpi 150", "-i", "-p", "Go To"]
     , windowTitler = myWindowBringerTitler
     }
 myWindowBringerColumnSize = 50
@@ -735,37 +768,3 @@ splitInformation d = mapTuple (T.unpack . T.reverse . T.strip . T.pack) $ span (
 mapTuple :: (a -> b) -> (a, a) -> (b, b)
 mapTuple f (a, b) = (f a, f b)
 
-
--- filter NSP workspace
-nonNSP          = WSIs (return (\ws -> W.tag ws /= "NSP"))
-nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "NSP"))
-
-------------------------------------------------------------------------
--- custom desktop notifications -- dunst package required
--- run an action on notifications
-------------------------------------------------------------------------
--- data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
--- instance UrgencyHook LibNotifyUrgencyHook where
---     urgencyHook LibNotifyUrgencyHook w = do
---         name     <- getName w
---         Just idx <- fmap (W.findTag w) $ gets windowset
---         safeSpawn "notify-send" [show name, "workspace " ++ idx]
-
-
-
-
---
--- Example of multiple xmobar bars per screen
---
--- import XMonad
--- import XMonad.Util.Run
--- import XMonad.Layout.IndependentScreens
--- main = do
---     n <- countScreens
---     xmprocs <- mapM (\i -> spawnPipe $ "xmobar /home/biskulopty/.xmobarrc-" ++ show i ++ " -x " ++ show i) [0..n-1]
---     xmonad def {
---         logHook = [> use xmprocs, which is a list of pipes of type [Handle] <]
---     }
--- For multiple monitors I use XMonad.Hooks.DynamicBars. The way this package handles multiple monitors is to spawn a separate bar for each window with something like
--- spawnPipe $ "xmobar -x " ++ show sid
--- for each screen id (0,1..).The -x tells xmobar which screen to display the bar on.
