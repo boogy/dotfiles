@@ -79,3 +79,5 @@ user_pref("layers.acceleration.force-enabled", true);
 user_pref("webgl.force-enabled", true);
 user_pref("media.hardware-video-decoding.force-enabled", true);
 user_pref("browser.tabs.remote.autostart", true);
+
+user_pref("media.volume_scale", "0.44");
