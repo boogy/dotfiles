@@ -21,7 +21,7 @@ import XMonad.Hooks.Minimize
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
--- import qualified XMonad.Hooks.InsertPosition as InsPosition (insertPosition, Focus(..), Position(..))
+import qualified XMonad.Hooks.InsertPosition as InsPosition (insertPosition, Focus(..), Position(..))
 
 -- Config
 import XMonad.Config.Desktop
@@ -142,6 +142,11 @@ myAlt = myModMask
 mySup = mod4Mask
 myFont = "xft:Mononoki Nerd Font:bold:size=9:antialias=true:hinting=true"
 
+-- XMonad.Hooks.InsertPosition
+-- keep master and insert slaves
+myWindowInsertBelowMaster =
+    InsPosition.insertPosition InsPosition.Below InsPosition.Newer
+
 
 -- -------------------------------------------------------------------------------------------------------
 -- Workspaces
@@ -167,8 +172,7 @@ myWorkspaces :: [String]
 myWorkspaces =  clickable $ [myWS1,myWS2,myWS3,myWS4,myWS5,myWS6,myWS7,myWS8,myWS9,myWS0]
         where
             clickable l = [ "%{A1:xdotool key alt+" ++ show n ++ " &:}" ++ ws ++ "%{A-}" |
-                            (i, ws) <- zip [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] l,
-                            let n = i ]
+                            (i, ws) <- zip [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] l, let n = i ]
 
 -- Generate list of workspaces to work with
 myWS01 = myWorkspaces !! 0
@@ -193,25 +197,21 @@ myBaseConfig = desktopConfig
 -- Window rules and manipulation (doFloat) (doCenterFloat) (doIgnore)
 -- -------------------------------------------------------------------------------------------------------
 myManageHook = composeAll . concat $
-    [ [ isDialog            --> doFloat                          ]
-    , [ isFullscreen        --> doFullFloat                      ]
-    , [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
+    [ [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
     , [ title     =? t      --> doCenterFloat  | t <- myTFloats  ]
     , [ resource  =? r      --> doFloat        | r <- myRFloats  ]
     , [ resource  =? i      --> doIgnore       | i <- myIgnores  ]
 
-    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"        --> doCenterFloat]
-    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_NOTIFICATION"  --> doCenterFloat]
-    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"  --> doCenterFloat]
-
-    , [ className =? "firefox" <&&> title    =? "Library"                      --> doCenterFloat]
-    , [ className =? "Firefox" <&&> resource =? "Toolkit"                      --> doFloat]
-    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> myDoRectFloat >> doCenterFloat]
-    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> myDoRectFloat >> doCenterFloat]
+    , [ className =? "firefox" <&&> title    =? "Library"                      --> doCenterFloat ]
+    , [ className =? "Firefox" <&&> resource =? "Toolkit"                      --> doFloat       ]
+    , [ className =? "firefox" <&&> title    =? "Picture-in-Picture"           --> doFloat       >> myCustomFloatingPosition ]
+    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> doCenterFloat >> myCustomFloatingPosition ]
+    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> doCenterFloat >> myCustomFloatingPosition ]
 
     , [ myIsPrefixOf "zoom"            className <&&> myIsPrefixOf "zoom"            title --> doShiftAndGo myWS09]
     , [ myIsPrefixOf "Microsoft Teams" className <&&> myIsPrefixOf "Microsoft Teams" title --> doShiftAndGo myWS00]
 
+    -- move windows to specific workspaces
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS01 | x <- my1Shifts ]
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS02 | x <- my2Shifts ]
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS03 | x <- my3Shifts ]
@@ -222,7 +222,14 @@ myManageHook = composeAll . concat $
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS08 | x <- my8Shifts ]
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS09 | x <- my9Shifts ]
     , [(className =? x <||> title =? x <||> resource =? x) --> doShiftAndGo myWS00 | x <- my10Shifts]
-    , [ namedScratchpadManageHook myScratchpads ]
+
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"        --> doCenterFloat]
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_NOTIFICATION"  --> doCenterFloat]
+    , [ isInProperty "_NET_WM_WINDOW_TYPE" "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"  --> doCenterFloat]
+
+    , [ isDialog                  --> doFloat    ]
+    , [ isFullscreen              --> doFullFloat]
+    , [ namedScratchpadManageHook myScratchpads  ]
     ]
     where
         doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
@@ -299,9 +306,9 @@ perWS = onWorkspace myWS01 myTiledFirst $
 -- -------------------------------------------------------------------------------------------------------
 -- Layout combinations
 -- -------------------------------------------------------------------------------------------------------
-myTiledFirst = myTiled ||| myFull  ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp
-myFullFirst  = myFull  ||| myTiled ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp
-myAll        = myTiled ||| myFull  ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp
+myTiledFirst = myTiled ||| myFull  ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp ||| myMagnifier
+myFullFirst  = myFull  ||| myTiled ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp ||| myMagnifier
+myAll        = myTiled ||| myFull  ||| myTabs ||| myThreeCol ||| myGrid ||| myBsp ||| myMagnifier
 
 -- -------------------------------------------------------------------------------------------------------
 -- Layout variables
@@ -321,6 +328,7 @@ myTiled = renamed [Replace "Tall"]
             $ ResizableTall 1 (3/100) (1/2) []
 
 myTabs = renamed [Replace "Tabbed"]
+            $ windowNavigation
             $ subLayout [] (smartBorders Simplest)
             $ noBorders (tabbed shrinkText myTabConfig)
 
@@ -347,6 +355,11 @@ myGrid = renamed [Replace "Grid"]
             $ limitWindows 8
             $ Grid (16/10)
 
+myMagnifier = renamed [Replace "Magnifier"]
+            $ windowNavigation
+            $ magnifiercz 1.2 -- increase the focus window
+            $ magnifier (Tall 1 (3/100) (1/2))
+
 -- -------------------------------------------------------------------------------------------------------
 -- Combine all layouts
 -- -------------------------------------------------------------------------------------------------------
@@ -356,7 +369,6 @@ myLayout = avoidStruts
             $ windowArrange
             $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
             $ perWS
-
 
 
 -- -------------------------------------------------------------------------------------------------------
@@ -394,9 +406,9 @@ commands = defaultCommands
 -- -------------------------------------------------------------------------------------------------------
 -- UrgencyHook Config
 -- -------------------------------------------------------------------------------------------------------
-myUrgencyConfig = urgencyConfig { suppressWhen = Focused
-                                ,remindWhen = Every 10
-                                }
+myUrgencyConfig =
+    urgencyConfig { suppressWhen = Focused,
+                    remindWhen = Every 5}
 
 -- -------------------------------------------------------------------------------------------------------
 -- Key mappings
@@ -414,7 +426,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mySup,                      xK_d),         spawn $ "rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode -dpi 150" )
     , ((myAlt,                      xK_y),         spawn $ "polybar-msg cmd toggle" )
     , ((mySup .|. shiftMask,        xK_p),         spawn $ "$HOME/.config/polybar/launch-polybar.sh" )
-    , ((mySup,  xK_e),                             spawn $ "thunar")
+    , ((mySup,                      xK_e),         spawn $ "thunar")
 
     -- XMonad recompile / restart
     , ((myAlt .|. shiftMask,        xK_r),         spawn $ "xmonad --recompile && xmonad --restart")
@@ -422,8 +434,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt .|. controlMask,      xK_u),         spawn $ "pavucontrol")
     , ((myAlt .|. shiftMask,        xK_e),         spawn $ "$HOME/.config/scripts/bspwm-dmenu-actions.sh")
 
-    , ((0,                         xK_Print),      spawn $ "flameshot gui")
-    , ((0 .|. shiftMask,           xK_Print ),     spawn $ "shutter -s")
+    , ((0,                          xK_Print),     spawn $ "flameshot gui")
+    , ((0 .|. shiftMask,            xK_Print ),    spawn $ "shutter -s")
 
     , ((0, xF86XK_AudioMute),                      spawn $ "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     , ((0, xF86XK_AudioMicMute),                   spawn $ "amixer set Capture toggle")
@@ -450,7 +462,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xK_l),     sendMessage $ JumpToLayout "Tall"       )
         , ((0, xK_g),     sendMessage $ JumpToLayout "Grid"       )
         , ((0, xK_c),     sendMessage $ JumpToLayout "ThreeColMid")
-        , ((0, xK_b),     sendMessage $ JumpToLayout "BSP")
+        , ((0, xK_b),     sendMessage $ JumpToLayout "BSP"        )
+        , ((0, xK_m),     sendMessage $ JumpToLayout "Magnifier"  )
         ])
 
     -- scratchpads
@@ -522,14 +535,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt .|. controlMask, xK_Right),  sendMessage (IncMasterN (-1)))
 
     -- XMonad.Layout.MultiToggle
-    , ((myAlt, xK_f),                      sendMessage $ MT.Toggle NBFULL)          -- set fullscreen no borders
-    , ((myAlt, xK_r),                      sendMessage $ MT.Toggle MIRROR)          -- mirror layout
+    , ((myAlt,                 xK_f),      sendMessage $ MT.Toggle NBFULL) -- set fullscreen no borders
+    , ((myAlt,                 xK_r),      sendMessage $ MT.Toggle MIRROR) -- mirror layout
 
-    , ((myAlt,               xK_g),        gotoMenuConfig  myWindowGoToConfig    >> myUpdatePointerCenter)
-    , ((myAlt .|. shiftMask, xK_b),        bringMenuConfig myWindowBringerConfig >> myUpdatePointerCenter)
+    , ((myAlt,                 xK_g),      gotoMenuConfig  myWindowGoToConfig    >> myUpdatePointerCenter)
+    , ((myAlt .|. shiftMask,   xK_b),      bringMenuConfig myWindowBringerConfig >> myUpdatePointerCenter)
 
-    , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand)                                                 -- select xmonad commands from dmenu
-    , ((mySup,                 xK_s),      sendMessage ToggleStruts              >> spawn "polybar-msg cmd toggle") -- toggle struts
+    , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand) -- select xmonad commands from dmenu
+    , ((mySup,                 xK_s),      sendMessage ToggleStruts >> spawn "polybar-msg cmd toggle") -- toggle struts
 
     ]
 
@@ -541,10 +554,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. myAlt, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1,xK_2,xK_3,xK_4,xK_5,xK_6,xK_7,xK_8,xK_9,xK_0]
         , (f, m) <- [(W.greedyView, 0),
-                     (W.shift, shiftMask)
-                    ,(\i -> W.greedyView i . W.shift i, controlMask .|. 0)
+                     (W.shift, shiftMask),
+                     (\i -> W.greedyView i . W.shift i, controlMask .|. 0),
+                     (copy, shiftMask .|. controlMask) -- copy window on workspace
     ]]
-
     ++
     -- ctrl-{comma,period,minus},       Switch to physical/Xinerama screens 1, 2, or 3
     -- ctrl-shift-{comma,period,minus}, Move client to screen 1, 2, or 3
@@ -562,12 +575,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- M4 == Sup
 -- M  == Alt
 myAdditionalKeys =
-    -- copy window to specific workspaces (dwm tag like) with MOD-CTRL-SHIFT-[0-9]
-    [("M-" ++ m ++ k, windows $ f i)
-        | (i, k) <- zip (myWorkspaces) (map show [1 :: Int ..])
-        , (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]
-    ]
-    ++
     [ ("S-C-a", windows copyToAll)   -- copy window to all workspaces
     , ("S-C-z", killAllOtherCopies)  -- kill copies of window on other workspaces
     , ("M4-a",  sendMessage MirrorExpand)
@@ -575,21 +582,13 @@ myAdditionalKeys =
     ]
 
 
+
 -- execute when xmonad starts
 myStartupHook = do
     spawn "$HOME/.config/xmonad/autostart.sh"
-    -- spawnOnce = "start-pulseaudio-x11; pulseaudio --start"
-    -- spawnOnce = "nm-applet"
-    -- spawnOnce = "blueman-applet"
-    -- spawnOnce = "/opt/dropbox/dropboxd"
-    -- spawnOnce = "/usr/lib/xfce4/notifyd/xfce4-notifyd"
-    -- spawnOnce = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
     setWMName "LG3D"
     -- spawnOn myWS01 "alacritty --class=work -t work -e tmux new-session -A -s WORK"
     -- spawnOn myWS02 myBrowser
-
--- XMonad.Hooks.InsertPosition
--- myWindowInsertBelowMaster = InsPosition.insertPosition InsPosition.Above InsPosition.Newer
 
 -- -------------------------------------------------------------------------------------------------------
 -- MAIN FUNCTION
@@ -609,6 +608,7 @@ main = do
             , layoutHook         = myLayout
             , manageHook         = manageDocks
                                     <+> (isFullscreen --> doFullFloat)
+                                    -- <+> myWindowInsertBelowMaster
                                     <+> manageSpawn -- manage startupHook spawnOn
                                     <+> myManageHook
                                     <+> manageHook myBaseConfig
@@ -627,7 +627,8 @@ main = do
             , normalBorderColor  = myNormalBorderColor
             , keys               = myKeys
             , logHook            = workspaceHistoryHook
-                                    <+> dynamicLogWithPP (myLogHook dbus) -- >> myUpdatePointerCenter
+                                    <+> myLogHook dbus
+                                    -- <+> dynamicLogWithPP (myLogHook dbus) -- >> myUpdatePointerCenter
             , mouseBindings      = myMouseBindings
         } `additionalKeysP` myAdditionalKeys
 
@@ -638,24 +639,43 @@ main = do
 -- -------------------------------------------------------------------------------------------------------
 -- %{F} == polybar foreground
 -- %{B} == polybar background
-myLogHook :: D.Client -> PP
-myLogHook dbus = def
-    { ppOutput           = dbusOutput dbus
-    , ppCurrent          = wrap ("%{B" ++ yellow3 ++ "} ") " %{B-}"
-    , ppVisible          = wrap ("%{B" ++ yellow  ++ "} ") " %{B-}"
-    , ppUrgent           = wrap ("%{B" ++ red     ++ "} ") " %{B-}"
-    , ppHidden           = wrap " " " "
-    , ppWsSep            = " "
-    , ppSep              = " | "
-    , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
-    , ppHiddenNoWindows  = wrap " " " "
-    , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A-}"
-    , ppTitle            = myAddSpaces 60
-    , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A-}" windowCount]
-    , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-    }
+-- myLogHook :: D.Client -> PP
+-- myLogHook dbus = def
+--     { ppOutput           = dbusOutput dbus
+--     , ppCurrent          = wrap ("%{B" ++ yellow3 ++ "} ") " %{B-}"
+--     , ppVisible          = wrap ("%{B" ++ yellow  ++ "} ") " %{B-}"
+--     , ppUrgent           = wrap ("%{B" ++ red     ++ "} ") " %{B-}"
+--     , ppHidden           = wrap " " " "
+--     , ppWsSep            = " "
+--     , ppSep              = " | "
+--     , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
+--     , ppHiddenNoWindows  = wrap " " " "
+--     , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A-}"
+--     , ppTitle            = myAddSpaces 60
+--     , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A-}" windowCount]
+--     , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+--     }
     -- , ppExtras          = [logCmd "echo ASD", windowCount]
 
+myLogHook dbus = do
+    copies <- wsContainingCopies
+    -- tag workspace that has copies on it
+    let check ws | ws `elem` copies = wrap ("%{B" ++ blue2 ++ "} ") " %{B-}" $ ws
+                 | otherwise = wrap " " " " ws
+    dynamicLogWithPP def { ppOutput           = dbusOutput dbus
+                         , ppCurrent          = wrap ("%{B" ++ yellow3 ++ "} ") " %{B-}"
+                         , ppVisible          = wrap ("%{B" ++ yellow  ++ "} ") " %{B-}"
+                         , ppUrgent           = wrap ("%{B" ++ red     ++ "} ") " %{B-}"
+                         , ppHidden           = check
+                         , ppWsSep            = " "
+                         , ppSep              = " | "
+                         , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
+                         , ppHiddenNoWindows  = wrap " " " "
+                         , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A-}"
+                         , ppTitle            = myAddSpaces 60
+                         , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A-}" windowCount]
+                         , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                        }
 
 -- Emit a DBus signal on log updates
 dbusOutput :: D.Client -> String -> IO ()
@@ -724,6 +744,9 @@ nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "NSP")
 
 myDoRectFloat = do
     doRectFloat (W.RationalRect (0 % 4) (1 % 4) (1 % 2) (1 % 2))
+
+myDoRectFloatSmaller = do
+    doRectFloat (W.RationalRect (2/6) (2/6) (2/6) (2/6))
 
 myIsInfixOf str = do
     fmap $ isInfixOf str

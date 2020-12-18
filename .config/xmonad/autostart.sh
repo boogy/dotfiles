@@ -43,7 +43,7 @@ xset c on &
 xset -dpms &
 xbacklight -set 15 &
 
-## set proper cursor (bspwm)
+## set proper cursor
 xsetroot -cursor_name left_ptr &
 
 ## set screen brightness to 100%
