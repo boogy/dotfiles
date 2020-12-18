@@ -193,7 +193,7 @@ myBaseConfig = desktopConfig
 -- Window rules and manipulation (doFloat) (doCenterFloat) (doIgnore)
 -- -------------------------------------------------------------------------------------------------------
 myManageHook = composeAll . concat $
-    [ [ isDialog            --> doCenterFloat                    ]
+    [ [ isDialog            --> doFloat                          ]
     , [ isFullscreen        --> doFullFloat                      ]
     , [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
     , [ title     =? t      --> doCenterFloat  | t <- myTFloats  ]
@@ -230,7 +230,7 @@ myManageHook = composeAll . concat $
                         "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"             ,
                         "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           ,
                         "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfce4-appfinder" ,
-                        "Pavucontrol"
+                        "Pavucontrol"          , "File-roller"
                     ]
         myTFloats = ["Downloads", "Save As..."]
         myRFloats = []
@@ -250,9 +250,14 @@ myManageHook = composeAll . concat $
 -- -------------------------------------------------------------------------------------------------------
 -- Scratchpads
 -- -------------------------------------------------------------------------------------------------------
-myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD" (title =? "scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
-                , NS "music" "firefox --new-window --kiosk 'https://music.youtube.com'" (className =? "Firefox" <&&> fmap (isInfixOf "YouTube Music — Mozilla Firefox") title) (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
-                , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad" (className=? "thunar-scratchpad") (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
+myCustomFloatingPosition = (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
+
+myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD"
+                                                    (title =? "scratchpad") myCustomFloatingPosition
+                , NS "music" "firefox --new-window 'https://music.youtube.com'"
+                                                    (className =? "firefox" <&&> fmap (isInfixOf "YouTube Music") title) myCustomFloatingPosition
+                , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad"
+                                                    (className=? "thunar-scratchpad") myCustomFloatingPosition
                 , NS "notes" spawnTerm findTerm manageTerm
                 ]
     where
@@ -401,7 +406,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [
       ((myAlt,                      xK_Return),    spawn $ myTerminal)
     , ((myAlt .|. shiftMask,        xK_Return),    spawn $ "alacritty --class=work -t work -e tmux new-session -A -s WORK")
-    , ((myAlt,                      xK_Escape),    spawn $ "xkill")
+    , ((myAlt .|. shiftMask,        xK_Escape),    spawn $ "xkill")
     , ((myAlt .|. shiftMask ,       xK_c),         kill)
 
     -- Application menus
@@ -520,12 +525,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt, xK_f),                      sendMessage $ MT.Toggle NBFULL)          -- set fullscreen no borders
     , ((myAlt, xK_r),                      sendMessage $ MT.Toggle MIRROR)          -- mirror layout
 
-    -- , ((myAlt, xK_g),                      spawn "rofi -show window -dpi 150")      -- focus windows
     , ((myAlt,               xK_g),        gotoMenuConfig  myWindowGoToConfig    >> myUpdatePointerCenter)
-    , ((myAlt .|. shiftMask, xK_b),        bringMenuConfig myWindowBringerConfig >> myUpdatePointerCenter) -- bring windows to the current workspace
+    , ((myAlt .|. shiftMask, xK_b),        bringMenuConfig myWindowBringerConfig >> myUpdatePointerCenter)
 
-    , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand)                 -- select xmonad commands from dmenu
-    , ((mySup, xK_s),                      sendMessage ToggleStruts >> spawn "polybar-msg cmd toggle")                -- toggle struts
+    , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand)                                                 -- select xmonad commands from dmenu
+    , ((mySup,                 xK_s),      sendMessage ToggleStruts              >> spawn "polybar-msg cmd toggle") -- toggle struts
 
     ]
 
@@ -646,7 +650,7 @@ myLogHook dbus = def
     , ppSort             = fmap (. namedScratchpadFilterOutWorkspace) getSortByIndex
     , ppHiddenNoWindows  = wrap " " " "
     , ppLayout           = wrap "%{A1:xdotool key super+space &:}\63564 " "%{A-}"
-    , ppTitle            = myAddSpaces 50
+    , ppTitle            = myAddSpaces 60
     , ppExtras           = [wrapL "%{A1:rofi -show window -dpi 150 &:}\62162 " "%{A-}" windowCount]
     , ppOrder            = \(ws:l:t:ex) -> [ws,l]++ex++[t]
     }
@@ -667,7 +671,7 @@ dbusOutput dbus str = do
 
 
 myAddSpaces :: Int -> String -> String
-myAddSpaces len str = sstr ++ replicate (len - length sstr) ' '
+myAddSpaces len str = "%{A1:xdotool key super+Tab &:}" ++ sstr ++ "%{A-}" ++ replicate (len - length sstr) ' '
   where
     sstr = shorten len str
 
