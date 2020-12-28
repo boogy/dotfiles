@@ -68,7 +68,8 @@ vnoremap > >gv
 map <silent> <leader><cr> :noh<cr>
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>
+" map <leader>bd :Bclose<cr>
+map <leader>d :Bclose<cr>
 
 " Source current line
 vnoremap <leader>L y:execute @@<cr>
