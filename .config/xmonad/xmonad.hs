@@ -205,8 +205,8 @@ myManageHook = composeAll . concat $
     , [ className =? "firefox" <&&> title    =? "Library"                      --> doCenterFloat ]
     , [ className =? "Firefox" <&&> resource =? "Toolkit"                      --> doFloat       ]
     , [ className =? "firefox" <&&> title    =? "Picture-in-Picture"           --> doFloat       >> myCustomFloatingPosition ]
-    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> doCenterFloat >> myCustomFloatingPosition ]
-    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> doCenterFloat >> myCustomFloatingPosition ]
+    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> doCenterFloat ]
+    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> doCenterFloat ]
 
     , [ myIsPrefixOf "zoom"            className <&&> myIsPrefixOf "zoom"            title --> doShiftAndGo myWS09]
     , [ myIsPrefixOf "Microsoft Teams" className <&&> myIsPrefixOf "Microsoft Teams" title --> doShiftAndGo myWS00]
@@ -237,7 +237,7 @@ myManageHook = composeAll . concat $
                         "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"             ,
                         "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           ,
                         "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfce4-appfinder" ,
-                        "Pavucontrol"          , "File-roller"
+                        "Pavucontrol"          , "File-roller"        , "Sxiv"
                     ]
         myTFloats = ["Downloads", "Save As..."]
         myRFloats = []
