@@ -334,6 +334,7 @@ myTabs = renamed [Replace "Tabbed"]
 
 myThreeCol = renamed [Replace "ThreeColMid"]
             $ windowNavigation
+            $ mkToggle (single MIRROR)
             $ addTabs shrinkText myTabConfig
             $ subLayout [] (smartBorders Simplest)
             $ mySpacingRaw
