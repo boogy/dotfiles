@@ -237,7 +237,7 @@ myManageHook = composeAll . concat $
                         "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"             ,
                         "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           ,
                         "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfce4-appfinder" ,
-                        "Pavucontrol"          , "File-roller"        , "Sxiv"
+                        "Pavucontrol"          , "File-roller"        , "Sxiv"              , "1Password"
                     ]
         myTFloats = ["Downloads", "Save As..."]
         myRFloats = []
@@ -483,14 +483,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mySup,               xK_Tab),      windows W.focusDown)
 
     -- CycleWS setup
-    , ((myAlt,               xK_Tab),      toggleWS)                             -- toggle workspaces focus
-    , ((myAlt,               xK_n),        moveTo  Next nonNSP)                  -- next workspace
-    , ((myAlt,               xK_p),        moveTo  Prev nonNSP)                  -- previous workspace
-    , ((myAlt .|. shiftMask, xK_n),        shiftTo Next nonNSP)                  -- shift to next workspace
-    , ((myAlt .|. shiftMask, xK_p),        shiftTo Prev nonNSP)                  -- shift to prev workspace
-    , ((mySup .|. shiftMask, xK_n),        shiftNextScreen)                      -- shift to next screen
-    , ((mySup .|. shiftMask, xK_p),        shiftPrevScreen)                      -- shift to previous screen
-    , ((myAlt,               xK_e),        nextScreen >> myUpdatePointerCenter)  -- shift to previous screen
+    , ((myAlt,               xK_Tab),      toggleWS)                                 -- toggle workspaces focus
+    , ((myAlt,               xK_n),        moveTo  Next nonNSP)                      -- next workspace
+    , ((myAlt,               xK_p),        moveTo  Prev nonNSP)                      -- previous workspace
+    , ((myAlt .|. shiftMask, xK_n),        shiftTo Next nonNSP)                      -- shift to next workspace
+    , ((myAlt .|. shiftMask, xK_p),        shiftTo Prev nonNSP)                      -- shift to prev workspace
+    , ((mySup .|. shiftMask, xK_n),        shiftNextScreen >> myUpdatePointerCenter) -- shift to next screen
+    , ((mySup .|. shiftMask, xK_p),        shiftPrevScreen >> myUpdatePointerCenter) -- shift to previous screen
+    , ((myAlt,               xK_e),        nextScreen      >> myUpdatePointerCenter) -- shift to previous screen
 
     -- Push window back into tiling.
     , ((myAlt, xK_space), toggleFloat)
@@ -531,8 +531,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mySup,                 xK_j),      onGroup W.focusDown')
 
     -- Increment / decrement the number of windows in the master area.
-    , ((myAlt .|. controlMask, xK_Left),   sendMessage (IncMasterN 1))
-    , ((myAlt .|. controlMask, xK_Right),  sendMessage (IncMasterN (-1)))
+    , ((mySup .|. controlMask, xK_Left),   sendMessage (IncMasterN 1))
+    , ((mySup .|. controlMask, xK_Right),  sendMessage (IncMasterN (-1)))
 
     -- XMonad.Layout.MultiToggle
     , ((myAlt,                 xK_f),      sendMessage $ MT.Toggle NBFULL) -- set fullscreen no borders
