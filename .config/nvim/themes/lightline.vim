@@ -92,12 +92,18 @@ endfunction
 " Configuration for lightline-bufferline plugin
 "########################################################
 
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+" let g:lightline#bufferline#auto_hide = 4000
 let g:lightline.component_raw = {'buffers': 1}
 
 let g:lightline#bufferline#enable_nerdfont=1
 let g:lightline#bufferline#unicode_symbols=1
 let g:lightline#bufferline#show_number=2
 let g:lightline#bufferline#clickable=1
+let g:lightline#bufferline#unnamed="[No Name]"
+let g:lightline#bufferline#icon_position="left"
+" let g:lightline#bufferline#modified="+"
 
 " Quick move to buffers
 nmap <leader>1 <Plug>lightline#bufferline#go(1)
@@ -129,5 +135,8 @@ nmap <leader>c0 <Plug>lightline#bufferline#delete(10)
 
 " Delete buffers by asking for its ordinal number
 command! -nargs=* DelBufferline :call lightline#bufferline#delete(<q-args>)
-nmap <silent> <leader>C :DelBufferline
+nmap <silent> <leader>C :DelBufferline<space>
+
+command! -nargs=* GoToBufferNb :call lightline#bufferline#go(<q-args>)
+nmap <silent> <leader>G :GoToBufferNb<space>
 
