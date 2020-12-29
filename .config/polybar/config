@@ -32,6 +32,63 @@ margin-top = 0
 margin-bottom = 0
 
 ;###############################################################
+; BAR (default)
+;###############################################################
+[bar/bar-default]
+monitor = ${env:MONITOR:DP1-2}
+monitor-strict = false
+bottom = false
+
+dpi = ${env:POLYBAR_DPI_VALUE:0}
+
+tray-position = ${env:TRAY_POSITION:right}
+tray-padding = 1
+tray-detached = false
+tray-scale = 1.0
+tray-maxsize = 16
+tray-background = ${root.background}
+
+width = 100%
+height = 24
+offset-x = 0
+offset-y = 0
+radius = 0.0
+
+fixed-center = true
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Noto Sans:size=10;2"
+font-1 = unifont:fontformat=truetype:size=9:antialias=true;0
+font-2 = Font Awesome 5 Free:style=Solid:size=9;2
+font-3 = Font Awesome 5 Brands:style=Solid:size=9;2
+font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
+font-5 = Ubuntu Mono derivative Powerline:size=9;1
+font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
+font-7 = Noto Color Emoji:style=Regular:size=10;2
+font-8 = Siji:pixelsize=10;1
+
+; modules-left = xwindow
+; modules-center = xwindow
+modules-right = powermenu xbacklight pulseaudio pulseaudio-microphone bluetooth memory cpu temperature wlan vpn eth battery date
+locale = fr_CH.UTF-8
+
+
+;###############################################################
 ; BAR (xmonad)
 ;###############################################################
 [bar/bar-xmonad]
@@ -554,7 +611,6 @@ ramp-signal-foreground = ${colors.foreground-alt}
 ;###############################################################
 [module/eth]
 type = internal/network
-; interface = ${env:DEFAULT_NETWORK_INTERFACE:eth0}
 interface = ${env:DEFAULT_NIC_INTERFACE:eth0}
 interval = 10
 

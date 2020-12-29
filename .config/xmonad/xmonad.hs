@@ -426,8 +426,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt,                      xK_F11),       spawn $ "rofi -show run -fullscreen -dpi 150" )
     , ((mySup,                      xK_d),         spawn $ "rofi -show drun -lines 10 -columns 1 -width 45 -sidebar-mode -dpi 150" )
     , ((myAlt,                      xK_y),         spawn $ "polybar-msg cmd toggle" )
-    , ((mySup .|. shiftMask,        xK_p),         spawn $ "$HOME/.config/polybar/launch-polybar.sh" )
     , ((mySup,                      xK_e),         spawn $ "thunar")
+    , ((myAlt .|. controlMask,      xK_o),         spawn $ "bolt --rofi-search")
 
     -- XMonad recompile / restart
     , ((myAlt .|. shiftMask,        xK_r),         spawn $ "xmonad --recompile && xmonad --restart")
@@ -455,6 +455,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xK_g),     spawn "gvim")
         , ((0, xK_w),     spawn "VBoxManage startvm Windows10 --type gui")
         , ((0, xK_v),     spawn "virtualbox")
+        , ((0, xK_b),     spawn "$HOME/.config/polybar/launch-polybar.sh" )
         ])
 
     , ((myAlt, xK_l), submap . M.fromList $

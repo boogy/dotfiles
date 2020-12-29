@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-#
-# Copy all the dot files in the user's home directory
-# and source them
-#
+
+## Copy all the dot files in the user's home directory
+## and source them
 
 THIS_DIR=$(cd $(dirname "$0"); pwd)
 INSTALLDIR=$HOME
@@ -28,9 +27,7 @@ cd ${INSTALLDIR}/dotfiles
 
 # if test -z $1; then
 #     read -p "Do you want to delete existing files/directorys ? [y/n]: " CLEAN_EXISTING_FILES
-# else
-#     CLEAN_EXISTING_FILES=$1
-# fi
+# else; CLEAN_EXISTING_FILES=$1; fi
 CLEAN_EXISTING_FILES=${1:-Y}
 
 if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
@@ -39,9 +36,7 @@ if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
     done
 fi
 
-##
 ## copy/symlink files to installdir
-##
 for FILE in ${MANAGED_FILES[@]}; do
     STRIPED_FILE_NAME=${FILE##*/}
     echo "Copying ${THIS_DIR}/${STRIPED_FILE_NAME} to ${INSTALLDIR}"
@@ -56,36 +51,28 @@ for DOT_FILE in $(ls .config); do
     ln -sf $THIS_DIR/.config/$DOT_FILE ~/.config/
 done
 
-## Link confiuration scripts to /usr/local/bin/
-# if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
-#     for RM_FILE in $(ls $THIS_DIR/.config/scripts); do
-#         rm -f /usr/local/bin/$RM_FILE
-#     done
-# fi
+## link scripts
 for FILE in $(ls $THIS_DIR/.config/scripts); do
+    # if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
+    #     for RM_FILE in $(ls $THIS_DIR/.config/scripts); do
+    #         rm -f /usr/local/bin/$RM_FILE
+    #     done
+    # fi
     sudo ln -sf $THIS_DIR/.config/scripts/$FILE /usr/local/bin/
 done
 
-##
+
 ## Install Plug for neovim
-##
 mkdir -p $HOME/.config/nvim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
 nvim -c 'CocInstall -sync coc-python coc-json coc-powershell coc-snippets coc-explorer coc-rls coc-go coc-tsserver coc-vimlsp coc-lists coc-sh coc-xml coc-yaml coc-pairs|q'
-# pip3 install --user jedi-language-server jedi
 
 ## map all the configuration for vim
 ln -sf ~/.config/nvim/init.vim ~/.vimrc
 ln -sf ~/.config/nvim ~/.vim
-
-# curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-#     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# vim +PlugInstall +qall
-# ln -sf $HOME/.vim/custom-snippets $HOME/.vim/UltiSnips
-# rm ~/.vim/custom-snippets/custom-snippets
 
 ##
 ## Install powerline fonts
