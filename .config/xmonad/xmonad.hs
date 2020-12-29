@@ -433,7 +433,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt .|. shiftMask,        xK_r),         spawn $ "xmonad --recompile && xmonad --restart")
     , ((mySup,                      xK_r),         spawn $ "xmonad --restart")
     , ((myAlt .|. controlMask,      xK_u),         spawn $ "pavucontrol")
-    , ((myAlt .|. shiftMask,        xK_e),         spawn $ "$HOME/.config/scripts/bspwm-dmenu-actions.sh")
+    , ((myAlt .|. controlMask,      xK_e),         spawn $ "$HOME/.config/scripts/bspwm-dmenu-actions.sh")
 
     , ((0,                          xK_Print),     spawn $ "flameshot gui")
     , ((0 .|. shiftMask,            xK_Print ),    spawn $ "shutter -s")
@@ -609,8 +609,6 @@ main = do
             startupHook          = myStartupHook
             , layoutHook         = myLayout
             , manageHook         = manageDocks
-                                    <+> (isFullscreen --> doFullFloat)
-                                    -- <+> myWindowInsertBelowMaster
                                     <+> manageSpawn -- manage startupHook spawnOn
                                     <+> myManageHook
                                     <+> manageHook myBaseConfig
