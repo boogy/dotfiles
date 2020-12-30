@@ -12,38 +12,43 @@ lock_screen() {
     ~/.config/scripts/betterlockscreen.sh --lock
 }
 
-# Function to kill programs
-killprogs() {
-    # Kill udisks-glue
-    pkill -x udisks-glue
-    # Kill panel
-    pkill -x panel
-    # Kill Redshift
-    pkill -x redshift
-}
-
 # Restart function
 restart() {
-    # Save session status
-    . "$BSPWM_CONFIG/restore.cfg"
-    bspc wm --dump-state > "$BSPWM_STATE"
-    # Kill programs
-    killprogs
-    # Quit bspwm
-    bspc quit 0
+    case $DESKTOP_SESSION in
+        bspwm )
+            # Save session status
+            . "$BSPWM_CONFIG/restore.cfg"
+            bspc wm --dump-state > "$BSPWM_STATE"
+            bspc quit 0
+            ;;
+        i3)
+            i3-msg restart
+            ;;
+        xmonad)
+            xdotool key super+r
+            ;;
+    esac
 }
 
 # Logout function
 logout() {
-    # For each opened window
-    bspc query --nodes | while read -r winid; do
-        # Close it
-        xdotool windowkill "$winid"
-    done
-    # Kill programs
-    killprogs
-    # Quit bspwm
-    bspc quit 1
+    case $DESKTOP_SESSION in
+        bspwm )
+            # For each opened window
+            bspc query --nodes | while read -r winid; do
+                # Close it
+                xdotool windowkill "$winid"
+            done
+            bspc quit 1
+            ;;
+        i3)
+            i3-msg exit
+            ;;
+        xmonad)
+            ## exit xmonad using it's shortcut
+            xdotool key alt+shift+q
+            ;;
+    esac
 }
 
 # Load dmenu config

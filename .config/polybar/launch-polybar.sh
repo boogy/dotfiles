@@ -34,17 +34,12 @@ tray_output=${POLYBAR_PRIMARY_MONITOR}
 
 _BAR_NAME=""
 case $DESKTOP_SESSION in
-    bspwm)
-        _BAR_NAME="bar-bspwm"
-        ;;
-    i3)
-        _BAR_NAME="bar-i3"
-        ;;
-    xmonad)
-        _BAR_NAME="bar-xmonad"
+    bspwm | i3 | xmonad)
+        _BAR_NAME="bar-${DESKTOP_SESSION}"
         ;;
     *)
         _BAR_NAME="bar-default"
+        ;;
 esac
 
 ## run a polybar instance per screen
