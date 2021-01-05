@@ -1,0 +1,11 @@
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Type=Package
+Target=xmonad*
+Target=haskell*
+
+[Action]
+Description=Rebuild xmonad
+When=PostTransaction
+Exec=/usr/sbin/xmonad --recompile

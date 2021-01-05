@@ -92,3 +92,7 @@ _check picom "picom -b"
 
 # trayer --edge top --align right --SetDockType true --SetPartialStrut true \
 #  --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
+
+## start other local programs
+test -f ~/.xmonad_autostart_local.sh \
+    && ~/.xmonad_autostart_local.sh &>/dev/null

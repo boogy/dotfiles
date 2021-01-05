@@ -235,7 +235,7 @@ myManageHook = composeAll . concat $
         doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
         myCFloats = [   "Arandr"               , "Places"             , "Nitrogen"          , "feh"             , "mpv"         ,
                         "Xfce4-terminal"       , "Shutter"            , "Blueman-manager"   , "vlc"             , "Antidote 10" ,
-                        "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           ,
+                        "Nm-connection-editor" , "Gnome-calculator"   , "Eog"               , "Piper"           , "Seahorse"    ,
                         "Evince"               , "VirtualBox Manager" , "Xfce4-taskmanager" , "Xfce4-appfinder" ,
                         "Pavucontrol"          , "File-roller"        , "Sxiv"              , "1Password"
                     ]
