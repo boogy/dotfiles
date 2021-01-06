@@ -8,4 +8,4 @@ Target=haskell*
 [Action]
 Description=Rebuild xmonad
 When=PostTransaction
-Exec=/usr/sbin/xmonad --recompile
+Exec=/usr/sbin/sudo -u boogy bash -c "/usr/sbin/xmonad --recompile"
