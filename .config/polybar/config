@@ -94,7 +94,7 @@ locale = fr_CH.UTF-8
 [bar/bar-xmonad]
 monitor = ${env:MONITOR:DP1-2}
 monitor-strict = false
-bottom = false
+bottom = true
 
 ; dpi-x = 0
 ; dpi-y = 0

@@ -83,6 +83,7 @@ import XMonad.Actions.WindowBringer
 import XMonad.Actions.Commands
 import XMonad.Actions.MouseResize
 import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Actions.GroupNavigation
 
 -- Graphics and Data
 import Graphics.X11.ExtraTypes.XF86
@@ -199,14 +200,15 @@ myBaseConfig = desktopConfig
 myManageHook = composeAll . concat $
     [ [ className =? c      --> doCenterFloat  | c <- myCFloats  ]
     , [ title     =? t      --> doCenterFloat  | t <- myTFloats  ]
-    , [ resource  =? r      --> doFloat        | r <- myRFloats  ]
+    , [ resource  =? r      --> doCenterFloat  | r <- myRFloats  ]
     , [ resource  =? i      --> doIgnore       | i <- myIgnores  ]
 
-    , [ className =? "firefox" <&&> title    =? "Library"                      --> doCenterFloat ]
-    , [ className =? "Firefox" <&&> resource =? "Toolkit"                      --> doFloat       ]
-    , [ className =? "firefox" <&&> title    =? "Picture-in-Picture"           --> doFloat       >> myCustomFloatingPosition ]
-    , [ className =? "zoom"    <&&> title    =? "Zoom - Licensed Account"      --> doCenterFloat ]
-    , [ className =? "zoom"    <&&> title    =? "Settings"                     --> doCenterFloat ]
+    , [ className =? "firefox"        <&&> title    =? "Library"                      --> doCenterFloat ]
+    , [ className =? "Firefox"        <&&> resource =? "Toolkit"                      --> doCenterFloat ]
+    , [ className =? "firefox"        <&&> title    =? "Picture-in-Picture"           --> doFloat       >> myCustomFloatingPosition ]
+    , [ className =? "zoom"           <&&> title    =? "Zoom - Licensed Account"      --> doCenterFloat ]
+    , [ className =? "zoom"           <&&> title    =? "Settings"                     --> doCenterFloat ]
+    , [ className =? "Google-chrome"  <&&> title    =? "Save File"                    --> doCenterFloat ]
 
     , [ myIsPrefixOf "zoom"            className <&&> myIsPrefixOf "zoom"            title --> doShiftAndGo myWS09]
     , [ myIsPrefixOf "Microsoft Teams" className <&&> myIsPrefixOf "Microsoft Teams" title --> doShiftAndGo myWS00]
@@ -531,6 +533,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mySup .|. controlMask, xK_slash),  withFocused (sendMessage . UnMergeAll))
     , ((mySup,                 xK_k),      onGroup W.focusUp')
     , ((mySup,                 xK_j),      onGroup W.focusDown')
+
+    -- cycle windows with the same class as focused
+    , ((mySup,                 xK_n),      nextMatchWithThis Forward  className)
+    , ((mySup,                 xK_p),      nextMatchWithThis Backward className)
 
     -- Increment / decrement the number of windows in the master area.
     , ((mySup .|. controlMask, xK_Left),   sendMessage (IncMasterN 1))
