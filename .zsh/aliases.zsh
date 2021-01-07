@@ -34,6 +34,7 @@ alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
 
 ## directory shortcuts
+hash -d dotfiles=~/dotfiles
 hash -d dunst=~/.config/dunst
 hash -d rofi=~/.config/rofi
 hash -d ranger=~/.config/ranger
@@ -47,6 +48,7 @@ hash -d sxhkd=~/.config/sxhkd
 hash -d sxiv=~/.config/sxiv/
 hash -d sxiv=~/.config/sxiv/
 hash -d picom=~/.config/picom
+hash -d xmonad=~/.config/xmonad
 hash -d conf-scripts=~/.config/scripts
 
 ## use delete key to delete
