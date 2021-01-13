@@ -263,10 +263,15 @@ myCustomFloatingPosition = (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
 
 myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD"
                                                     (title =? "scratchpad") myCustomFloatingPosition
-                , NS "music" "firefox --new-window 'https://music.youtube.com'"
-                                                    (className =? "firefox" <&&> fmap (isInfixOf "YouTube Music") title) myCustomFloatingPosition
+                -- , NS "music" "firefox --new-window 'https://music.youtube.com'"
+                --                                     (className =? "firefox" <&&> fmap (isInfixOf "YouTube Music") title) myCustomFloatingPosition
+                -- youtube music
+                , NS "music" "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod"
+                                                    (className =? "Google-chrome" <&&> resource =? "crx_cinhimbnkkaeohfgghhklpknlkffjgod") myCustomFloatingPosition
+                -- file manager scratchpad
                 , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad"
                                                     (className=? "thunar-scratchpad") myCustomFloatingPosition
+                -- not used
                 , NS "notes" spawnTerm findTerm manageTerm
                 ]
     where
