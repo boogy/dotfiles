@@ -16,6 +16,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-eunuch'
     Plug 'airblade/vim-gitgutter'
 
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -84,6 +87,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'lambdalisue/fern-renderer-devicons.vim'
 
 call plug#end()
+
 
 " Load plugins on insert to speed up vim launch
 " augroup load_us_ycm

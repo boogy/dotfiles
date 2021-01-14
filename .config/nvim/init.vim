@@ -43,6 +43,8 @@ source $HOME/.config/nvim/plug-config/NerdTree.vim
 source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/fern.vim
 source $HOME/.config/nvim/plug-config/vim-racer.vim
+source $HOME/.config/nvim/plug-config/vim-lsp.vim
+source $HOME/.config/nvim/plug-config/asyncomplete.vim
 
 " Themes
 source $HOME/.config/nvim/themes/gruvbox.vim

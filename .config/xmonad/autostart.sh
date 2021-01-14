@@ -94,7 +94,7 @@ _check picom "picom -b"
 #  --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
 
 ## setup screen locker
-xautolock -time 10 -locker "~/.config/scripts/betterlockscreen.sh --lock" &
+# xautolock -time 10 -locker "~/.config/scripts/betterlockscreen.sh --lock" &
 
 ## start other local programs
 test -f ~/.xmonad_autostart_local.sh \

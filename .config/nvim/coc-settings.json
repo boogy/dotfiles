@@ -23,11 +23,17 @@
     ],
     "languageserver": {
         "terraform": {
-            "command": "terraform-lsp",
-            "filetypes": [
-                "terraform"
+            "command": "terraform-ls",
+            "args": [
+                "serve",
+                "completion"
             ],
-            "initializationOptions": {}
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {}
         }
     },
     // coc-snippets
@@ -46,7 +52,7 @@
     "explorer.previewAction.onHover": false,
     "explorer.quitOnOpen": false,
     "explorer.buffer.tabOnly": false,
-    "explorer.keyMappings": {
+    "explorer.keyMappings.global": {
         "*": "toggleSelection",
         "<tab>": "actionMenu",
         "h": "collapse",
