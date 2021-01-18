@@ -7,9 +7,29 @@
         "html",
         "json"
     ],
+    "http.proxyStrictSSL": true,
+    //
     // coc-yaml settings
-    "yaml.format.enable": true,
+    //
     "yaml.completion": true,
+    "yaml.format.enable": true,
+    "yaml.validate": true,
+    "yaml.hover": true,
+    "yaml.schemaStore.enable": true,
+    "yaml.schemas": {
+        "https://json.schemastore.org/ansible-playbook": [
+            "*/host_playbooks/*.yaml",
+            "*/host_playbooks/*.yml"
+        ],
+        "https://json.schemastore.org/ansible-role-2.9": [
+            "*/host_playbooks/*.yaml",
+            "*/host_playbooks/*.yml"
+        ],
+        "https://json.schemastore.org/ansible-inventory": [
+            "*/host_playbooks/*.yaml",
+            "*/host_playbooks/*.yml"
+        ]
+    },
     // if false, microsoft python engine will be used
     "python.jediEnabled": false,
     "python.linting.enabled": true,
@@ -36,17 +56,23 @@
             "settings": {}
         }
     },
+    //
     // coc-snippets
+    //
     "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "json.enable": true,
     "json.format.enable": true,
+    //
     // coc-highlight
+    //
     "highlight.colorNames.enable": false,
     "highlight.colors.enable": true,
     "highlight.disableLanguages": [
         "markdown"
     ],
+    //
     // explorer
+    //
     "explorer.width": 50,
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
