@@ -13,23 +13,26 @@
     //
     "yaml.completion": true,
     "yaml.format.enable": true,
-    "yaml.validate": true,
+    "yaml.validate": false,
     "yaml.hover": true,
     "yaml.schemaStore.enable": true,
     "yaml.schemas": {
-        "https://json.schemastore.org/ansible-playbook": [
+        "/home/boogy/.config/nvim/json-schemas/ansible-stable-2.9.json": [
             "*/host_playbooks/*.yaml",
-            "*/host_playbooks/*.yml"
+            "*/host_playbooks/*.yml",
+            "*/tasks/*.yml",
+            "*/tasks/*.yaml"
         ],
-        "https://json.schemastore.org/ansible-role-2.9": [
-            "*/host_playbooks/*.yaml",
-            "*/host_playbooks/*.yml"
-        ],
-        "https://json.schemastore.org/ansible-inventory": [
-            "*/host_playbooks/*.yaml",
-            "*/host_playbooks/*.yml"
+        "/home/boogy/.config/nvim/json-schemas/ansible-role-2.9.json": [
+            "*/roles/*.yaml",
+            "*/roles/*.yml",
+            "*/roles/*/tasks/*.yml",
+            "*/roles/*/tasks/*.yaml"
         ]
     },
+    "yaml.customTags": [
+        "!vault"
+    ],
     // if false, microsoft python engine will be used
     "python.jediEnabled": false,
     "python.linting.enabled": true,
