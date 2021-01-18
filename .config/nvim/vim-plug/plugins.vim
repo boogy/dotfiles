@@ -53,7 +53,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Syntax plugins and themes
     Plug 'ekalinin/Dockerfile.vim' , { 'for': ['docker'    , 'Dockerfile'] }
-    Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']              }
+    " Plug 'pearofducks/ansible-vim' , { 'for': ['yaml', 'yml']              }
+
+    " Themes
     Plug 'gruvbox-community/gruvbox'
     " Plug 'morhetz/gruvbox'
     Plug 'rakr/vim-one'
