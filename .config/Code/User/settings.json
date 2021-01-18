@@ -399,5 +399,5 @@
     "instantmarkdown.autoOpenBrowser": false,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "python.languageServer": "Pylance",
-    "workbench.colorTheme": "Gruvbox Dark (Hard)"
+    "workbench.colorTheme": "Gruvbox Dark Hard"
 }
