@@ -557,6 +557,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((myAlt .|. controlMask, xK_y),      commands >>= runCommand) -- select xmonad commands from dmenu
     , ((mySup,                 xK_s),      sendMessage ToggleStruts >> spawn "polybar-msg cmd toggle") -- toggle struts
 
+    -- swap screens
+    , ((myAlt .|. shiftMask,   xK_e),      screenWorkspace 0 >>= flip whenJust (windows . (W.greedyView)))
+    , ((mySup .|. shiftMask,   xK_e),      screenWorkspace 1 >>= flip whenJust (windows . (W.greedyView)))
+
     ]
 
     ++
