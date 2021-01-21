@@ -23,6 +23,10 @@ au BufRead,BufNewFile *.py
     \ set autoindent |
     \ set fileformat=unix
 
+" zM = close all folds
+" zR = open all folds
+" au BufNewFile,BufRead *.py set foldmethod=indent
+
 " Add the proper yml indentation
 au BufRead,BufNewFile *.yml
     \ set tabstop=2 |
