@@ -12,16 +12,11 @@
 "   autocmd BufNewFile,BufRead hosts setfiletype yaml.ansible
 " augroup END
 
-" au BufRead,BufNewFile */playbooks/*.yml        set filetype=yaml.ansible
-" au BufRead,BufNewFile */playbooks/*.yaml       set filetype=yaml.ansible
-" au BufRead,BufNewFile */*-ansible/*.yml        set filetype=yaml.ansible
-" au BufRead,BufNewFile */*-ansible/*.yaml       set filetype=yaml.ansible
-" au BufRead,BufNewFile */hosts_playbooks/*.yml  set filetype=yaml.ansible
-" au BufRead,BufNewFile */hosts_playbooks/*.yaml set filetype=yaml.ansible
+" au BufRead,BufNewFile */playbooks/*.{yml,yaml}        set filetype=yaml.ansible
+" au BufRead,BufNewFile */*-ansible/*.{yml,yaml}        set filetype=yaml.ansible
+" au BufRead,BufNewFile */hosts_playbooks/*.{yml,yaml}  set filetype=yaml.ansible
+" au BufRead,BufNewFile */host_playbooks/*.{yml,yaml}   set filetype=yaml.ansible
+" au BufRead,BufNewFile */roles/*.{yml,yaml}            set filetype=yaml.ansible
 
-au BufRead,BufNewFile */playbooks/*.{yml,yaml}        set filetype=yaml.ansible
-au BufRead,BufNewFile */*-ansible/*.{yml,yaml}        set filetype=yaml.ansible
-au BufRead,BufNewFile */hosts_playbooks/*.{yml,yaml}  set filetype=yaml.ansible
-au BufRead,BufNewFile */roles/*.{yml,yaml}            set filetype=yaml.ansible
-
-au BufNewFile,BufRead *.{yml,yaml}.j2                 set syntax=yaml.jinja2
+au BufRead,BufNewFile *.{yml,yaml}     set filetype=yaml.ansible
+au BufNewFile,BufRead *.{yml,yaml}.j2  set filetype=yaml.jinja2
