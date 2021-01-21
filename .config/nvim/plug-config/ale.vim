@@ -25,10 +25,6 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_echo_msg_info_str = 'Info'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_fix_on_save = 0
-let g:ale_fixers = {
-      \    'python': ['yapf'],
-      \    '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \}
 let g:ale_history_enabled = 1
 let g:ale_history_log_output = 1
 let g:ale_keep_list_window_open = 0
@@ -45,6 +41,10 @@ let g:ale_linters = {
       \   'yaml': ['ansible-lint', 'yaml'],
       \   'ansible': ['ansible-lint', 'yaml'],
       \   'javascript': ['eslint'],
+      \}
+let g:ale_fixers = {
+      \    'python': ['yapf'],
+      \    '*': ['remove_trailing_lines', 'trim_whitespace'],
       \}
 let g:ale_linters_explicit = 0
 let g:ale_linters_ignore = {}
