@@ -2,15 +2,30 @@
 " Plugin Commands: https://github.com/prabirshrestha/vim-lsp#supported-commands
 "
 
-" " Registering servers
-" if executable('pyls')
-"     " pip install python-language-server
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'pyls',
-"         \ 'cmd': {server_info->['pyls']},
-"         \ 'allowlist': ['python'],
-"         \ })
-" endif
+" ########################################################
+" Python language server
+" ########################################################
+
+" Highlight references to the symbol under the cursor (enabled by default)
+let g:lsp_document_highlight_enabled = 0
+
+" Disable diagnostic support
+let g:lsp_diagnostics_enabled = 0
+
+" Registering servers
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+
+" ########################################################
+" Terraform language server
+" ########################################################
 
 " terraform language server
 if executable('terraform-ls')
@@ -20,6 +35,7 @@ if executable('terraform-ls')
         \ 'whitelist': ['terraform'],
         \ })
 endif
+
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
