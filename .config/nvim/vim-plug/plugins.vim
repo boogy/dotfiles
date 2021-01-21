@@ -30,6 +30,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Replace vim-airline with a lighter equivalent
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
+    Plug 'maximbaz/lightline-ale'
     " Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
 
@@ -46,6 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Use release branch (Recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'dense-analysis/ale'
 
     " Markdown
     Plug 'plasticboy/vim-markdown' , { 'for': 'markdown' }

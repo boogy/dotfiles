@@ -22,6 +22,7 @@ source $HOME/.config/nvim/general/functions.vim
 source $HOME/.config/nvim/keys/mappings.vim
 
 " Plugin options
+source $HOME/.config/nvim/plug-config/ale.vim
 source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/coc-snippets.vim
 source $HOME/.config/nvim/plug-config/coc-highlight.vim

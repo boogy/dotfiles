@@ -1,3 +1,7 @@
+"########################################################
+" LightLine Config
+"########################################################
+
 set laststatus=2
 set noshowmode
 
@@ -13,7 +17,11 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'lightline_hunks','readonly', 'absolutepath', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype', 'coc_status' ] ]
+      \   'right': [
+      \              [ 'lineinfo' ],
+      \              ['percent'],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'coc_status' ],
+      \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ],
       \ },
       \ 'component_function': {
       \   'lightline_hunks': 'LightLineHunksComposer',
@@ -35,7 +43,6 @@ let g:lightline.tabline = {
 "   \   'left': [ ['tabs'] ],
 "   \   'right': [ ['close'] ]
 "   \ }
-
 let g:lightline.separator = {
 	\   'left': '', 'right': ''
   \}
@@ -49,7 +56,6 @@ let g:vimshell_force_overwrite_statusline = 0
 
 " COC status force lightline update
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
 
 " Show git hunk symbols in lightline
 " code from : https://github.com/sinetoami/lightline-hunks
@@ -86,6 +92,31 @@ function! LightLineHunksComposer()
   endif
   return ''
 endfunction
+
+
+" #######################################################
+" lightline-ale
+" #######################################################
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+let g:lightline#ale#indicator_checking = "\uf110 "
+let g:lightline#ale#indicator_infos = "\uf129 "
+let g:lightline#ale#indicator_warnings = "\uf071 "
+let g:lightline#ale#indicator_errors = "\uf05e "
+let g:lightline#ale#indicator_ok = "\uf00c "
 
 
 "########################################################
@@ -139,4 +170,6 @@ nmap <silent> <leader>C :DelBufferline<space>
 
 command! -nargs=* GoToBufferNb :call lightline#bufferline#go(<q-args>)
 nmap <silent> <leader>G :GoToBufferNb<space>
+
+
 
