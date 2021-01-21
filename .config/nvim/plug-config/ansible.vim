@@ -19,4 +19,4 @@
 "   autocmd BufNewFile,BufRead hosts setfiletype yaml.ansible
 " augroup END
 
-au BufRead,BufNewFile *.yaml set filetype=yaml
+" au BufRead,BufNewFile *.yaml set filetype=yaml

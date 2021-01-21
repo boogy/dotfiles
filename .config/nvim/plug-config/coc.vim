@@ -147,7 +147,7 @@ let g:coc_global_extensions = [
 \ 'coc-css',
 \ 'coc-yaml',
 \ 'coc-highlight',
-\ 'coc-python',
+\ 'coc-pyright',
 \ 'coc-snippets',
 \ 'coc-explorer',
 \ 'coc-rls',

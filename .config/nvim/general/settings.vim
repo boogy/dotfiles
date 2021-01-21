@@ -50,6 +50,7 @@ set redrawtime=20000                    " For syntax highlighting the time appli
 set hlsearch                            " Highlight searches
 set noswapfile                          " Disable swapfile creation
 set textwidth=120                       " I hate when vim wraps the text to 80 chars
+" set colorcolumn=120                     " show line length colored border line
 
 " timeout or commentary is not working properly
 set ttimeout
