@@ -25,7 +25,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_echo_msg_info_str = 'Info'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_fix_on_save = 0
-let g:ale_fixers = {'python': ['yapf']}
+let g:ale_fixers = {
+      \    'python': ['yapf'],
+      \    '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \}
 let g:ale_history_enabled = 1
 let g:ale_history_log_output = 1
 let g:ale_keep_list_window_open = 0
@@ -36,7 +39,13 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linter_aliases = {}
-let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_linters = {
+      \   'python': ['flake8', 'pylint'],
+      \   'terraform': ['tflint'],
+      \   'yaml': ['ansible-lint', 'yaml'],
+      \   'ansible': ['ansible-lint', 'yaml'],
+      \   'javascript': ['eslint'],
+      \}
 let g:ale_linters_explicit = 0
 let g:ale_linters_ignore = {}
 let g:ale_list_vertical = 0
@@ -81,3 +90,6 @@ function! AleLinterStatus() abort
     \   all_errors
     \)
 endfunction
+
+" let g:ale_yaml_yaml_executable = "ansible-lint"
+" let g:ale_ansible_ansible_lint_executable = "ansible-lint"

@@ -12,7 +12,10 @@ let g:lsp_document_highlight_enabled = 0
 " Disable diagnostic support
 let g:lsp_diagnostics_enabled = 0
 
-" Registering servers
+
+" ########################################################
+" Python language server
+" ########################################################
 if executable('pyls')
     " pip install python-language-server
     au User lsp_setup call lsp#register_server({
@@ -24,10 +27,20 @@ endif
 
 
 " ########################################################
+" Ansible language server
+" ########################################################
+if executable('ansible-lint')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ansible-lint',
+        \ 'cmd': {server_info->['ansible-lint']},
+        \ 'allowlist': ['yaml', 'ansible'],
+        \ })
+endif
+
+" ########################################################
 " Terraform language server
 " ########################################################
-
-" terraform language server
 if executable('terraform-ls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'terraform-ls',

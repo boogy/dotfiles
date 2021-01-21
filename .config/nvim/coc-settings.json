@@ -17,6 +17,7 @@
     "yaml.validate": false,
     "yaml.hover": true,
     "yaml.schemaStore.enable": true,
+    "yaml.format.bracketSpacing": true,
     "yaml.schemas": {
         // Additonal schemas: https://www.schemastore.org/json/
         "/home/boogy/.config/nvim/json-schemas/ansible-stable-2.9.json": [
