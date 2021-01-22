@@ -8,7 +8,7 @@ let g:coc_explorer_global_presets = {
 \   'floatingLeftside': {
 \      'position': 'floating',
 \      'floating-position': 'left-center',
-\      'floating-width': 40,
+\      'floating-width': 50,
 \   },
 \   'floatingRightside': {
 \      'position': 'floating',
@@ -20,7 +20,7 @@ let g:coc_explorer_global_presets = {
 \   }
 \ }
 ""nmap <silent> <space>e :CocCommand explorer<CR>
-nnoremap <leader>e :CocCommand explorer --toggle --sources=buffer+,file+<CR>
-
+nnoremap <leader>e :CocCommand explorer --toggle --sources=buffer-,file+<CR>
 nmap <leader>E :CocCommand explorer --preset floatingRightside<CR>
+
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

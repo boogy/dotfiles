@@ -30,11 +30,10 @@ endif
 " Ansible language server
 " ########################################################
 if executable('ansible-lint')
-    " pip install python-language-server
     au User lsp_setup call lsp#register_server({
         \ 'name': 'ansible-lint',
         \ 'cmd': {server_info->['ansible-lint']},
-        \ 'allowlist': ['yaml', 'ansible'],
+        \ 'allowlist': ['yaml', 'ansible', 'yaml.ansible'],
         \ })
 endif
 

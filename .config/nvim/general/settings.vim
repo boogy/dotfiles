@@ -3,8 +3,9 @@ let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 
 syntax enable                           " Enables syntax highlighing
-" set hidden                              " Required to keep multiple buffers open multiple buffers
+set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
+set noerrorbells                        " Don't ring the bell (beep or screen flash) for error messages
 set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
@@ -33,7 +34,7 @@ set noshowmode                          " We don't need to see things like -- IN
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set updatetime=300                      " Faster completion
-set timeoutlen=100                      " By default timeoutlen is 1000 ms
+" set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set autoread                            " Automatically reload changes if detected
@@ -45,17 +46,22 @@ set showmatch                           " Show matching brackets when text indic
 set backspace=eol,start,indent          " Configure backspace so it acts as it should
 set lazyredraw                          " Don't redraw while executing macros (better performance config)
 set lcs+=space:·                        " Character to show for spaces when `set list` is active
-" set listchars=tab:\|\                   " Character to show for tabs
 set redrawtime=20000                    " For syntax highlighting the time applies per window
 set hlsearch                            " Highlight searches
 set noswapfile                          " Disable swapfile creation
 set textwidth=120                       " I hate when vim wraps the text to 80 chars
+" set listchars=tab:\|\                   " Character to show for tabs
 " set colorcolumn=120                     " show line length colored border line
+set scrolloff=8                         " Minimal number of screen lines to keep above and below the cursor
+set updatetime=50                       " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+set cmdheight=2                         " Number of screen lines to use for the command-line
 
 " timeout or commentary is not working properly
-set ttimeout
-set timeoutlen=150
-set ttimeoutlen=0
+" set timeout
+" set ttimeout
+" set timeoutlen=150
+" set ttimeoutlen=0
+set timeoutlen=500
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
