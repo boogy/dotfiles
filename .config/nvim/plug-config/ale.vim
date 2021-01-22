@@ -38,7 +38,7 @@ let g:ale_linter_aliases = {}
 let g:ale_linters = {
       \   'python': ['flake8', 'pylint'],
       \   'terraform': ['tflint'],
-      \   'yaml': ['ansible-lint', 'yaml'],
+      \   'yaml': ['ansible-lint', 'yaml', 'prettier'],
       \   'ansible': ['ansible-lint', 'yaml'],
       \   'javascript': ['eslint'],
       \}
