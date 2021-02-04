@@ -301,7 +301,7 @@ myTabConfig = def { activeColor = "#556064"
 -- -------------------------------------------------------------------------------------------------------
 perWS = onWorkspace myWS01 myTiledFirst $
         onWorkspace myWS02 myFullFirst  $
-        onWorkspace myWS03 myTiledFirst $
+        onWorkspace myWS03 myFullFirst  $
         onWorkspace myWS04 myFullFirst  $
         onWorkspace myWS05 myFullFirst  $
         onWorkspace myWS06 myFullFirst  $
