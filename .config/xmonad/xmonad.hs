@@ -263,14 +263,19 @@ myCustomFloatingPosition = (customFloating (W.RationalRect 0.1 0.1 0.8 0.8))
 
 myScratchpads = [ NS "terminal" "alacritty --class=scratchpad -t scratchpad -e tmux new-session -A -s SCRATCHPAD"
                                                     (title =? "scratchpad") myCustomFloatingPosition
-                -- , NS "music" "firefox --new-window 'https://music.youtube.com'"
-                --                                     (className =? "firefox" <&&> fmap (isInfixOf "YouTube Music") title) myCustomFloatingPosition
                 -- youtube music
                 , NS "music" "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod"
                                                     (className =? "Google-chrome" <&&> resource =? "crx_cinhimbnkkaeohfgghhklpknlkffjgod") myCustomFloatingPosition
-                -- file manager scratchpad
+                -- 1Password
+                , NS "1password" "/usr/bin/1password" (className =? "1Password" <&&> resource =? "1password") myCustomFloatingPosition
+
+                -- thunar
                 , NS "thunar-scratchpad" "thunar --name=thunar-scratchpad --class=thunar-scratchpad"
-                                                    (className=? "thunar-scratchpad") myCustomFloatingPosition
+                                                    (className =? "thunar-scratchpad" <&&> resource =? "thunar-scratchpad") myCustomFloatingPosition
+
+                , NS "pcmanfm-scratchpad" "pcmanfm-qt --title pcmanfm-scratchpad --name pcmanfm-scratchpad"
+                                                    (className =? "pcmanfm-qt" <&&> resource =? "pcmanfm-scratchpad") myCustomFloatingPosition
+
                 -- not used
                 , NS "notes" spawnTerm findTerm manageTerm
                 ]
@@ -478,6 +483,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- scratchpads
     , ((myAlt, xK_u),     namedScratchpadAction myScratchpads "terminal")
     , ((mySup, xK_F1),    namedScratchpadAction myScratchpads "music")
+    , ((mySup, xK_1),     namedScratchpadAction myScratchpads "1password")
+    , ((mySup, xK_0),     namedScratchpadAction myScratchpads "pcmanfm-scratchpad")
     , ((0,     xK_F3),    spawn $ "xfce4-appfinder")
 
 
