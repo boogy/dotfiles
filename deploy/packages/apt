@@ -95,7 +95,7 @@ gtk2-engines-murrine
 vpnc
 #####################
 #####################
-bspwm
+#bspwm
 sxhkd
 feh
 xdo
@@ -171,9 +171,11 @@ libxcb-composite0-dev
 xcb
 libxcb-ewmh2
 python3-sphinx
+python3-xcbgen
 gcc-c++
 clang
 cmake
+cmake-data
 seahorse
 qt5ct
 libnfs-utils

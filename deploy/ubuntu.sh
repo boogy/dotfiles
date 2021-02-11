@@ -21,6 +21,8 @@ sudo apt remove -y --purge rhythmbox ekiga totem ubuntu-one unity-lens-music \
 sudo add-apt-repository -y ppa:libreoffice/ppa
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo add-apt-repository -y ppa:ansible/ansible
+## alacritty PPA
+sudo add-apt-repository -y ppa:aslatter/ppa
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -39,14 +41,18 @@ if [[ -f $DIR/packages/apt ]]; then
 fi
 
 
+##
 ## Install docker
+##
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce
 sudo usermod -aG docker ${USER}
 
+##
 ## Install polybar
+##
 git clone https://github.com/jaagr/polybar.git $HOME/polybar
 cd $HOME/polybar
 mkdir build
@@ -56,9 +62,12 @@ make -j$(nproc)
 sudo make install
 
 
+##
 ## Install snaps
+##
 # sudo apt install -y snapd
-sudo snap install alacritty --classic
+# sudo snap install alacritty --classic
+# sudo snap install polybar-git --edge
 
 ## Install rustup
 # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
