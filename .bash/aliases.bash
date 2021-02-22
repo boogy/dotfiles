@@ -211,11 +211,11 @@ alias show-running-services="systemctl -t service --state running"
 ##
 ## NVIDIA aliases
 ##
-alias nvidia-on="sudo tee /proc/acpi/bbswitch <<<ON"
-alias nvidia-off="sudo tee /proc/acpi/bbswitch <<<OFF"
-alias nvidia-is-on="cat /proc/acpi/bbswitch"
-alias nvidia-check64="optirun glxspheres64"
-alias nvidia-check32="optirun glxspheres32"
+# alias nvidia-on="sudo tee /proc/acpi/bbswitch <<<ON"
+# alias nvidia-off="sudo tee /proc/acpi/bbswitch <<<OFF"
+# alias nvidia-is-on="cat /proc/acpi/bbswitch"
+# alias nvidia-check64="optirun glxspheres64"
+# alias nvidia-check32="optirun glxspheres32"
 
 ##
 ## MISC
@@ -237,7 +237,7 @@ alias busy='my_file=$(find /usr/include -type f | sort -R | head -n 1); my_len=$
 alias fix_stty='stty sane'
 alias timestamp="date +%Y%m%d%H%M%S"
 
-alias change-mouse-theme="sudo update-alternatives --config x-cursor-theme"
+# alias change-mouse-theme="sudo update-alternatives --config x-cursor-theme"
 alias reload-xresources="xrdb ~/.Xresources"
 alias show-xresources="xrdb -query -all"
 alias show-wifi="wicd-curses" # wicd service should be started
