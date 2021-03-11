@@ -112,6 +112,14 @@ let g:which_key_map['l'] = {
   \ 'W'     : [":LspWorkspaceSymbolSearch"  , 'Workspace Symbol Search'] ,
   \ }
 
+" CoCCommand for python
+let g:which_key_map['y'] = {
+  \ 'name'  : 'Python CocCommands'                       ,
+  \ 'i'     : [":CocCommand pyright.organizeimports"     , 'Organize python imports'] ,
+  \ 'l'     : [":CoCCommand python.runLinting"           , 'Run linting']             ,
+  \ 'a'     : [":CoCCommand pyright.addoptionalforparam" , 'Run linting']             ,
+  \ 'r'     : [":CoCCommand pyright.restartserver"       , 'Restart Python Server']   ,
+  \ }
 
 " ALE mappings
 let g:which_key_map['A'] = {
