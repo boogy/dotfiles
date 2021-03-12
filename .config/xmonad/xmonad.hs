@@ -609,7 +609,7 @@ myAdditionalKeys =
 
 -- execute when xmonad starts
 myStartupHook = do
-    spawn "$HOME/.config/xmonad/autostart.sh"
+    spawn "$HOME/.config/xmonad/autostart.sh &"
     setWMName "LG3D"
     -- spawnOn myWS01 "alacritty --class=work -t work -e tmux new-session -A -s WORK"
     -- spawnOn myWS02 myBrowser
@@ -638,7 +638,7 @@ main = do
             , borderWidth        = myBorderWidth
             , handleEventHook    = serverModeEventHookCmd
                                     <+> serverModeEventHook
-                                    <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
+                                    -- <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                     <+> docksEventHook
                                     <+> fullscreenEventHook
                                     <+> ewmhDesktopsEventHook

@@ -10,7 +10,7 @@ _check() {
 }
 
 ## detect screen layout automatically
-autorandr -c
+autorandr -c &>/dev/null
 
 ##
 ## SETTINGS
@@ -41,7 +41,6 @@ xset s noblank &
 xset s noexpose &
 xset c on &
 xset -dpms &
-xbacklight -set 15 &
 
 ## set proper cursor
 xsetroot -cursor_name left_ptr &
