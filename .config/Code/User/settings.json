@@ -21,7 +21,7 @@
     "editor.largeFileOptimizations": false,
     "editor.fontSize": 13,
     "editor.columnSelection": false,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.suggestSelection": "first",
     //
     // VIM CONFIG
@@ -352,9 +352,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000"
     },
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "material-icon-theme",
