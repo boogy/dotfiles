@@ -12,6 +12,7 @@ __pycache__
 Pipefile.lock
 Pipefile
 .venv
+yarn.lock
 
 ## VIM / NVIM
 .vim/plugged/*

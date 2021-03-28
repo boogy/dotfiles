@@ -83,7 +83,7 @@ alias mv="mv -i"
 [ uname -s =~ Darwin ] && {
     alias rm=rm
 } || {
-    alias rm="rm -I"    # "rm -i" prompts for every file
+    alias rm="rm -i"    # "rm -i" prompts for every file
 }
 alias ln="ln -i"    # prompt whether to remove destinations
 # alias chown="chown --preserve-root"
