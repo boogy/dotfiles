@@ -11,11 +11,13 @@ blue=$(tput setaf 4)     # Heading
 bold=$(tput bold  setaf 7)     # Highlight
 reset=$(tput setaf 7)       # Norma
 
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+
 ##
 ## The 'ls' family (this assumes you use a recent GNU ls)
 ## or rust equivalent 'exa'
 ##
-command -v -p exa &>/dev/null && {
+if command -v exa &>/dev/null; then
     alias ls="exa -g --color=auto --time-style=long-iso"
     alias ll="ls -l --color=auto"
     alias l=ll
@@ -24,9 +26,8 @@ command -v -p exa &>/dev/null && {
     alias llmr="ls -lr -s modified"
     alias llt="ll -T"
     alias llg="ll -G"
-} || {
-
-    [ ! uname -s =~ Darwin ] && {
+else
+    ! [ uname -s =~ Darwin ] && {
         ## add color if on macOS
         alias ls="ls -G"
         alias ll="ls -l"
@@ -45,12 +46,12 @@ command -v -p exa &>/dev/null && {
         alias lr="ls -lR"          # recursive ls
         alias lsdirs="ls -l | grep --color=always "^d""
     }
-}
+fi
 
 ##
 ## vim stuff
 ##
-command -v -p nvim &>/dev/null && {
+command -v nvim &>/dev/null && {
     # function vim(){ nvim $@; }
     export EDITOR=nvim
 } || {
@@ -69,7 +70,7 @@ alias vm-conf="$EDITOR ~/.vim/mappings.vim"
 alias i3-conf="$EDITOR ~/.config/i3/config"
 alias polybar-conf="$EDITOR ~/.config/i3/polybar_config"
 
-command -v -p rg &>/dev/null && {
+command -v rg &>/dev/null && {
     alias rg='rg --hidden'
 }
 
@@ -79,11 +80,15 @@ command -v -p rg &>/dev/null && {
 alias cp="cp -i"
 alias cp2="rsync -aPWh"
 alias mv="mv -i"
-alias rm="rm -I"    # "rm -i" prompts for every file
+[ uname -s =~ Darwin ] && {
+    alias rm=rm
+} || {
+    alias rm="rm -I"    # "rm -i" prompts for every file
+}
 alias ln="ln -i"    # prompt whether to remove destinations
-alias chown="chown --preserve-root"
-alias chmod="chmod --preserve-root"
-alias chgrp="chgrp --preserve-root"
+# alias chown="chown --preserve-root"
+# alias chmod="chmod --preserve-root"
+# alias chgrp="chgrp --preserve-root"
 alias batpp="bat -p --paging=never"
 alias batp="bat --paging=never"
 
