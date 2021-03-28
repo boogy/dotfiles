@@ -220,7 +220,13 @@ fi
 ##
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
-#source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
+## macos brew
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+
+if command -v brew &>/dev/null; then
+    source $(brew --prefix)/share/zsh-completions
+fi
 
 ## load prompt
 source ~/.zsh/prompt/prompt.zsh
@@ -243,4 +249,3 @@ source ~/.zsh/prompt/prompt.zsh
 # }
 # ;;
 # esac
-

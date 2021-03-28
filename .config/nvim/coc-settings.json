@@ -47,7 +47,7 @@
     ],
     "python.venvPath": ".venv",
     //
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "python.linting.lintOnSave": false,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintPath": "pylint",

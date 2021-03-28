@@ -88,7 +88,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Asynchronous file explorer
     Plug 'lambdalisue/fern.vim'
     Plug 'lambdalisue/fern-git-status.vim'
-    Plug 'lambdalisue/fern-renderer-devicons.vim'
+    Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+    " Plug 'lambdalisue/fern-renderer-devicons.vim'
 
 call plug#end()
 
