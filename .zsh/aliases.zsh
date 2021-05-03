@@ -94,3 +94,8 @@ for ft in $_media_fts; do alias -s $ft=mplayer; done
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/config,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
+
+alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>&1 |grep -v "ermi"'
+
+
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}

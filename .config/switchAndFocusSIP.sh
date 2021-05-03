@@ -29,21 +29,21 @@ CurrentlyVisibleSpaceNames=$(yabai -m query --spaces | jq -re ".[] | select(.vis
 #  yabai -m space 6 --label six
 case $inputKeyNumber in
 '1')
-    firstSpaceName='one'
+    firstSpaceName='main'
     firstspacenumber='1'
-    secondSpaceName='two'
+    secondSpaceName='web'
     secondSpacenumber='2'
     ;;
 '2')
-    firstSpaceName='three'
+    firstSpaceName='term'
     firstspacenumber='3'
-    secondSpaceName='four'
+    secondSpaceName='mail'
     secondSpacenumber='4'
     ;;
 '3')
-    firstSpaceName='five'
+    firstSpaceName='vms'
     firstspacenumber='5'
-    secondSpaceName='six'
+    secondSpaceName='docs'
     secondSpacenumber='6'
     ;;
 esac

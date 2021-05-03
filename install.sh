@@ -36,12 +36,14 @@ if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
     done
 fi
 
+
 ## copy/symlink files to installdir
 for FILE in ${MANAGED_FILES[@]}; do
     STRIPED_FILE_NAME=${FILE##*/}
     echo "Copying ${THIS_DIR}/${STRIPED_FILE_NAME} to ${INSTALLDIR}"
     ln -sf ${THIS_DIR}/${STRIPED_FILE_NAME} ${INSTALLDIR}
 done
+
 
 ## link .config files
 for DOT_FILE in $(ls .config); do
@@ -50,6 +52,13 @@ for DOT_FILE in $(ls .config); do
     fi
     ln -sf $THIS_DIR/.config/$DOT_FILE ~/.config/
 done
+
+
+## Alacritty OS specific config
+cd ~/.config/alacritty \
+    && ln -sf alacritty.yml alacritty-$(uname -s).yml \
+    && cd $THIS_DIR
+
 
 ## link scripts
 for FILE in $(ls $THIS_DIR/.config/scripts); do
@@ -74,33 +83,38 @@ nvim -c 'CocInstall -sync coc-python coc-json coc-powershell coc-snippets coc-ex
 ln -sf ~/.config/nvim/init.vim ~/.vimrc
 ln -sf ~/.config/nvim ~/.vim
 
-##
-## Install powerline fonts
-##
-# git clone https://github.com/powerline/fonts.git --depth=1 ${INSTALLDIR}/powerline_fonts
-# cd ${INSTALLDIR}/powerline_fonts
-# ./install.sh
-# rm -rf ${INSTALLDIR}/powerline_fonts &>/dev/null
-
-
-## setup xmonad
-mkdir -p $HOME/.local/share/xmonad
-ln -s ${THIS_DIR}/.config/xmonad $HOME/.xmonad
-cd $HOME/.config/xmonad/ && ghc -dynamic xmonadctl.hs
-
 
 ## Copy firefox user.js in all profiles
-FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
+case $(uname -s) in
+    Darwin)
+        firefox_profile="/Users/$USER/Library/Application Support/Firefox/Profiles"
+        firefox_ini_pth="/Users/$USER/Library/Application Support/Firefox/profiles.ini"
+        ;;
+    Linux)
+        firefox_profile=~/.mozilla/firefox
+        firefox_ini_pth=$firefox_profile
+        ;;
+esac
+
+# FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
+FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ${firefox_ini_pth}))
 for P in ${FF_PROFILES_PATHS[@]}; do
-    cp ${THIS_DIR}/deploy/conf/firefox/user.js ~/.mozilla/firefox/${P}/
+    cp ${THIS_DIR}/deploy/conf/firefox/user.js ${firefox_profile}/${P}
 done
 
-## Make sure .bash_aliases is loaded
+## Make sure .bash_aliases is loaded and more
 case $(uname) in
     [Ll]inux)
         grep -qEo ".bash_aliases" ~/.bashrc \
             || echo "source ~/.bash_aliases" >> ~/.bashrc
         (test -f ~/.bashrc && chmod 0700 $_ && source $_) &>/dev/null
+
+        ## setup xmonad
+        # command -v ghc && {
+        #     (mkdir -p $HOME/.local/share/xmonad \
+        #         && ln -s ${THIS_DIR}/.config/xmonad $HOME/.xmonad \
+        #         && cd $HOME/.config/xmonad/ && ghc -dynamic xmonadctl.hs) &>/dev/null
+        # }
         ;;
 
     [Dd]arwin)
@@ -110,6 +124,9 @@ case $(uname) in
         grep -qEo ".bash_aliases" ~/.bashrc \
             || echo "source ~/.bash_aliases" >> ~/.profile
         (test -f ~/.profile && chmod 0700 $_ && source $_) &>/dev/null
+
+        ## setup VSCode
+        ln -sf ${THIS_DIR}/deploy/conf/VSCode/User /Users/bnicorici/Library/Application\ Support/Code/
         ;;
     *)
         echo "These dotfiles do not support $(uname)"
