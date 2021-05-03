@@ -45,6 +45,10 @@ pandoc-citeproc
 !.config/Code/User/settings.json
 !.config/Code/User/keybindings.json
 !.config/Code/User/snippets/
+deploy/conf/VSCode/User/*
+!deploy/conf/VSCode/User/settings.json
+!deploy/conf/VSCode/User/*.json
+!deploy/conf/VSCode/User/snippets/*
 
 ## VIFM
 .config/vifm/*

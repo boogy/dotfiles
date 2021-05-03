@@ -2,7 +2,7 @@
     //
     // EDITOR CONFIG
     //
-    "editor.fontFamily": "Source Code Pro for Powerline",
+    "editor.fontFamily": "Cousine Nerd Font",
     // "editor.fontFamily": "Ubuntu Mono derivative Powerline",
     // "editor.fontFamily": "Source Code Pro Regular",
     "editor.fontSize": 14,
@@ -42,15 +42,27 @@
     "vim.insertModeKeyBindings": [
         // bind jj to <ESC> in insert mode
         {
-            "before": [ "j", "j" ],
-            "after": [ "<Esc>" ]
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": [ "k", "k" ],
-            "after": [ "<Esc>" ]
+            "before": [
+                "k",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": [ "C-v" ],
+            "before": [
+                "C-v"
+            ],
             "after": [],
             "commands": [
                 {
@@ -60,7 +72,9 @@
             ]
         },
         {
-            "before": [ "C-x" ],
+            "before": [
+                "C-x"
+            ],
             "after": [],
             "commands": [
                 {
@@ -70,7 +84,9 @@
             ]
         },
         {
-            "before": [ "C-c" ],
+            "before": [
+                "C-c"
+            ],
             "after": [],
             "commands": [
                 {
@@ -80,7 +96,9 @@
             ]
         },
         {
-            "before": [ "C-d" ],
+            "before": [
+                "C-d"
+            ],
             "after": [],
             "commands": [
                 {
@@ -90,7 +108,10 @@
             ]
         },
         {
-            "before": [ "C-k", "C-d" ],
+            "before": [
+                "C-k",
+                "C-d"
+            ],
             "after": [],
             "commands": [
                 {
@@ -102,47 +123,89 @@
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [ "<leader>", "d" ],
-            "after": [ "d", "d" ]
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "d",
+                "d"
+            ]
         },
         {
             // "before": [ "<C-n>" ],
-            "before": [ "<leader>", "<Enter>" ],
-            "commands": [ ":nohl" ]
+            "before": [
+                "<leader>",
+                "<Enter>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
         },
         {
-            "before": [";"],
+            "before": [
+                ";"
+            ],
             "commands": [
                 "workbench.action.showCommands",
             ]
         },
         {
-            "before": ["Z", "Z"],
-            "commands": [ ":wq" ]
+            "before": [
+                "Z",
+                "Z"
+            ],
+            "commands": [
+                ":wq"
+            ]
         },
         {
-            "before": ["<leader>", "w"],
-            "commands": [ "workbench.action.files.save", ]
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.files.save",
+            ]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": [ "<Delete>",],
-            "commands": [ "editor.action.deleteLines"],
+            "before": [
+                "<Delete>",
+            ],
+            "commands": [
+                "editor.action.deleteLines"
+            ],
         },
         // Bind p in visual mode to paste without overriding the current register
         {
-            "before": [ "p", ],
-            "after": [ "p", "g", "v", "y" ]
+            "before": [
+                "p",
+            ],
+            "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ]
         },
         // Bind > and < in visual mode to indent/outdent lines (repeatable)
         {
-            "before": [ ">" ],
-            "commands": [ "editor.action.indentLines" ]
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
         },
         {
-            "before": [ "<" ],
-            "commands": [ "editor.action.outdentLines" ]
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
         },
     ],
     // Allow VSCodeVim to change status bar color based on mode
@@ -247,7 +310,8 @@
     // Configure editor settings to be overridden for [yaml] language.
     "[yaml]": {
         "editor.insertSpaces": true,
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[ansible]": {
         "editor.insertSpaces": true,
@@ -270,7 +334,7 @@
     //
     // WINDOW CONFIG
     //
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "window.menuBarVisibility": "hidden",
     "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
@@ -280,10 +344,9 @@
     // WORKBENCH CONFIG
     //
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.activityBar.visible": false,
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.colorTheme": "Flatland Monokai",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
         "statusBar.noFolderBackground": "#005f5f",
@@ -333,5 +396,12 @@
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "python.languageServer": "Microsoft"
 }

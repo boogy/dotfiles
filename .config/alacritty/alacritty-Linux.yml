@@ -1,0 +1,180 @@
+env:
+  TERM: xterm-256color
+
+window:
+  dimensions:
+    columns: 0
+    lines: 0
+
+  # position:
+  #   x: 0
+  #   y: 0
+
+  padding:
+    x: 4
+    y: 1
+
+  # Window decorations
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  decorations: none
+
+  # Window title
+  title: Alacritty
+
+  # Window class (Linux/BSD only):
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+  # GTK theme variant (Linux/BSD only)
+  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
+  # Set this to `None` to use the default theme variant.
+  gtk_theme_variant: None
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+## Font configuration
+## Cool fonts
+##   Cousine for Powerline style=Regular
+##   Cousine Nerd Font Mono style=Regular
+font:
+  normal:
+    family: "Cousine Nerd Font"
+    style: Regular
+
+  bold:
+    family: "Cousine Nerd Font"
+    style: Bold
+
+  italic:
+    family: "Cousine Nerd Font"
+    style: Italic
+
+  ## Point size
+  size: 12
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: false
+
+background_opacity: 0.96
+# background_opacity: 1
+
+schemes:
+  ## Colors (Monokai)
+  monokai: &monokai
+    cursor:
+      text: "#000000"
+      cursor: "#ffffff"
+    primary:
+      background: "#191919"
+      foreground: "#d8dee9"
+    normal:
+      black: "#5D5B57"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#2AA198"
+      white: "#F9F8F5"
+    bright:
+      black: "#75715E"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#2AA198"
+      white: "#F9F9F5"
+
+  ## Colors (Gruvbox dark)
+  gruvbox-dark: &gruvbox-dark
+    primary:
+      background: '#1d2021'
+      foreground: '#ebdbb2'
+    normal:
+      black:   '#282828'
+      red:     '#cc241d'
+      green:   '#98971a'
+      yellow:  '#d79921'
+      blue:    '#458588'
+      magenta: '#b16286'
+      cyan:    '#689d6a'
+      white:   '#a89984'
+    bright:
+      black:   '#928374'
+      red:     '#fb4934'
+      green:   '#b8bb26'
+      yellow:  '#fabd2f'
+      blue:    '#83a598'
+      magenta: '#d3869b'
+      cyan:    '#8ec07c'
+      white:   '#ebdbb2'
+
+colors: *monokai
+# colors: *gruvbox-dark
+
+selection:
+  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  ## When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: false
+
+## Live config reload (changes require restart)
+live_config_reload: true
+
+## Shell
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+
+# Startup directory
+#working_directory: None
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+  hide_when_typing: true
+
+  url:
+    launcher:
+      program: xdg-open
+      args: []
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - { key: V          , mods: Control|Shift     , action: Paste            }
+  - { key: C          , mods: Control|Shift     , action: Copy             }
+  - { key: Paste      , action: Paste                                      }
+  - { key: Copy       , action: Copy                                       }
+  - { key: Insert     , mods: Shift             , action: PasteSelection   }
+  - { key: Key0       , mods: Control           , action: ResetFontSize    }
+  - { key: Plus       , mods: Control|Shift     , action: IncreaseFontSize }
+  - { key: Equals     , mods: Control|Shift     , action: IncreaseFontSize }
+  - { key: Minus      , mods: Control           , action: DecreaseFontSize }
+  - { key: L          , mods: Control           , action: ClearLogNotice   }
+  - { key: L          , mods: Control           , chars: "\x0c"            }
+  # - { key: PageUp   , action: ScrollPageUp                               }
+  # - { key: PageDown , action: ScrollPageDown                             }
+  # - { key: Home     , action: ScrollToTop                                }
+  # - { key: End      , action: ScrollToBottom                             }
+  - { key: PageUp     , chars: "\x1b[5~"                                   }
+  - { key: PageDown   , chars: "\x1b[6~"                                   }
+  - { key: Home       , chars: "\x1b[H"         , mode: ~AppCursor         }
+  - { key: Home       , chars: "\x1b[1~"        , mode: AppCursor          }
+  - { key: End        , chars: "\x1b[F"         , mode: ~AppCursor         }
+  - { key: End        , chars: "\x1b[4~"        , mode: AppCursor          }
+
