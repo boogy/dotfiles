@@ -201,6 +201,7 @@ bash_config_files=(
     python
     aliases
     git
+    azure-cli
 )
 BASH_FULL_FILE_PATH="${HOME}/.bash/"
 for config_file in $bash_config_files; do
