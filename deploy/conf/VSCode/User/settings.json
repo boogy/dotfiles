@@ -3,8 +3,6 @@
     // EDITOR CONFIG
     //
     "editor.fontFamily": "Cousine Nerd Font",
-    // "editor.fontFamily": "Ubuntu Mono derivative Powerline",
-    // "editor.fontFamily": "Source Code Pro Regular",
     "editor.fontSize": 14,
     "editor.lineHeight": 0,
     "editor.lineNumbers": "on",
@@ -241,16 +239,8 @@
     "vim.easymotionMarkerBackgroundColor": "#000000",
     // Set a custom color for the text on one character long markers.
     "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
-    // Set a custom color for the text on two character long markers.
-    "vim.easymotionMarkerForegroundColorTwoChar": "#ffa500",
-    // Set the width (in pixels) allocated to each character in the match.
-    "vim.easymotionMarkerWidthPerChar": 8,
     // Set the height of the marker.
     "vim.easymotionMarkerHeight": 14,
-    // Set the font family of the marker text.
-    "vim.easymotionMarkerFontFamily": "Consolas",
-    // Set the font size of the marker text.
-    "vim.easymotionMarkerFontSize": "12",
     // Set the font weight of the marker text.
     "vim.easymotionMarkerFontWeight": "normal",
     // Set the Y offset of the marker text (the distance from the top).
@@ -320,7 +310,7 @@
     //
     // TERMINAL CONFIG
     //
-    "terminal.integrated.fontFamily": "Ubuntu Mono derivative Powerline",
+    "terminal.integrated.fontFamily": "Cousine Nerd Font",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1.2,
     "terminal.external.linuxExec": "termite",
