@@ -79,6 +79,7 @@ yabai -m rule --add label="Transmission" app="^Transmission$" manage=off border=
 yabai -m rule --add label="VLC" app="VLC" manage=off border=off
 yabai -m rule --add label="Zoom" app="^Zoom$" manage=off border=off
 yabai -m rule --add label="MacVim" app="^MacVim$" manage=off border=off
+yabai -m rule --add label="Alfred Preferences" app="^Alfred Preferences$" manage=off border=off
 
 ## Remove borders
 yabai -m rule --add app="^Firefox$" border=off

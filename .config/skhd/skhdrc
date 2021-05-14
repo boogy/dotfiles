@@ -209,3 +209,7 @@ ctrl + alt - a : yabai -m space --layout bsp
 ctrl + alt - s : yabai -m space --layout stack
 # ctrl + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 ctrl + alt - d : yabai -m space --layout float
+
+## scratchpad
+alt - p: ~/.config/yabai/scratchpad.sh
+
