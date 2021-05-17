@@ -21,7 +21,7 @@ yarn.lock
 .vim/spell
 .vim/view
 .vim/sessions
-.vim/nvim/*
+.vim/nvim
 .config/nvim/sessions/
 .config/vifm/vifminfo
 .config/nvim/autoload/*
