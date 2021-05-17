@@ -56,7 +56,7 @@ done
 
 ## Alacritty OS specific config
 cd ~/.config/alacritty \
-    && ln -sf alacritty.yml alacritty-$(uname -s).yml \
+    && ln -sf alacritty-$(uname -s).yml alacritty.yml \
     && cd $THIS_DIR
 
 

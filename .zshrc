@@ -67,6 +67,9 @@ zstyle ':completion:*' menu select
 # Auto complete with case insenstivity
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
+## enable bash completions in zsh
+autoload -U +X bashcompinit && bashcompinit
+
 ## ../../ completion
 # zstyle ':completion:*' special-dirs true
 
