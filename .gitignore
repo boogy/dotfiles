@@ -29,6 +29,7 @@ yarn.lock
 .config/nvim/plugged/*
 .config/nvim/.netrwhist
 .config/nvim/spell
+.config/nvim/nvim
 
 copyright.pandoc
 pandoc

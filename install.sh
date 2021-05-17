@@ -82,6 +82,7 @@ nvim -c 'CocInstall -sync coc-python coc-json coc-powershell coc-snippets coc-ex
 ## map all the configuration for vim
 ln -sf ~/.config/nvim/init.vim ~/.vimrc
 ln -sf ~/.config/nvim ~/.vim
+ln -sf ~/.config/nvim ~/.vim/nvim
 
 
 ## Copy firefox user.js in all profiles
