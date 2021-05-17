@@ -37,6 +37,9 @@ pandoc-citeproc
 ## Vagrant
 .vagrant/
 
+## Alacritty link to config file
+.config/alacritty/alacritty.yml
+
 ## Visual Studio Code
 .vscode/
 .config/Code/*
@@ -63,6 +66,3 @@ deploy/conf/VSCode/User/*
 .config/xmonad/xmonad.o
 .config/xmonad/xmonadctl.hi
 .config/xmonad/xmonadctl.o
-
-## Alacritty link to config file
-.config/alacritty/alacritty.yml
