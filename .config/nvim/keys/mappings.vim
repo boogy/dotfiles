@@ -54,7 +54,7 @@ nnoremap <C-Q> :wq!<CR>
 nnoremap <C-c> <Esc>
 
 " <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Better tabbing / indentation
 vnoremap < <gv

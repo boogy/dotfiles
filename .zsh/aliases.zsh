@@ -100,4 +100,5 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>&1 |grep -v "ermi"'
 
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+[[ $(uname -s) =~ Darwin ]] \
+    && code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}

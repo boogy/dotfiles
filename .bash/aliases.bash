@@ -52,7 +52,6 @@ fi
 ## vim stuff
 ##
 command -v nvim &>/dev/null && {
-    # function vim(){ nvim $@; }
     export EDITOR=nvim
 } || {
     export EDITOR=vim
@@ -63,12 +62,6 @@ alias vim="$EDITOR -p"
 alias svi="sudo -E $EDITOR"
 alias svim="sudo -E $EDITOR"
 alias v-conf="$EDITOR ~/.vimrc"
-alias va-conf="$EDITOR ~/.vim/autocmds.vim"
-alias vc-conf="$EDITOR ~/.vim/config.vim"
-alias vf-conf="$EDITOR ~/.vim/functions.vim"
-alias vm-conf="$EDITOR ~/.vim/mappings.vim"
-alias i3-conf="$EDITOR ~/.config/i3/config"
-alias polybar-conf="$EDITOR ~/.config/i3/polybar_config"
 
 command -v rg &>/dev/null && {
     alias rg='rg --hidden'
@@ -86,9 +79,6 @@ alias mv="mv -i"
     alias rm="rm -i"    # "rm -i" prompts for every file
 }
 alias ln="ln -i"    # prompt whether to remove destinations
-# alias chown="chown --preserve-root"
-# alias chmod="chmod --preserve-root"
-# alias chgrp="chgrp --preserve-root"
 alias batpp="bat -p --paging=never"
 alias batp="bat --paging=never"
 
@@ -115,14 +105,6 @@ alias t-conf="$EDITOR ~/.tmux.conf"
 ##
 alias ~="cd ~"
 alias cd-="cd -"
-# alias cd..="cd .."
-# alias cd...="cd ../../"
-# alias cd....="cd ../../../"
-# alias ..="cd .."
-# alias .2="cd ../../"
-# alias .3="cd ../../../"
-# alias .4="cd ../../../../"
-# alias .5="cd ../../../../../"
 
 ##
 ## debian/ubuntu aliases
@@ -212,16 +194,6 @@ alias show-running-services="sudo systemctl list-units --type service --state ru
 alias show-active-services="systemctl -t service --state active"
 alias show-running-services="systemctl -t service --state running"
 
-
-##
-## NVIDIA aliases
-##
-# alias nvidia-on="sudo tee /proc/acpi/bbswitch <<<ON"
-# alias nvidia-off="sudo tee /proc/acpi/bbswitch <<<OFF"
-# alias nvidia-is-on="cat /proc/acpi/bbswitch"
-# alias nvidia-check64="optirun glxspheres64"
-# alias nvidia-check32="optirun glxspheres32"
-
 ##
 ## MISC
 ##
@@ -255,7 +227,6 @@ alias disable-hugepages="echo never | sudo tee /sys/kernel/mm/transparent_hugepa
 alias cups-start="sudo systemctl start org.cups.cupsd.service"
 alias cups-stop="sudo systemctl stop org.cups.cupsd.service"
 alias socks-create="ssh -f -N -D 1080"
-alias clusterssh="/usr/bin/vendor_perl/cssh"
 
 ##
 ## keyboard aliases
