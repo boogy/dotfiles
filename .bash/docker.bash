@@ -126,30 +126,4 @@ function drun
 complete -F _list_available_docker drun
 
 
-##
-## Start a local rocket chat instance
-##
-function rocket-chat-start
-{
-    ## docker pull rocket.chat
-    docker run --name db -d mongo:3.0 --smallfiles
-    docker run --name rocketchat --link db -d rocket.chat
-    #docker run --name rocketchat -p 80:3000 --env ROOT_URL=http://localhost --link db -d rocket.chat
-}
-
-
-##
-## Mono compile project
-##
-function mono-compile
-{
-    FILE_TO_COMPILE=$1
-    PLATFORM=${2:-"x64"}
-    docker run -it --rm \
-        -v $PWD:/share \
-        mono mcs -platform:${PLATFORM} /share/${FILE_TO_COMPILE}
-    # sudo chown ${USER}:${USER} "${FILE_TO_COMPILE%.*}"*
-}
-
-
 } # end check docker command
