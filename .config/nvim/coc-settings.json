@@ -162,5 +162,7 @@
         "r": "rename",
         "v": "open:vsplit",
         "o": "open:tab"
-    }
+    },
+    "powershell.debugging.createTemporaryIntegratedConsole": false,
+    "powershell.integratedConsole.showOnStartup": false
 }

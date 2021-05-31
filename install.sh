@@ -127,7 +127,7 @@ case $(uname) in
         (test -f ~/.profile && chmod 0700 $_ && source $_) &>/dev/null
 
         ## setup VSCode
-        ln -sf ${THIS_DIR}/deploy/conf/VSCode/User /Users/bnicorici/Library/Application\ Support/Code/
+        ln -sf ${THIS_DIR}/deploy/conf/VSCode/User "/Users/$USER/Library/Application Support/Code/"
         ;;
     *)
         echo "These dotfiles do not support $(uname)"
