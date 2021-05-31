@@ -221,11 +221,6 @@ mouse:
   triple_click: { threshold: 300 }
   hide_when_typing: true
 
-  url:
-    launcher:
-      program: open
-      args: []
-
 
 key_bindings:
   # (macOS only)
