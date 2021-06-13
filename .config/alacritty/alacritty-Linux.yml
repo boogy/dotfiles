@@ -147,10 +147,6 @@ mouse:
   triple_click: { threshold: 300 }
   hide_when_typing: true
 
-  url:
-    launcher:
-      program: xdg-open
-      args: []
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
