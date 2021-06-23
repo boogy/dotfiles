@@ -1,5 +1,4 @@
 {
-    "http.proxyStrictSSL": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "css",
         "markdown",
@@ -163,6 +162,7 @@
         "v": "open:vsplit",
         "o": "open:tab"
     },
+    "http.proxyStrictSSL": true,
     "powershell.debugging.createTemporaryIntegratedConsole": false,
     "powershell.integratedConsole.showOnStartup": false
 }
