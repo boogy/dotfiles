@@ -62,6 +62,10 @@ window:
     history: 100000
     multiplier: 3
 
+dpi:
+  x: 96.0
+  y: 96.0
+
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
 
@@ -92,7 +96,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: true
+  use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
