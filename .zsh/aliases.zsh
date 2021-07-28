@@ -35,6 +35,16 @@ alias go-root="sudo -u root -s"
 alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
 
+
+[[ $(uname -s) =~ Darwin ]] && {
+    alias brew-update='brew update && brew upgrade && brew cleanup'
+    alias b-clean='brew cleanup'
+    alias b-inst='brew install'
+    alias b-list='brew list'
+    alias b-list-formula='brew list --formula'
+    alias b-list-cask='brew list --cask'
+}
+
 ## directory shortcuts
 hash -d dotfiles=~/dotfiles
 hash -d dunst=~/.config/dunst

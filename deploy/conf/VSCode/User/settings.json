@@ -284,28 +284,114 @@
     },
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
-    "files.associations": {
-        "**/defautls/**/*": "ansible",
-        "**/tasks/**/*.yml": "ansible",
-        "**/handler/*.yml": "ansible",
-        "**/*_vars/**/*.yml": "ansible",
-        "**/roles/**/*.yml": "ansible",
-        "**/playbooks/**/*.yml": "ansible",
-        "**/*ansible*/**/*.yml": "ansible",
-        "**/vars/**/*.yml": "ansible",
-        "**/inventory/*/*": "ansible",
-        "*.yml": "yaml"
-    },
+    // "files.associations": {
+    //     "**/defaults/**/*": "ansible",
+    //     "**/tasks/**/*.yml": "ansible",
+    //     "**/handler/*.yml": "ansible",
+    //     "**/*_vars/**/*.yml": "ansible",
+    //     "**/roles/**/*.yml": "ansible",
+    //     "**/playbooks/**/*.yml": "ansible",
+    //     "**/*ansible*/**/*.yml": "ansible",
+    //     "**/vars/**/*.yml": "ansible",
+    //     "**/vars/*/*": "ansible",
+    //     "**/inventory/*/*": "ansible",
+    //     "**/host_playbooks/*/*": "ansible",
+    //     // "**/*.yml": "yaml",
+    //     // "**/*.yaml": "yaml",
+    // },
     "files.autoSave": "off",
-    // Configure editor settings to be overridden for [yaml] language.
+    //
+    // Ansible
+    //
+    "ansible.validate.executablePath": "ansible-lint",
+    "ansible.vault.executablePath": "ansible-vault",
+    "ansible.validate.enable": true,
+    "[ansible]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+    },
+    "redhat.telemetry.enabled": false,
+    //
+    // YAML
+    //
+    "yaml.completion": true,
+    "yaml.format.enable": true,
     "[yaml]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
-    "[ansible]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2
+    "yaml.customTags": [
+        "!encrypted/pkcs1-oaep scalar",
+        "!vault scalar",
+    ],
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-galaxy.json": [
+            "examples/**/*.yml",
+            "galaxy.yml"
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-lint.json": [
+            ".ansible-lint",
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-vars.json": [
+            "playbooks/vars/*.yml",
+            "**/playbooks/vars/*.yml",
+            "playbooks/vars/*.yaml",
+            "**/playbooks/vars/*.yaml",
+            "host_playbooks/vars/*.yaml",
+            "**/host_playbooks/vars/*.yaml",
+            "host_playbooks/vars/*.yml",
+            "**/host_playbooks/vars/*.yml",
+            "vars/*.yml",
+            "vars/*.yaml",
+            "defaults/*.yml",
+            "defaults/*.yaml",
+            "host_vars/*.yml",
+            "host_vars/*.yaml",
+            "group_vars/*.yml",
+            "group_vars/*.yaml"
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json": [
+            "tasks/*.yml",
+            "**/tasks/*.yml",
+            "tasks/*.yaml",
+            "**/tasks/*.yaml",
+            "handlers/*.yml",
+            "**/handlers/*.yml",
+            "handlers/*.yaml",
+            "**/handlers/*.yaml",
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/molecule.json": [
+            "molecule.yml"
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-meta.json": [
+            "meta/*.yml",
+            "**/meta/*.yml",
+            "**/meta/*.yaml",
+            "**/meta/**/*",
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-requirements.json": [
+            "**/requirements.yml",
+            "**/requirements.yaml",
+            "**/*/requirements.yml",
+            "**/*/requirements.yaml",
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/zuul.json": [
+            "zuul.d/**/*.yml",
+            "zuul.d/**/*.yaml",
+        ],
+        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-playbook.json": [
+            "playbooks/*.yml",
+            "**/playbooks/*.yml",
+            "playbooks/*.yaml",
+            "**/playbooks/*.yaml",
+            "host_playbooks/*.yml",
+            "**/host_playbooks/*.yml",
+            "host_playbooks/*.yaml",
+            "**/host_playbooks/*.yaml",
+            "*ansible/*.yml",
+            "*ansible*/*.yaml",
+        ]
     },
     //
     // TERMINAL CONFIG
@@ -313,23 +399,23 @@
     "terminal.integrated.fontFamily": "Cousine Nerd Font",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1.2,
-    "terminal.external.linuxExec": "termite",
-    "terminal.integrated.shell.linux": "/usr/sbin/zsh",
+    "terminal.external.linuxExec": "alacritty",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.scrollback": 100000,
+    "terminal.integrated.copyOnSelection": true,
     //
     // TELEMETRY
     //
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": true,
     //
-    // WINDOW CONFIG
+    // Window
     //
-    "window.zoomLevel": 1,
-    "window.menuBarVisibility": "hidden",
     "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
     "window.openFoldersInNewWindow": "off",
-    "window.enableMenuBarMnemonics": true,
+    "window.zoomLevel": 1,
     //
     // WORKBENCH CONFIG
     //
@@ -342,11 +428,16 @@
         "statusBar.noFolderBackground": "#005f5f",
         "statusBar.debuggingBackground": "#005f5f"
     },
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "workbench.startupEditor": "newUntitledFile",
     //
     //EXPLORER CONFIG
     //
     "explorer.autoReveal": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
     //
     "material-icon-theme.showUpdateMessage": false,
     "extensions.ignoreRecommendations": false,
@@ -357,10 +448,9 @@
     "rust.rustfmtPath": "/home/boogy/.cargo/bin/rustfmt",
     "rust.rustsymPath": "/home/boogy/.cargo/bin/rustsym",
     "rust.mode": "rls",
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
     "markdown-pdf.executablePath": "/usr/sbin/chromium",
     "markdown-pdf.highlightStyle": "monokai.css",
+    "markdown-pdf.breaks": true,
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
@@ -373,22 +463,18 @@
     //
     // Python config
     //
-    "python.sortImports.path": "/usr/sbin/isort",
-    "python.pythonPath": "/usr/bin/python2",
-    "python.jediPath": "/usr/lib/python3.7/site-packages/jedi",
-    "python.jediEnabled": false,
+    "python.jediEnabled": true,
+    "python.languageServer": "Jedi",
     "python.linting.pylintEnabled": true,
-    "markdown-pdf.breaks": true,
-    "terminal.integrated.shell.osx": "/usr/sbin/zsh",
-    "terminal.integrated.copyOnSelection": true,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+    "security.workspace.trust.untrustedFiles": "open",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
     },
-    "python.languageServer": "Microsoft"
 }

@@ -6,8 +6,8 @@ cmd + ctrl - return: /Applications/Alacritty.app/Contents/MacOS/alacritty
 alt - e: open -a Finder
 
 ## focus quick shortcuts
-alt - tab : yabai -m window --focus recent
-ctrl - tab : yabai -m space --focus recent
+# alt - tab : yabai -m window --focus recent
+# ctrl - tab : yabai -m space --focus recent
 # hyper - x : yabai -m space --focus recent
 #alt -  : ~/.config/yabai/switchBetweenWindowsPrev.sh
 

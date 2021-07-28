@@ -70,7 +70,7 @@ let g:which_key_map['w'] = {
 " Terminal mappings
 let g:which_key_map.t = {
       \ 'name' : '+terminal'                                                  ,
-      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'] ,
+      \ ';' : [':FloatermNew --wintype=popup --height=600'      , 'terminal'] ,
       \ 'f' : [':FloatermNew fzf'                               , 'fzf']      ,
       \ 'p' : [':FloatermNew python'                            , 'python']   ,
       \ 'r' : [':FloatermNew ranger'                            , 'ranger']   ,

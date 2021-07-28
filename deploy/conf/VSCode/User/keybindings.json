@@ -1,23 +1,25 @@
 // Place your key bindings in this file to overwrite the defaults
 [
     {
-        "key": "ctrl+alt+[Equal]",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
-    {
-        "key": "ctrl+shift+[Equal]",
-        "command": "-workbench.action.terminal.toggleTerminal"
-    },
-    {
         "key": "f6",
         "command": "workbench.action.navigateEditorGroups"
     },
     {
         "key": "ctrl+shift+b",
-        "command": "-workbench.action.tasks.build"
+        "command": "workbench.action.toggleActivityBarVisibility"
     },
     {
-        "key": "ctrl+shift+b",
-        "command": "workbench.action.toggleActivityBarVisibility"
+        "key": "ctrl+[Equal]",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+[Equal]",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
     }
+    // {
+    //     "key": "ctrl+[Equal]",
+    //     "command": "workbench.action.terminal.toggleTerminal",
+    // },
 ]
