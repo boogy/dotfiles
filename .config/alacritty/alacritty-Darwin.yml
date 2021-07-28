@@ -62,10 +62,6 @@ window:
     history: 100000
     multiplier: 3
 
-dpi:
-  x: 96.0
-  y: 96.0
-
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
 
