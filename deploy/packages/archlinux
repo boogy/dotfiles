@@ -1,13 +1,13 @@
 ##
 ## arch linux packages to install
 ##
-i3-gaps
-i3blocks
-i3lock
-i3status
-rxvt-unicode
-rxvt-unicode-terminfo
-urxvt-perls
+#i3-gaps
+#i3blocks
+#i3status
+#i3lock
+#rxvt-unicode
+#rxvt-unicode-terminfo
+#urxvt-perls
 libinput
 xf86-input-libinput
 xf86-video-intel
@@ -27,7 +27,6 @@ alsa-utils
 ansible
 arandr
 bash-completion
-#bbswitch-dkms
 dkms
 pavucontrol
 rofi
@@ -39,11 +38,7 @@ eog-plugins
 evince
 file-roller
 p7zip
-filezilla
 firefox
-chromium
-pepper-flash
-freerdp
 ghex
 gtk-engine-murrine
 gtk2
@@ -53,7 +48,6 @@ lsof
 nmap
 tmux
 sipcalc
-ipcalc
 enca
 thunar
 thunar-archive-plugin
@@ -72,9 +66,6 @@ virtualbox-guest-iso
 ##
 ## python 3
 python
-python-i3-py
-python-crypto
-python-cryptography
 python-pylint
 python-paramiko
 python-pexpect
@@ -91,26 +82,12 @@ pygmentize
 python-netaddr
 autopep8
 ##
-## python 2
-#ipython2
-#python2
-#python2-pip
-#python2-requests
-#python2-m2crypto
-#python2-virtualenv
-#python2-pylint
-#python2-jedi
-#python2-isort
-#python2-paramiko
-#python2-netaddr
-##
 wpa_supplicant
 lightdm
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
 lxappearance
 remmina
-sipcalc
 xorg
 xorg-xinit
 xorg-xinput
@@ -128,13 +105,11 @@ jre8-openjdk
 jdk8-openjdk
 jre10-openjdk
 jdk10-openjdk
-w3m
 xcursor-themes
 xcursor-bluecurve
 xcursor-comix
 xcursor-pinux
 vlc
-hexchat
 docker
 dmidecode
 pacman-contrib
@@ -180,7 +155,6 @@ alacritty
 sxiv
 vifm
 neovim
-termite
 zsh
 zsh-syntax-highlighting
 zsh-autosuggestions
@@ -222,7 +196,7 @@ bluez-utils
 #
 ##
 ## BSPWM
-bspwm
+#bspwm
 sxhkd
 xdo
 lsw
@@ -237,3 +211,7 @@ yubico-pam
 imagemagick
 mpv
 xdotool
+go
+nodejs
+yarn
+rustup

@@ -133,7 +133,8 @@ msg_ok "Installing some packages"
 pacstrap /mnt base base-devel \
     linux-lts linux-lts-headers linux-firmware \
     intel-ucode linux-firmware pacman-contrib \
-    openssh sudo ntp wget gvim curl wget git
+    openssh sudo ntp wget gvim curl wget git \
+    vim git zsh zh-syntax-highlighting zsh-autosuggestions
 
 
 ## Generate fstab
@@ -155,7 +156,7 @@ chmod +x /mnt/sysprep_archlinux_chroot.sh
 ##
 msg_ok "Swithing to arch-chroot in /mnt"
 arch-chroot /mnt chmod +x /sysprep_archlinux_chroot.sh
-arch-chroot /mnt ./sysprep_archlinux_chroot.sh ${PARTITION2} ${SHOULD_ENCRYPT_DISK} ${PARTITION_LUKS}
+arch-chroot /mnt /sysprep_archlinux_chroot.sh ${PARTITION2} ${SHOULD_ENCRYPT_DISK} ${PARTITION_LUKS}
 
 
 ## Unmount all filesystems
