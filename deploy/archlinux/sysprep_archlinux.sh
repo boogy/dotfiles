@@ -120,8 +120,7 @@ mount ${PARTITION1} /mnt/boot || msg_error "[mount] -> No boot partition with th
 msg_ok "Generate pacman mirrorlist"
 pacman -S --noconfirm pacman-contrib
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | \
-    sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -) > /etc/pacman.d/mirrorlist
+reflector --country 'Switzerland' --latest 200 --protocol https --protocol http --age 12 --sort rate --fastest 5 --save /etc/pacman.d/mirrorlist
 msg_ok "Refresh pacman database"
 pacman -Syy
 
