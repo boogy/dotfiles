@@ -222,32 +222,17 @@ fi
 ##
 ## Source other files
 ##
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+[[ $(uname -s) =~ Linux ]] && {
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+} || true
 ## macos brew
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+[[ $(uname -s) =~ Darwin ]] && {
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+} || true
 
 ## load prompt
 source ~/.zsh/prompt/prompt.zsh
 
-# # set window title to program name
-# case $TERM in
-#     (*xterm*|rxvt|alacritty)
-#
-#     # Write some info to terminal title.
-#     # This is seen when the shell prompts for input.
-#     function precmd {
-#         print -Pn "\e]0;zsh%L %(1j,%j job%(2j|s|); ,)%~\a"
-#         export PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD##*/}\007"'
-#     }
-# # Write command and args to terminal title.
-# # This is seen while the shell waits for a command to complete.
-# function preexec {
-#     printf "\033]0;%s\a" "$1"
-#     export PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME%%.*}: ${PWD##*/}\007"'
-# }
-# ;;
-# esac
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true

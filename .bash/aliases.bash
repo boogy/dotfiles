@@ -11,13 +11,27 @@ blue=$(tput setaf 4)     # Heading
 bold=$(tput bold  setaf 7)     # Highlight
 reset=$(tput setaf 7)       # Norma
 
-export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+[[ "$(uname -)" =~ Darwin ]] && export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+
+has(){
+    _OS=$(uname -s)
+    case $_OS in
+        Linux)
+            command -v -p $1
+            ;;
+        Darwin)
+            command -v $1
+            ;;
+        *)
+            command -v -p $1
+    esac
+}
 
 ##
 ## The 'ls' family (this assumes you use a recent GNU ls)
 ## or rust equivalent 'exa'
 ##
-if command -v exa &>/dev/null; then
+if has exa &>/dev/null; then
     alias ls="exa -g --color=auto --time-style=long-iso"
     alias ll="ls -l --color=auto"
     alias l=ll
@@ -27,11 +41,11 @@ if command -v exa &>/dev/null; then
     alias llt="ll -T"
     alias llg="ll -G"
 else
-    ! [ uname -s =~ Darwin ] && {
+    if [[ "$(uname -s)" =~ Darwin ]]; then
         ## add color if on macOS
         alias ls="ls -G"
         alias ll="ls -l"
-    } || {
+    else
         alias ls="ls --color=always"
         alias ll="ls -l"
         alias l=ll
@@ -45,13 +59,13 @@ else
         alias lm="ls -al|more"     # pipe through "more"
         alias lr="ls -lR"          # recursive ls
         alias lsdirs="ls -l | grep --color=always "^d""
-    }
+    fi
 fi
 
 ##
 ## vim stuff
 ##
-command -v nvim &>/dev/null && {
+has nvim &>/dev/null && {
     export EDITOR=nvim
 } || {
     export EDITOR=vim
@@ -63,7 +77,7 @@ alias svi="sudo -E $EDITOR"
 alias svim="sudo -E $EDITOR"
 alias v-conf="$EDITOR ~/.vimrc"
 
-command -v rg &>/dev/null && {
+has rg &>/dev/null && {
     alias rg='rg --hidden'
 }
 
@@ -71,9 +85,8 @@ command -v rg &>/dev/null && {
 ## safety features
 ##
 alias cp="cp -i"
-alias cp2="rsync -aPWh"
 alias mv="mv -i"
-[ uname -s =~ Darwin ] && {
+[[ $(uname -s) =~ Darwin ]] && {
     alias rm=rm
 } || {
     alias rm="rm -i"    # "rm -i" prompts for every file
@@ -109,7 +122,7 @@ alias cd-="cd -"
 ##
 ## debian/ubuntu aliases
 ##
-[[ "$(uname)" = "Linux" && $(command -v -p apt-get) ]] && {
+[[ $(uname -s) =~ Linux && $(has apt-get) ]] && {
     alias a-search="apt search"
     alias a-install="sudo apt install"
     alias a-remove="sudo apt remove"
@@ -129,7 +142,7 @@ alias cd-="cd -"
 ##
 ## Arch Linux
 ##
-[[ "$(uname)" = "Linux" && $(command -v -p pacman) ]] && {
+[[ $(uname -s) =~ Linux && $(has pacman) ]] && {
     alias p-install="sudo pacman -S"
     alias pacinst=p-install
     alias p-remove="sudo pacman -R"
