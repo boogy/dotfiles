@@ -2,11 +2,13 @@
 #
 # Some useful functions
 
-open_with_fzf() {
+open_with_fzf()
+{
     fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
 }
 
-cd_with_fzf() {
+cd_with_fzf()
+{
     cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
 }
 
@@ -14,29 +16,8 @@ pacs() {
     sudo pacman -Syy $(pacman -Ssq | fzf -m --preview="pacman -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
 }
 
-# Set tmux session name with the hostname
-function settitle
-{
-    printf "\033k${1}\033\\"
-}
 
-
-function window-title
-{
-    echo -e "\e]0;${1}\a"
-}
-
-
-# Uses settitle to automaticaly set tmux
-# session with host when using ssh
-function con
-{
-    # settitle "$*";
-    command ssh -X "$@"
-}
-
-
-function s
+s()
 {
     # do sudo, or sudo the last command if no argument given
     if [[ $# == 0 ]]; then
@@ -47,33 +28,35 @@ function s
 }
 
 
-function cpbak
+cpbak()
 {
     cp "$1"{,.bak}
 }
 
 
-function cls
+cls()
 {
     cd "$1"; ls
 }
 
 
 # Show aliases in my environment
-function show-alias-command
+show-alias-command()
 {
     # alias|grep --color=none "$1"|awk -F= '{gsub(/'"'"'/, "", $2); print $1" =",$2}'|sed 's|\\||g'| column -s "=" -t
     alias|grep --color=none "$1"|sed 's/=/\t/'
 }
 
+
 # Print whole function
 # from our environment files
-function show-function
+show-function()
 {
     (declare -f $1 ~/.bash/*.bash | sed '1 s/\(.*\)/function \1/') | pygmentize -g
 }
 
-function show-alias
+
+show-alias()
 {
     fnc=$(show-function $@)
     als=$(show-alias-command $@)
@@ -87,54 +70,57 @@ function show-alias
     fi
 }
 
-function mcd
+
+mcd()
 {
     mkdir -p "$1"; cd "$1"
 }
 
-function mkcd
+
+mkcd()
 {
     mkdir -p "$1" ; cd "$1"
 }
 
-function what
+what()
 {
     which $1 | xargs ls -la
 }
 
-function random-number
+random-number()
 {
     echo $[RANDOM%${1}+1]
 }
 
-function gen-uuid
+gen-uuid()
 {
     # echo $(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
     echo $(python3 -c 'import uuid;print(uuid.uuid1())')
 }
 
-function lsg
+lsg()
 {
     keyword=$(echo "$@" |  sed 's/ /.*/g')
     ls -GgthrA | grep -iE $keyword
 }
 
-function d-swiggle
+
+d-swiggle()
 {
     find . -type f -name '*~' -exec rm -v {} \;
 }
 
-function zombie-process
+zombie-process()
 {
     ps auxw | awk '{ print $8 " " $2 }' | grep -w Z
 }
 
-function tophist
+tophist()
 {
     history | awk '{ print $2 }' | sort |  uniq -c | sort -rn | sed '1,27!d'
 }
 
-function up
+up()
 { # usage: up 2 --> same as cd ../../
     local x=''
     for i in $(seq ${1:-1});do
@@ -143,49 +129,49 @@ function up
     cd $x
 }
 
-function sort-dir-by-size()
+sort-dir-by-size()
 {
     du -sh "$@" | sort -r -h
 }
 
-function my_ps
+my_ps()
 { # List processes owned by my user
     ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command
 }
 
 # Viewing Top Processes according to cpu, mem, swap size, etc.
-function top_proc
+top_proc()
 {
     ps wwo pid,user,group,vsize:8,size:8,sz:6,rss:6,pmem:7,pcpu:7,time:7,wchan,sched=,stat,flags,comm,args k -vsz -A|\
     sed -u '/^ *PID/d;10q'
 }
 
 
-function copy-cwd-dir-and-compress
+copy-cwd-dir-and-compress()
 {
     tar -cf - . | pv -s $(du -sb . | awk '{print $2}') | gzip > out.tgz
 }
 
-function deadlinks
+deadlinks()
 {
     # find dead symlinks in the current directory or $1
     local __path="${1:-./}"
     find -L "${__path}" -type l -print
 }
 
-function mx
+mx()
 { # Return MX records for a given domain
     [[ ${1:-UNSET} == "UNSET" ]] && return 1
     dig +short mx "${1}" | sort | tr "[:upper:]" "[:lower:]"
 }
 
-function nameservers
+nameservers()
 { # return nameservers for a given domain
     [[ ${1:-UNSET} == "UNSET" ]] && return 1
     dig +short ns "${1}" | sort | tr "[:upper:]" "[:lower:]"
 }
 
-function repeat
+repeat()
 {
     # Repeat n times command.
     local i max
@@ -195,13 +181,13 @@ function repeat
     done
 }
 
-function gen-passwd
+gen-passwd()
 {
     pip2 show passlib &>/dev/null && \
         python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.using(rounds=5000).hash(getpass.getpass())"
 }
 
-function killps
+killps()
 {
     # Kill by process name
     local pid pname sig="-TERM"   # Default signal.
@@ -218,19 +204,20 @@ function killps
     done
 }
 
-function my-ip
+
+my-ip()
 {
     echo $(ip route get 1 | awk '{print $7;exit}')
 }
 
 
-function list-ips
+list-ips()
 {
     ip --color=always -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {print $2" "$4}'|column -t
 }
 
 
-function extract
+extract()
 {
     local opt
     local OPTIND=1
@@ -287,7 +274,8 @@ End-Of-Usage
     done
 }
 
-function smartcompress
+
+smartcompress()
 {
     # Usage: smartcompress <file> (<type>)
     # Description: compresses files or a directory.  Defaults to tar.gz
@@ -307,7 +295,8 @@ function smartcompress
     fi
 }
 
-function is-reboot_required
+
+is-reboot_required()
 {
     if echo "$(cat /etc/os-release|awk -F'=' '/^NAME=.*$/{print $2}'|tr -d '"')" \
         | grep -Eo "ubuntu|debian"
@@ -320,7 +309,8 @@ function is-reboot_required
     fi
 }
 
-function clean-trash
+
+clean-trash()
 {
     local TRASH_DIR=""
     if [[ -d "$HOME/.Trash" ]]; then
@@ -349,7 +339,7 @@ function clean-trash
 alias empty-trash=clean-trash
 
 
-function open-with-firefox
+open-with-firefox()
 {
     FILE_NAME=$@
     for F in ${FILE_NAME[@]}
@@ -362,17 +352,21 @@ function open-with-firefox
     done
 }
 
-function file-to-hex()
+
+file-to-hex()
 {
     od -A n -t x1 $1|sed 's/ *//g'|tr -d '\n';echo
 }
 
-function expand-ip()
+
+expand-ip()
 {
   nmap -sL -n "$1" | awk '/Nmap scan report/{print $NF}'
 }
 
-ssh-forward-local(){
+
+ssh-forward-local()
+{
     local BIND_PORT="$1"
     local DEST_HOST="$2"
     local DEST_PORT="$3"
@@ -386,19 +380,27 @@ ssh-forward-local(){
     fi
 }
 
-to-lower(){
+
+to-lower()
+{
     echo "$1" | awk '{print tolower($0)}'
 }
 
-to-upper(){
+
+to-upper()
+{
     echo "$1" | awk '{print toupper($0)}'
 }
 
-cpu-usage-percentage(){
+
+cpu-usage-percentage()
+{
     top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
 }
 
-aur-update(){
+
+aur-update()
+{
     local $COMMIT_MESSAGE="$1"
 
     if [ -z $COMMIT_MESSAGE]; then
@@ -409,4 +411,3 @@ aur-update(){
     git add --all
     git commit -v -a -m "${COMMIT_MESSAGE}"
 }
-

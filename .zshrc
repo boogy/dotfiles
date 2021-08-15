@@ -233,6 +233,8 @@ fi
 } || true
 
 ## load prompt
-source ~/.zsh/prompt/prompt.zsh
+# source ~/.zsh/prompt/prompt.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
+
+eval "$(starship init zsh)"

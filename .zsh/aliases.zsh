@@ -37,7 +37,7 @@ alias exiftool="/usr/bin/vendor_perl/exiftool"
 
 
 [[ $(uname -s) =~ Darwin ]] && {
-    alias brew-update='brew update && brew upgrade && brew cleanup'
+    alias b-update='brew update && brew upgrade && brew cleanup'
     alias b-clean='brew cleanup'
     alias b-inst='brew install'
     alias b-list='brew list'
@@ -60,6 +60,7 @@ hash -d sxhkd=~/.config/sxhkd
 hash -d sxiv=~/.config/sxiv/
 hash -d sxiv=~/.config/sxiv/
 hash -d picom=~/.config/picom
+hash -d awesome=~/.config/awesome
 hash -d xmonad=~/.config/xmonad
 hash -d conf-scripts=~/.config/scripts
 

@@ -443,7 +443,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- XMonad recompile / restart
     , ((myAlt .|. shiftMask,        xK_r),         spawn $ "xmonad --recompile && xmonad --restart")
-    , ((mySup,                      xK_r),         spawn $ "xmonad --restart")
+    , ((mySup .|. shiftMask,        xK_r),         spawn $ "xmonad --restart")
     , ((myAlt .|. controlMask,      xK_u),         spawn $ "pavucontrol")
     , ((myAlt .|. controlMask,      xK_e),         spawn $ "$HOME/.config/scripts/bspwm-dmenu-actions.sh")
 

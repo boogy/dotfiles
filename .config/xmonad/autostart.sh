@@ -57,6 +57,7 @@ xbacklight -set 100%
 
 ## set wallpaper from last feh image
 [ -f ~/.fehbg ] && ~/.fehbg &
+nitrogen --restore
 
 ## start pulseaudio
 start-pulseaudio-x11

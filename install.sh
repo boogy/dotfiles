@@ -85,6 +85,14 @@ ln -sf ~/.config/nvim ~/.vim
 ln -sf ~/.config/nvim ~/.vim/nvim
 
 
+## Install powerline fonts
+cd /tmp && git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts \
+    && ./install.sh \
+    && cd ..
+    && rm -rf fonts
+
+
 ## Copy firefox user.js in all profiles
 case $(uname -s) in
     Darwin)

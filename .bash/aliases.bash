@@ -100,7 +100,6 @@ alias batp="bat --paging=never"
 ##
 alias br-conf="$EDITOR ~/.bashrc"
 alias ba-conf="$EDITOR ~/.bash_aliases"
-alias b-vmi="$EDITOR ~/.bash/init"
 alias brc="source ~/.bashrc"
 
 ##
@@ -143,6 +142,8 @@ alias cd-="cd -"
 ## Arch Linux
 ##
 [[ $(uname -s) =~ Linux && $(has pacman) ]] && {
+    alias pac="sudo pacman -S"
+    alias pacs="pacman -Ss"
     alias p-install="sudo pacman -S"
     alias pacinst=p-install
     alias p-remove="sudo pacman -R"

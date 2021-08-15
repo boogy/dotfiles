@@ -72,7 +72,7 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Noto Sans:size=10;2"
+font-0 = "Noto Sans:size=12;2"
 font-1 = unifont:fontformat=truetype:size=9:antialias=true;0
 font-2 = Font Awesome 5 Free:style=Solid:size=9;2
 font-3 = Font Awesome 5 Brands:style=Solid:size=9;2
@@ -80,7 +80,7 @@ font-4 = Font Awesome 5 Free Solid:pixelsize=10;2
 font-5 = Ubuntu Mono derivative Powerline:size=9;1
 font-6 = NotoEmoji Nerd Font:style=Book:size=10;2
 font-7 = Noto Color Emoji:style=Regular:size=10;2
-font-8 = Siji:pixelsize=10;1
+; font-8 = Siji:pixelsize=10;1
 
 ; modules-left = xwindow
 ; modules-center = xwindow
@@ -629,7 +629,7 @@ format-disconnected-underline = #55aa55
 ;###############################################################
 [module/vpn]
 type = custom/script
-exec = ~/.config/i3/scripts/vpn-openvpn-status.sh
+exec = ~/.config/scripts/vpn-openvpn-status.sh
 interval = 10
 
 
@@ -858,22 +858,10 @@ menu-5-0-exec = betterlockscreen.sh --lock
 [module/bluetooth]
 type = custom/script
 interval = 120
-exec = ~/.config/i3/scripts/i3bluetooth.sh
+exec = ~/.config/scripts/bluetooth.sh
 format = %{A1:blueman-manager &:}<label>%{A}
 format-underline = #268bd2
 format-prefix-foreground = ${root.background-alt}
-
-
-; [module/litecoin]
-; type = custom/script
-; interval = 10
-; format = <label>
-; format-prefix = " LTC "
-; tail = true
-; format-underline = #268bd2
-; ; format-underline = #f90000
-; format-prefix-foreground = ${colors.foreground}
-; exec = ~/.config/i3/scripts/crypto_prices.py ltcusd
 
 
 [module/bspwm-monocle-nb-windows]
@@ -887,14 +875,6 @@ click-left = rofi -show window -show-icons -opacity "90"
 scroll-up = bspc node --focus next.local.window.!floating
 scroll-down = bspc node --focus prev.local.window.!floating
 
-
-; [module/pulseaudio-microphone]
-; type = custom/ipc
-; initial = 1
-; hook-0 = ~/.config/bspwm/scripts/pulseaudio-microphone.sh
-; click-left = amixer set Capture toggle && polybar-msg hook pulseaudio-microphone 1 &>/dev/null
-; click-right = amixer set Capture toggle && polybar-msg hook pulseaudio-microphone 1 &>/dev/null
-; format-underline = #f5a70a
 
 [module/pulseaudio-microphone]
 type = custom/script
