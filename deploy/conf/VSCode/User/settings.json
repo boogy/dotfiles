@@ -415,11 +415,10 @@
     "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
     "window.openFoldersInNewWindow": "off",
-    "window.zoomLevel": 1,
     //
     // WORKBENCH CONFIG
     //
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "vscode-icons",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorTheme": "Gruvbox Dark Hard",
@@ -477,4 +476,5 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "window.menuBarVisibility": "toggle",
 }

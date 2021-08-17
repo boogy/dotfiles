@@ -1,3 +1,5 @@
+local awesome, client, screen = awesome, client, screen
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -95,17 +97,22 @@ end
 -- ===================================================================
 
 -- use window gaps
--- beautiful.useless_gap = 4
+beautiful.useless_gap = 4
 
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 local themes = {
-    "copland",          -- 1
-    "default",          -- 2
+    "default",          -- 1*
+    "copland",          -- 2**
+    "dremora",          -- 3**
+    "holo",             -- 4*
+    "multicolor",       -- 5*
 }
 -- choose your theme here
-local chosen_theme = themes[1]
+local chosen_theme = themes[2]
+-- local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+-- beautiful.init(theme_path)
 beautiful.init(
     string.format("%s/.config/awesome/themes/%s/theme-personal.lua", os.getenv("HOME"), chosen_theme)
 )
@@ -122,7 +129,6 @@ awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.magnifier,
     awful.layout.suit.floating,
-
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -197,7 +203,7 @@ awful.screen.connect_for_each_screen(function(s)
     for i = 1, 10 do
         awful.tag.add((tagnum[i]), {
                 layout = awful.layout.suit.tile,
-                -- master_fill_policy = "expand",
+                master_fill_policy = "expand",
                 gap_single_client = false,
                 master_count = 1,
                 gap = 4,
@@ -384,14 +390,14 @@ client.connect_signal("property::floating", function(c)
 end)
 
 -- remove gaps if layout is set to max
-tag.connect_signal('property::layout', function(t)
-   local current_layout = awful.tag.getproperty(t, 'layout')
-   if (current_layout == awful.layout.suit.max) then
-      t.gap = 0
-   else
-      t.gap = beautiful.useless_gap
-   end
-end)
+-- tag.connect_signal('property::layout', function(t)
+--    local current_layout = awful.tag.getproperty(t, 'layout')
+--    if (current_layout == awful.layout.suit.max) then
+--       t.gap = 0
+--    else
+--       t.gap = beautiful.useless_gap
+--    end
+-- end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
