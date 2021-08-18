@@ -7,23 +7,30 @@ local keys = require("config.keys")
 local clientbuttons = keys.clientbuttons
 local clientkeys = keys.clientkeys
 
+
 -- ===================================================================
 -- Rules
 -- ===================================================================
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
+
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+        properties = {
+            border_width = beautiful.border_width,
+            border_color = beautiful.border_normal,
+            focus = awful.client.focus.filter,
+            raise = true,
+            keys = clientkeys,
+            buttons = clientbuttons,
+            screen = awful.screen.preferred,
+            placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+            -- newly added
+            sticky = false,
+            maximized_horizontal = false,
+			maximized_vertical = false,
+        }
     },
 
     -- Floating clients.
@@ -32,6 +39,7 @@ awful.rules.rules = {
                 "DTA",          -- Firefox addon DownThemAll.
                 "copyq",        -- Includes session name in class.
                 "pinentry",
+                "Places",       -- Firefox show all downloads window
             },
             class = {
                 "Arandr",
@@ -46,6 +54,7 @@ awful.rules.rules = {
                 "Nitrogen",
                 "Thunar",
                 "Lxappearance",
+                "Evince",
             },
             -- Note that the name property shown in xprop might be set slightly after creation of the client
             -- and the name shown there might not match defined rules here.
@@ -56,23 +65,34 @@ awful.rules.rules = {
                 "AlarmWindow",      -- Thunderbird's calendar.
                 "ConfigManager",    -- Thunderbird's about:config.
                 "pop-up",           -- e.g. Google Chrome's (detached) Developer Tools.
+            },
+            type = {
+                "splash",
+                "notification",
             }
         },
         properties = {
             floating = true,
-            centered = true,
-            placement = awful.placement.centered+awful.placement.no_offscreen
+            placement = awful.placement.centered,
+            -- callback = function(c)
+            --     awful.client.placement.centered(c)
+            -- end
         }
     },
 
-    -- uncomment to enable title bars for floating only
-    { rule_any = { type = { "floating" }
-        }, properties = { titlebars_enabled = true }
+    { rule_any = { type = { "floating" } },
+        properties = {
+            titlebars_enabled = true,
+            placement = awful.placement.centered
+        }
     },
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-        }, properties = { titlebars_enabled = false }
+    { rule_any = { type = { "normal", "dialog" }},
+        properties = {
+            titlebars_enabled = false,
+            placement = awful.placement.centered
+        }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -82,10 +102,6 @@ awful.rules.rules = {
             tag = function() return awful.screen.focused().tags[2] end,
             switchtotag = true,
         }
-    },
-
-    { rule = { role = "_NET_WM_STATE_FULLSCREEN" },
-      properties = { floating = true }
     },
 
 }

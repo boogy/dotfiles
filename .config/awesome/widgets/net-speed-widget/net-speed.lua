@@ -12,7 +12,7 @@ local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 
 local HOME_DIR = os.getenv("HOME")
-local WIDGET_DIR = HOME_DIR .. '/.config/awesome/awesome-wm-widgets/net-speed-widget/'
+local WIDGET_DIR = HOME_DIR .. '/.config/awesome/widgets/net-speed-widget/'
 local ICONS_DIR = WIDGET_DIR .. 'icons/'
 
 local net_speed_widget = {}

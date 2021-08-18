@@ -13,7 +13,7 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 
 local HOME = os.getenv('HOME')
-local ICON_DIR = HOME .. '/.config/awesome/awesome-wm-widgets/logout-menu-widget/icons/'
+local ICON_DIR = HOME .. '/.config/awesome/widgets/logout-menu-widget/icons/'
 
 local logout_menu_widget = wibox.widget {
     {

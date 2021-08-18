@@ -15,13 +15,17 @@ local wibox = require("wibox")
 
 -- Theme handling library
 local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 
 -- Notification library
 local naughty = require("naughty")
-naughty.config.defaults['icon_size'] = 100
+naughty.config.defaults['icon_size'] = dpi(100)
 
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- freedesktop for the menu
+local freedesktop = require("freedesktop")
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -54,14 +58,13 @@ require('modules.exit-screen')
 -- ===================================================================
 -- Widgets
 -- ===================================================================
-local cpu_widget = require("widgets.cpu-widget.cpu-widget")
-local batteryarc_widget = require("widgets.batteryarc-widget.batteryarc")
+local cpu_widget         = require("widgets.cpu-widget.cpu-widget")
+local batteryarc_widget  = require("widgets.batteryarc-widget.batteryarc")
 local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
-local ram_widget = require("widgets.ram-widget.ram-widget")
-local volume_widget = require('widgets.volume-widget.volume')
-local brightness_widget = require("widgets.brightness-widget.brightness")
-local net_speed_widget = require("widgets.net-speed-widget.net-speed")
-local calendar_widget = require("widgets.calendar-widget.calendar")
+local ram_widget         = require("widgets.ram-widget.ram-widget")
+local volume_widget      = require('widgets.volume-widget.volume')
+local brightness_widget  = require("widgets.brightness-widget.brightness")
+local calendar_widget    = require("widgets.calendar-widget.calendar")
 
 
 -- ===================================================================
@@ -106,9 +109,7 @@ local themes = {
 }
 -- choose your theme here
 local chosen_theme = themes[1]
-beautiful.init(
-    string.format("%s/.config/awesome/themes/%s/theme-personal.lua", os.getenv("HOME"), chosen_theme)
-)
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme-personal.lua", os.getenv("HOME"), chosen_theme))
 
 
 -- ===================================================================
@@ -120,7 +121,6 @@ awful.layout.layouts = {
 
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    awful.layout.suit.magnifier,
     awful.layout.suit.floating,
 
     -- awful.layout.suit.tile.left,
@@ -146,20 +146,23 @@ awful.layout.layouts = {
 
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkeys"     , function() hotkeys_popup.show_help(nil  , awful.screen.focused()) end } ,
-   { "manual"      , terminal .. " -e man awesome" }         ,
-   { "edit config" , editor_cmd .. " " .. awesome.conffile } ,
-   { "restart"     , awesome.restart }                       ,
-   { "quit"        , function() awesome.quit() end }         ,
+    { "hotkeys", function() return false, hotkeys_popup.show_help end },
+    { "manual", terminal .. " -e man awesome" },
+    { "edit config", string.format("%s -e %s %s", terminal, editor_cmd, awesome.conffile) },
+    { "restart", awesome.restart },
+    { "quit", function() awesome.quit() end }
 }
-
-mymainmenu = awful.menu({
-        items = {
-            { "awesome"       , myawesomemenu , beautiful.awesome_icon }                             ,
-            { "open terminal" , terminal      , "/usr/share/icons/Papirus/32x32/apps/Alacritty.svg"} ,
-            { "Firefox"       , browser       , "/usr/share/icons/hicolor/48x48/apps/firefox.png"}
-        }
-    })
+mymainmenu = freedesktop.menu.build({
+    before = {
+        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        -- other triads can be put here
+    },
+    after = {
+        { "open terminal" , terminal      , "/usr/share/icons/Papirus/32x32/apps/Alacritty.svg"} ,
+        { "Firefox"       , browser       , "/usr/share/icons/hicolor/48x48/apps/firefox.png"}
+        -- other triads can be put here
+    }
+})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
@@ -170,6 +173,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- ===================================================================
 -- Wibar setup
 -- ===================================================================
+
 -- import keys / buttons for wibox
 local taglist_buttons = keys.taglist_buttons
 local tasklist_buttons = keys.tasklist_buttons
@@ -189,19 +193,36 @@ mytextclock:connect_signal("button::press", function(_, _, _, button)
 end)
 
 
--- setup tags for each screen
+--
+-- setup tags (workspaces) for each screen
+--
 awful.screen.connect_for_each_screen(function(s)
-    --         1     2     3     4     5     6     7     8     9     10
-    tagnum = {" ", " ", " ", " ", " ", " ", " ", " ", " ", ""}
 
-    for i = 1, 10 do
-        awful.tag.add((tagnum[i]), {
-                layout = awful.layout.suit.tile,
-                -- master_fill_policy = "expand",
+    -- setup tags with individual properties
+    layouts = awful.layout.suit
+    tagnum = {
+        { index = 1  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 2  , name = " " , layout = layouts.max      , icon = "" },
+        { index = 3  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 4  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 5  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 6  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 7  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 8  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 9  , name = " " , layout = layouts.tile     , icon = "" },
+        { index = 10 , name = ""  , layout = layouts.floating , icon = "" },
+    }
+    for k, v in pairs(tagnum) do
+        awful.tag.add(v.name,
+        {
+                layout = v.layout,
+                master_fill_policy = "expand",
                 gap_single_client = false,
                 master_count = 1,
                 gap = 4,
                 screen = s,
+                index = v.index,
+                selected = v.index == 1
         })
     end
 
@@ -225,11 +246,13 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+    -- s.mytasklist = awful.widget.tasklist {
+    --     screen  = s,
+    --     filter  = awful.widget.tasklist.filter.currenttags,
+    --     buttons = tasklist_buttons
+    -- }
+    -- new tasklist
+    local mytask_list = require("widgets.task-list")
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -240,13 +263,16 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            -- mylauncher,
+            mylauncher,
             wibox.widget.textbox(" "),
             s.mytaglist,
             wibox.widget.textbox(" "),
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        -- default tasklist
+        -- s.mytasklist, -- Middle widget
+        -- custom tasklist
+        mytask_list.create(s),
 
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
@@ -289,7 +315,8 @@ awful.screen.connect_for_each_screen(function(s)
                 charging_color = "#43a047",
             }),
             wibox.widget.textbox(" | "),
-            wibox.widget.systray(),
+            -- wibox.widget.systray(),
+            wibox.layout.margin(wibox.widget.systray(), dpi(1), dpi(1), dpi(1), dpi(1)),
             wibox.widget.textbox(" | "),
             mytextclock,
             wibox.widget.textbox(" | "),
@@ -303,7 +330,6 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 end)
-
 
 -- ===================================================================
 -- Signals
@@ -321,7 +347,6 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
     if awesome.startup
         and not c.size_hints.user_position
         and not c.size_hints.program_position then
@@ -329,6 +354,7 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
+
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
@@ -343,7 +369,6 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
-
     awful.titlebar(c) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
@@ -370,11 +395,14 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
+
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
+
+-- show titlebars on floating clients
 client.connect_signal("property::floating", function(c)
     if c.floating then
         awful.titlebar.show(c)
@@ -383,18 +411,29 @@ client.connect_signal("property::floating", function(c)
     end
 end)
 
--- remove gaps if layout is set to max
-tag.connect_signal('property::layout', function(t)
-   local current_layout = awful.tag.getproperty(t, 'layout')
-   if (current_layout == awful.layout.suit.max) then
-      t.gap = 0
-   else
-      t.gap = beautiful.useless_gap
-   end
-end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+
+-- remove window borders when not tiled
+--
+screen.connect_signal("arrange", function (s)
+    -- without the if it complains when no tags are selected
+    if s.selected_tag then
+        local max = s.selected_tag.layout.name == "max"
+        local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
+
+        -- but iterate over clients instead of tiled_clients as tiled_clients doesn't include maximized windows
+        for _, c in pairs(s.clients) do
+            if (max or only_one) and not c.floating or c.maximized then
+                c.border_width = 0
+            else
+                c.border_width = beautiful.border_width
+            end
+        end
+    end
+end)
 
 
 -- ===================================================================

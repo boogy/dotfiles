@@ -2,7 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
+local dpi   = require("beautiful.xresources").apply_dpi
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- Enable hotkeys help widget for VIM and other apps
@@ -57,10 +57,10 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, }, "s",       hotkeys_popup.show_help,
         {description="show help", group="awesome"}),
 
-    awful.key({ modkey, }, "p",       awful.tag.viewprev,
+    awful.key({ winkey, }, "p",       awful.tag.viewprev,
         {description = "view previous", group = "tag"}),
 
-    awful.key({ modkey, }, "n",       awful.tag.viewnext,
+    awful.key({ winkey, }, "n",       awful.tag.viewnext,
         {description = "view next", group = "tag"}),
 
     -- uses escape by default
@@ -73,6 +73,9 @@ keys.globalkeys = gears.table.join(
         end,
         {description = "focus next by index", group = "client"}
     ),
+
+    -- center window to the screen
+    awful.key({ winkey, "Shift"   }, "c", awful.placement.centered),
 
     -- ALSA volume control
     --
@@ -204,18 +207,6 @@ keys.globalkeys = gears.table.join(
             awful.layout.inc(-1)
         end,
         {description = "select previous", group = "layout"}),
-
-    awful.key({ modkey, "Control" }, "n",
-        function ()
-            local c = awful.client.restore()
-            -- Focus restored client
-            if c then
-            c:emit_signal(
-                "request::activate", "key.unminimize", {raise = true}
-            )
-            end
-        end,
-        {description = "restore minimized", group = "client"}),
 
     -- Prompt
     awful.key({ modkey, }, "r",
@@ -379,13 +370,25 @@ keys.clientkeys = gears.table.join(
         end,
         {description = "toggle keep on top", group = "client"}),
 
-    awful.key({ modkey,           }, "n",
+    -- minimize client
+    awful.key({ modkey }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
+
+    -- un-minimize client
+    awful.key({ modkey, "Control" }, "n",
+        function ()
+            local c = awful.client.restore()
+            -- Focus restored client
+            if c then
+                c:emit_signal( "request::activate", "key.unminimize", {raise = true})
+            end
+        end,
+        {description = "restore minimized", group = "client"}),
 
     awful.key({ modkey }, "m",
         function (c)

@@ -115,9 +115,8 @@ exit_screen =
   }
 )
 
--- exit_screen.bg = beautiful.background.hue_800 .. 'dd' or '#C62828dd'
-exit_screen.bg = '#0D47A1' .. 'dd'
-exit_screen.fg = beautiful.exit_screen_fg or beautiful.wibar_fg or '#FEFEFE'
+exit_screen.bg = beautiful.fg_normal or '#C62828dd'
+exit_screen.fg = beautiful.bg_normal or '#0D47A1dd'
 
 local exit_screen_grabber
 

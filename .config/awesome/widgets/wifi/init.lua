@@ -11,17 +11,13 @@
 local awful = require('awful')
 local watch = require('awful.widget.watch')
 local wibox = require('wibox')
-local clickable_container = require('widget.material.clickable-container')
+local clickable_container = require('widgets.clickable-container')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 
--- acpi sample outputs
--- Battery 0: Discharging, 75%, 01:51:38 remaining
--- Battery 0: Charging, 53%, 00:57:43 until charged
-
 local HOME = os.getenv('HOME')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/wifi/icons/'
-local interface = 'wlp3s0'
+local interface = 'wlan0'
 local connected = false
 local essid = 'N/A'
 

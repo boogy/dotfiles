@@ -5,10 +5,8 @@
 
 --]]
 
-local gears = require("gears")
-local lain  = require("lain")
 local awful = require("awful")
-local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi   = require("beautiful.xresources").apply_dpi
 
 local theme                                     = {}
@@ -34,9 +32,9 @@ theme.titlebar_bg_focus                         = "#262626"
 
 -- Focused border size
 theme.border_width                              = dpi(2)
-theme.menu_height                               = dpi(16)
+theme.menu_height                               = dpi(20)
 theme.menu_width                                = dpi(130)
-theme.tasklist_disable_icon                     = true
+theme.tasklist_disable_icon                     = false
 
 theme.awesome_icon                              = theme.dir .."/icons/archlinux.png"
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
