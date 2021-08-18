@@ -105,7 +105,6 @@ end
 
 local themes = {
     "copland",          -- 1
-    "default",          -- 2
 }
 -- choose your theme here
 local chosen_theme = themes[1]
