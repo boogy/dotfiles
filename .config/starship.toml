@@ -1,0 +1,81 @@
+add_newline = true
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$golang\
+$perl\
+$php\
+$python\
+$rust\
+$terraform\
+$vagrant\
+$aws\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$time\
+$status\
+$shell\
+$character"""
+
+[character]
+vicmd_symbol = "[V](bold green) "
+# success_symbol = "[➜](bold green) "
+# error_symbol = "[✗](bold red) "
+
+[directory]
+home_symbol = "~"
+truncate_to_repo = false
+truncation_length = 8
+truncation_symbol = "…/"
+
+[cmd_duration]
+# min_time = 500
+# format = "underwent [$duration](bold yellow)"
+disabled = true
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_metrics]
+added_style = "bold blue"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+conflicted = "c${count}"
+untracked = "u${count}"
+stashed = "s${count}"
+modified = "m${count}"
+staged = '[++\($count\)](green)'
+renamed = "r${count}"
+deleted = "d${count}"
+
+
+[hostname]
+ssh_only = false
+format =  "[$hostname](bold red) "
+trim_at = ".companyname.com"
+disabled = true
+
+[aws]
+disabled = true
