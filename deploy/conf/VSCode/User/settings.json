@@ -29,6 +29,7 @@
         "<C-f>": false,
         "<C-w>": false,
         "<C-c>": false,
+        // "<C-v>": true,
         "<C-b>": false,
         "<C-d>": true,
         "<C-j>": false,
@@ -40,39 +41,15 @@
     "vim.insertModeKeyBindings": [
         // bind jj to <ESC> in insert mode
         {
-            "before": [
-                "j",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
+            "before": [ "j", "j" ],
+            "after": [ "<Esc>" ]
         },
         {
-            "before": [
-                "k",
-                "k"
-            ],
-            "after": [
-                "<Esc>"
-            ]
+            "before": [ "k", "k" ],
+            "after": [ "<Esc>" ]
         },
         {
-            "before": [
-                "C-v"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.clipboardPasteAction",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "C-x"
-            ],
+            "before": [ "C-x" ],
             "after": [],
             "commands": [
                 {
@@ -81,10 +58,16 @@
                 }
             ]
         },
+        // {
+        //     "before": ["<C-c>"],
+        //     "after": ["\"", "+", "y"]
+        // },
+        // {
+        //     "before": ["<C-v>"],
+        //     "after":  ["\"", "+", "p"]
+        // },
         {
-            "before": [
-                "C-c"
-            ],
+            "before": [ "C-c" ],
             "after": [],
             "commands": [
                 {
@@ -94,9 +77,7 @@
             ]
         },
         {
-            "before": [
-                "C-d"
-            ],
+            "before": [ "C-d" ],
             "after": [],
             "commands": [
                 {
@@ -106,10 +87,7 @@
             ]
         },
         {
-            "before": [
-                "C-k",
-                "C-d"
-            ],
+            "before": [ "C-k", "C-d" ],
             "after": [],
             "commands": [
                 {
@@ -120,48 +98,39 @@
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
+        // {
+        //     "before": ["<C-c>"],
+        //     "after": ["\"", "+", "y"]
+        // },
+        // {
+        //     "before": ["<C-v>"],
+        //     "after":  ["\"", "+", "p"]
+        // },
         {
-            "before": [
-                "<leader>",
-                "d"
+            "before": [ "<leader>", "d"
             ],
-            "after": [
-                "d",
-                "d"
-            ]
+            "after": [ "d", "d" ]
         },
         {
             // "before": [ "<C-n>" ],
-            "before": [
-                "<leader>",
-                "<Enter>"
+            "before": [ "<leader>", "<Enter>"
             ],
-            "commands": [
-                ":nohl"
-            ]
+            "commands": [ ":nohl" ]
         },
         {
-            "before": [
-                ";"
-            ],
+            "before": [ ";" ],
             "commands": [
                 "workbench.action.showCommands",
             ]
         },
         {
-            "before": [
-                "Z",
-                "Z"
-            ],
+            "before": [ "Z", "Z" ],
             "commands": [
                 ":wq"
             ]
         },
         {
-            "before": [
-                "<leader>",
-                "w"
-            ],
+            "before": [ "<leader>", "w" ],
             "commands": [
                 "workbench.action.files.save",
             ]
@@ -418,7 +387,7 @@
     //
     // WORKBENCH CONFIG
     //
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorTheme": "Gruvbox Dark Hard",
@@ -462,8 +431,8 @@
     //
     // Python config
     //
-    "python.jediEnabled": true,
     "python.languageServer": "Jedi",
+    "python.terminal.activateEnvironment": true,
     "python.linting.pylintEnabled": true,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -477,4 +446,5 @@
         "jupyter-notebook": "left"
     },
     "window.menuBarVisibility": "toggle",
+    "go.toolsManagement.autoUpdate": true,
 }

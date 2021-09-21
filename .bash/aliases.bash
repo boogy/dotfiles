@@ -255,3 +255,9 @@ alias fr-keyboard="setxkbmap -model pc105 -layout ch -variant fr -option lv3:ral
 ## FZF magic
 ##
 alias list-notes="fzf --preview=\"cat {}\" --preview-window=right:70%:wrap --bind=\"space:toggle-preview\""
+
+##
+## Ansible
+##
+alias ansible-list-all-hosts='ansible-inventory --list all | jq " ._meta.hostvars| keys[]"'
+alias ansible-list-hosts="ansible all --list-hosts | sed '1d' | tr -d ' '"
