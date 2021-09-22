@@ -2,6 +2,7 @@
 #
 # file: aliases.sh
 #
+source $HOME/.bash/utils.bash
 
 ## colors
 red=$(tput setaf 1)      # Issues/Errors
@@ -11,21 +12,8 @@ blue=$(tput setaf 4)     # Heading
 bold=$(tput bold  setaf 7)     # Highlight
 reset=$(tput setaf 7)       # Norma
 
-[[ "$(uname -)" =~ Darwin ]] && export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
-
-has(){
-    _OS=$(uname -s)
-    case $_OS in
-        Linux)
-            command -v -p $1
-            ;;
-        Darwin)
-            command -v $1
-            ;;
-        *)
-            command -v -p $1
-    esac
-}
+[[ "$(uname -s)" =~ Darwin ]] && \
+    export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 ##
 ## The 'ls' family (this assumes you use a recent GNU ls)
@@ -88,7 +76,7 @@ alias cp="cp -i"
 alias mv="mv -i"
 [[ $(uname -s) =~ Darwin ]] && {
     alias rm=rm
-} || {
+} ||{
     alias rm="rm -i"    # "rm -i" prompts for every file
 }
 alias ln="ln -i"    # prompt whether to remove destinations

@@ -1,5 +1,8 @@
 #!/use/bin/env zsh
 
+## helper fucntion
+source $HOME/.bash/utils.bash
+
 alias ipa='ip -c=always a s'
 alias ipaj="ip -j a s|jq -c '.[]|select(.ifname|match(\"(eth[0-9]{1})\")).addr_info[0].local'|tr -d '\"'"
 alias ipaa="ip -j a s|jq '.[].addr_info[]|select(.family|match(\"inet$\"))|select(.label|match(\"[^(lo)]\"))|.label,.local'|sed -e ':a;N;\$!ba;s/\"//g;s/\([0-9]\{,3\}\.[0-9]\{,3\}.[0-9]\{,3\}\.[0-9]\{,3\}\)/\1\n/g'"
@@ -30,13 +33,14 @@ alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias ff='find . -type f -name'
 alias ffd='find . -type d -name'
-alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+os_is Linux && {
+    alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+}
 alias go-root="sudo -u root -s"
 alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
 
-
-[[ $(uname -s) =~ Darwin ]] && {
+os_is macOS && {
     alias b-update='brew update && brew upgrade && brew cleanup'
     alias b-clean='brew cleanup'
     alias b-inst='brew install'

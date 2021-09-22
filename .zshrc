@@ -208,7 +208,7 @@ bash_config_files=(
 )
 BASH_FULL_FILE_PATH="${HOME}/.bash/"
 for config_file in $bash_config_files; do
-    source_bash "${BASH_FULL_FILE_PATH}/${config_file}.bash" &>/dev/null
+    source_bash "${BASH_FULL_FILE_PATH}${config_file}.bash" &>/dev/null
 done
 
 if [ -f "$HOME/.zsh_local" ]; then
