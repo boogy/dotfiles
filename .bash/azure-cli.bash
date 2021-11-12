@@ -14,7 +14,8 @@ az-list-users(){
 
 az-show-user-info(){
     local _USER_ID="${1}"
-    az ad user show --id $_USER_ID | jq -r '"ID:\(.objectId) | Name:\(.displayName) | Mail:\(.mail) | Department:\(.department) | Country:\(.country) | Created:\(.createdDateTime)"'
+    az ad user show --id $_USER_ID --query '{City:city, Country:country, Email:mail, Name:displayName, Department:department, ObjectID:objectId}'|jq '.'
+    # az ad user show --id $_USER_ID | jq -r '"ID:\(.objectId) | Name:\(.displayName) | Mail:\(.mail) | Department:\(.department) | Country:\(.country) | Created:\(.createdDateTime)"'
 }
 
 az-show-user-info-extended(){

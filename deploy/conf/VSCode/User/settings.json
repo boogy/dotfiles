@@ -373,11 +373,28 @@
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.scrollback": 100000,
     "terminal.integrated.copyOnSelection": true,
+    "terminal.external.osxExec": "Alacritty.app",
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash",
+        },
+        "zsh": {
+            "path": "zsh"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell",
+        },
+        "python3-repl": {
+            "path": "python3",
+            "args": ["-q"]
+        }
+    },
     //
     // TELEMETRY
     //
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": true,
+    "telemetry.telemetryLevel": "off",
     //
     // Window
     //
@@ -431,9 +448,18 @@
     //
     // Python config
     //
-    "python.languageServer": "Jedi",
-    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.banditEnabled": true,
     "python.linting.pylintEnabled": true,
+    "python.linting.lintOnSave": true,
+    "python.languageServer": "Jedi",
+    "python.analysis.autoImportCompletions": true,
+    "python.terminal.activateEnvironment": true,
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {"source.organizeImports": true},
+    },
+
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
