@@ -181,6 +181,7 @@ zsh_plugins=(
     python
     docker
     ssh
+    aws
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"
