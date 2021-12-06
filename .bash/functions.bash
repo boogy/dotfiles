@@ -370,3 +370,15 @@ aur-update() {
     git commit -v -a -m "${COMMIT_MESSAGE}"
 }
 
+
+##
+## macOS related functions
+##
+[[ "$(uname -s)" == Darwin ]] && {
+
+get-bundle-id(){
+    osascript -e 'id of app "'$1'"'
+}
+
+} # end macOS functions
+

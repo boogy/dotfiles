@@ -61,6 +61,9 @@ export PYTHONSTARTUP=~/.pythonrc.py
 ## bspwm java applications problem
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+## Add zsh completions folder
+fpath=(~/.zsh/completions $fpath)
+
 # Basic auto/tab complete:
 autoload -Uz compinit
 zstyle ':completion:*' menu select
@@ -181,7 +184,7 @@ zsh_plugins=(
     python
     docker
     ssh
-    aws
+    aws-vault
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"
