@@ -3,13 +3,22 @@ function _sshlist
     awk '/^Host [^\*]/{print $2}' ~/.ssh/config
 }
 
-function con_x11_ssh
-{
-    command ssh -X "$@"
+# function con_x11_ssh
+# {
+#     command ssh -o IdentitiesOnly=yes -X "$@"
+# }
+function ssh(){
+    if { [ -n "$TMUX" ]; } then
+        tmux rename-window -t${TMUX_PANE} "$1"
+        command ssh -o IdentitiesOnly=yes "$@"
+        tmux rename-window -t${TMUX_PANE} "zsh"
+    else
+        command ssh -o IdentitiesOnly=yes "$@"
+    fi
 }
 # compdef '_arguments "0: :($(_sshlist))"' con_x11_ssh
 
-alias ssh='con_x11_ssh' # Rename the tmux session with the hostname
+# alias ssh='con_x11_ssh' # Rename the tmux session with the hostname
 alias key-info="ssh-keygen -lf"
 alias del-ssh-key="ssh-keygen -R"
 

@@ -153,7 +153,7 @@ schemes:
 colors: *monokai
 
 # Background opacity
-background_opacity: 0.96
+background_opacity: 0.97
 
 selection:
   # This string contains all characters that are used as separators for

@@ -9,8 +9,8 @@ let g:vim_markdown_frontmatter = 1
 
 let g:vim_markdown_new_list_item_indent = 0
 let g:markdown_minlines = 100
-let g:markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js=javascript', 'json=javascript', 'perl', 'php', 'python', 'erb=eruby', 'ruby', 'sass', 'xml', 'html', 'csharp=cs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
-let g:vim_markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js=javascript', 'json=javascript', 'perl', 'php', 'python', 'erb=eruby', 'ruby', 'sass', 'xml', 'html', 'csharp=cs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+let g:markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js=javascript', 'json=javascript', 'perl', 'php', 'python', 'erb=eruby', 'ruby', 'sass', 'xml', 'html', 'csharp=cs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'terraform=terraform']
+let g:vim_markdown_fenced_languages = ['bash=sh', 'css', 'django', 'javascript', 'js=javascript', 'json=javascript', 'perl', 'php', 'python', 'erb=eruby', 'ruby', 'sass', 'xml', 'html', 'csharp=cs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'terraform=terraform']
 
 " au BufRead,BufNewFile,BufReadPost *.md set filetype=markdown
 au BufNewFile,BufFilePre,BufRead,BufReadPost *.md,.*markdown set filetype=markdown

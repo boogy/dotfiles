@@ -253,21 +253,6 @@
     },
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
-    // "files.associations": {
-    //     "**/defaults/**/*": "ansible",
-    //     "**/tasks/**/*.yml": "ansible",
-    //     "**/handler/*.yml": "ansible",
-    //     "**/*_vars/**/*.yml": "ansible",
-    //     "**/roles/**/*.yml": "ansible",
-    //     "**/playbooks/**/*.yml": "ansible",
-    //     "**/*ansible*/**/*.yml": "ansible",
-    //     "**/vars/**/*.yml": "ansible",
-    //     "**/vars/*/*": "ansible",
-    //     "**/inventory/*/*": "ansible",
-    //     "**/host_playbooks/*/*": "ansible",
-    //     // "**/*.yml": "yaml",
-    //     // "**/*.yaml": "yaml",
-    // },
     "files.autoSave": "off",
     //
     // Ansible
@@ -278,6 +263,7 @@
     "[ansible]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
+        "editor.formatOnSave": false
     },
     "redhat.telemetry.enabled": false,
     //
@@ -362,6 +348,24 @@
             "*ansible*/*.yaml",
         ]
     },
+    // Terraform
+    "terraform.languageServer": {
+        "external": true,
+        "pathToBinary": "",
+        "args": [
+            "serve"
+        ],
+        "maxNumberOfProblems": 100,
+        "trace.server": "off"
+    },
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "terraform-ls.experimentalFeatures": {
+        "validateOnSave": true
+    },
     //
     // TERMINAL CONFIG
     //
@@ -404,7 +408,7 @@
     //
     // WORKBENCH CONFIG
     //
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "vscode-great-icons",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorTheme": "Gruvbox Dark Hard",
@@ -437,7 +441,7 @@
     "markdown-pdf.highlightStyle": "monokai.css",
     "markdown-pdf.breaks": true,
     "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+        "editor.defaultFormatter":"yzhang.markdown-all-in-one",
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -473,4 +477,7 @@
     },
     "window.menuBarVisibility": "toggle",
     "go.toolsManagement.autoUpdate": true,
+    "window.zoomLevel": 1,
+    "editor.accessibilitySupport": "off",
+    "editor.bracketPairColorization.enabled": true,
 }

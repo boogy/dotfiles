@@ -2,6 +2,16 @@
 #
 # Some useful functions
 
+# ssh(){
+#     if { [ -n "$TMUX" ]; } then
+#         tmux rename-window -t${TMUX_PANE} "$1"
+#         command ssh "$@"
+#         tmux rename-window -t${TMUX_PANE} "zsh"
+#     else
+#         command ssh "$@"
+#     fi
+# }
+
 open_with_fzf() {
     fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
 }
