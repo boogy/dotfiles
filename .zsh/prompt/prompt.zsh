@@ -22,22 +22,22 @@ PROMPT_CHAR_USER="%{$fg[blue]%}➜%{$reset_color%}"
 
 ## show git branch/tag, or name-rev if on detached head
 parse_git_branch() {
-  (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+    (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
 }
 
 ## show red star if there are uncommitted changes
 parse_git_dirty() {
-  if command git diff-index --quiet HEAD 2> /dev/null; then
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  fi
+    if command git diff-index --quiet HEAD 2> /dev/null; then
+        echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    else
+        echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+    fi
 }
 
 ## if in a git repo, show dirty indicator + git branch
 git_custom_status() {
-  local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo " $ZSH_THEME_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$ZSH_THEME_GIT_PROMPT_SUFFIX$(parse_git_dirty)"
+    local git_where="$(parse_git_branch)"
+    [ -n "$git_where" ] && echo " $ZSH_THEME_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$ZSH_THEME_GIT_PROMPT_SUFFIX$(parse_git_dirty)"
 }
 
 prompt_char() {
@@ -45,6 +45,12 @@ prompt_char() {
         echo "$PROMPT_CHAR_ROOT"
     else
         echo "$PROMPT_CHAR_USER"
+    fi
+}
+
+check_if_aws_vault() {
+    if ! [[ -z $AWS_VAULT ]]; then
+        echo " %{$fg_bold[red]%} ➜ ${AWS_VAULT} | ${AWS_REGION}%{$reset_color%}"
     fi
 }
 
@@ -57,6 +63,7 @@ prompt_char() {
 
 ## basic prompt on the left
 # PROMPT='%{$fg[cyan]%}%~% %(?.%{$fg[green]%}.%{$fg[red]%})%B$%b '
+
 PROMPT='%(?, ,%{$fg[red]%}✘ FAIL: $?%{$reset_color%}
 )
 %{$fg_bold[yellow]%}%m%{$reset_color%}: %{$fg_bold[blue]%}%~%{$reset_color%}$(git_custom_status)

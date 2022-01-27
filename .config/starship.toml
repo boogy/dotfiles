@@ -78,4 +78,5 @@ trim_at = ".companyname.com"
 disabled = true
 
 [aws]
-disabled = true
+disabled = false
+format = '(\[$profile\])($style)'

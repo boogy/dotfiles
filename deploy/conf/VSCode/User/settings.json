@@ -257,10 +257,8 @@
     //
     // Ansible
     //
-    "ansible.validate.executablePath": "ansible-lint",
-    "ansible.vault.executablePath": "ansible-vault",
-    "ansible.validate.enable": true,
     "[ansible]": {
+
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.formatOnSave": false
@@ -431,18 +429,17 @@
     "material-icon-theme.showUpdateMessage": false,
     "extensions.ignoreRecommendations": false,
     //
-    // RUST config
+    // Markdown config
     //
-    "rust.racerPath": "/home/boogy/.cargo/bin/racer",
-    "rust.rustfmtPath": "/home/boogy/.cargo/bin/rustfmt",
-    "rust.rustsymPath": "/home/boogy/.cargo/bin/rustsym",
-    "rust.mode": "rls",
     "markdown-pdf.executablePath": "/usr/sbin/chromium",
     "markdown-pdf.highlightStyle": "monokai.css",
     "markdown-pdf.breaks": true,
     "[markdown]": {
         "editor.defaultFormatter":"yzhang.markdown-all-in-one",
     },
+    //
+    // Json config
+    //
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -463,7 +460,9 @@
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {"source.organizeImports": true},
     },
-
+    //
+    // JavaScript config
+    //
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -475,9 +474,8 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "window.menuBarVisibility": "toggle",
     "go.toolsManagement.autoUpdate": true,
-    "window.zoomLevel": 1,
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
+    "window.zoomLevel": 1,
 }
