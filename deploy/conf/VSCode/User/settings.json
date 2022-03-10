@@ -29,6 +29,7 @@
         "<C-f>": false,
         "<C-w>": false,
         "<C-c>": false,
+        "<cmd-c>" : false,
         // "<C-v>": true,
         "<C-b>": false,
         "<C-d>": true,
@@ -40,14 +41,14 @@
     // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
     "vim.insertModeKeyBindings": [
         // bind jj to <ESC> in insert mode
-        {
-            "before": [ "j", "j" ],
-            "after": [ "<Esc>" ]
-        },
-        {
-            "before": [ "k", "k" ],
-            "after": [ "<Esc>" ]
-        },
+        // {
+        //     "before": [ "j", "j" ],
+        //     "after": [ "<Esc>" ]
+        // },
+        // {
+        //     "before": [ "k", "k" ],
+        //     "after": [ "<Esc>" ]
+        // },
         {
             "before": [ "C-x" ],
             "after": [],
@@ -185,7 +186,8 @@
     // Use system clipboard for unnamed register.
     "vim.useSystemClipboard": false,
     // Override VSCode's copy command with our own copy command, which works better with VSCodeVim. Turn this off if copying is not working.
-    "vim.overrideCopy": true,
+    // "vim.overrideCopy": true,
+    "vim.overrideCopy": false,
     // Non-recursive keybinding overrides to use for insert mode. Allows mapping to vim commands or vscode actions. See README for more.
     "vim.insertModeKeyBindingsNonRecursive": [],
     // Width to word-wrap to when using gq.
@@ -347,6 +349,24 @@
         ]
     },
     // Terraform
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+          "source.formatAll.terraform": true
+        },
+        "editor.tabSize": 2
+      },
+      "[terraform-vars]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+          "source.formatAll.terraform": true
+        },
+    },
+    "terraform-ls.experimentalFeatures": {
+        "validateOnSave": true
+    },
     "terraform.languageServer": {
         "external": true,
         "pathToBinary": "",
@@ -355,14 +375,6 @@
         ],
         "maxNumberOfProblems": 100,
         "trace.server": "off"
-    },
-    "[terraform]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.tabSize": 2
-    },
-    "terraform-ls.experimentalFeatures": {
-        "validateOnSave": true
     },
     //
     // TERMINAL CONFIG
@@ -477,5 +489,4 @@
     "go.toolsManagement.autoUpdate": true,
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
-    "window.zoomLevel": 1,
 }
