@@ -18,6 +18,9 @@
     "editor.mouseWheelZoom": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.renderFinalNewline": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
     //
     // VIM CONFIG
     //
@@ -472,6 +475,14 @@
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {"source.organizeImports": true},
     },
+    "python.linting.pylintArgs": [
+        "--max-line-length=120",
+        "--disable={C0301}",
+    ],
+    "python.formatting.autopep8Args": [
+        "--max-line-length", "120",
+        "--experimental",
+    ],
     //
     // JavaScript config
     //
@@ -489,4 +500,5 @@
     "go.toolsManagement.autoUpdate": true,
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
 }
