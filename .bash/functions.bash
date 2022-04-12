@@ -382,3 +382,8 @@ get-bundle-id(){
 
 } # end macOS functions
 
+
+clean-tf-cache(){
+    find . -type d -iname ".terragrunt-cache" -prune -exec rm -rf {} \;
+    find . -type f -iname ".terraform.lock.hcl" -prune -exec rm -rf {} \;
+}
