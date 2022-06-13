@@ -62,7 +62,7 @@ export PYTHONSTARTUP=~/.pythonrc.py
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 ## Add zsh completions folder
-fpath=(~/.zsh/completions $fpath)
+fpath=(~/.zsh/completion $fpath)
 
 # Basic auto/tab complete:
 autoload -Uz compinit
