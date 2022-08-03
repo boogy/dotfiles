@@ -2,12 +2,17 @@
     //
     // EDITOR CONFIG
     //
-    "editor.fontFamily": "Cousine Nerd Font",
+    "editor.fontFamily": "Hack Nerd Font",
+    // "editor.fontFamily": "Cousine Nerd Font",
     "editor.fontSize": 14,
     "editor.lineHeight": 0,
     "editor.lineNumbers": "on",
     "editor.tabSize": 4,
-    "editor.quickSuggestions": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    },
     "editor.quickSuggestionsDelay": 10,
     "editor.autoClosingBrackets": "always",
     "editor.cursorStyle": "line-thin",
@@ -379,6 +384,14 @@
         "maxNumberOfProblems": 100,
         "trace.server": "off"
     },
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.hcl$",
+                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+            }
+        ]
+    },
     //
     // TERMINAL CONFIG
     //
@@ -426,9 +439,9 @@
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#5f0000",
-        "statusBar.noFolderBackground": "#5f0000",
-        "statusBar.debuggingBackground": "#5f0000"
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"

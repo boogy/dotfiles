@@ -160,6 +160,7 @@
         ">>": "gitUnstage",
         "r": "rename",
         "v": "open:vsplit",
+        "V": "open:split",
         "o": "open:tab"
     },
     "http.proxyStrictSSL": true,
