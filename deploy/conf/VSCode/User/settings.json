@@ -384,6 +384,9 @@
         "maxNumberOfProblems": 100,
         "trace.server": "off"
     },
+    // "files.associations": {
+    //     "*.hcl": "terraform"
+    // },
     "emeraldwalk.runonsave": {
         "commands": [
             {
@@ -502,10 +505,12 @@
     // JavaScript config
     //
     "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
     },
     "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
     },
     "security.workspace.trust.untrustedFiles": "open",
     "notebook.cellToolbarLocation": {
@@ -516,4 +521,8 @@
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
