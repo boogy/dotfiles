@@ -89,7 +89,7 @@ ln -sf ~/.config/nvim ~/.vim/nvim
 cd /tmp && git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts \
     && ./install.sh \
-    && cd ..
+    && cd .. \
     && rm -rf fonts
 
 

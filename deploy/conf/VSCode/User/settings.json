@@ -437,7 +437,7 @@
     //
     // WORKBENCH CONFIG
     //
-    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorTheme": "Gruvbox Dark Hard",
@@ -527,4 +527,5 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
+    "window.zoomLevel": 1,
 }

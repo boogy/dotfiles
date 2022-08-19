@@ -47,6 +47,7 @@ export PATH=${PATH}:${HOME}/bin
 export PATH=${PATH}:/home/boogy/.cargo/bin
 export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/.cargo/bin
+export PATH="${PATH}:/opt/homebrew/bin"
 
 export LANG=en_US.UTF-8
 export BROWSER=firefox
@@ -232,9 +233,12 @@ fi
 } || true
 ## macos brew
 [[ $(uname -s) =~ Darwin ]] && {
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &>/dev/null
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh &>/dev/null
+    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" &>/dev/null
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" &>/dev/null
 } || true
+
+# rebuild compinit with
+# rm -f ~/.zcompdump; compinit
 
 ## load prompt
 # source ~/.zsh/prompt/prompt.zsh
