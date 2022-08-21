@@ -527,5 +527,4 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
-    "window.zoomLevel": 1,
 }
