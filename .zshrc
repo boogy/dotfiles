@@ -48,6 +48,7 @@ export PATH=${PATH}:/home/boogy/.cargo/bin
 export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/.cargo/bin
 export PATH="${PATH}:/opt/homebrew/bin"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 export LANG=en_US.UTF-8
 export BROWSER=firefox
@@ -61,6 +62,8 @@ export PYTHONSTARTUP=~/.pythonrc.py
 
 ## bspwm java applications problem
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export PYENV_ROOT="$HOME/.pyenv"
 
 ## Add zsh completions folder
 fpath=(~/.zsh/completion $fpath)
@@ -246,3 +249,6 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
 
 eval "$(starship init zsh)"
+
+# setup pyenv
+eval "$(pyenv init -)"

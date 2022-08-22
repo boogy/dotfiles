@@ -49,14 +49,14 @@
     // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
     "vim.insertModeKeyBindings": [
         // bind jj to <ESC> in insert mode
-        // {
-        //     "before": [ "j", "j" ],
-        //     "after": [ "<Esc>" ]
-        // },
-        // {
-        //     "before": [ "k", "k" ],
-        //     "after": [ "<Esc>" ]
-        // },
+        {
+            "before": [ "j", "j" ],
+            "after": [ "<Esc>" ]
+        },
+        {
+            "before": [ "k", "k" ],
+            "after": [ "<Esc>" ]
+        },
         {
             "before": [ "C-x" ],
             "after": [],
