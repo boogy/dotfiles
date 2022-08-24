@@ -26,6 +26,9 @@
     "editor.renderFinalNewline": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "workbench.colorTheme": "Gruvbox Dark Medium",
+    "material-icon-theme.folders.theme": "specific",
+    "workbench.iconTheme": "material-icon-theme",
     //
     // VIM CONFIG
     //
@@ -37,7 +40,7 @@
         "<C-f>": false,
         "<C-w>": false,
         "<C-c>": false,
-        "<cmd-c>" : false,
+        "<cmd-c>": false,
         // "<C-v>": true,
         "<C-b>": false,
         "<C-d>": true,
@@ -50,15 +53,27 @@
     "vim.insertModeKeyBindings": [
         // bind jj to <ESC> in insert mode
         {
-            "before": [ "j", "j" ],
-            "after": [ "<Esc>" ]
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": [ "k", "k" ],
-            "after": [ "<Esc>" ]
+            "before": [
+                "k",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": [ "C-x" ],
+            "before": [
+                "C-x"
+            ],
             "after": [],
             "commands": [
                 {
@@ -76,7 +91,9 @@
         //     "after":  ["\"", "+", "p"]
         // },
         {
-            "before": [ "C-c" ],
+            "before": [
+                "C-c"
+            ],
             "after": [],
             "commands": [
                 {
@@ -86,7 +103,9 @@
             ]
         },
         {
-            "before": [ "C-d" ],
+            "before": [
+                "C-d"
+            ],
             "after": [],
             "commands": [
                 {
@@ -96,7 +115,10 @@
             ]
         },
         {
-            "before": [ "C-k", "C-d" ],
+            "before": [
+                "C-k",
+                "C-d"
+            ],
             "after": [],
             "commands": [
                 {
@@ -116,30 +138,47 @@
         //     "after":  ["\"", "+", "p"]
         // },
         {
-            "before": [ "<leader>", "d"
+            "before": [
+                "<leader>",
+                "d"
             ],
-            "after": [ "d", "d" ]
+            "after": [
+                "d",
+                "d"
+            ]
         },
         {
             // "before": [ "<C-n>" ],
-            "before": [ "<leader>", "<Enter>"
+            "before": [
+                "<leader>",
+                "<Enter>"
             ],
-            "commands": [ ":nohl" ]
+            "commands": [
+                ":nohl"
+            ]
         },
         {
-            "before": [ ";" ],
+            "before": [
+                ";"
+            ],
             "commands": [
                 "workbench.action.showCommands",
             ]
         },
         {
-            "before": [ "Z", "Z" ],
+            "before": [
+                "Z",
+                "Z"
+            ],
             "commands": [
                 ":wq"
             ]
         },
         {
-            "before": [ "<leader>", "w" ],
+            "before": [
+                "<leader>",
+                "w"
+            ],
             "commands": [
                 "workbench.action.files.save",
             ]
@@ -268,7 +307,6 @@
     // Ansible
     //
     "[ansible]": {
-
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.formatOnSave": false
@@ -357,36 +395,49 @@
         ]
     },
     // Terraform
+    "terraform.codelens.referenceCount": true,
     "[terraform]": {
         "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
         "editor.codeActionsOnSave": {
-          "source.formatAll.terraform": true
+            "source.fixAll": true,
+            "source.formatAll.terraform": true
         },
         "editor.tabSize": 2
-      },
-      "[terraform-vars]": {
+    },
+    "[tf]": {
         "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
         "editor.codeActionsOnSave": {
-          "source.formatAll.terraform": true
+            "source.fixAll": true,
+            "source.formatAll.terraform": true
         },
+        "editor.tabSize": 2
     },
-    "terraform-ls.experimentalFeatures": {
-        "validateOnSave": true
+    "[tfvars]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+            "source.formatAll.terraform": true
+        },
+        "editor.tabSize": 2
     },
-    "terraform.languageServer": {
-        "external": true,
-        "pathToBinary": "",
-        "args": [
-            "serve"
-        ],
-        "maxNumberOfProblems": 100,
-        "trace.server": "off"
+    "[terraform-vars]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+            "source.formatAll.terraform": true
+        },
+        "editor.tabSize": 2
     },
-    // "files.associations": {
-    //     "*.hcl": "terraform"
-    // },
+    "terraform.experimentalFeatures.validateOnSave": true,
+    "terraform.experimentalFeatures.prefillRequiredFields": true,
     "emeraldwalk.runonsave": {
         "commands": [
             {
@@ -395,6 +446,9 @@
             }
         ]
     },
+    // "files.associations": {
+    //     "*.hcl": "terraform"
+    // },
     //
     // TERMINAL CONFIG
     //
@@ -421,7 +475,9 @@
         },
         "python3-repl": {
             "path": "python3",
-            "args": ["-q"]
+            "args": [
+                "-q"
+            ]
         }
     },
     //
@@ -434,13 +490,8 @@
     "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
     "window.openFoldersInNewWindow": "off",
-    //
-    // WORKBENCH CONFIG
-    //
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
         "statusBar.noFolderBackground": "#005f5f",
@@ -466,7 +517,7 @@
     "markdown-pdf.highlightStyle": "monokai.css",
     "markdown-pdf.breaks": true,
     "[markdown]": {
-        "editor.defaultFormatter":"yzhang.markdown-all-in-one",
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
     },
     //
     // Json config
@@ -490,7 +541,9 @@
     "python.terminal.activateEnvironment": true,
     "[python]": {
         "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {"source.organizeImports": true},
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
     },
     "python.linting.pylintArgs": [
         "--max-line-length=120",
@@ -499,7 +552,8 @@
         "--disable=C0116",
     ],
     "python.formatting.autopep8Args": [
-        "--max-line-length", "120",
+        "--max-line-length",
+        "120",
         "--experimental",
     ],
     //
@@ -527,4 +581,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
+    "markdown.extension.tableFormatter.normalizeIndentation": true,
+    "editor.formatOnSave": true,
 }

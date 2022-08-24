@@ -1,4 +1,3 @@
-#neofetch
 
 ## If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -44,7 +43,6 @@ stty -ixon
 ## set PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH=${PATH}:${HOME}/bin
-export PATH=${PATH}:/home/boogy/.cargo/bin
 export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/.cargo/bin
 export PATH="${PATH}:/opt/homebrew/bin"
@@ -252,3 +250,5 @@ eval "$(starship init zsh)"
 
 # setup pyenv
 eval "$(pyenv init -)"
+
+eval $(/opt/homebrew/bin/brew shellenv)
