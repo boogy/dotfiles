@@ -1,3 +1,7 @@
+if has('macunix')
+    let g:coc_node_path = "/opt/homebrew/bin/node"
+endif
+
 " TextEdit might fail if hidden is not set.
 set hidden
 

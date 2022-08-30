@@ -395,7 +395,7 @@
         ]
     },
     // Terraform
-    "terraform.codelens.referenceCount": true,
+    "terraform.odelens.referenceunt": true,
     "[terraform]": {
         "editor.defaultFormatter": "hashicorp.terraform",
         "editor.formatOnSave": true,
@@ -583,4 +583,13 @@
     "git.enableSmartCommit": true,
     "markdown.extension.tableFormatter.normalizeIndentation": true,
     "editor.formatOnSave": true,
+    //
+    // CodeSnap
+    //
+    "codesnap.transparentBackground": true,
+    "codesnap.showWindowTitle": false,
+    "codesnap.roundedCorners": true,
+    "codesnap.showLineNumbers": false,
+    "codesnap.target": "window",
+    "codesnap.shutterAction": "copy"
 }
