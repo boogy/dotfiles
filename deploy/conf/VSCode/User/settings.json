@@ -325,6 +325,33 @@
     "yaml.customTags": [
         "!encrypted/pkcs1-oaep scalar",
         "!vault scalar",
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
     ],
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-galaxy.json": [
@@ -591,5 +618,7 @@
     "codesnap.roundedCorners": true,
     "codesnap.showLineNumbers": false,
     "codesnap.target": "window",
-    "codesnap.shutterAction": "copy"
+    "codesnap.shutterAction": "copy",
+    "aws.telemetry": false,
+    "material-icon-theme.activeIconPack": "react"
 }

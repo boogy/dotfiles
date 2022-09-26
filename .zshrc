@@ -250,5 +250,6 @@ eval "$(starship init zsh)"
 
 # setup pyenv
 eval "$(pyenv init -)"
+eval "$(pyenv init --path)
 
 eval $(/opt/homebrew/bin/brew shellenv)

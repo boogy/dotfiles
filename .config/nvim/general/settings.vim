@@ -102,3 +102,5 @@ if has('vim') || has('gui') || exists('g:nvim-qt')
     set t_Co=256
 endif
 
+
+let g:python3_host_prog = "/opt/homebrew/bin/python3"
