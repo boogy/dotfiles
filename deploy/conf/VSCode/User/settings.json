@@ -620,5 +620,9 @@
     "codesnap.target": "window",
     "codesnap.shutterAction": "copy",
     "aws.telemetry": false,
-    "material-icon-theme.activeIconPack": "react"
+    "material-icon-theme.activeIconPack": "react",
+    "git.confirmSync": false,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
