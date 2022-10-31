@@ -26,7 +26,6 @@
     "editor.renderFinalNewline": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "workbench.colorTheme": "Gruvbox Dark Medium",
     "material-icon-theme.folders.theme": "specific",
     "workbench.iconTheme": "material-icon-theme",
     //
@@ -520,9 +519,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -551,7 +550,9 @@
     //
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
     },
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
@@ -624,5 +625,6 @@
     "git.confirmSync": false,
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "workbench.colorTheme": "Gruvbox Dark Medium"
 }

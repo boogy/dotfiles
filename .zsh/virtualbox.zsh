@@ -1,3 +1,4 @@
+[[ $(uname -s) =~ Linux ]] && {
 ## virtualbox shortcuts
 vagrant_box_path=$HOME/tools/vagrant/
 
@@ -157,3 +158,5 @@ function vbox-start-vm
 
 }
 compdef '_arguments "1: :($(_list_vbox_vms_name))"' vbox-start-vm
+
+} # END LINUX
