@@ -384,6 +384,16 @@ get-bundle-id(){
 
 
 clean-tf-cache(){
-    find . -type d -iname ".terragrunt-cache" -prune -exec rm -rf {} \;
-    find . -type f -iname ".terraform.lock.hcl" -prune -exec rm -rf {} \;
+    find . -type d \( \
+        -iname ".terragrunt-cache" -o \
+        -iname ".terraform" -o \
+        -iname ".terragrunt" \) \
+        -prune \
+        -exec rm -rf {} \;
+
+    find . -type f \( \
+        -iname "terraform.tfstate.backup" -o \
+        -iname "terraform.tfstate" \) \
+        -prune \
+        -exec rm -rf {} \;
 }

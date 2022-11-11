@@ -420,8 +420,9 @@
             "*ansible*/*.yaml",
         ]
     },
+    //
     // Terraform
-    "terraform.odelens.referenceunt": true,
+    //
     "[terraform]": {
         "editor.defaultFormatter": "hashicorp.terraform",
         "editor.formatOnSave": true,
@@ -468,7 +469,7 @@
         "commands": [
             {
                 "match": "\\.hcl$",
-                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+                "cmd": "/opt/homebrew/bin/terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
             }
         ]
     },
@@ -519,9 +520,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#5f0000",
-        "statusBar.noFolderBackground": "#5f0000",
-        "statusBar.debuggingBackground": "#5f0000"
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -539,7 +540,7 @@
     //
     // Markdown config
     //
-    "markdown-pdf.executablePath": "/usr/sbin/chromium",
+    // "markdown-pdf.executablePath": "/usr/sbin/chromium",
     "markdown-pdf.highlightStyle": "monokai.css",
     "markdown-pdf.breaks": true,
     "[markdown]": {
