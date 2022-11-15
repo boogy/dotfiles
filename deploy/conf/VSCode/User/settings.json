@@ -469,7 +469,7 @@
         "commands": [
             {
                 "match": "\\.hcl$",
-                "cmd": "/opt/homebrew/bin/terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
             }
         ]
     },
