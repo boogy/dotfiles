@@ -307,7 +307,7 @@ __taint() {
         '-module=[(path)  The module path where the resource lives. By default this will be root. Child modules can be specified by names. Ex. "consul" or "consul.vpc" (nested modules).]' \
         '-state=[(path) Path to read and save state (unless state-out is  specified). Defaults to "terraform.tfstate".]:statefile:_files -g "*.tfstate"' \
         '-state-out=[(path) Path to write updated state file. By default, the "-state" path will be used.]:statefile:_files -g "*.tfstate"' \
-        *:address:__statelist"
+        "*:address:__statelist"
 }
 
 __untaint() {
