@@ -40,14 +40,6 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 ## disable the XON/XOFF tty flow feature [ctrl-S|ctrl-Q]
 stty -ixon
 
-## set PATH
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-export PATH=${PATH}:${HOME}/bin
-export PATH=${PATH}:${HOME}/.local/bin
-export PATH=${PATH}:${HOME}/.cargo/bin
-export PATH="${PATH}:/opt/homebrew/bin"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-
 export LANG=en_US.UTF-8
 export BROWSER=firefox
 export TERMINAL=alacritty
@@ -57,11 +49,21 @@ export FZF_CTRL_R_OPTS="--reverse --preview 'echo {}' --preview-window down:3:hi
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 # export TERM=xterm-256color
 export PYTHONSTARTUP=~/.pythonrc.py
+export GOPATH=$HOME/go
 
 ## bspwm java applications problem
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export PYENV_ROOT="$HOME/.pyenv"
+
+## set PATH
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH=${PATH}:${HOME}/bin
+export PATH=${PATH}:${HOME}/.local/bin
+export PATH=${PATH}:${HOME}/.cargo/bin
+export PATH="${PATH}:/opt/homebrew/bin"
+export PATH="${PATH}:${GOPATH}/bin"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 ## Add zsh completions folder
 fpath=(~/.zsh/completion $fpath)

@@ -81,14 +81,6 @@
                 }
             ]
         },
-        // {
-        //     "before": ["<C-c>"],
-        //     "after": ["\"", "+", "y"]
-        // },
-        // {
-        //     "before": ["<C-v>"],
-        //     "after":  ["\"", "+", "p"]
-        // },
         {
             "before": [
                 "C-c"
@@ -128,14 +120,6 @@
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
-        // {
-        //     "before": ["<C-c>"],
-        //     "after": ["\"", "+", "y"]
-        // },
-        // {
-        //     "before": ["<C-v>"],
-        //     "after":  ["\"", "+", "p"]
-        // },
         {
             "before": [
                 "<leader>",
@@ -468,7 +452,7 @@
     "emeraldwalk.runonsave": {
         "commands": [
             {
-                "match": "\\.hcl$",
+                "match": "\\.hcl$|\\.hcl.json$",
                 "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
             }
         ]
@@ -480,6 +464,7 @@
     // TERMINAL CONFIG
     //
     "terminal.integrated.fontFamily": "Cousine Nerd Font",
+    // "terminal.integrated.fontFamily": "Hack Nerd Font",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1.2,
     "terminal.external.linuxExec": "alacritty",
@@ -520,9 +505,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
