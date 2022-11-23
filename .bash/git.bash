@@ -192,3 +192,9 @@ function git_info
         echo "you're currently not in a git repository"
     fi
 }
+
+function git-show-changed-dirs
+{
+    git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}
+
