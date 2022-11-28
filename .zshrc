@@ -189,6 +189,7 @@ zsh_plugins=(
     docker
     ssh
     aws-vault
+    aws
     terraform
 )
 ZSH_FULL_PLUGIN_PATHS=(
