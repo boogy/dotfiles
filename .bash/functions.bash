@@ -393,7 +393,8 @@ clean-tf-cache(){
 
     find . -type f \( \
         -iname "terraform.tfstate.backup" -o \
-        -iname "terraform.tfstate" \) \
+        -iname "terraform.tfstate" -o \
+        -iname ".terraform.lock.hcl" \) \
         -prune \
         -exec rm -rf {} \;
 }
