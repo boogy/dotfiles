@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+##
 ## Copy all the dot files in the user's home directory
 ## and source them
+##
 
 THIS_DIR=$(cd $(dirname "$0"); pwd)
 INSTALLDIR=$HOME
