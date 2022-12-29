@@ -281,48 +281,6 @@ is-reboot_required() {
 }
 
 
-clean-trash() {
-    local TRASH_DIR=""
-    if [[ -d "$HOME/.Trash" ]]; then
-        TRASH_DIR=~/.Trash
-    else
-        TRASH_DIR="$HOME/.local/share/Trash"
-    fi
-    echo "$TRASH_DIR"
-
-    if [[ $# -ge 1 ]] && [[ $(echo "$1"|grep -Eo "^(-f|force|--force|f|F)$") ]]
-    then
-        rm -rf $TRASH_DIR
-    else
-        tree $TRASH_DIR
-        echo -e "${BYellow}Are you sure you want to remove all the files [Y/n]${Color_Off}"
-        read ANSWER
-
-        if [[ $(echo ${ANSWER:-y} |grep -Eo "^[y|Y]$") ]]
-        then
-            rm -rf $TRASH_DIR/* && echo -e "${BGreen}Files removed ...${Color_Off}"
-        else
-            echo -e "${BGreen}No action to do ...${Color_Off}"
-        fi
-    fi
-}
-alias empty-trash=clean-trash
-
-
-open-with-firefox()
-{
-    FILE_NAME=$@
-    for F in ${FILE_NAME[@]}
-    do
-        if test -f $F; then
-            firefox $(cat $F)
-        else
-            firefox $F
-        fi
-    done
-}
-
-
 file-to-hex() {
     od -A n -t x1 $1|sed 's/ *//g'|tr -d '\n';echo
 }
@@ -358,31 +316,6 @@ cpu-usage-percentage() {
 }
 
 
-aur-update() {
-    local $COMMIT_MESSAGE="$1"
-
-    if [ -z $COMMIT_MESSAGE]; then
-        echo "Usage: ${FUNCNAME[0]} <commit message>"
-    fi
-
-    makepkg --printsrcinfo > .SRCINFO
-    git add --all
-    git commit -v -a -m "${COMMIT_MESSAGE}"
-}
-
-
-##
-## macOS related functions
-##
-[[ "$(uname -s)" == Darwin ]] && {
-
-get-bundle-id(){
-    osascript -e 'id of app "'$1'"'
-}
-
-} # end macOS functions
-
-
 clean-tf-cache(){
     find . -type d \( \
         -iname ".terragrunt-cache" -o \
@@ -398,3 +331,16 @@ clean-tf-cache(){
         -prune \
         -exec rm -rf {} \;
 }
+
+
+##
+## macOS related functions
+##
+[[ "$(uname -s)" == Darwin ]] && {
+
+get-bundle-id(){
+    osascript -e 'id of app "'$1'"'
+}
+
+} # end macOS functions
+

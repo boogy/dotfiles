@@ -24,6 +24,7 @@
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "editor.renderFinalNewline": false,
+    "editor.formatOnSave": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "material-icon-theme.folders.theme": "specific",
@@ -427,14 +428,19 @@
     "emeraldwalk.runonsave": {
         "commands": [
             {
-                "match": "\\.hcl$|\\.hcl.json$",
+                "match": "\\.hcl$",
+                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+            },
+            {
+                "match": "\\.hcl.json$",
                 "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
             }
         ]
     },
-    // "files.associations": {
-    //     "*.hcl": "terraform"
-    // },
+    "files.associations": {
+        // "*.hcl": "terraform"
+        "*.tf.tpl": "terraform"
+    },
     //
     // TERMINAL CONFIG
     //
@@ -467,6 +473,7 @@
             ]
         }
     },
+    "terminal.integrated.enableMultiLinePasteWarning": false,
     //
     // TELEMETRY
     //
@@ -488,6 +495,7 @@
         "*.ipynb": "jupyter-notebook"
     },
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Gruvbox Dark Medium",
     //
     //EXPLORER CONFIG
     //
@@ -506,6 +514,7 @@
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
     },
+    "markdown.extension.tableFormatter.normalizeIndentation": true,
     //
     // Json config
     //
@@ -556,6 +565,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
+    "javascript.updateImportsOnFileMove.enabled": "always",
     "security.workspace.trust.untrustedFiles": "open",
     "notebook.cellToolbarLocation": {
         "default": "right",
@@ -564,14 +574,11 @@
     "go.toolsManagement.autoUpdate": true,
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    "javascript.updateImportsOnFileMove.enabled": "always",
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
-    "markdown.extension.tableFormatter.normalizeIndentation": true,
-    "editor.formatOnSave": true,
+    "git.confirmSync": false,
     //
     // CodeSnap
     //
@@ -583,9 +590,7 @@
     "codesnap.shutterAction": "copy",
     "aws.telemetry": false,
     "material-icon-theme.activeIconPack": "react",
-    "git.confirmSync": false,
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "workbench.colorTheme": "Gruvbox Dark Medium"
+    }
 }
