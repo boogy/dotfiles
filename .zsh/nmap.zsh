@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Some useful nmap aliases for scan modes
 # Credit: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/nmap/nmap.plugin.zsh
 

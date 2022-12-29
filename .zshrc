@@ -175,7 +175,6 @@ bindkey  "^[[3~"  delete-char
 zsh_plugins=(
     sudo
     # ssh-agent
-    autojump
     fzf
     virtualenvwrapper
 
@@ -183,11 +182,11 @@ zsh_plugins=(
     aliases
     directories
     expandalias
-    virtualbox
     systemd
     python
     docker
     ssh
+    git
     aws-vault
     aws
     terraform
@@ -211,10 +210,8 @@ function source_bash {
 
 bash_config_files=(
     functions
-    python
     aliases
-    git
-    azure-cli
+    # azure-cli
 )
 BASH_FULL_FILE_PATH="${HOME}/.bash/"
 for config_file in $bash_config_files; do
