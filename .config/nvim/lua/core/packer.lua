@@ -85,6 +85,11 @@ require('packer').startup(function(use)
   use 'ryanoasis/vim-devicons'
   use 'SirVer/ultisnips'
 
+  use {
+    "windwp/nvim-autopairs",
+    -- config = function() require("nvim-autopairs").setup {} end
+  }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then

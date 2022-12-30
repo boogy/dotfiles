@@ -19,5 +19,6 @@ require "plugins.comment"
 
 require "plugins.neodev"
 require "plugins.nvim-cmp"
+require "plugins.nvim-autopairs"
 -- require "plugins.mason"
 
