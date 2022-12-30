@@ -7,7 +7,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
-require('packer').startup(function(use)
+require('packer').startup({ function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
 
@@ -53,10 +53,13 @@ require('packer').startup(function(use)
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
+  use 'tpope/vim-git'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -77,8 +80,6 @@ require('packer').startup(function(use)
   }
 
   -- additional plugins
-  use 'tpope/vim-surround'
-  use 'tpope/vim-git'
   use 'godlygeek/tabular'
   use 'ellisonleao/gruvbox.nvim'
   use 'preservim/nerdcommenter'
@@ -90,6 +91,9 @@ require('packer').startup(function(use)
     -- config = function() require("nvim-autopairs").setup {} end
   }
 
+  -- some better markdown support
+  use 'plasticboy/vim-markdown'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -99,7 +103,15 @@ require('packer').startup(function(use)
   if is_bootstrap then
     require('packer').sync()
   end
-end)
+end,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
+    }
+  }
+})
 
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })

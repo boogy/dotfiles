@@ -6,18 +6,18 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local opts = { noremap = true, silent = true }
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+-- local keymap = vim.api.nvim_set_keymap
 
--- local function map(mode, lhs, rhs, opts)
+-- local function map(mode, lhs, rhs, map_opts)
 --   local options = { noremap=true, silent=true }
---   if opts then
---     options = vim.tbl_extend('force', options, opts)
+--   if map_opts then
+--     options = vim.tbl_extend('force', options, map_opts)
 --   end
 --   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
---   local term_opts = { silent = true }
 -- end
+
+local map = require("utils").map
 
 -- -- Disable arrow keys
 -- map('', '<up>', '<nop>')
@@ -25,39 +25,44 @@ local keymap = vim.api.nvim_set_keymap
 -- map('', '<left>', '<nop>')
 -- map('', '<right>', '<nop>')
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- Y yanks entire line
+-- map("n", "<S-Y>", "yy")
 
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+-- better C-D/u with line redraw at center of window
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
 -- keep the curso in place when joining lines with J
-keymap("n", "J", "mzJ`z", opts)
+map("n", "J", "mzJ`z")
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-l>", "<C-w>l")
+map("n", "<C-k>", "<C-w>k")
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+map("n", "<Up>", ":resize -2<CR>")
+map("n", "<Down>", ":resize +2<CR>")
+map("n", "<Left>", ":vertical resize -2<CR>")
+map("n", "<Right>", ":vertical resize +2<CR>")
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+map("n", "<S-l>", ":bnext<CR>")
+map("n", "<S-h>", ":bprevious<CR>")
 
 -- Navigate tabs
-keymap("n", "<C-l>", ":tabnext<CR>", opts)
-keymap("n", "<C-h>", ":tabprev<CR>", opts)
+map("n", "<C-n>", ":tabnext<CR>")
+map("n", "<C-p>", ":tabprev<CR>")
 
 -- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+map("n", "<A-j>", "<Esc>:m .+1<CR>==gi")
+map("n", "<A-k>", "<Esc>:m .-2<CR>==gi")
+
+-- Change split orientation
+map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
+map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
 -- Insert --
 -- Press jk fast to exit insert mode
@@ -67,33 +72,41 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Visual --
 -- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+map("v", "<A-j>", ":m .+1<CR>==")
+map("v", "<A-k>", ":m .-2<CR>==")
+map("v", "p", '"_dP')
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
--- Keymaps for better default experience
+map("x", "J", ":move '>+1<CR>gv-gv")
+map("x", "K", ":move '<-2<CR>gv-gv")
+map("x", "<A-j>", ":move '>+1<CR>gv-gv")
+map("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
-
--- delete buffer
-keymap("n", "<leader>d", ":bd!<CR>", opts)
+-- delete buffer then witch to next buffer
+map("n", "<leader>d", ":bd!<CR>")
+map("n", "<leader>w", ":bw!<CR>:bnext<CR>")
 
 -- remove highlight from search
-keymap("n", "<leader><CR>", ":noh<CR>", opts)
+map("n", "<leader><CR>", ":noh<CR>")
 
--- See `:help vim.keymap.set()`
+-- close quickfix window
+map("n", "<Leader>a", ":cclose<CR>")
+
+
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- easy replace
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- set or remove executable for file
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>-x", "<cmd>!chmod -x %<CR>", { silent = true })
 

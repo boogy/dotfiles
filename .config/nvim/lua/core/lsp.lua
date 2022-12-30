@@ -1,12 +1,26 @@
 -- Setup neovim lua configuration
-require('neodev').setup()
+
+-- load neodev
+local neodev_ok, neodev = pcall(require, 'neodev')
+if not neodev_ok then return end
+neodev.setup()
+
+
+-- load cmp_nvim_lsp
+local cmp_status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not cmp_status_ok then
+  return
+end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
 
 -- Turn on lsp status information
-require('fidget').setup()
+local fidget_ok, fidget = pcall(require, 'fidget')
+if not fidget_ok then return end
+fidget.setup()
 
 
 -- LSP settings.
@@ -60,6 +74,7 @@ local servers = {
   rust_analyzer = {},
   tsserver = {},
   jsonls = {},
+  yamlls = {},
   ansiblels = {},
   tflint = {
     workspace = { checkThirdParty = false },
@@ -82,10 +97,14 @@ local servers = {
 
 
 -- Setup mason so it can manage external tooling
-require('mason').setup()
+-- require('mason').setup()
+local mason_ok, mason = pcall(require, 'mason')
+if not mason_ok then return end
+mason.setup()
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if not mason_lspconfig_ok then return end
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
@@ -100,4 +119,3 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-

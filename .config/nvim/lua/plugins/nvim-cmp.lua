@@ -1,7 +1,14 @@
 -- nvim-cmp setup
 
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp_status_ok, cmp = pcall(require, 'cmp')
+if not cmp_status_ok then
+  return
+end
+
+local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
+if not luasnip_status_ok then
+  return
+end
 
 cmp.setup {
   snippet = {
@@ -10,9 +17,13 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<C-Space>'] = cmp.mapping.complete(),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete({ reason = cmp.ContextReason.Auto, }), { "i", "c" }),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -41,6 +52,6 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'cmdline' },
     { name = 'buffer' },
-    { name = 'path'},
+    { name = 'path' },
   },
 }

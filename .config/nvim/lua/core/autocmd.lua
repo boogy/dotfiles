@@ -21,8 +21,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.cmd [[
-autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * :%s/\s\+$//e
 ]]
+
+-- Auto PackerCompile run when plugins.lua is changed
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+-- Source packer.lua when written and run PackerSync
+vim.cmd([[
+  augroup packer_edited_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]])
 
 
 -- [[ Highlight on yank ]]
@@ -35,3 +51,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+
