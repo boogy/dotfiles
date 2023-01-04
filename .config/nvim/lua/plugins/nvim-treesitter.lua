@@ -5,7 +5,7 @@ local tflint = require "lspconfig.server_configurations.tflint"
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'help', 'javascript', 'typescript', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'go' },
+  ensure_installed = { 'bash', 'help', 'javascript', 'typescript', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'go' },
 
   auto_install = true,
 
