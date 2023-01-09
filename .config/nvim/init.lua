@@ -4,6 +4,7 @@
 require "core.packer"
 require "core.color"
 require "core.keymaps"
+-- require "core.gui-zoom"
 require "core.autocmd"
 require "core.options"
 require "core.lsp"

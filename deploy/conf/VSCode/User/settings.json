@@ -487,9 +487,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -594,5 +594,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "editor.guides.bracketPairs": true
+    "editor.guides.bracketPairs": true,
+    "groovyLint.fix.trigger": "onSave"
 }

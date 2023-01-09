@@ -28,6 +28,11 @@ local map = require("utils").map
 -- Y yanks entire line
 -- map("n", "<S-Y>", "yy")
 
+-- quicker save shortcut
+map("n", "<C-s>", "<ESC>:w<CR>")
+map("i", "<C-s>", "<Esc>:w<CR>a")
+
+
 -- better C-D/u with line redraw at center of window
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
@@ -98,6 +103,12 @@ map("n", "<leader><CR>", ":noh<CR>")
 map("n", "<Leader>a", ":cclose<CR>")
 
 
+-- GUI Zoom
+-- vim.keymap.set("n", "<C-+>", vim.fn.ZoomIn)
+-- vim.keymap.set("n", "<C-->", vim.fn.ZoomOut)
+-- vim.keymap.set("n", "<C-=>", vim.fn.ZoomReset)
+
+
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -109,4 +120,5 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- set or remove executable for file
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-x", "<cmd>!chmod -x %<CR>", { silent = true })
+
 

@@ -53,8 +53,8 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 vim.o.scrolloff = 8
-vim.o.updatetime = 300
-vim.o.timeoutlen = 500
+-- vim.o.updatetime = 300
+-- vim.o.timeoutlen = 500
 vim.o.cmdheight = 2
 
 -- Make line numbers default
