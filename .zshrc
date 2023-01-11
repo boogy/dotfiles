@@ -63,6 +63,7 @@ export PATH=${PATH}:${HOME}/.local/bin
 export PATH=${PATH}:${HOME}/.cargo/bin
 export PATH="${PATH}:/opt/homebrew/bin"
 export PATH="${PATH}:${GOPATH}/bin"
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 ## Add zsh completions folder

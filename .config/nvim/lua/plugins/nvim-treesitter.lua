@@ -1,7 +1,9 @@
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 
-local tflint = require "lspconfig.server_configurations.tflint"
+local function ts_disable(_, bufnr)
+    return vim.api.nvim_buf_line_count(bufnr) > 5000
+end
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
@@ -9,7 +11,14 @@ require('nvim-treesitter.configs').setup {
 
   auto_install = true,
 
-  highlight = { enable = true },
+  -- highlight = { enable = true },
+  highlight = {
+        enable = true,
+        disable = function(lang, bufnr)
+            return lang == "cmake" or ts_disable(lang, bufnr)
+        end,
+        additional_vim_regex_highlighting = {"latex"},
+  },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
     enable = true,

@@ -4,6 +4,12 @@
 -- local g   = vim.g   -- Global variables
 -- local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
+vim.cmd([[
+let $PATH = '/opt/homebrew/bin:' . $PATH
+let g:node_host_prog = '/opt/homebrew/opt/node@18/bin'
+let g:python3_host_prog = '~/.pyenv/shims/python'
+]])
+
 vim.o.autoread = true                           -- Automatically reload changes if detected
 vim.o.mouse = 'a'                               -- Enable mouse support
 vim.o.mousehide = true
@@ -11,6 +17,8 @@ vim.o.clipboard = 'unnamedplus'                 -- Copy/paste to system clipboar
 vim.o.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 vim.o.backspace = "eol,start,indent"
 vim.o.lcs="tab:> ,trail:-,nbsp:+"
+
+vim.cmd('set shell=/bin/zsh')
 
 -----------------------------------------------------------
 -- Neovim UI
