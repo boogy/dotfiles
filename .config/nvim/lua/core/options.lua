@@ -7,7 +7,7 @@
 vim.cmd([[
 let $PATH = '/opt/homebrew/bin:' . $PATH
 let g:node_host_prog = '/opt/homebrew/opt/node@18/bin'
-let g:python3_host_prog = '~/.pyenv/shims/python'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 ]])
 
 vim.o.autoread = true                           -- Automatically reload changes if detected
