@@ -41,7 +41,7 @@ vicmd_symbol = "[V](bold green) "
 [directory]
 home_symbol = "~"
 truncate_to_repo = false
-truncation_length = 5
+truncation_length = 3
 truncation_symbol = "…/"
 
 [cmd_duration]
