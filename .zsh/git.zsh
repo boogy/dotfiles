@@ -198,3 +198,58 @@ function git-show-changed-dirs
     git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
 }
 
+
+function push-pr
+{
+    CURRENT_BRANCH=$(git branch --show-current)
+    BRANCH=${1:-CURRENT_BRANCH}
+
+    cmd="git push origin '$CURRENT_BRANCH'"
+    echo -en "Will run:\n\t $cmd\n\n"
+
+    if read -q "choice?Press Y/y to continue with push PR: "; then
+        echo && eval $cmd
+    else
+        echo
+        echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
+    fi
+}
+
+function git-commit
+{
+    MESSAGE="$1"
+    if [ $# -eq 0 ] || [ -z $MESSAGE ]; then
+        echo "You need to provide a message for the commit"
+        return
+    fi
+
+    cmd="git add --all && git commit -S -m '$MESSAGE'"
+    echo -en "Will run:\n\t $cmd\n\n"
+
+    if read -q "choice?Press Y/y to continue with commit and pull: "; then
+        echo && eval $cmd
+    else
+        echo
+        echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
+    fi
+}
+
+function git-commit-and-pull
+{
+    MESSAGE="$1"
+    if [ $# -eq 0 ] || [ -z $MESSAGE ]; then
+        echo "You need to provide a message for the commit"
+        return
+    fi
+
+    cmd="git add --all && git commit -m '$MESSAGE'"
+    echo -en "Will run:\n\t $cmd\n\n"
+
+    if read -q "choice?Press Y/y to continue with commit and pull: "; then
+        echo && eval $cmd
+    else
+        echo
+        echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
+    fi
+}
+
