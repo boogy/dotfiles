@@ -94,7 +94,8 @@ alias brc="source ~/.bashrc"
 ## tmux config shortcuts
 ##
 alias tmux="tmux -2"
-alias ta="tmux attach"
+#alias ta="tmux attach"
+alias ta="tmux new-session -A -s WORK"
 alias tls="tmux ls"
 alias tat="tmux attach -t"
 alias tns="tmux new-session -s"
