@@ -18,13 +18,16 @@
     "editor.cursorStyle": "line-thin",
     "editor.tabCompletion": "onlySnippets",
     "editor.fontWeight": "normal",
-    "editor.minimap.maxColumn": 300,
+    // "editor.minimap.maxColumn": 200,
     "editor.wordWrapColumn": 80,
     "editor.mouseWheelZoom": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.renderFinalNewline": false,
+    "editor.renderFinalNewline": "off",
     "editor.formatOnSave": true,
+    "editor.accessibilitySupport": "off",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "material-icon-theme.folders.theme": "specific",
@@ -241,12 +244,8 @@
     "vim.easymotionMarkerBackgroundColor": "#000000",
     // Set a custom color for the text on one character long markers.
     "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
-    // Set the height of the marker.
-    "vim.easymotionMarkerHeight": 14,
     // Set the font weight of the marker text.
     "vim.easymotionMarkerFontWeight": "normal",
-    // Set the Y offset of the marker text (the distance from the top).
-    "vim.easymotionMarkerYOffset": 11,
     // Enable the Surround plugin for Vim.
     "vim.surround": true,
     // Show all matches of the most recent search pattern
@@ -478,12 +477,11 @@
     // TELEMETRY
     //
     "telemetry.telemetryLevel": "off",
-    //
-    // Window
-    //
-    "window.titleBarStyle": "native",
     "window.openFilesInNewWindow": "off",
     "window.openFoldersInNewWindow": "off",
+    // "window.nativeFullScreen": false,
+    "window.newWindowDimensions": "inherit",
+    "window.commandCenter": true,
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
@@ -503,7 +501,6 @@
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     //
-    "material-icon-theme.showUpdateMessage": false,
     "extensions.ignoreRecommendations": false,
     //
     // Markdown config
@@ -572,13 +569,17 @@
         "jupyter-notebook": "left"
     },
     "go.toolsManagement.autoUpdate": true,
-    "editor.accessibilitySupport": "off",
-    "editor.bracketPairColorization.enabled": true,
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
+    "aws.telemetry": false,
+    "material-icon-theme.activeIconPack": "react",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
     //
     // CodeSnap
     //
@@ -587,13 +588,5 @@
     "codesnap.roundedCorners": true,
     "codesnap.showLineNumbers": false,
     "codesnap.target": "window",
-    "codesnap.shutterAction": "copy",
-    "aws.telemetry": false,
-    "material-icon-theme.activeIconPack": "react",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "editor.guides.bracketPairs": true,
-    "groovyLint.fix.trigger": "onSave"
+    "codesnap.shutterAction": "copy"
 }
