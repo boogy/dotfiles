@@ -144,7 +144,7 @@ function git-revert
     git reset --hard
 }
 
-function git_remove_missing_files
+function git-remove-missing-files
 { # git rm's missing files
     git ls-files -d -z | xargs -0 git update-index --remove
 }
@@ -158,7 +158,7 @@ function local-ignore
 }
 
 # get a quick overview for your git repo
-function git_info
+function git-info
 {
     # overview for your git repo
     if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
