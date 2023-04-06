@@ -247,7 +247,7 @@ function git-commit-push
         return
     fi
 
-    cmd="git add -all && git commit -m '$MESSAGE' && git push origin $BRANCH"
+    cmd="git add --all && git commit -m '$MESSAGE' && git push origin $BRANCH"
     echo -en "Will run:\n\t $cmd\n\n"
 
     if read -q "choice?Press Y/y to continue with commit and pull: "; then
