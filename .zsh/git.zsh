@@ -199,7 +199,7 @@ function git-show-changed-dirs
 }
 
 
-function push-pr
+function git-push-pr
 {
     CURRENT_BRANCH=$(git branch --show-current)
     BRANCH=${1:-CURRENT_BRANCH}
@@ -214,6 +214,7 @@ function push-pr
         echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
     fi
 }
+alias g-push-pr=git-push-pr
 
 function git-commit
 {
@@ -223,7 +224,7 @@ function git-commit
         return
     fi
 
-    cmd="git add --all && git commit -S -m '$MESSAGE'"
+    cmd="git add --all && git commit -m '$MESSAGE'"
     echo -en "Will run:\n\t $cmd\n\n"
 
     if read -q "choice?Press Y/y to continue with commit and pull: "; then
@@ -233,6 +234,30 @@ function git-commit
         echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
     fi
 }
+alias g-commit=git-commit
+
+function git-commit-push
+{
+    CURRENT_BRANCH=$(git branch --show-current)
+    MESSAGE="$1"
+    BRANCH=${2:-${CURRENT_BRANCH}}
+
+    if [ $# -eq 0 ] || [ -z $MESSAGE ]; then
+        echo "You need to provide a message for the commit"
+        return
+    fi
+
+    cmd="git add -all && git commit -m '$MESSAGE' && git push origin $BRANCH"
+    echo -en "Will run:\n\t $cmd\n\n"
+
+    if read -q "choice?Press Y/y to continue with commit and pull: "; then
+        echo && eval $cmd
+    else
+        echo
+        echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
+    fi
+}
+alias g-commit-push=git-commit-push
 
 function git-commit-and-pull
 {
@@ -252,4 +277,5 @@ function git-commit-and-pull
         echo "Choice:'$choice' not 'Y' or 'y'. Exiting..."
     fi
 }
+alias g-commit-and-pull=git-commit-and-pull
 
