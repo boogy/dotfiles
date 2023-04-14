@@ -17,6 +17,16 @@
         "key": "ctrl+[Equal]",
         "command": "workbench.action.terminal.toggleTerminal",
         "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+pagedown",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+pageup",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
     }
     // {
     //     "key": "ctrl+[Equal]",
