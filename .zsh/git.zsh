@@ -3,6 +3,9 @@
 # Git shortcuts
 #
 
+# git shortcut with completions
+compdef g='git'
+
 alias gcl='git clone'
 alias ga='git add'
 alias gall='git add -A'

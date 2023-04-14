@@ -51,3 +51,6 @@ alias tg-plan="terragrunt plan"
 alias tf-apply="terraform apply"
 alias tg-apply="terragrunt apply"
 
+# shortcut with completions
+compdef tf='terraform'
+compdef tg='terragrunt'
