@@ -35,6 +35,10 @@ copyright.pandoc
 pandoc
 pandoc-citeproc
 
+## ignore symlinks
+bin/terraform
+bin/terragrunt
+
 ## Vagrant
 .vagrant/
 
@@ -70,3 +74,4 @@ deploy/conf/VSCode/User/*
 
 ## neovim packer_compiled.lua
 .config/nvim/plugin/*
+
