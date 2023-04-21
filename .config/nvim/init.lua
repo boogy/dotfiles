@@ -1,5 +1,13 @@
 -- vim: ts=2 sts=2 sw=2 et
 --
+vim.cmd([[
+let g:loaded_perl_provider = 0
+
+let $PATH = '/opt/homebrew/bin:' . $PATH
+let g:node_host_prog = '/opt/homebrew/bin/neovim-node-host'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+]])
+
 -- Import configuration
 require "core.plugins"
 require "core.color"

@@ -22,7 +22,8 @@
     "editor.wordWrapColumn": 80,
     "editor.mouseWheelZoom": true,
     "editor.multiCursorModifier": "ctrlCmd",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    // "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
     "editor.renderFinalNewline": "off",
     "editor.formatOnSave": true,
     "editor.accessibilitySupport": "off",
@@ -214,7 +215,7 @@
     // Show the text of any command you are in the middle of writing.
     "vim.showcmd": true,
     // keywords contain alphanumeric characters and '_'
-    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
     // Ignore case in search patterns.
     "vim.ignorecase": true,
     // Override the 'ignorecase' option if the search pattern contains upper case characters.
@@ -466,9 +467,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#5f0000",
-        "statusBar.noFolderBackground": "#5f0000",
-        "statusBar.debuggingBackground": "#5f0000"
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"

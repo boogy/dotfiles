@@ -4,11 +4,13 @@
 -- local g   = vim.g   -- Global variables
 -- local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
-vim.cmd([[
-let $PATH = '/opt/homebrew/bin:' . $PATH
-let g:node_host_prog = '/opt/homebrew/opt/node@18/bin'
-let g:python3_host_prog = '/opt/homebrew/bin/python3'
-]])
+-- vim.cmd([[
+-- let g:loaded_perl_provider = 0
+--
+-- let $PATH = '/opt/homebrew/bin:' . $PATH
+-- let g:node_host_prog = '/opt/homebrew/bin/neovim-node-host'
+-- let g:python3_host_prog = '/opt/homebrew/bin/python3'
+-- ]])
 
 vim.o.autoread = true                           -- Automatically reload changes if detected
 vim.o.mouse = 'a'                               -- Enable mouse support
