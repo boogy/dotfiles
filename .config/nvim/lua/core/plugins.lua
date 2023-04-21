@@ -86,6 +86,9 @@ require('packer').startup({ function(use)
   use 'ryanoasis/vim-devicons'
   use 'SirVer/ultisnips'
 
+  use "rafamadriz/friendly-snippets"
+  use "L3MON4D3/LuaSnip"
+
   use {
     "windwp/nvim-autopairs",
     -- config = function() require("nvim-autopairs").setup {} end

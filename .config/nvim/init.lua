@@ -1,7 +1,7 @@
 -- vim: ts=2 sts=2 sw=2 et
 --
 -- Import configuration
-require "core.packer"
+require "core.plugins"
 require "core.color"
 require "core.keymaps"
 require "core.autocmd"

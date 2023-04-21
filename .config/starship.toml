@@ -14,8 +14,6 @@ $docker_context\
 $package\
 $cmake\
 $golang\
-$perl\
-$php\
 $python\
 $rust\
 $terraform\
@@ -69,13 +67,20 @@ staged = '[++\($count\)](green)'
 renamed = "r${count}"
 deleted = "d${count}"
 
-
 [hostname]
 ssh_only = false
 format =  "[$hostname](bold red) "
 trim_at = ".companyname.com"
 disabled = true
 
+[python]
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = false
+python_binary = "python3"
+# which files should trigger this module
+detect_files = ['__init__.py', 'Pipfile', 'setup.py']
+
 [aws]
 disabled = false
 format = '(\[$profile\])($style)'
+# format = 'on [$symbol($profile )(\($region\) )]($style)'
