@@ -46,10 +46,10 @@ compdef _terragrunt tg
 
 ## ALL
 alias tg="terragrunt"
-alias tf-plan="terraform plan"
-alias tg-plan="terragrunt plan"
-alias tf-apply="terraform apply"
-alias tg-apply="terragrunt apply"
+alias tf-plan="terraform plan -compact-warnings"
+alias tg-plan="terragrunt plan -compact-warnings"
+alias tf-apply="terraform apply -compact-warnings"
+alias tg-apply="terragrunt apply -compact-warnings"
 
 # shortcut with completions
 compdef tf='terraform'
