@@ -45,7 +45,7 @@ compdef _terragrunt tg
 
 
 ## ALL
-alias tg="terragrunt -compact-warnings"
+alias tg="terragrunt"
 alias tf-plan="terraform plan"
 alias tg-plan="terragrunt plan"
 alias tf-apply="terraform apply"
