@@ -11,7 +11,7 @@ function tf_prompt_info() {
   echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
 }
 
-alias tf='terraform -compact-warnings'
+alias tf='terraform'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
 alias tff='terraform fmt'
