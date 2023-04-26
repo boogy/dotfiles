@@ -94,8 +94,17 @@ require('packer').startup({ function(use)
     -- config = function() require("nvim-autopairs").setup {} end
   }
 
+  -- harpoon - switch easily between files
+  -- use 'ThePrimeagen/harpoon'
+
   -- some better markdown support
   use 'plasticboy/vim-markdown'
+
+  -- null-ls
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  })
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')

@@ -93,6 +93,7 @@ map("x", "<A-j>", ":move '>+1<CR>gv-gv")
 map("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
 -- delete buffer then witch to next buffer
+map("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 map("n", "<leader>d", ":bd!<CR>")
 map("n", "<leader>w", ":bw!<CR>:bnext<CR>")
 
