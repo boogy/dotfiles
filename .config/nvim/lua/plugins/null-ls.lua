@@ -90,6 +90,20 @@ local sources = {
 }
 
 null_ls.setup({
+	debug = true,
 	sources = sources,
-	defaults = defaults
+	defaults = defaults,
+
+	-- format on save
+	on_attach = function()
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			callback = function()
+				vim.lsp.buf.format({
+					filter = function(client)
+						return client.name == "null-ls"
+					end
+				})
+			end
+		})
+	end,
 })
