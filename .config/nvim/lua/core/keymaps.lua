@@ -123,3 +123,46 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-x", "<cmd>!chmod -x %<CR>", { silent = true })
 
 
+-------------------------------------------------------------------------------------------
+-- LSP Diagnostics
+-------------------------------------------------------------------------------------------
+
+-- disable diagnostic message and show only on hoover
+vim.diagnostic.config({ virtual_text = false })
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+-- Show all diagnostics on current line in floating window
+-- vim.api.nvim_set_keymap( 'n', '<Leader>d', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+
+-- Go to next diagnostic (if there are multiple on the same line, only shows
+-- one at a time in the floating window)
+-- vim.api.nvim_set_keymap( 'n', '<Leader>n', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+
+-- Go to prev diagnostic (if there are multiple on the same line, only shows
+-- one at a time in the floating window)
+-- vim.api.nvim_set_keymap( 'n', '<Leader>p', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+
+vim.g.diagnostics_visible = true
+function _G.toggle_diagnostics()
+  if vim.g.diagnostics_visible then
+    vim.g.diagnostics_visible = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_visible = true
+    vim.diagnostic.enable()
+  end
+end
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.toggle_diagnostics()<CR>', {silent=true, noremap=true})
+
+-- Toggle visual_text true or false
+function _G.toggle_virtual_text()
+    if vim.diagnostic.config()['virtual_text'] == true then
+        vim.diagnostic.config({ virtual_text = false })
+    else
+        vim.diagnostic.config({ virtual_text = true })
+    end
+end
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>L', ':call v:lua.toggle_virtual_text()<CR>', {silent=true, noremap=true})

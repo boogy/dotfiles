@@ -43,7 +43,7 @@ local sources = {
 	null_ls.builtins.formatting.beautysh,
 	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.yamlfmt,
-	null_ls.builtins.formatting.yamlfix,
+	-- null_ls.builtins.formatting.yamlfix,
 	null_ls.builtins.formatting.xmllint,
 	null_ls.builtins.formatting.xmlformat,
 	null_ls.builtins.formatting.rustfmt,
@@ -66,6 +66,7 @@ local sources = {
 	----------------------------------------------------------------------------------------
 	null_ls.builtins.diagnostics.eslint,
 	null_ls.builtins.diagnostics.zsh,
+	null_ls.builtins.diagnostics.ansiblelint,
 
 	-- python
 	null_ls.builtins.diagnostics.pylint.with({ method = null_ls.methods.DIAGNOSTICS_ON_SAVE }),
