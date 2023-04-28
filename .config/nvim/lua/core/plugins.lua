@@ -106,6 +106,10 @@ require('packer').startup({ function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
 
+  -- Easily speed up your neovim startup time!
+  -- replacement for filetype.vim
+  use "nathom/filetype.nvim"
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then

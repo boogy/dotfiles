@@ -85,6 +85,9 @@ map("v", "<A-j>", ":m .+1<CR>==")
 map("v", "<A-k>", ":m .-2<CR>==")
 map("v", "p", '"_dP')
 
+-- greatest remap ever
+-- map("x", "<leader>p", [["_dP]])
+
 -- Visual Block --
 -- Move text up and down
 map("x", "J", ":move '>+1<CR>gv-gv")
@@ -93,7 +96,7 @@ map("x", "<A-j>", ":move '>+1<CR>gv-gv")
 map("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
 -- delete buffer then witch to next buffer
-map("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+map("n", "<leader>Q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 map("n", "<leader>d", ":bd!<CR>")
 map("n", "<leader>w", ":bw!<CR>:bnext<CR>")
 
@@ -122,6 +125,11 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-x", "<cmd>!chmod -x %<CR>", { silent = true })
 
+-- format current buffer
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+
 
 -------------------------------------------------------------------------------------------
 -- LSP Diagnostics
@@ -135,7 +143,7 @@ vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Show all diagnostics on current line in floating window
--- vim.api.nvim_set_keymap( 'n', '<Leader>d', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap( 'n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 
 -- Go to next diagnostic (if there are multiple on the same line, only shows
 -- one at a time in the floating window)
@@ -155,14 +163,18 @@ function _G.toggle_diagnostics()
     vim.diagnostic.enable()
   end
 end
-vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.toggle_diagnostics()<CR>', {silent=true, noremap=true})
+
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.toggle_diagnostics()<CR>',
+  { silent = true, noremap = true })
 
 -- Toggle visual_text true or false
 function _G.toggle_virtual_text()
-    if vim.diagnostic.config()['virtual_text'] == true then
-        vim.diagnostic.config({ virtual_text = false })
-    else
-        vim.diagnostic.config({ virtual_text = true })
-    end
+  if vim.diagnostic.config()['virtual_text'] == true then
+    vim.diagnostic.config({ virtual_text = false })
+  else
+    vim.diagnostic.config({ virtual_text = true })
+  end
 end
-vim.api.nvim_buf_set_keymap(0, 'n', '<leader>L', ':call v:lua.toggle_virtual_text()<CR>', {silent=true, noremap=true})
+
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>L', ':call v:lua.toggle_virtual_text()<CR>',
+  { silent = true, noremap = true })
