@@ -28,8 +28,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 4
-   y: 1
+    x: 4
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -125,26 +125,26 @@ schemes:
   ## Colors (Gruvbox dark)
   gruvbox-dark: &gruvbox-dark
     primary:
-      background: '#1d2021'
-      foreground: '#ebdbb2'
+      background: "#1d2021"
+      foreground: "#ebdbb2"
     normal:
-      black:   '#282828'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#a89984'
+      black: "#282828"
+      red: "#cc241d"
+      green: "#98971a"
+      yellow: "#d79921"
+      blue: "#458588"
+      magenta: "#b16286"
+      cyan: "#689d6a"
+      white: "#a89984"
     bright:
-      black:   '#928374'
-      red:     '#fb4934'
-      green:   '#b8bb26'
-      yellow:  '#fabd2f'
-      blue:    '#83a598'
-      magenta: '#d3869b'
-      cyan:    '#8ec07c'
-      white:   '#ebdbb2'
+      black: "#928374"
+      red: "#fb4934"
+      green: "#b8bb26"
+      yellow: "#fabd2f"
+      blue: "#83a598"
+      magenta: "#d3869b"
+      cyan: "#8ec07c"
+      white: "#ebdbb2"
 
 colors: *monokai
 
@@ -173,7 +173,6 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
   hide_when_typing: true
-
 
 key_bindings:
   # (macOS only)
@@ -210,3 +209,18 @@ key_bindings:
   - { key: 22,        mods: Alt,              chars: "]"                }
   # command enter to toggle fullscreen
   - { key: 36,        mods: Command,          action: ToggleFullscreen  }
+  #
+  # neovim bindings
+  #
+  - { key: A,         mods: Command,              chars: "\x1ba"}
+  - { key: S,         mods: Command,              chars: "\x1bs"}
+  - { key: D,         mods: Command,              chars: "\x1bd"}
+  - { key: Key1,      mods: Command,              chars: "\x1b1"}
+  - { key: Key2,      mods: Command,              chars: "\x1b2"}
+  - { key: Key3,      mods: Command,              chars: "\x1b3"}
+  - { key: Key4,      mods: Command,              chars: "\x1b4"}
+  - { key: Key5,      mods: Command,              chars: "\x1b5"}
+  - { key: Key6,      mods: Command,              chars: "\x1b6"}
+  - { key: Key7,      mods: Command,              chars: "\x1b7"}
+  - { key: Key8,      mods: Command,              chars: "\x1b8"}
+  - { key: Key9,      mods: Command,              chars: "\x1b9"}
