@@ -30,6 +30,7 @@ yarn.lock
 .config/nvim/.netrwhist
 .config/nvim/spell
 .config/nvim/nvim
+.config/nvim/lua/.luarc.json
 
 copyright.pandoc
 pandoc
@@ -74,4 +75,3 @@ deploy/conf/VSCode/User/*
 
 ## neovim packer_compiled.lua
 .config/nvim/plugin/*
-

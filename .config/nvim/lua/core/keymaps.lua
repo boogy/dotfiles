@@ -1,5 +1,3 @@
--- [[ Keymaps ]]
---
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -7,17 +5,14 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Shorten function name
--- local keymap = vim.api.nvim_set_keymap
-
--- local function map(mode, lhs, rhs, map_opts)
---   local options = { noremap=true, silent=true }
---   if map_opts then
---     options = vim.tbl_extend('force', options, map_opts)
---   end
---   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
--- end
-
+local keymap = vim.keymap -- for conciseness
 local map = require("utils").map
+
+--------------------------------------------------------------------------------------------------
+-- Keymaps
+--------------------------------------------------------------------------------------------------
+-- sync all modules
+map("n", "<leader>pu", ":PackerSync<CR>", { desc = "Update all packer moduls" })
 
 -- -- Disable arrow keys
 -- map('', '<up>', '<nop>')
@@ -69,11 +64,6 @@ map("n", "<A-k>", "<Esc>:m .-2<CR>==gi")
 map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
--- Insert --
--- Press jk fast to exit insert mode
--- keymap("i", "jk", "<ESC>", opts)
--- keymap("i", "kj", "<ESC>", opts)
-
 
 -- Visual --
 -- Stay in indent mode
@@ -107,7 +97,9 @@ map("n", "<leader><CR>", ":noh<CR>")
 map("n", "<Leader>a", ":cclose<CR>")
 
 
+--------------------------------------------------------------------------------------------------
 -- GUI Zoom
+--------------------------------------------------------------------------------------------------
 -- vim.keymap.set("n", "<C-+>", vim.fn.ZoomIn)
 -- vim.keymap.set("n", "<C-->", vim.fn.ZoomOut)
 -- vim.keymap.set("n", "<C-=>", vim.fn.ZoomReset)
@@ -131,9 +123,69 @@ vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 
 
+--------------------------------------------------------------------------------------------------
+--
+-- Vim Telescope
+--
+--------------------------------------------------------------------------------------------------
+keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+keymap.set('n', '<leader>p', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+keymap.set('n', '<leader>/', function()
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+    })
+end, { desc = '[/] Fuzzily search in current buffer]' })
+
+keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+keymap.set('n', '<leader>bk', require('telescope.builtin').keymaps, { desc = 'Builtin Keymaps' })
+
+
+-- telescope git commands (not on youtube nvim video)
+keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>",
+    { desc = 'List all git commits (use <cr> to checkout) ["gc" for git commits]' })
+
+keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>",
+    { desc = 'List git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]' })
+
+keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>",
+    { desc = 'List git branches (use <cr> to checkout) ["gb" for git branch]' })
+
+keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>",
+    { desc = 'List current changes per file with diff preview' })
+
+keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<cr>",
+    { desc = 'Lists stash items in current repository with ability to apply them on <cr>' })
+
+
+--------------------------------------------------------------------------------------------------
+--
+-- Harpoon
+--
+--------------------------------------------------------------------------------------------------
+keymap.set("n", "<leader>hp", require('harpoon.ui').toggle_quick_menu)
+keymap.set("n", "<leader>hm", require('harpoon.mark').add_file)
+keymap.set("n", "<M-n>", require('harpoon.ui').nav_next)
+keymap.set("n", "<M-p>", require('harpoon.ui').nav_prev)
+
+
 -------------------------------------------------------------------------------------------
+--
 -- LSP Diagnostics
+--
 -------------------------------------------------------------------------------------------
+vim.g.diagnostics_visible = true
+
+keymap.set('n', '[d', vim.diagnostic.goto_prev)
+keymap.set('n', ']d', vim.diagnostic.goto_next)
+keymap.set('n', '<leader>E', vim.diagnostic.open_float)
+keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- disable diagnostic message and show only on hoover
 vim.diagnostic.config({ virtual_text = false })
@@ -153,28 +205,7 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {f
 -- one at a time in the floating window)
 -- vim.api.nvim_set_keymap( 'n', '<Leader>p', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 
-vim.g.diagnostics_visible = true
-function _G.toggle_diagnostics()
-  if vim.g.diagnostics_visible then
-    vim.g.diagnostics_visible = false
-    vim.diagnostic.disable()
-  else
-    vim.g.diagnostics_visible = true
-    vim.diagnostic.enable()
-  end
-end
-
-vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.toggle_diagnostics()<CR>',
-  { silent = true, noremap = true })
-
--- Toggle visual_text true or false
-function _G.toggle_virtual_text()
-  if vim.diagnostic.config()['virtual_text'] == true then
-    vim.diagnostic.config({ virtual_text = false })
-  else
-    vim.diagnostic.config({ virtual_text = true })
-  end
-end
-
-vim.api.nvim_buf_set_keymap(0, 'n', '<leader>L', ':call v:lua.toggle_virtual_text()<CR>',
-  { silent = true, noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>',
+    { silent = true, noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>L', ':call v:lua.require("utils").toggle_virtual_text()<CR>',
+    { silent = true, noremap = true })

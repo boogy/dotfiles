@@ -5,6 +5,12 @@ vim.g.did_load_filetypes = 1
 -- In init.lua or filetype.nvim's config file
 require("filetype").setup({
     overrides = {
+        extensions = {
+            tf = "terraform",
+            tfvars = "terraform",
+            tfstate = "json",
+            hcl = "terraform",
+        },
         complex = {
             -- Set the filetype of any full filename matching the regex to gitconfig
             [".*git/config"] = "gitconfig", -- Included in the plugin

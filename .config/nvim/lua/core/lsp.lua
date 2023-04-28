@@ -68,20 +68,41 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  bashls = {},
   clangd = {},
   gopls = {},
+  dockerls = {},
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
+  awk_ls = {},
   jsonls = {},
-  -- yamlls = {},
+  yamlls = {},
+  graphql = {},
   ansiblels = {},
+  terraformls = {},
   tflint = {
     workspace = { checkThirdParty = false },
     telemetry = { enable = false },
   },
 
-  -- lua_ls = {
+  lua_ls = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.stdpath("config") .. "/lua"] = true,
+        },
+      },
+      telemetry = { enable = false },
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+
+  -- sumneko_lua = {
   --   Lua = {
   --     workspace = { checkThirdParty = false, library = {
   --       [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -93,19 +114,6 @@ local servers = {
   --     },
   --   },
   -- },
-
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false, library = {
-        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-        [vim.fn.stdpath("config") .. "/lua"] = true,
-      }, },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
 }
 
 

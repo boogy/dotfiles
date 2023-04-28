@@ -2,24 +2,52 @@
 -- See `:help nvim-treesitter`
 
 local function ts_disable(_, bufnr)
-    return vim.api.nvim_buf_line_count(bufnr) > 5000
+  return vim.api.nvim_buf_line_count(bufnr) > 5000
 end
 
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'bash', 'help', 'javascript', 'typescript', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'go', 'yaml' },
+  ensure_installed = {
+    'bash',
+    'c',
+    'cpp',
+    'diff',
+    'dockerfile',
+    'git_config',
+    'git_rebase',
+    'gitcommit',
+    'gitignore',
+    'go',
+    'go',
+    'graphql',
+    'help',
+    'javascript',
+    'jq',
+    'json',
+    'lua',
+    'lua',
+    'make',
+    'python',
+    'rust',
+    'terraform',
+    'toml',
+    'typescript',
+    'vim',
+    'yaml',
+  },
 
   auto_install = true,
 
   -- highlight = { enable = true },
   highlight = {
-        enable = true,
-        disable = function(lang, bufnr)
-            return lang == "cmake" or ts_disable(lang, bufnr)
-        end,
-        additional_vim_regex_highlighting = {"latex"},
+    enable = true,
+    disable = function(lang, bufnr)
+      return lang == "cmake" or ts_disable(lang, bufnr)
+    end,
+    additional_vim_regex_highlighting = false, -- { "latex" },
   },
   indent = { enable = true, disable = { 'python' } },
+
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -74,11 +102,3 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
-

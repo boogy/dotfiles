@@ -10,8 +10,8 @@ let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 -- Import configuration
 require "core.plugins"
-require "core.color"
 require "core.keymaps"
+require "core.color"
 require "core.autocmd"
 require "core.options"
 require "core.lsp"
@@ -32,4 +32,6 @@ require "plugins.nvim-autopairs"
 require "plugins.nvim-markdown"
 require "plugins.null-ls"
 require "plugins.filetype"
+require "plugins.harpoon"
+
 -- require "plugins.mason"
