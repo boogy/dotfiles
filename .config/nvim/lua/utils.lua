@@ -8,7 +8,6 @@ function M.map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
 function M.toggle_diagnostics()
     if vim.g.diagnostics_visible then
         vim.g.diagnostics_visible = false
@@ -18,7 +17,6 @@ function M.toggle_diagnostics()
         vim.diagnostic.enable()
     end
 end
-
 
 function M.toggle_virtual_text()
     if vim.diagnostic.config()['virtual_text'] == true then
