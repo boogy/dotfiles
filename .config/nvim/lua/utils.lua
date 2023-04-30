@@ -8,6 +8,14 @@ function M.map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+function M.imap(tbl)
+    vim.keymap.set("i", tbl[1], tbl[2], tbl[3])
+end
+
+function M.nmap(tbl)
+    vim.keymap.set("n", tbl[1], tbl[2], tbl[3])
+end
+
 function M.toggle_diagnostics()
     if vim.g.diagnostics_visible then
         vim.g.diagnostics_visible = false

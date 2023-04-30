@@ -27,7 +27,8 @@ require('lualine').setup {
     },
     lualine_b = {
       'branch',
-      { 'diff',
+      {
+        'diff',
         colored = true,
         diff_color = {
           added = 'DiffAdd',
@@ -37,11 +38,15 @@ require('lualine').setup {
         symbols = { added = '+', modified = '~', removed = '-' },
       },
       'diagnostics',
-      { 'buffers', show_modified_status = true, hide_filename_extension = false, mode = 2,
+      {
+        'buffers',
+        show_modified_status = true,
+        hide_filename_extension = false,
+        mode = 2,
         symbols = {
-          modified = ' ●',      -- Text to show when the buffer is modified
+          modified = ' ●',    -- Text to show when the buffer is modified
           alternate_file = '#', -- Text to show to identify the alternate file
-          directory = '',      -- Text to show when the buffer is a directory
+          directory = '',    -- Text to show when the buffer is a directory
         },
       }
     },
@@ -58,7 +63,14 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
+  tabline = {
+    lualine_a = { "buffers" },
+    lualine_b = { "tabs" },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
   winbar = {},
   inactive_winbar = {},
   extensions = { 'quickfix', 'fugitive' }

@@ -20,7 +20,6 @@ require('nvim-treesitter.configs').setup {
     'go',
     'go',
     'graphql',
-    'help',
     'javascript',
     'jq',
     'json',

@@ -1,12 +1,7 @@
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Shorten function name
 local keymap = vim.keymap -- for conciseness
 local map = require("utils").map
+local nmap = require("utils").nmap
 
 --------------------------------------------------------------------------------------------------
 -- Keymaps
@@ -14,7 +9,6 @@ local map = require("utils").map
 -- quicker save shortcut
 map("n", "<C-s>", "<ESC>:w<CR>")
 map("i", "<C-s>", "<Esc>:w<CR>a")
-
 
 -- better C-D/u with line redraw at center of window
 map("n", "<C-d>", "<C-d>zz")
@@ -55,9 +49,7 @@ map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
 
---
 -- Visual --
---
 -- Stay in indent mode
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -143,23 +135,16 @@ keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<cr>")     -- 'Lists stas
 -- Harpoon
 --
 --------------------------------------------------------------------------------------------------
--- keymap.set("n", "<leader>1", ":call v:lua.require('harpoon.ui').nav_file(1)<CR>")
--- keymap.set("n", "<leader>2", ":call v:lua.require('harpoon.ui').nav_file(2)<CR>")
--- keymap.set("n", "<leader>3", ":call v:lua.require('harpoon.ui').nav_file(3)<CR>")
---
 keymap.set("n", "<C-e>", function() require('harpoon.ui').toggle_quick_menu() end)
 keymap.set("n", "<C-a>", function() require('harpoon.mark').add_file() end)
-keymap.set("n", "<M-p>", function() require('harpoon.ui').nav_prev() end)
-keymap.set("n", "<M-n>", function() require('harpoon.ui').nav_next() end)
-keymap.set("n", "<M-1>", function() require('harpoon.ui').nav_file(1) end)
-keymap.set("n", "<M-2>", function() require('harpoon.ui').nav_file(2) end)
-keymap.set("n", "<M-3>", function() require('harpoon.ui').nav_file(3) end)
-keymap.set("n", "<M-4>", function() require('harpoon.ui').nav_file(4) end)
-keymap.set("n", "<M-5>", function() require('harpoon.ui').nav_file(5) end)
-keymap.set("n", "<M-6>", function() require('harpoon.ui').nav_file(6) end)
-keymap.set("n", "<M-7>", function() require('harpoon.ui').nav_file(7) end)
-keymap.set("n", "<M-8>", function() require('harpoon.ui').nav_file(8) end)
-keymap.set("n", "<M-9>", function() require('harpoon.ui').nav_file(9) end)
+for i = 1, 9 do
+  nmap {
+    string.format("<M-%s>", i),
+    function()
+      require("harpoon.ui").nav_file(i)
+    end,
+  }
+end
 
 
 -------------------------------------------------------------------------------------------

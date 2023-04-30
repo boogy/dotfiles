@@ -8,14 +8,19 @@ let g:node_host_prog = '/opt/homebrew/bin/neovim-node-host'
 let g:python3_host_prog = '/opt/homebrew/bin/python3'
 ]])
 
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Import configuration
 require "core.plugins"
 require "core.keymaps"
+require "core.options"
 require "core.color"
 require "core.autocmd"
-require "core.options"
 require "core.lsp"
--- require "core.gui-zoom"
 
 -- plugins configuration
 require "plugins.nvim-treesitter"
@@ -33,5 +38,7 @@ require "plugins.nvim-markdown"
 require "plugins.null-ls"
 require "plugins.filetype"
 require "plugins.harpoon"
+require "plugins.toggleterm"
 
--- require "plugins.mason"
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
