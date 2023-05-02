@@ -38,17 +38,17 @@ require('lualine').setup {
         symbols = { added = '+', modified = '~', removed = '-' },
       },
       'diagnostics',
-      {
-        'buffers',
-        show_modified_status = true,
-        hide_filename_extension = false,
-        mode = 2,
-        symbols = {
-          modified = ' ●',    -- Text to show when the buffer is modified
-          alternate_file = '#', -- Text to show to identify the alternate file
-          directory = '',    -- Text to show when the buffer is a directory
-        },
-      }
+      -- {
+      --   'buffers',
+      --   show_modified_status = true,
+      --   hide_filename_extension = false,
+      --   mode = 2,
+      --   symbols = {
+      --     modified = ' ●',    -- Text to show when the buffer is modified
+      --     alternate_file = '#', -- Text to show to identify the alternate file
+      --     directory = '',    -- Text to show when the buffer is a directory
+      --   },
+      -- }
     },
     lualine_c = {}, -- filename
     lualine_x = { 'encoding', 'fileformat', 'filetype', 'searchcount' },
@@ -64,8 +64,20 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {
-    lualine_a = { "buffers" },
-    lualine_b = { "tabs" },
+    lualine_a = {
+      {
+        'buffers',
+        show_modified_status = true,
+        hide_filename_extension = false,
+        mode = 2,
+        symbols = {
+          modified = ' ●',    -- Text to show when the buffer is modified
+          alternate_file = '#', -- Text to show to identify the alternate file
+          directory = '',    -- Text to show when the buffer is a directory
+        },
+      }
+    },
+    lualine_b = { --[[ {"tabs", mode = 2} ]] },
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},

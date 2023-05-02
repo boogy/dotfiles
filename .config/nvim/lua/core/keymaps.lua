@@ -39,6 +39,8 @@ map("n", "<S-h>", ":bprevious<CR>")
 -- Navigate tabs
 map("n", "<C-n>", ":tabnext<CR>")
 map("n", "<C-p>", ":tabprev<CR>")
+-- map("n", "<D-t>", ":tabnew<CR>")
+-- map("n", "<M-t>", ":tabnew<CR>")
 
 -- Move text up and down
 map("n", "<A-j>", "<Esc>:m .+1<CR>==gi")
@@ -49,7 +51,9 @@ map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
 
+--
 -- Visual --
+--
 -- Stay in indent mode
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -62,7 +66,10 @@ map("v", "p", '"_dP')
 -- greatest remap ever
 -- map("x", "<leader>p", [["_dP]])
 
+
+--
 -- Visual Block --
+--
 -- Move text up and down
 map("x", "J", ":move '>+1<CR>gv-gv")
 map("x", "K", ":move '<-2<CR>gv-gv")
@@ -79,7 +86,6 @@ map("n", "<leader><CR>", ":noh<CR>")
 
 -- close quickfix window
 -- map("n", "<Leader>a", ":cclose<CR>")
-
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
@@ -108,11 +114,11 @@ keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?
 keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 keymap.set('n', '<leader>p', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 keymap.set('n', '<leader>/', function()
-    -- You can pass additional configuration to telescope to change theme, layout, etc.
-    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-    })
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
 keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
@@ -144,6 +150,12 @@ for i = 1, 9 do
       require("harpoon.ui").nav_file(i)
     end,
   }
+  nmap {
+    string.format("<D-%s>", i),
+    function()
+      require("harpoon.ui").nav_file(i)
+    end,
+  }
 end
 
 
@@ -168,5 +180,5 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {f
 
 -- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>', { silent = true, noremap = true })
 -- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>T', ':call v:lua.require("utils").toggle_virtual_text()<CR>', { silent = true, noremap = true })
-keymap.set('n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>')
-keymap.set('n', '<leader>T', ':call v:lua.require("utils").toggle_virtual_text()<CR>')
+keymap.set('n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>', { silent = true, noremap = true })
+keymap.set('n', '<leader>T', ':call v:lua.require("utils").toggle_virtual_text()<CR>', { silent = true, noremap = true })
