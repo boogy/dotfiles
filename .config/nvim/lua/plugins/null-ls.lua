@@ -25,6 +25,11 @@ local defaults = {
 	update_in_insert = false,
 }
 
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local completion = null_ls.builtins.completion
+local hover = null_ls.builtins.hover
+
 -- Docs
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -39,55 +44,55 @@ local sources = {
 	----------------------------------------------------------------------------------------
 	-- Formating
 	----------------------------------------------------------------------------------------
-	null_ls.builtins.formatting.shfmt,
-	null_ls.builtins.formatting.beautysh,
-	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.yamlfmt,
-	-- null_ls.builtins.formatting.yamlfix,
-	null_ls.builtins.formatting.xmllint,
-	null_ls.builtins.formatting.xmlformat,
-	null_ls.builtins.formatting.rustfmt,
-	null_ls.builtins.formatting.isort,
-	null_ls.builtins.formatting.reorder_python_imports,
-	null_ls.builtins.formatting.black,
-	null_ls.builtins.formatting.sqlformat,
-	null_ls.builtins.formatting.sqlfmt,
-	null_ls.builtins.formatting.terraform_fmt,
-	null_ls.builtins.formatting.terrafmt,
+	formatting.shfmt,
+	formatting.beautysh,
+	formatting.stylua,
+	-- formatting.yamlfmt,
+	formatting.yamlfix,
+	formatting.xmllint,
+	formatting.xmlformat,
+	formatting.rustfmt,
+	formatting.isort,
+	formatting.reorder_python_imports,
+	formatting.black,
+	formatting.sqlformat,
+	formatting.sqlfmt,
+	formatting.terraform_fmt,
+	formatting.terrafmt,
 	-- format terraform code in markdow:n files
-	null_ls.builtins.formatting.usort,
-	null_ls.builtins.formatting.trim_whitespace,
+	formatting.usort,
+	formatting.trim_whitespace,
 	-- JavaScript standard style
-	null_ls.builtins.formatting.standardts,
+	formatting.standardts,
 
 
 	----------------------------------------------------------------------------------------
 	-- Diagnostics
 	----------------------------------------------------------------------------------------
-	null_ls.builtins.diagnostics.eslint,
-	null_ls.builtins.diagnostics.zsh,
-	null_ls.builtins.diagnostics.ansiblelint,
+	diagnostics.eslint,
+	diagnostics.zsh,
+	diagnostics.ansiblelint,
 
 	-- python
-	null_ls.builtins.diagnostics.pylint.with({ method = null_ls.methods.DIAGNOSTICS_ON_SAVE }),
+	diagnostics.pylint.with({ method = null_ls.methods.DIAGNOSTICS_ON_SAVE }),
 
-	null_ls.builtins.diagnostics.yamllint,
-	null_ls.builtins.diagnostics.golangci_lint,
-	null_ls.builtins.diagnostics.gospel,
+	diagnostics.yamllint,
+	diagnostics.golangci_lint,
+	diagnostics.gospel,
 
 	-- git commit message linter
-	null_ls.builtins.diagnostics.gitlint,
+	diagnostics.gitlint,
 
 
 	----------------------------------------------------------------------------------------
 	-- Completions
 	----------------------------------------------------------------------------------------
-	null_ls.builtins.completion.spell,
+	completion.spell,
 
 	----------------------------------------------------------------------------------------
 	-- Hover
 	----------------------------------------------------------------------------------------
-	null_ls.builtins.hover.dictionary,
+	hover.dictionary,
 }
 
 null_ls.setup({
