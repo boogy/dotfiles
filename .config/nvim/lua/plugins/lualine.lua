@@ -1,17 +1,32 @@
 -- Set lualine as statusline
 -- See `:help lualine.txt`
+local status_ok, lualine = pcall(require, "lualine")
+if not status_ok then
+  return
+end
 
-require('lualine').setup {
+-- shift lualine when nvim-tree is open
+-- local nvim_tree_shift = {
+--   function()
+--     local len = vim.api.nvim_win_get_width(require('nvim-tree.view').get_winnr()) - 2
+--     local title = "Nvim-Tree"
+--     local left = (len - #title) / 2
+--     local right = len - left - #title
+--
+--     return string.rep(' ', left) .. title .. string.rep(' ', right)
+--   end,
+--   cond = require('nvim-tree.view').is_visible,
+--   color = 'Normal'
+-- }
+
+lualine.setup {
   options = {
     icons_enabled = true,
     theme = 'gruvbox',
     -- theme = 'onedark',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
+    disabled_filetypes = { "TelescopePrompt", "packer", "toggleterm", "statusline", "winbar", "NvimTree" },
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
@@ -23,6 +38,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {
+      -- nvim_tree_shift,
       { 'mode', icons_enabled = true },
     },
     lualine_b = {
@@ -65,6 +81,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {
+      -- nvim_tree_shift,
       {
         'buffers',
         show_modified_status = true,
@@ -85,5 +102,5 @@ require('lualine').setup {
   },
   winbar = {},
   inactive_winbar = {},
-  extensions = { 'quickfix', 'fugitive' }
+  extensions = { 'quickfix', 'fugitive', 'toggleterm' }
 }

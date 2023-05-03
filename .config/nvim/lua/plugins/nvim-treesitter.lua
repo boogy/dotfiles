@@ -37,6 +37,8 @@ require('nvim-treesitter.configs').setup {
 
   auto_install = true,
 
+  ignore_install = { "vimdoc" },
+
   -- highlight = { enable = true },
   highlight = {
     enable = true,

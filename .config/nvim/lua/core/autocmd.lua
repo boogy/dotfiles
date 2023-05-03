@@ -1,3 +1,7 @@
+local function augroup(name)
+  return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
+end
+
 -- nvim-tree is also there in modified buffers so this function filter it out
 local modifiedBufs = function(bufs)
     local t = 0

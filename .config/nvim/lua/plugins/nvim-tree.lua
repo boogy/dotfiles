@@ -95,7 +95,6 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
   vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
   vim.keymap.set('n', 'E', api.tree.change_root_to_node, opts('CD'))
-
 end
 
 
@@ -109,6 +108,10 @@ nvim_tree.setup {
   update_focused_file = {
     enable = true,
     update_cwd = true,
+  },
+  filters = {
+    custom = { ".git" },
+    exclude = { ".gitignore" },
   },
   git = {
     enable = false,
@@ -191,3 +194,13 @@ nvim_tree.setup {
     },
   },
 }
+
+-- autoclose  nvim-tree
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("NvimTreeClose", {clear = true}),
+  pattern = "NvimTree_*",
+  callback = function()
+    local layout = vim.api.nvim_call_function("winlayout", {})
+    if layout[1] == "leaf" and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and layout[3] == nil then vim.cmd("confirm quit") end
+  end
+})
