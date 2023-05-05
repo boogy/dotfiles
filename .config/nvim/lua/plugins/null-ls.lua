@@ -1,5 +1,5 @@
 -- load cmp_nvim_lsp
-local null_ls_ok, null_ls = pcall(require, 'null-ls')
+local null_ls_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_ok then
 	return
 end
@@ -43,7 +43,6 @@ local sources = {
 	code_actions.gitsigns,
 	code_actions.shellcheck,
 
-
 	----------------------------------------------------------------------------------------
 	-- Formating
 	----------------------------------------------------------------------------------------
@@ -52,10 +51,10 @@ local sources = {
 	formatting.beautysh,
 	formatting.stylua,
 	-- formatting.yamlfmt,
-	formatting.yamlfix,
-	formatting.xmllint,
-	formatting.xmlformat,
-	formatting.rustfmt,
+	-- formatting.yamlfix,
+	-- formatting.xmllint,
+	-- formatting.xmlformat,
+	-- formatting.rustfmt,
 	formatting.isort,
 	formatting.reorder_python_imports,
 	formatting.black,
@@ -68,7 +67,6 @@ local sources = {
 	formatting.trim_whitespace,
 	-- JavaScript standard style
 	formatting.standardts,
-
 
 	----------------------------------------------------------------------------------------
 	-- Diagnostics
@@ -86,7 +84,6 @@ local sources = {
 
 	-- git commit message linter
 	diagnostics.gitlint,
-
 
 	----------------------------------------------------------------------------------------
 	-- Completions
@@ -111,9 +108,9 @@ null_ls.setup({
 				vim.lsp.buf.format({
 					filter = function(client)
 						return client.name == "null-ls"
-					end
+					end,
 				})
-			end
+			end,
 		})
 	end,
 })
