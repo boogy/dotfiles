@@ -50,7 +50,9 @@ alias tf-plan="terraform plan -compact-warnings"
 alias tg-plan="terragrunt plan -compact-warnings"
 alias tf-apply="terraform apply -compact-warnings"
 alias tg-apply="terragrunt apply -compact-warnings"
+alias av="aws-vault"
 
 # shortcut with completions
 compdef tf='terraform'
 compdef tg='terragrunt'
+compdef av='aws-vault'
