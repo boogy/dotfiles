@@ -40,6 +40,7 @@ require("plugins.null-ls")
 require("plugins.filetype")
 require("plugins.harpoon")
 require("plugins.toggleterm")
+require("plugins.goto-preview")
 
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])

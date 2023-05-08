@@ -68,6 +68,7 @@ require("lazy").setup({
 	-- Color Scheme
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
 	-- '{navarasu/onedark.nvim'}
+	{ "rebelot/kanagawa.nvim" },
 
 	-- Some of the best vim plugins
 	"tpope/vim-fugitive",
@@ -113,6 +114,7 @@ require("lazy").setup({
 	"windwp/nvim-autopairs",
 	-- some better markdown support
 	"plasticboy/vim-markdown",
-})
 
--- vim.cmd("colorscheme gruvbox")
+	-- goto definition window popup
+	"rmagatti/goto-preview",
+})
