@@ -131,6 +131,7 @@ keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- List git co
 keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- List git branches (use <cr> to checkout) ["gb" for git branch]'
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- 'List current changes per file with diff preview'
 keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<cr>") -- 'Lists stash items in current repository with ability to apply them on <cr>'
+keymap.set("n", "<leader>gF", "<cmd>Telescope git_files<cr>") -- 'Lists files managed by git
 -- telescope file browser
 keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { noremap = true })
 
