@@ -78,7 +78,7 @@ local sources = {
 	-- python
 	diagnostics.pylint.with({ method = null_ls.methods.DIAGNOSTICS_ON_SAVE }),
 
-	diagnostics.yamllint,
+	-- diagnostics.yamllint,
 	diagnostics.golangci_lint,
 	diagnostics.gospel,
 
