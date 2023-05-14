@@ -1,6 +1,6 @@
 -- Enable `lukas-reineke/indent-blankline.nvim`
 
-local status_ok, indent_blankline = pcall(require, 'indent_blankline')
+local status_ok, indent_blankline = pcall(require, 'indent-blankline')
 if not status_ok then
   return
 end

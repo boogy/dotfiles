@@ -22,25 +22,8 @@ require("core.color")
 require("core.autocmd")
 require("core.lsp")
 
--- plugins configuration
-require("plugins.nvim-treesitter")
-require("plugins.telescope")
--- require "plugins.nvim-tree"
-require("plugins.neo-tree")
-require("plugins.gitsigns")
-require("plugins.lualine")
-require("plugins.indent-blankline")
-require("plugins.comment")
-
-require("plugins.neodev")
-require("plugins.nvim-cmp")
-require("plugins.nvim-autopairs")
-require("plugins.nvim-markdown")
-require("plugins.null-ls")
-require("plugins.filetype")
-require("plugins.harpoon")
-require("plugins.toggleterm")
-require("plugins.goto-preview")
+-- import plugins configurations
+require("plugins_config")
 
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])

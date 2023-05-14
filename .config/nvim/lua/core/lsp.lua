@@ -78,7 +78,23 @@ local servers = {
 	tsserver = {},
 	awk_ls = {},
 	jsonls = {},
-	yamlls = {},
+	yamlls = {
+		yaml = {
+			keyOrdering = false,
+			validate = true,
+			completion = true,
+			format = {
+				enable = false,
+				singleQuote = false,
+				bracketSpacing = true,
+			},
+		},
+		redhat = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+	},
 	graphql = {},
 	ansiblels = {},
 	terraformls = {},
