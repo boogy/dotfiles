@@ -151,6 +151,16 @@ key_bindings:
   - { key: S,     mods: Command, chars: "\x13"     } # save vim buffer
   - { key: L,     mods: Command, chars: "\x02"     } # create a new tmux window
   - { key: T,     mods: Command, chars: "\x18\x63" } # switch to the last tmux session
+
+  # - { key: Key1,  mods: Command, chars: "\x18\x31"    } # select tmux window 1
+  # - { key: Key2,  mods: Command, chars: "\x18\x32"    } #                ... 2
+  # - { key: Key3,  mods: Command, chars: "\x18\x33"    } #                ... 3
+  # - { key: Key4,  mods: Command, chars: "\x18\x34"    } #                ... 4
+  # - { key: Key5,  mods: Command, chars: "\x18\x35"    } #                ... 5
+  # - { key: Key6,  mods: Command, chars: "\x18\x36"    } #                ... 6
+  # - { key: Key7,  mods: Command, chars: "\x18\x37"    } #                ... 7
+  # - { key: Key8,  mods: Command, chars: "\x18\x38"    } #                ... 8
+  # - { key: Key9,  mods: Command, chars: "\x18\x39"    } #                ... 9
   - { key: Key1,  mods: Command, chars: "\x021"    } # select tmux window 1
   - { key: Key2,  mods: Command, chars: "\x022"    } #                ... 2
   - { key: Key3,  mods: Command, chars: "\x023"    } #                ... 3
