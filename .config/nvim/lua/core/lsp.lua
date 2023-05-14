@@ -77,6 +77,20 @@ local servers = {
 	rust_analyzer = {},
 	tsserver = {},
 	awk_ls = {},
+	pylsp = {
+		plugins = {
+			pylint = {
+				enable = true,
+				args = { "--disable=C0111,C0115,C0114,E501" },
+			},
+			-- pyright = {
+			-- 	enable = true,
+			-- 	autoSearchPaths = true,
+			-- 	useLibraryCodeForTypes = true,
+			-- 	diagnosticMode = "workspace",
+			-- },
+		},
+	},
 	jsonls = {},
 	yamlls = {
 		yaml = {

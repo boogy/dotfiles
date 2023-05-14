@@ -56,8 +56,8 @@ local sources = {
 	-- formatting.xmlformat,
 	-- formatting.rustfmt,
 	formatting.isort,
-	formatting.reorder_python_imports,
 	formatting.black,
+	formatting.reorder_python_imports,
 	formatting.sqlformat,
 	formatting.sqlfmt,
 	formatting.terraform_fmt,
@@ -76,9 +76,15 @@ local sources = {
 	diagnostics.ansiblelint,
 
 	-- python
-	diagnostics.pylint.with({ method = null_ls.methods.DIAGNOSTICS_ON_SAVE }),
+	diagnostics.pylint.with({
+		method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+		diagnostics_postprocess = function(diagnostic)
+			diagnostic.code = diagnostic.message_id
+		end,
+	}),
 
 	-- diagnostics.yamllint,
+	-- diagnostics.flake8,
 	diagnostics.golangci_lint,
 	diagnostics.gospel,
 
