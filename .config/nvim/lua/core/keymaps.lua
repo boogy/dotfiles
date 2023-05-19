@@ -160,37 +160,3 @@ for i = 1, 9 do
 		end,
 	})
 end
-
--------------------------------------------------------------------------------------------
---
--- LSP Diagnostics
---
--------------------------------------------------------------------------------------------
-vim.g.diagnostics_visible = true
-
-keymap.set("n", "[d", vim.diagnostic.goto_prev)
-keymap.set("n", "]d", vim.diagnostic.goto_next)
-keymap.set("n", "<leader>E", vim.diagnostic.open_float)
-keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
-
--- disable diagnostic message and show only on hoover
-vim.diagnostic.config({ virtual_text = false })
-
--- Show line diagnostics automatically in hover window
-vim.o.updatetime = 250
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
-
--- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>', { silent = true, noremap = true })
--- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>T', ':call v:lua.require("utils").toggle_virtual_text()<CR>', { silent = true, noremap = true })
-keymap.set(
-	"n",
-	"<leader>tt",
-	':call v:lua.require("utils").toggle_diagnostics()<CR>',
-	{ silent = true, noremap = true }
-)
-keymap.set(
-	"n",
-	"<leader>T",
-	':call v:lua.require("utils").toggle_virtual_text()<CR>',
-	{ silent = true, noremap = true }
-)

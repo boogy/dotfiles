@@ -1,7 +1,6 @@
 -- plugins configuration
 require("plugins_config.nvim-treesitter")
 require("plugins_config.telescope")
--- require "plugins.nvim-tree"
 
 require("plugins_config.neo-tree")
 require("plugins_config.gitsigns")

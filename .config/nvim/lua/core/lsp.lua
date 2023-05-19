@@ -1,4 +1,5 @@
 -- Setup neovim lua configuration
+local keymap = vim.keymap -- for conciseness
 
 -- load neodev
 local neodev_ok, neodev = pcall(require, "neodev")
@@ -161,3 +162,60 @@ mason_lspconfig.setup_handlers({
 		})
 	end,
 })
+
+-------------------------------------------------------------------------------------------
+--
+-- LSP Diagnostics
+--
+-------------------------------------------------------------------------------------------
+vim.g.diagnostics_visible = true
+local min_diagnostic_severity = require("utils").opts.min_diagnostic_severity
+
+keymap.set("n", "[d", vim.diagnostic.goto_prev)
+keymap.set("n", "]d", vim.diagnostic.goto_next)
+keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+
+-- disable diagnostic message and show only on hoover
+vim.diagnostic.config({
+	virtual_text = false,
+	-- signs = true,
+	signs = {
+		severity = min_diagnostic_severity,
+	},
+	update_in_insert = false,
+	-- underline = true,
+	underline = {
+		severity = min_diagnostic_severity,
+	},
+	severity_sort = true,
+	float = {
+		focusable = true,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd(
+	[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({severity = min_diagnostic_severity}, {focus=false})]]
+)
+
+-- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>', { silent = true, noremap = true })
+-- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>T', ':call v:lua.require("utils").toggle_virtual_text()<CR>', { silent = true, noremap = true })
+keymap.set(
+	"n",
+	"<leader>tt",
+	':call v:lua.require("utils").toggle_diagnostics()<CR>',
+	{ silent = true, noremap = true }
+)
+keymap.set(
+	"n",
+	"<leader>T",
+	':call v:lua.require("utils").toggle_virtual_text()<CR>',
+	{ silent = true, noremap = true }
+)
