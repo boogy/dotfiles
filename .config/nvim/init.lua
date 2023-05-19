@@ -6,6 +6,7 @@ let g:loaded_perl_provider = 0
 let $PATH = '/opt/homebrew/bin:' . $PATH
 let g:node_host_prog = '/opt/homebrew/bin/neovim-node-host'
 let g:python3_host_prog = '/opt/homebrew/bin/python3'
+" let g:python3_host_prog = './venv/bin/python3'
 ]])
 
 -- Set <space> as the leader key

@@ -82,6 +82,7 @@ local sources = {
 			diagnostic.code = diagnostic.message_id
 		end,
 	}),
+	-- diagnostics.flake8,
 
 	-- diagnostics.yamllint,
 	-- diagnostics.flake8,

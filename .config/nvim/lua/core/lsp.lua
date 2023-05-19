@@ -82,14 +82,17 @@ local servers = {
 		plugins = {
 			pylint = {
 				enable = true,
-				args = { "--disable=C0111,C0115,C0114,E501" },
+				args = {
+					"--disable=C0111,C0103,C0115,C0114,E501",
+					"--module-naming-style=snake_case",
+				},
 			},
-			-- pyright = {
-			-- 	enable = true,
-			-- 	autoSearchPaths = true,
-			-- 	useLibraryCodeForTypes = true,
-			-- 	diagnosticMode = "workspace",
-			-- },
+			pyright = {
+				enable = true,
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				diagnosticMode = "workspace",
+			},
 		},
 	},
 	jsonls = {},
@@ -202,7 +205,7 @@ vim.diagnostic.config({
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
 vim.cmd(
-	[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({severity = min_diagnostic_severity}, {focus=false})]]
+	[[ autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float( {severity = min_diagnostic_severity}, {focus=false}) ]]
 )
 
 -- vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tt', ':call v:lua.require("utils").toggle_diagnostics()<CR>', { silent = true, noremap = true })
