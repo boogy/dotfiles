@@ -57,14 +57,14 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export PYENV_ROOT="$HOME/.pyenv"
 
 ## set PATH
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-export PATH=${PATH}:${HOME}/bin
-export PATH=${PATH}:${HOME}/.local/bin
-export PATH=${PATH}:${HOME}/.cargo/bin
-export PATH="${PATH}:/opt/homebrew/bin"
-export PATH="${PATH}:${GOPATH}/bin"
-export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# export PATH=${PATH}:${HOME}/bin
+# export PATH=${PATH}:${HOME}/.local/bin
+# export PATH=${PATH}:${HOME}/.cargo/bin
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# export PATH="${PATH}:/opt/homebrew/bin"
+# export PATH="${PATH}:${GOPATH}/bin"
+# export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 ## Add zsh completions folder
 fpath=(~/.zsh/completion $fpath)
@@ -120,15 +120,15 @@ bindkey '^W' backward-kill-word
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
+    if [[ ${KEYMAP} == vicmd ]] ||
+    [[ $1 = 'block' ]]; then
+        echo -ne '\e[1 q'
+    elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+        echo -ne '\e[5 q'
+    fi
 }
 zle -N zle-keymap-select
 
@@ -136,18 +136,18 @@ zle -N zle-keymap-select
 autoload -U select-quoted
 zle -N select-quoted
 for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
 done
 
 ## ci{, ci(, ci<, di{, etc
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $m $c select-bracketed
-  done
+    for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+        bindkey -M $m $c select-bracketed
+    done
 done
 
 zle-line-init() {
@@ -171,11 +171,13 @@ bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 
+##
 ## source plugins from oh-my-zsh
 ## and custom will take precedence
+##
 zsh_plugins=(
-    sudo
     # ssh-agent
+    sudo
     fzf
     virtualenvwrapper
 
@@ -184,7 +186,7 @@ zsh_plugins=(
     directories
     expandalias
     systemd
-    python
+    # python
     docker
     ssh
     git
@@ -202,6 +204,7 @@ for PLUGIN_PATH in $ZSH_FULL_PLUGIN_PATHS; do
     done
 done
 
+##
 ## bash files
 ##
 function source_bash {
@@ -212,7 +215,6 @@ function source_bash {
 bash_config_files=(
     functions
     aliases
-    # azure-cli
 )
 BASH_FULL_FILE_PATH="${HOME}/.bash/"
 for config_file in $bash_config_files; do
@@ -221,10 +223,6 @@ done
 
 if [ -f "$HOME/.zsh_local" ]; then
     source "$HOME/.zsh_local" &>/dev/null
-fi
-
-if [ -f "$HOME/.bash_local" ]; then
-    source_bash "$HOME/.bash_local" &>/dev/null
 fi
 
 ##
@@ -246,14 +244,12 @@ fi
 ## load prompt
 # source ~/.zsh/prompt/prompt.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
-
-eval "$(starship init zsh)"
+# eval $(/opt/homebrew/bin/brew shellenv zsh)
 
 # setup pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)" # && eval "$(pyenv init --path)"
 fi
 
-eval $(/opt/homebrew/bin/brew shellenv)
+## load prompt
+eval "$(starship init zsh)"

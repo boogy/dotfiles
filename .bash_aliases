@@ -128,12 +128,12 @@ PS1+="\[\033[1;33m\] >> \[\033[0m\]"
     ## show history from top to bottom
     export FZF_CTRL_R_OPTS='--reverse'
 
-    export PATH="${HOME}/.rvm/bin:${PATH}"
-    export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    export PATH=${PATH}:${HOME}/bin
-    export PATH=${PATH}:/home/boogy/.cargo/bin
-    export PATH=${PATH}:${HOME}/.local/bin
-    export PATH=${PATH}:/opt/homebrew/bin
+    # export PATH="${HOME}/.rvm/bin:${PATH}"
+    # export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    # export PATH=${PATH}:${HOME}/bin
+    # export PATH=${PATH}:/home/boogy/.cargo/bin
+    # export PATH=${PATH}:${HOME}/.local/bin
+    # export PATH=${PATH}:/opt/homebrew/bin
 
     # export TERM=screen-256color
     export EDITOR=$(which nvim)
@@ -145,4 +145,3 @@ PS1+="\[\033[1;33m\] >> \[\033[0m\]"
     ## overwriting option with the local file
     test -f ~/.bash_local && source $_
 }
-

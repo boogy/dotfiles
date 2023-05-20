@@ -80,8 +80,10 @@ local servers = {
 	awk_ls = {},
 	pylsp = {
 		plugins = {
+			pyflakes = { enabled = false },
+			pycodestyle = { enabled = false },
 			pylint = {
-				enable = true,
+				enable = false,
 				args = {
 					"--disable=C0111,C0103,C0115,C0114,E501",
 					"--module-naming-style=snake_case",

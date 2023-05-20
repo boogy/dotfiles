@@ -17,7 +17,6 @@ $golang\
 $python\
 $rust\
 $terraform\
-$vagrant\
 $aws\
 $env_var\
 $crystal\
@@ -76,7 +75,7 @@ disabled = true
 [python]
 format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 pyenv_version_name = false
-python_binary = "python3"
+# python_binary = "python3"
 # which files should trigger this module
 detect_files = ['__init__.py', 'Pipfile', 'setup.py']
 
