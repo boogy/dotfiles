@@ -87,7 +87,7 @@ local sources = {
 	-- diagnostics.yamllint,
 	-- diagnostics.flake8,
 	diagnostics.golangci_lint,
-	diagnostics.gospel,
+	-- diagnostics.gospel,
 
 	-- git commit message linter
 	diagnostics.gitlint,
