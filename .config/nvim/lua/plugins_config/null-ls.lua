@@ -76,12 +76,12 @@ local sources = {
 	diagnostics.ansiblelint,
 
 	-- python
-	diagnostics.pylint.with({
-		method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-		diagnostics_postprocess = function(diagnostic)
-			diagnostic.code = diagnostic.message_id
-		end,
-	}),
+	-- diagnostics.pylint.with({
+	-- 	method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+	-- 	diagnostics_postprocess = function(diagnostic)
+	-- 		diagnostic.code = diagnostic.message_id
+	-- 	end,
+	-- }),
 	-- diagnostics.flake8,
 
 	-- diagnostics.yamllint,

@@ -82,15 +82,16 @@ local servers = {
 		plugins = {
 			pyflakes = { enabled = false },
 			pycodestyle = { enabled = false },
+			flake8 = { enabled = false },
 			pylint = {
-				enable = false,
+				enabled = false,
 				args = {
 					"--disable=C0111,C0103,C0115,C0114,E501",
 					"--module-naming-style=snake_case",
 				},
 			},
 			pyright = {
-				enable = true,
+				enabled = true,
 				autoSearchPaths = true,
 				useLibraryCodeForTypes = true,
 				diagnosticMode = "workspace",
@@ -155,6 +156,7 @@ if not mason_lspconfig_ok then
 end
 
 mason_lspconfig.setup({
+	automatic_installation = true,
 	ensure_installed = vim.tbl_keys(servers),
 })
 
