@@ -140,7 +140,7 @@ keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { noremap = true })
 -- Harpoon
 --
 --------------------------------------------------------------------------------------------------
-keymap.set("n", "<C-h>", function()
+keymap.set("n", "<C-e>", function()
 	require("harpoon.ui").toggle_quick_menu()
 end)
 keymap.set("n", "<C-a>", function()
