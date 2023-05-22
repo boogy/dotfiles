@@ -67,6 +67,9 @@ local sources = {
 	formatting.trim_whitespace,
 	-- JavaScript standard style
 	formatting.standardts,
+	-- golang
+	formatting.goimports,
+	formatting.gofmt,
 
 	----------------------------------------------------------------------------------------
 	-- Diagnostics
