@@ -58,13 +58,13 @@ export PYENV_ROOT="$HOME/.pyenv"
 
 ## set PATH
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# export PATH=${PATH}:${HOME}/bin
-# export PATH=${PATH}:${HOME}/.local/bin
-# export PATH=${PATH}:${HOME}/.cargo/bin
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# export PATH="${PATH}:/opt/homebrew/bin"
-# export PATH="${PATH}:${GOPATH}/bin"
-# export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+export PATH=${PATH}:${HOME}/bin
+export PATH=${PATH}:${HOME}/.local/bin
+export PATH=${PATH}:${HOME}/.cargo/bin
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="${PATH}:/opt/homebrew/bin"
+export PATH="${PATH}:${GOPATH}/bin"
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 ## Add zsh completions folder
 fpath=(~/.zsh/completion $fpath)
