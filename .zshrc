@@ -53,18 +53,19 @@ export GOPATH=$HOME/go
 
 ## bspwm java applications problem
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 export PYENV_ROOT="$HOME/.pyenv"
 
+##
 ## set PATH
+##
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-export PATH=${PATH}:${HOME}/bin
-export PATH=${PATH}:${HOME}/.local/bin
-export PATH=${PATH}:${HOME}/.cargo/bin
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="${PATH}:/opt/homebrew/bin"
-export PATH="${PATH}:${GOPATH}/bin"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+export PATH="${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.cargo/bin"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="${PATH}:${GOPATH}/bin"
 
 ## Add zsh completions folder
 fpath=(~/.zsh/completion $fpath)
@@ -176,11 +177,7 @@ bindkey  "^[[3~"  delete-char
 ## and custom will take precedence
 ##
 zsh_plugins=(
-    # ssh-agent
-    sudo
     fzf
-    virtualenvwrapper
-
     ## custom
     aliases
     directories
@@ -193,6 +190,7 @@ zsh_plugins=(
     aws-vault
     aws
     terraform
+    kubectl
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"
@@ -243,7 +241,6 @@ fi
 
 ## load prompt
 # source ~/.zsh/prompt/prompt.zsh
-
 # eval $(/opt/homebrew/bin/brew shellenv zsh)
 
 # setup pyenv
@@ -252,4 +249,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 ## load prompt
+# eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
 eval "$(starship init zsh)"

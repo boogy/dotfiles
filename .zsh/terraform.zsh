@@ -2,15 +2,16 @@
 ## Terraform
 ##
 function tf_prompt_info() {
-  # dont show 'default' workspace in home dir
-  [[ "$PWD" != ~ ]] || return
-  # check if in terraform dir and file exists
-  [[ -d .terraform && -r .terraform/environment ]] || return
+    # dont show 'default' workspace in home dir
+    [[ "$PWD" != ~ ]] || return
+    # check if in terraform dir and file exists
+    [[ -d .terraform && -r .terraform/environment ]] || return
 
-  local workspace="$(< .terraform/environment)"
-  echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
+    local workspace="$(< .terraform/environment)"
+    echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
 }
 
+alias tg='terragrunt'
 alias tf='terraform'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
@@ -37,15 +38,16 @@ function tg_prompt_info() {
     [[ "$PWD" == ~ ]] && return
     # check if in terraform dir
     if [ -d .terraform ]; then
-      workspace=$(terragrunt workspace show 2> /dev/null) || return
-      echo "[${workspace}]"
+        workspace=$(terragrunt workspace show 2> /dev/null) || return
+        echo "[${workspace}]"
     fi
 }
 compdef _terragrunt tg
+setopt tg
+
 
 
 ## ALL
-alias tg="terragrunt"
 alias tf-plan="terraform plan -compact-warnings"
 alias tg-plan="terragrunt plan -compact-warnings"
 alias tf-apply="terraform apply -compact-warnings"
@@ -57,4 +59,6 @@ alias ave="aws-vault exec"
 compdef tf='terraform'
 compdef tg='terragrunt'
 compdef av='aws-vault'
-compdef ave='aws-vault exec'
+
+# use same completion as terraform
+complete -o nospace -C ~/bin/terraform tg
