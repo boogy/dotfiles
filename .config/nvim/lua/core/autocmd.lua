@@ -38,3 +38,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+
+
+-- local generalSettingsGroup = vim.api.nvim_create_augroup('General settings', { clear = true })
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = { '*.json' },
+--     callback = function()
+--         vim.opt.tabstop = 2
+--         vim.opt.shiftwidth = 2
+--     end,
+--     group = generalSettingsGroup,
+-- })
+
+vim.cmd([[
+    autocmd FileType json,xml,yaml set tabstop=2 shiftwidth=2
+]])

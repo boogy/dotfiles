@@ -27,6 +27,16 @@
         "key": "cmd+pageup",
         "command": "workbench.action.terminal.focusPrevious",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "-editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
     }
     // {
     //     "key": "ctrl+[Equal]",

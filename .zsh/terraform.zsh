@@ -52,6 +52,7 @@ alias tf-plan="terraform plan -compact-warnings"
 alias tg-plan="terragrunt plan -compact-warnings"
 alias tf-apply="terraform apply -compact-warnings"
 alias tg-apply="terragrunt apply -compact-warnings"
+alias tga="terragrunt apply -compact-warnings"
 alias av="aws-vault"
 alias ave="aws-vault exec"
 
