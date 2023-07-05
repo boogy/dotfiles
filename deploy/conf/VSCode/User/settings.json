@@ -48,6 +48,7 @@
         // "<C-v>": true,
         "<C-b>": false,
         "<C-d>": true,
+        "<cmd-d>": true,
         "<C-j>": false,
         // enable zenmode CTRL+k+z
         "<C-k>": false,
@@ -574,5 +575,6 @@
     "codesnap.showLineNumbers": false,
     "codesnap.target": "window",
     "codesnap.shutterAction": "copy",
-    "githubPullRequests.terminalLinksHandler": "github"
+    "githubPullRequests.terminalLinksHandler": "github",
+    "editor.minimap.autohide": true
 }
