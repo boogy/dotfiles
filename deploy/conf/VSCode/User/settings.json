@@ -428,8 +428,8 @@
     //
     // TERMINAL CONFIG
     //
-    "terminal.integrated.fontFamily": "Cousine Nerd Font",
-    // "terminal.integrated.fontFamily": "Hack Nerd Font",
+    // "terminal.integrated.fontFamily": "Cousine Nerd Font",
+    "terminal.integrated.fontFamily": "Hack Nerd Font",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1.2,
     "terminal.external.linuxExec": "alacritty",
@@ -441,10 +441,17 @@
     "terminal.integrated.profiles.osx": {
         "bash": {
             "path": "bash",
+            "args": [
+                "-l"
+            ],
             "icon": "terminal-bash",
         },
         "zsh": {
-            "path": "zsh"
+            "path": "zsh",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal",
         },
         "pwsh": {
             "path": "pwsh",
