@@ -117,3 +117,8 @@ alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>
 
 [[ $(uname -s) =~ Darwin ]] \
     && code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+
+pyclean () {
+    find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+}

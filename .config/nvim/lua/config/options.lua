@@ -1,0 +1,50 @@
+-- Options are automatically loaded before lazy.nvim startup
+-- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Add any additional options here
+local opt = vim.opt
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-----------------------------------------------------------
+-- Neovide UI
+-----------------------------------------------------------
+if vim.g.neovide then
+  opt.guifont = "Hack Nerd Font:h15"
+  opt.linespace = 0
+  -- vim.g.neovide_scale_factor = 1.0
+  -- vim.g.neovide_transparency = 0.8
+  vim.g.neovide_scroll_animation_length = 0.3
+  vim.g.neovide_hide_mouse_when_typing = false
+  vim.g.neovide_confirm_quit = false
+  vim.g.neovide_fullscreen = false
+  vim.g.neovide_remember_window_size = true
+  vim.g.neovide_input_macos_alt_is_meta = false
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_trail_size = 0.5
+  vim.g.neovide_cursor_antialiasing = true
+
+  -- Keymaps
+  vim.api.nvim_set_keymap(
+    "n",
+    "<C-+>",
+    ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>",
+    { silent = true }
+  )
+  vim.api.nvim_set_keymap(
+    "n",
+    "<C-->",
+    ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>",
+    { silent = true }
+  )
+  vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
+
+  vim.keymap.set("n", "<D-c>", '"*y :let @+=@*<CR>', { noremap = true, silent = true })
+  vim.keymap.set("n", "<D-v>", '"+p', { noremap = true, silent = true })
+  vim.keymap.set("i", "<D-v>", '<ESC>"*p<CR>i<CR>', { noremap = true, silent = true })
+
+  vim.keymap.set("n", "<D-t>", ":tabnew<CR>")
+end
+
+-- opt.fixendofline = true
+-- opt.endofline = true

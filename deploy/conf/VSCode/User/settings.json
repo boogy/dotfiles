@@ -29,6 +29,13 @@
     "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
+    "editor.minimap.autohide": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": false,
+        "source.fixAll": false,
+        "source.fixAll.eslint": true,
+        "source.fixAll.isort": true
+    },
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "material-icon-theme.folders.theme": "specific",
@@ -401,10 +408,10 @@
         "editor.defaultFormatter": "hashicorp.terraform",
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file",
-        "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.formatAll.terraform": true
-        },
+        // "editor.codeActionsOnSave": {
+        //     "source.fixAll": true,
+        //     "source.formatAll.terraform": true
+        // },
         "editor.tabSize": 2
     },
     "terraform.experimentalFeatures.validateOnSave": true,
@@ -519,30 +526,29 @@
     //
     // Python config
     //
-    "python.linting.enabled": true,
-    "python.linting.banditEnabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.lintOnSave": true,
-    "python.languageServer": "Jedi",
+    // "python.languageServer": "Jedi","
     "python.analysis.autoImportCompletions": true,
     "python.terminal.activateEnvironment": true,
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            "source.organizeImports": true,
+            "source.fixAll": true,
+            "source.fixAll.eslint": true
         },
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "python.linting.pylintArgs": [
-        "--max-line-length=120",
-        "--logging-format-style=fstr",
+    "pylint.args": [
+        "--disable=C0111",
+        "--disable=C0103",
+        "--disable=R0904",
+        "--disable=W1203",
         "--disable=C0301",
-        "--disable=C0116",
+        "--disable=C0413",
     ],
-    "python.formatting.autopep8Args": [
-        "--max-line-length",
-        "120",
-        "--experimental",
+    "isort.args": [
+        "--profile",
+        "black"
     ],
     //
     // JavaScript config
@@ -582,6 +588,5 @@
     "codesnap.showLineNumbers": false,
     "codesnap.target": "window",
     "codesnap.shutterAction": "copy",
-    "githubPullRequests.terminalLinksHandler": "github",
-    "editor.minimap.autohide": true
+    "githubPullRequests.terminalLinksHandler": "github"
 }
