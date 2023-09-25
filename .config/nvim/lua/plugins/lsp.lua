@@ -89,6 +89,15 @@ return {
           },
         },
         pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pyflakes = { enabled = false }, -- actually disables pyflakes
+                pycodestyle = { enabled = false },
+                flake8 = { enabled = false },
+              },
+            },
+          },
           plugins = {
             pyflakes = { enabled = false },
             pycodestyle = { enabled = false },
