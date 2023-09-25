@@ -5,7 +5,7 @@ env:
   TERM: xterm-256color
 
 window:
-  opacity: 0.97
+  opacity: 0.98
   dimensions:
     columns: 320
     lines: 100
@@ -196,3 +196,4 @@ key_bindings:
   - { key: 22,             mods: Alt, chars: "]"                                   }
   # command enter to toggle fullscreen
   - { key: 36,             mods: Command, action: ToggleFullscreen                 }
+
