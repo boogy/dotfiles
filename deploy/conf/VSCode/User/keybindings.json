@@ -38,8 +38,5 @@
         "command": "-editor.action.formatDocument",
         "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
     }
-    // {
-    //     "key": "ctrl+[Equal]",
-    //     "command": "workbench.action.terminal.toggleTerminal",
-    // },
 ]
+

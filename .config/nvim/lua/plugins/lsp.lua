@@ -9,8 +9,8 @@ return {
         "terraform-ls",
         "pyright",
         "black",
-        "ruff-lsp",
-        "ruff",
+        -- "ruff-lsp",
+        -- "ruff",
       })
     end,
   },
@@ -19,9 +19,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      autoformat = false,
       servers = {
         pyright = {},
-        ruff_lsp = {},
+        -- ruff_lsp = {},
         bashls = {},
         clangd = {},
         dockerls = {},
@@ -157,7 +158,7 @@ return {
         tsserver = {
           keys = {
             { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
-            { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
+            { "<leader>cR", "<cmd>TypescriptRenameFile<CR>",      desc = "Rename File" },
           },
           settings = {
             typescript = {
@@ -201,26 +202,64 @@ return {
           end)
           -- end workaround
         end,
-        ruff_lsp = function()
-          require("lazyvim.util").on_attach(function(client, _)
-            if client.name == "ruff_lsp" then
-              -- Disable hover in favor of Pyright
-              client.server_capabilities.hoverProvider = false
-            end
-          end)
-        end,
-        tsserver = function(_, opts)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
+        -- ruff_lsp = function()
+        --   require("lazyvim.util").on_attach(function(client, _)
+        --     if client.name == "ruff_lsp" then
+        --       -- Disable hover in favor of Pyright
+        --       client.server_capabilities.hoverProvider = false
+        --     end
+        --   end)
+        -- end,
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
       },
     },
   },
 
-  -- null-ls
+  -- none-ls
+  -- {
+  --   'nvimtools/none-ls.nvim',
+  --   dependencies = {
+  --     "mason.nvim",
+  --     opts = function(_, opts)
+  --       opts.ensure_installed = opts.ensure_installed or {}
+  --       vim.list_extend(opts.ensure_installed, { "hadolint" })
+  --     end,
+  --     { "nvim-lua/plenary.nvim" },
+  --   },
+  --
+  --   opts = function(_, opts)
+  --     local nls = require("null-ls")
+  --     opts.sources = opts.sources or {}
+  --
+  --     vim.list_extend(opts.sources, {
+  --       nls.builtins.formatting.prettierd,
+  --       nls.builtins.diagnostics.hadolint,
+  --       nls.builtins.formatting.stylua,
+  --       nls.builtins.formatting.shfmt,
+  --
+  --       -- python
+  --       nls.builtins.formatting.black,
+  --
+  --       -- golang
+  --       nls.builtins.code_actions.gomodifytags,
+  --       nls.builtins.code_actions.impl,
+  --       nls.builtins.formatting.gofumpt,
+  --       nls.builtins.formatting.goimports_reviser,
+  --
+  --       -- terraform
+  --       nls.builtins.formatting.terraform_fmt,
+  --       nls.builtins.diagnostics.terraform_validate,
+  --
+  --       require('typescript.extensions.null-ls.code-actions'),
+  --     })
+  --   end,
+  -- },
+
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    -- dependencies = { "nvim-lua/plenary.nvim" },
+    'nvimtools/none-ls.nvim',
     dependencies = {
       "mason.nvim",
       opts = function(_, opts)
@@ -229,16 +268,17 @@ return {
       end,
       { "nvim-lua/plenary.nvim" },
     },
-
     opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = opts.sources or {}
-
-      vim.list_extend(opts.sources, {
+      local nls = require('null-ls')
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.code_actions.gitsigns,
         nls.builtins.formatting.prettierd,
         nls.builtins.diagnostics.hadolint,
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.shfmt,
+
+        -- python
+        nls.builtins.formatting.black,
 
         -- golang
         nls.builtins.code_actions.gomodifytags,
@@ -250,10 +290,15 @@ return {
         nls.builtins.formatting.terraform_fmt,
         nls.builtins.diagnostics.terraform_validate,
 
-        require("typescript.extensions.null-ls.code-actions"),
+        -- ts
+        nls.builtins.formatting.biome,
+        -- require('typescript.extensions.null-ls.code-actions'),
+
+        -- other
+        nls.builtins.formatting.stylua,
+        nls.builtins.formatting.shfmt,
       })
-      -- table.insert(opts.sources, require("typescript.extensions.null-ls.code-actions"))
-      -- table.insert(opts.sources, nls.builtins.formatting.prettierd)
+      return opts
     end,
   },
 
@@ -301,10 +346,10 @@ return {
           "python",
           "rst",
           "toml",
-          "typescript",
           "tsx",
         })
       end
     end,
   },
 }
+
