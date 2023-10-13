@@ -19,7 +19,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      autoformat = false,
       servers = {
         pyright = {},
         -- ruff_lsp = {},
@@ -158,7 +157,7 @@ return {
         tsserver = {
           keys = {
             { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
-            { "<leader>cR", "<cmd>TypescriptRenameFile<CR>",      desc = "Rename File" },
+            { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
           },
           settings = {
             typescript = {
@@ -185,7 +184,7 @@ return {
         gopls = function(_, opts)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-          require("lazyvim.util").on_attach(function(client, _)
+          require("lazyvim.util").lsp.on_attach(function(client, _)
             if client.name == "gopls" then
               if not client.server_capabilities.semanticTokensProvider then
                 local semantic = client.config.capabilities.textDocument.semanticTokens
@@ -259,7 +258,7 @@ return {
   -- },
 
   {
-    'nvimtools/none-ls.nvim',
+    "nvimtools/none-ls.nvim",
     dependencies = {
       "mason.nvim",
       opts = function(_, opts)
@@ -269,7 +268,7 @@ return {
       { "nvim-lua/plenary.nvim" },
     },
     opts = function(_, opts)
-      local nls = require('null-ls')
+      local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
         nls.builtins.code_actions.gitsigns,
         nls.builtins.formatting.prettierd,
@@ -352,4 +351,3 @@ return {
     end,
   },
 }
-
