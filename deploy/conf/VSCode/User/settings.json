@@ -486,13 +486,14 @@
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
         "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
     },
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.colorTheme": "Gruvbox Dark Medium",
     //
     //EXPLORER CONFIG
     //
@@ -588,5 +589,6 @@
     "codesnap.showLineNumbers": false,
     "codesnap.target": "window",
     "codesnap.shutterAction": "copy",
-    "githubPullRequests.terminalLinksHandler": "github"
+    "githubPullRequests.terminalLinksHandler": "github",
+    "workbench.colorTheme": "Gruvbox Dark Medium"
 }
