@@ -31,10 +31,10 @@
     "editor.guides.bracketPairs": true,
     "editor.minimap.autohide": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": false,
-        "source.fixAll": false,
-        "source.fixAll.eslint": true,
-        "source.fixAll.isort": true
+        "source.organizeImports": "never",
+        "source.fixAll": "never",
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.isort": "explicit"
     },
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
@@ -45,6 +45,10 @@
     //
     // What key should <leader> map to in remappings?
     "vim.leader": ",",
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
     // Option to delegate certain key combinations back to VSCode to be handled natively
     "vim.handleKeys": {
         "<C-a>": false,
@@ -208,7 +212,7 @@
     // Color of the search highlight.
     "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
     // Use system clipboard for unnamed register.
-    "vim.useSystemClipboard": false,
+    "vim.useSystemClipboard": true,
     // Override VSCode's copy command with our own copy command, which works better with VSCodeVim. Turn this off if copying is not working.
     // "vim.overrideCopy": true,
     "vim.overrideCopy": false,
@@ -244,7 +248,6 @@
     "vim.incsearch": true,
     // How much search or command history should be remembered
     "vim.history": 100,
-    // Indent code automatically.
     "vim.autoindent": true,
     // Start in Insert Mode.
     "vim.startInInsertMode": false,
@@ -252,10 +255,9 @@
     "vim.visualstar": false,
     // Uses a hack to move around folds properly
     "vim.foldfix": false,
-    // Use neovim on backend. (only works for Ex commands right now). You should restart VScode after enable/disabling this for the changes to take effect. NOTE: Neovim must be installed and neovimPath must be set the executable in order for this setting to work. Otherwise, vscodevim will crash.
-    "vim.enableNeovim": false,
+    "vim.enableNeovim": true,
     // Path to run neovim executable. For example, /usr/bin/nvim, or
-    "vim.neovimPath": "nvim",
+    // "vim.neovimPath": "nvim",
     //
     // FILE CONFIG
     //
@@ -430,7 +432,21 @@
     },
     "files.associations": {
         // "*.hcl": "terraform"
-        "*.tf.tpl": "terraform"
+        "*.tf.tpl": "terraform",
+        "*.json.j2": "jinja-json",
+        "*.html.j2": "jinja-html",
+    },
+    //
+    // Jinja
+    //
+    "[jinja-json]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true
+    },
+    "[go]": {
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "golang.go"
     },
     //
     // TERMINAL CONFIG
@@ -533,9 +549,9 @@
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true,
-            "source.fixAll": true,
-            "source.fixAll.eslint": true
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit",
+            "source.fixAll.eslint": "explicit"
         },
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
@@ -590,5 +606,12 @@
     "codesnap.target": "window",
     "codesnap.shutterAction": "copy",
     "githubPullRequests.terminalLinksHandler": "github",
-    "workbench.colorTheme": "Gruvbox Dark Medium"
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "githubPullRequests.remotes": [
+        "origin"
+    ],
+    "[plaintext]": {
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false
+    }
 }
