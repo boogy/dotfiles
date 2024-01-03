@@ -500,9 +500,9 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000",
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
     },
@@ -522,7 +522,7 @@
     // Markdown config
     //
     // "markdown-pdf.executablePath": "/usr/sbin/chromium",
-    "markdown-pdf.highlightStyle": "monokai.css",
+    "markdown-pdf.highlightStyle": "gruvbox-dark.css",
     "markdown-pdf.breaks": true,
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
@@ -613,5 +613,6 @@
     "[plaintext]": {
         "editor.unicodeHighlight.ambiguousCharacters": false,
         "editor.unicodeHighlight.invisibleCharacters": false
-    }
+    },
+    "window.clickThroughInactive": false
 }
