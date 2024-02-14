@@ -92,6 +92,9 @@ bindkey "\033[4~" end-of-line
 # bindkey '^W' my-backward-delete-word
 
 
+alias aws-whoami="aws sts get-caller-identity ; echo \"Creds expiration time: $AWS_CREDENTIAL_EXPIRATION\""
+
+
 if [[ -n "$BROWSER" ]]; then
     _browser_fts=(htm html de org net com at cx nl se dk)
     for ft in $_browser_fts; do alias -s $ft=$BROWSER; done
@@ -122,3 +125,10 @@ alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>
 pyclean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
+
+list-sub-folders() {
+  FOLDER_NAME="$1"
+  DEPTH="${2:2}"
+  fd -d $DEPTH -t d ".*" $FOLDER_NAME
+}
+
