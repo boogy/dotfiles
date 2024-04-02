@@ -615,5 +615,6 @@
         "editor.unicodeHighlight.invisibleCharacters": false
     },
     "window.clickThroughInactive": false,
-    "diffEditor.maxComputationTime": 0
+    "diffEditor.maxComputationTime": 0,
+    "git.autofetch": true
 }

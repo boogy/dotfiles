@@ -257,49 +257,49 @@ return {
   --   end,
   -- },
 
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-      "mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "hadolint" })
-      end,
-      { "nvim-lua/plenary.nvim" },
-    },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.code_actions.gitsigns,
-        nls.builtins.formatting.prettierd,
-        nls.builtins.diagnostics.hadolint,
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt,
-
-        -- python
-        nls.builtins.formatting.black,
-
-        -- golang
-        nls.builtins.code_actions.gomodifytags,
-        nls.builtins.code_actions.impl,
-        nls.builtins.formatting.gofumpt,
-        nls.builtins.formatting.goimports_reviser,
-
-        -- terraform
-        nls.builtins.formatting.terraform_fmt,
-        nls.builtins.diagnostics.terraform_validate,
-
-        -- ts
-        nls.builtins.formatting.biome,
-        -- require('typescript.extensions.null-ls.code-actions'),
-
-        -- other
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt,
-      })
-      return opts
-    end,
-  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   dependencies = {
+  --     "mason.nvim",
+  --     opts = function(_, opts)
+  --       opts.ensure_installed = opts.ensure_installed or {}
+  --       vim.list_extend(opts.ensure_installed, { "hadolint" })
+  --     end,
+  --     { "nvim-lua/plenary.nvim" },
+  --   },
+  --   opts = function(_, opts)
+  --     local nls = require("null-ls")
+  --     opts.sources = vim.list_extend(opts.sources or {}, {
+  --       nls.builtins.code_actions.gitsigns,
+  --       nls.builtins.formatting.prettierd,
+  --       nls.builtins.diagnostics.hadolint,
+  --       nls.builtins.formatting.stylua,
+  --       nls.builtins.formatting.shfmt,
+  --
+  --       -- python
+  --       nls.builtins.formatting.black,
+  --
+  --       -- golang
+  --       nls.builtins.code_actions.gomodifytags,
+  --       nls.builtins.code_actions.impl,
+  --       nls.builtins.formatting.gofumpt,
+  --       nls.builtins.formatting.goimports_reviser,
+  --
+  --       -- terraform
+  --       nls.builtins.formatting.terraform_fmt,
+  --       nls.builtins.diagnostics.terraform_validate,
+  --
+  --       -- ts
+  --       nls.builtins.formatting.biome,
+  --       -- require('typescript.extensions.null-ls.code-actions'),
+  --
+  --       -- other
+  --       nls.builtins.formatting.stylua,
+  --       nls.builtins.formatting.shfmt,
+  --     })
+  --     return opts
+  --   end,
+  -- },
 
   -- nvim-treesitter parsers
   {
