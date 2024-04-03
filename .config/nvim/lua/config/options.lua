@@ -6,6 +6,10 @@ local opt = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Set $PATH
+vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/opt/node@18/bin"
+vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin"
+
 -----------------------------------------------------------
 -- Neovide UI
 -----------------------------------------------------------
@@ -14,6 +18,7 @@ if vim.g.neovide then
   opt.linespace = 0
   -- vim.g.neovide_scale_factor = 1.0
   -- vim.g.neovide_transparency = 0.8
+  vim.g.neovide_theme = "auto"
   vim.g.neovide_scroll_animation_length = 0.3
   vim.g.neovide_hide_mouse_when_typing = false
   vim.g.neovide_confirm_quit = false
@@ -23,6 +28,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_cursor_trail_size = 0.5
   vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_unlink_border_highlights = true
 
   -- Keymaps
   vim.api.nvim_set_keymap(
