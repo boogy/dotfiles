@@ -616,5 +616,6 @@
     },
     "window.clickThroughInactive": false,
     "diffEditor.maxComputationTime": 0,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "githubPullRequests.notifications": "pullRequests"
 }

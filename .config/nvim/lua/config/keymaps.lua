@@ -46,6 +46,18 @@ map("n", "<leader>th", "<C-w>t<C-w>H", { desc = "Change split orientation right"
 -- format current buffer
 map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format current buffer", silent = true })
 
+-- Copy Pasting
+map("x", "<leader>p", '"_dP', { desc = "Replace without yanking" })
+map("n", "<leader>d", '"_d', { desc = "Delete without yanking" }) -- e.g <leader>dd deletes the current line without yanking it
+map("n", "<leader>D", '"_D', { desc = "Delete until EOL without yanking" })
+map("n", "<leader>c", '"_c', { desc = "Change without yanking" })
+map("n", "<leader>C", '"_C', { desc = "Change until EOL without yanking" })
+
+-- map("", "<leader>y", '"+y', { desc = "Yank to clipboard" }) -- E.g: <leader>yy will yank current line to os clipboard
+-- map("", "<leader>Y", '"+y$', { desc = "Yank until EOL to clipboard" })
+-- map("n", "<leader>p", '"+p', { desc = "Paste after cursor from clipboard" })
+-- map("n", "<leader>P", '"+P', { desc = "Paste before cursor from clipboard" })
+
 --------------------------------------------------------------------------------------------------
 -- Floating terminal
 --------------------------------------------------------------------------------------------------

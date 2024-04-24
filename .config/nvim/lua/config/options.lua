@@ -18,8 +18,8 @@ if vim.g.neovide then
   opt.linespace = 0
   -- vim.g.neovide_scale_factor = 1.0
   -- vim.g.neovide_transparency = 0.8
-  vim.g.neovide_theme = "auto"
-  vim.g.neovide_scroll_animation_length = 0.3
+  -- vim.g.neovide_theme = "auto"
+  vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_hide_mouse_when_typing = false
   vim.g.neovide_confirm_quit = false
   vim.g.neovide_fullscreen = false
@@ -45,9 +45,10 @@ if vim.g.neovide then
   )
   vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
 
+  vim.keymap.set("v", "<D-c>", "y", { noremap = true, silent = true })
   vim.keymap.set("n", "<D-c>", '"*y :let @+=@*<CR>', { noremap = true, silent = true })
   vim.keymap.set("n", "<D-v>", '"+p', { noremap = true, silent = true })
-  vim.keymap.set("i", "<D-v>", '<ESC>"*p<CR>i<CR>', { noremap = true, silent = true })
+  vim.keymap.set("i", "<D-v>", '<ESC>"*pi', { noremap = true, silent = true })
 
   vim.keymap.set("n", "<D-t>", ":tabnew<CR>")
 end
