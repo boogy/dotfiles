@@ -93,7 +93,9 @@ end
 --------------------------------------------------------------------------------------------------
 -- Telescope
 --------------------------------------------------------------------------------------------------
-map("n", "<space>fB", ":Telescope file_browser<CR>", { desc = "Open Telescope File Browser", noremap = true })
+map("n", "<space>fB", ":Telescope file_browser<CR>", { desc = "Open Telescope - File Browser", noremap = true })
+map("n", "<space>o", ":Telescope buffers<CR>", { desc = "Open Telescope - Buffers", noremap = true })
+map("n", "<space>fg", ":Telescope git_files<CR>", { desc = "Open Telescope - Git Files", noremap = true })
 
 -- open file_browser with the path of the current buffer
 map(
