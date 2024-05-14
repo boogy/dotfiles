@@ -48,10 +48,14 @@ if vim.g.neovide then
   vim.keymap.set("v", "<D-c>", "y", { noremap = true, silent = true })
   vim.keymap.set("n", "<D-c>", '"*y :let @+=@*<CR>', { noremap = true, silent = true })
   vim.keymap.set("n", "<D-v>", '"+p', { noremap = true, silent = true })
-  vim.keymap.set("i", "<D-v>", '<ESC>"*pA', { noremap = true, silent = true })
+  vim.keymap.set("i", "<D-v>", '<ESC>"*pa', { noremap = true, silent = true })
 
   vim.keymap.set("n", "<D-t>", ":tabnew<CR>")
 end
 
 -- opt.fixendofline = true
 -- opt.endofline = true
+
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
