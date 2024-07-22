@@ -10,11 +10,6 @@
     },
     {
         "key": "ctrl+[Equal]",
-        "command": "workbench.action.toggleMaximizedPanel",
-        "when": "!terminalFocus"
-    },
-    {
-        "key": "ctrl+[Equal]",
         "command": "workbench.action.terminal.toggleTerminal",
         "when": "terminalFocus"
     },

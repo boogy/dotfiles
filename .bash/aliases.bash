@@ -5,58 +5,58 @@
 source $HOME/.bash/utils.bash
 
 ## colors
-red=$(tput setaf 1)      # Issues/Errors
-green=$(tput setaf 2)    # Success
-yellow=$(tput setaf 3)   # Warnings/Information
-blue=$(tput setaf 4)     # Heading
-bold=$(tput bold  setaf 7)     # Highlight
-reset=$(tput setaf 7)       # Norma
+red=$(tput setaf 1)       # Issues/Errors
+green=$(tput setaf 2)     # Success
+yellow=$(tput setaf 3)    # Warnings/Information
+blue=$(tput setaf 4)      # Heading
+bold=$(tput bold setaf 7) # Highlight
+reset=$(tput setaf 7)     # Norma
 
-[[ "$(uname -s)" =~ Darwin ]] && \
-    export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+[[ "$(uname -s)" =~ Darwin ]] &&
+  export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 ##
 ## The 'ls' family (this assumes you use a recent GNU ls)
 ## or rust equivalent 'exa'
 ##
-if has exa &>/dev/null; then
-    alias ls="exa -g --color=auto --time-style=long-iso"
-    alias ll="ls -l --color=auto"
-    alias l=ll
-    alias la="ls -la --color=always"
-    alias llm="ls -l -s modified"
-    alias llmr="ls -lr -s modified"
-    alias llt="ll -T"
-    alias llg="ll -G"
+if has eza &>/dev/null; then
+  alias ls="eza -g --color=auto --time-style=long-iso"
+  alias ll="ls -l --color=auto"
+  alias l=ll
+  alias la="ls -la --color=always"
+  alias llm="ls -l -s modified"
+  alias llmr="ls -lr -s modified"
+  alias llt="ll -T"
+  alias llg="ll -G"
 else
-    if [[ "$(uname -s)" =~ Darwin ]]; then
-        ## add color if on macOS
-        alias ls="ls -G"
-        alias ll="ls -l"
-    else
-        alias ls="ls --color=always"
-        alias ll="ls -l"
-        alias l=ll
-        alias sl="ls"
-        alias la="ls -Al"          # show hidden files
-        alias lx="ls -lXB"         # sort by extension
-        alias lk="ls -lSr"         # sort by size, biggest last
-        alias lc="ls -ltcr"        # sort by and show change time, most recent last
-        alias lu="ls -ltur"        # sort by and show access time, most recent last
-        alias lt="ls -ltr"         # sort by date, most recent last
-        alias lm="ls -al|more"     # pipe through "more"
-        alias lr="ls -lR"          # recursive ls
-        alias lsdirs="ls -l | grep --color=always "^d""
-    fi
+  if [[ "$(uname -s)" =~ Darwin ]]; then
+    ## add color if on macOS
+    alias ls="ls -G"
+    alias ll="ls -l"
+  else
+    alias ls="ls --color=always"
+    alias ll="ls -l"
+    alias l=ll
+    alias sl="ls"
+    alias la="ls -Al"      # show hidden files
+    alias lx="ls -lXB"     # sort by extension
+    alias lk="ls -lSr"     # sort by size, biggest last
+    alias lc="ls -ltcr"    # sort by and show change time, most recent last
+    alias lu="ls -ltur"    # sort by and show access time, most recent last
+    alias lt="ls -ltr"     # sort by date, most recent last
+    alias lm="ls -al|more" # pipe through "more"
+    alias lr="ls -lR"      # recursive ls
+    alias lsdirs="ls -l | grep --color=always "^d""
+  fi
 fi
 
 ##
 ## vim stuff
 ##
 has nvim &>/dev/null && {
-    export EDITOR=nvim
+  export EDITOR=nvim
 } || {
-    export EDITOR=vim
+  export EDITOR=vim
 }
 alias v="$EDITOR"
 alias vi="$EDITOR -p"
@@ -66,7 +66,7 @@ alias svim="sudo -E $EDITOR"
 alias v-conf="$EDITOR ~/.vimrc"
 
 has rg &>/dev/null && {
-    alias rg='rg --hidden'
+  alias rg='rg --hidden'
 }
 
 ##
@@ -75,11 +75,11 @@ has rg &>/dev/null && {
 alias cp="cp -i"
 alias mv="mv -i"
 [[ $(uname -s) =~ Darwin ]] && {
-    alias rm=rm
-} ||{
-    alias rm="rm -i"    # "rm -i" prompts for every file
+  alias rm=rm
+} || {
+  alias rm="rm -i" # "rm -i" prompts for every file
 }
-alias ln="ln -i"    # prompt whether to remove destinations
+alias ln="ln -i" # prompt whether to remove destinations
 alias batpp="bat -p --paging=never"
 alias batp="bat --paging=never"
 
@@ -111,72 +111,72 @@ alias cd-="cd -"
 ## debian/ubuntu aliases
 ##
 [[ $(uname -s) =~ Linux && $(has apt-get) ]] && {
-    alias a-search="apt search"
-    alias a-install="sudo apt install"
-    alias a-remove="sudo apt remove"
-    alias a-purge="sudo apt remove --purge"
-    alias a-update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get autoclean"
-    alias a-upgrade="sudo apt update && sudo apt dist-upgrade && sudo apt autoremove"
-    alias a-show="sudo apt show"
-    alias a-info="sudo apt-cache showpkg"
-    alias a-deplist="apt-cache showpkg" # apt-cache rdepends works to
-    alias a-upgradeble="apt list --upgradeable"
-    alias dpkg-l="dpkg -l|grep --color=always"
-    alias dpkg-f="dpkg-query -L"
-    alias dpkg-stat="dpkg --status"
-    alias dpkg-extract="dpkg-deb --extract" # dpkg-deb --extract package.deb dir-to-extract-to
+  alias a-search="apt search"
+  alias a-install="sudo apt install"
+  alias a-remove="sudo apt remove"
+  alias a-purge="sudo apt remove --purge"
+  alias a-update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get autoclean"
+  alias a-upgrade="sudo apt update && sudo apt dist-upgrade && sudo apt autoremove"
+  alias a-show="sudo apt show"
+  alias a-info="sudo apt-cache showpkg"
+  alias a-deplist="apt-cache showpkg" # apt-cache rdepends works to
+  alias a-upgradeble="apt list --upgradeable"
+  alias dpkg-l="dpkg -l|grep --color=always"
+  alias dpkg-f="dpkg-query -L"
+  alias dpkg-stat="dpkg --status"
+  alias dpkg-extract="dpkg-deb --extract" # dpkg-deb --extract package.deb dir-to-extract-to
 }
 
 ##
 ## Arch Linux
 ##
 [[ $(uname -s) =~ Linux && $(has pacman) ]] && {
-    alias pac="sudo pacman -S"
-    alias pacs="pacman -Ss"
-    alias p-install="sudo pacman -S"
-    alias pacinst=p-install
-    alias p-remove="sudo pacman -R"
-    alias pacremove=p-remove
-    alias p-purge="sudo pacman -Rns"
-    alias pacpurge=p-purge
-    alias p-update="sudo pacman -Syu"
-    alias pacupdate=p-update
-    alias p-search="pacman -Ss"
-    alias pacsearch=p-search
-    alias p-query-installed="pacman -Qs"
-    alias p-query-foreign="pacman -Qm"
-    alias p-list-aur-packages="pacman -Qm"
-    alias p-show="pacman -Si"
-    alias pacshow=p-show
-    alias p-clean-cache="sudo pacman -Sc"
-    alias p-clean-orphans='sudo pacman -Rns $(pacman -Qtdq)'
-    alias p-list-orphans="pacman -Qtdq"
-    alias pacbrowse="pacman -Qq | fzf --preview \"pacman -Qil {}\" --layout=reverse --bind \"enter:execute(pacman -Qil {} | less)\""
+  alias pac="sudo pacman -S"
+  alias pacs="pacman -Ss"
+  alias p-install="sudo pacman -S"
+  alias pacinst=p-install
+  alias p-remove="sudo pacman -R"
+  alias pacremove=p-remove
+  alias p-purge="sudo pacman -Rns"
+  alias pacpurge=p-purge
+  alias p-update="sudo pacman -Syu"
+  alias pacupdate=p-update
+  alias p-search="pacman -Ss"
+  alias pacsearch=p-search
+  alias p-query-installed="pacman -Qs"
+  alias p-query-foreign="pacman -Qm"
+  alias p-list-aur-packages="pacman -Qm"
+  alias p-show="pacman -Si"
+  alias pacshow=p-show
+  alias p-clean-cache="sudo pacman -Sc"
+  alias p-clean-orphans='sudo pacman -Rns $(pacman -Qtdq)'
+  alias p-list-orphans="pacman -Qtdq"
+  alias pacbrowse="pacman -Qq | fzf --preview \"pacman -Qil {}\" --layout=reverse --bind \"enter:execute(pacman -Qil {} | less)\""
 
-    ## AUR
-    alias y-search="yay "
-    alias ysearch=pa-search
+  ## AUR
+  alias y-search="yay "
+  alias ysearch=pa-search
 
-    alias y-install="yay -S"
-    alias yinstall=pa-install
-    alias y-install-silent="yay -S --noconfirm"
+  alias y-install="yay -S"
+  alias yinstall=pa-install
+  alias y-install-silent="yay -S --noconfirm"
 
-    alias y-update="yay -Syyuu --topdown --cleanafter"
-    alias yupdate=pa-update
+  alias y-update="yay -Syyuu --topdown --cleanafter"
+  alias yupdate=pa-update
 
-    alias y-remove="yay -R"
-    alias yremove=pa-remove
+  alias y-remove="yay -R"
+  alias yremove=pa-remove
 
-    ## alternative to yay with some cool options
-    ## option can be changed in /etc/paru.conf
-    alias paru="paru --bottomup"
-    alias pupdate="paru -Syyu --bottomup --cleanafter --nocombinedupgrade --useask --upgrademenu"
-    alias aur-show="paru -Gp"
-    alias aur-download="paru -G"
-    alias pinstall="paru"
-    alias pfm-install"paru -S --fm=vim"
-    alias psearch="paru --bottomup"
-    alias pshow="paru -Si"
+  ## alternative to yay with some cool options
+  ## option can be changed in /etc/paru.conf
+  alias paru="paru --bottomup"
+  alias pupdate="paru -Syyu --bottomup --cleanafter --nocombinedupgrade --useask --upgrademenu"
+  alias aur-show="paru -Gp"
+  alias aur-download="paru -G"
+  alias pinstall="paru"
+  alias pfm-install"paru -S --fm=vim"
+  alias psearch="paru --bottomup"
+  alias pshow="paru -Si"
 }
 
 ##
@@ -187,7 +187,6 @@ alias ports="netstat -lapute"
 alias monittcp="sudo watch -n 1 \"ss -lapute| grep ESTAB\""
 alias listening="sudo lsof -P -i -n"
 alias ss-connected="ss -4p|column -t"
-
 
 ##
 ## Services

@@ -616,5 +616,7 @@
     },
     "window.clickThroughInactive": false,
     "diffEditor.maxComputationTime": 0,
-    "githubPullRequests.notifications": "pullRequests"
+    "githubPullRequests.notifications": "pullRequests",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "git.openRepositoryInParentFolders": "never"
 }
