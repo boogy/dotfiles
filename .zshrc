@@ -60,6 +60,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 ##
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
@@ -251,3 +252,4 @@ fi
 ## load prompt
 # eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
 eval "$(starship init zsh)"
+

@@ -40,6 +40,9 @@ brew install --cask font-cousine-nerd-font
 brew install --cask the-unarchiver
 brew install --cask xmind
 
+brew install warrensbox/tap/tfswitch
+brew install warrensbox/tap/tgswitch
+
 brew install zsh
 brew install zsh-autosuggestions
 brew install zsh-completions
@@ -85,3 +88,4 @@ brew install openjdk
 brew install p7zip
 brew install pinentry
 brew install pinentry-mac
+
