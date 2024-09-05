@@ -1,622 +1,564 @@
 {
-    //
-    // EDITOR CONFIG
-    //
-    "editor.fontFamily": "Hack Nerd Font",
-    // "editor.fontFamily": "Cousine Nerd Font",
-    "editor.fontSize": 14,
-    "editor.lineHeight": 0,
-    "editor.lineNumbers": "relative",
-    "editor.tabSize": 4,
-    "editor.quickSuggestions": {
-        "comments": "on",
-        "strings": "on",
-        "other": "on"
+  //
+  // EDITOR CONFIG
+  //
+  "editor.fontFamily": "Hack Nerd Font",
+  // "editor.fontFamily": "Cousine Nerd Font",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 0,
+  "editor.lineNumbers": "relative",
+  "editor.tabSize": 4,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+  },
+  "editor.quickSuggestionsDelay": 10,
+  "editor.autoClosingBrackets": "always",
+  "editor.cursorStyle": "line-thin",
+  "editor.tabCompletion": "onlySnippets",
+  "editor.fontWeight": "normal",
+  // "editor.minimap.maxColumn": 200,
+  "editor.wordWrapColumn": 80,
+  "editor.mouseWheelZoom": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  // "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
+  "editor.renderFinalNewline": "off",
+  "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.minimap.autohide": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "never",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.isort": "explicit"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "material-icon-theme.folders.theme": "specific",
+  "workbench.iconTheme": "material-icon-theme",
+  //
+  // VIM CONFIG
+  //
+  // What key should <leader> map to in remappings?
+  "vim.leader": ",",
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  // Option to delegate certain key combinations back to VSCode to be handled natively
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-w>": false,
+    "<C-c>": false,
+    "<cmd-c>": false,
+    // "<C-v>": true,
+    "<C-b>": false,
+    "<C-d>": true,
+    "<cmd-d>": true,
+    "<C-j>": false,
+    // enable zenmode CTRL+k+z
+    "<C-k>": false,
+    "<C-o>": false
+  },
+  // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["C-x"],
+      "after": [],
+      "commands": [
+        {
+          "command": "editor.action.clipboardCutAction",
+          "args": []
+        }
+      ]
     },
-    "editor.quickSuggestionsDelay": 10,
-    "editor.autoClosingBrackets": "always",
-    "editor.cursorStyle": "line-thin",
-    "editor.tabCompletion": "onlySnippets",
-    "editor.fontWeight": "normal",
-    // "editor.minimap.maxColumn": 200,
-    "editor.wordWrapColumn": 80,
-    "editor.mouseWheelZoom": true,
-    "editor.multiCursorModifier": "ctrlCmd",
-    // "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
-    "editor.renderFinalNewline": "off",
+    {
+      "before": ["C-c"],
+      "after": [],
+      "commands": [
+        {
+          "command": "editor.action.clipboardCopyAction",
+          "args": []
+        }
+      ]
+    },
+    {
+      "before": ["C-d"],
+      "after": [],
+      "commands": [
+        {
+          "command": "editor.action.addSelectionToNextFindMatch",
+          "args": []
+        }
+      ]
+    },
+    {
+      "before": ["C-k", "C-d"],
+      "after": [],
+      "commands": [
+        {
+          "command": "editor.action.moveSelectionToNextFindMatch",
+          "args": []
+        }
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      // "before": [ "<C-n>" ],
+      "before": ["<leader>", "<Enter>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": [";"],
+      "commands": ["workbench.action.showCommands"]
+    },
+    {
+      "before": ["Z", "Z"],
+      "commands": [":wq"]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.files.save"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<Delete>"],
+      "commands": ["editor.action.deleteLines"]
+    },
+    // Bind p in visual mode to paste without overriding the current register
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
+    },
+    // Bind > and < in visual mode to indent/outdent lines (repeatable)
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  // Allow VSCodeVim to change status bar color based on mode
+  "vim.statusBarColorControl": true,
+  "vim.mouseSelectionGoesIntoVisualMode": false,
+  // Enable some vim ctrl key commands that override otherwise common operations, like ctrl+c
+  "vim.useCtrlKeys": true,
+  // Color of the search highlight.
+  "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
+  // Use system clipboard for unnamed register.
+  "vim.useSystemClipboard": true,
+  // Override VSCode's copy command with our own copy command, which works better with VSCodeVim. Turn this off if copying is not working.
+  // "vim.overrideCopy": true,
+  "vim.overrideCopy": false,
+  // Non-recursive keybinding overrides to use for insert mode. Allows mapping to vim commands or vscode actions. See README for more.
+  "vim.insertModeKeyBindingsNonRecursive": [],
+  // Width to word-wrap to when using gq.
+  "vim.textwidth": 80,
+  // Timeout in milliseconds for remapped commands
+  "vim.timeout": 1000,
+  // Number of lines to scroll with CTRL-U and CTRL-D commands.
+  "vim.scroll": 20,
+  // Show the text of any command you are in the middle of writing.
+  "vim.showcmd": true,
+  // keywords contain alphanumeric characters and '_'
+  "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
+  // Ignore case in search patterns.
+  "vim.ignorecase": true,
+  // Override the 'ignorecase' option if the search pattern contains upper case characters.
+  "vim.smartcase": true,
+  // Enable the EasyMotion plugin for Vim.
+  "vim.easymotion": true,
+  // Set a custom background color for EasyMotion markers.
+  "vim.easymotionMarkerBackgroundColor": "#000000",
+  // Set a custom color for the text on one character long markers.
+  "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
+  // Set the font weight of the marker text.
+  "vim.easymotionMarkerFontWeight": "normal",
+  // Enable the Surround plugin for Vim.
+  "vim.surround": true,
+  // Show all matches of the most recent search pattern
+  "vim.hlsearch": true,
+  // Show where a / search matches as you type it.
+  "vim.incsearch": true,
+  // How much search or command history should be remembered
+  "vim.history": 100,
+  "vim.autoindent": true,
+  // Start in Insert Mode.
+  "vim.startInInsertMode": false,
+  // In visual mode, start a search with * or # using the current selection
+  "vim.visualstar": false,
+  // Uses a hack to move around folds properly
+  "vim.foldfix": false,
+  "vim.enableNeovim": true,
+  // Path to run neovim executable. For example, /usr/bin/nvim, or
+  // "vim.neovimPath": "nvim",
+  //
+  // FILE CONFIG
+  //
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.swp": true
+  },
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+  "files.hotExit": "off",
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "off",
+  //
+  // Ansible
+  //
+  "[ansible]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": false
+  },
+  "redhat.telemetry.enabled": false,
+  //
+  // YAML
+  //
+  "yaml.completion": true,
+  "yaml.format.enable": true,
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "yaml.customTags": [
+    "!encrypted/pkcs1-oaep scalar",
+    "!vault scalar",
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-galaxy.json": [
+      "examples/**/*.yml",
+      "galaxy.yml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-lint.json": [
+      ".ansible-lint"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-vars.json": [
+      "playbooks/vars/*.yml",
+      "**/playbooks/vars/*.yml",
+      "playbooks/vars/*.yaml",
+      "**/playbooks/vars/*.yaml",
+      "host_playbooks/vars/*.yaml",
+      "**/host_playbooks/vars/*.yaml",
+      "host_playbooks/vars/*.yml",
+      "**/host_playbooks/vars/*.yml",
+      "vars/*.yml",
+      "vars/*.yaml",
+      "defaults/*.yml",
+      "defaults/*.yaml",
+      "host_vars/*.yml",
+      "host_vars/*.yaml",
+      "group_vars/*.yml",
+      "group_vars/*.yaml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json": [
+      "tasks/*.yml",
+      "**/tasks/*.yml",
+      "tasks/*.yaml",
+      "**/tasks/*.yaml",
+      "handlers/*.yml",
+      "**/handlers/*.yml",
+      "handlers/*.yaml",
+      "**/handlers/*.yaml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/molecule.json": [
+      "molecule.yml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-meta.json": [
+      "meta/*.yml",
+      "**/meta/*.yml",
+      "**/meta/*.yaml",
+      "**/meta/**/*"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-requirements.json": [
+      "**/requirements.yml",
+      "**/requirements.yaml",
+      "**/*/requirements.yml",
+      "**/*/requirements.yaml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/zuul.json": [
+      "zuul.d/**/*.yml",
+      "zuul.d/**/*.yaml"
+    ],
+    "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-playbook.json": [
+      "playbooks/*.yml",
+      "**/playbooks/*.yml",
+      "playbooks/*.yaml",
+      "**/playbooks/*.yaml",
+      "host_playbooks/*.yml",
+      "**/host_playbooks/*.yml",
+      "host_playbooks/*.yaml",
+      "**/host_playbooks/*.yaml",
+      "*ansible/*.yml",
+      "*ansible*/*.yaml"
+    ]
+  },
+  //
+  // Terraform
+  //
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "editor.accessibilitySupport": "off",
-    "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": true,
-    "editor.minimap.autohide": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.detectIndentation": true,
+    "editor.tabSize": 2
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    // "editor.codeActionsOnSave": {
+    //     "source.fixAll": true,
+    //     "source.formatAll.terraform": true
+    // },
+    "editor.tabSize": 2
+  },
+  "terraform.experimentalFeatures.validateOnSave": true,
+  "terraform.experimentalFeatures.prefillRequiredFields": true,
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.hcl$",
+        "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+      },
+      {
+        "match": "\\.hcl.json$",
+        "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
+      }
+    ]
+  },
+  "files.associations": {
+    // "*.hcl": "terraform"
+    "*.tf.tpl": "terraform",
+    "*.json.j2": "jinja-json",
+    "*.json": "jinja-json",
+    "*.html.j2": "jinja-html"
+  },
+  //
+  // Jinja
+  //
+  "[jinja-json]": {
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[go]": {
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go"
+  },
+  //
+  // TERMINAL CONFIG
+  //
+  // "terminal.integrated.fontFamily": "Cousine Nerd Font",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.2,
+  "terminal.external.linuxExec": "alacritty",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.scrollback": 100000,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.external.osxExec": "Alacritty.app",
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "path": "bash",
+      "args": ["-l"],
+      "icon": "terminal-bash"
+    },
+    "zsh": {
+      "path": "zsh",
+      "args": ["-l"],
+      "icon": "terminal"
+    },
+    "pwsh": {
+      "path": "pwsh",
+      "icon": "terminal-powershell"
+    },
+    "python3-repl": {
+      "path": "python3",
+      "args": ["-q"]
+    }
+  },
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  //
+  // TELEMETRY
+  //
+  "telemetry.telemetryLevel": "off",
+  "window.openFilesInNewWindow": "off",
+  "window.openFoldersInNewWindow": "off",
+  // "window.nativeFullScreen": false,
+  "window.newWindowDimensions": "inherit",
+  "window.commandCenter": true,
+  "workbench.editor.enablePreview": true,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "workbench.startupEditor": "newUntitledFile",
+  //
+  //EXPLORER CONFIG
+  //
+  "explorer.autoReveal": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  //
+  "extensions.ignoreRecommendations": false,
+  //
+  // Markdown config
+  //
+  // "markdown-pdf.executablePath": "/usr/sbin/chromium",
+  "markdown-pdf.highlightStyle": "gruvbox-dark.css",
+  "markdown-pdf.breaks": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  //
+  // Json config
+  //
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  //
+  // Python config
+  //
+  // "python.languageServer": "Jedi","
+  "python.analysis.autoImportCompletions": true,
+  "python.terminal.activateEnvironment": true,
+  "[python]": {
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": "never",
-        "source.fixAll": "never",
-        "source.fixAll.eslint": "explicit",
-        "source.fixAll.isort": "explicit"
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit",
+      "source.fixAll.eslint": "explicit"
     },
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "material-icon-theme.folders.theme": "specific",
-    "workbench.iconTheme": "material-icon-theme",
-    //
-    // VIM CONFIG
-    //
-    // What key should <leader> map to in remappings?
-    "vim.leader": ",",
-    // To improve performance
-    "extensions.experimental.affinity": {
-        "vscodevim.vim": 1
-    },
-    // Option to delegate certain key combinations back to VSCode to be handled natively
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-f>": false,
-        "<C-w>": false,
-        "<C-c>": false,
-        "<cmd-c>": false,
-        // "<C-v>": true,
-        "<C-b>": false,
-        "<C-d>": true,
-        "<cmd-d>": true,
-        "<C-j>": false,
-        // enable zenmode CTRL+k+z
-        "<C-k>": false,
-        "<C-o>": false,
-    },
-    // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "C-x"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.clipboardCutAction",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "C-c"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.clipboardCopyAction",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "C-d"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.addSelectionToNextFindMatch",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "C-k",
-                "C-d"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "editor.action.moveSelectionToNextFindMatch",
-                    "args": []
-                }
-            ]
-        }
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "after": [
-                "d",
-                "d"
-            ]
-        },
-        {
-            // "before": [ "<C-n>" ],
-            "before": [
-                "<leader>",
-                "<Enter>"
-            ],
-            "commands": [
-                ":nohl"
-            ]
-        },
-        {
-            "before": [
-                ";"
-            ],
-            "commands": [
-                "workbench.action.showCommands",
-            ]
-        },
-        {
-            "before": [
-                "Z",
-                "Z"
-            ],
-            "commands": [
-                ":wq"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "w"
-            ],
-            "commands": [
-                "workbench.action.files.save",
-            ]
-        }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<Delete>",
-            ],
-            "commands": [
-                "editor.action.deleteLines"
-            ],
-        },
-        // Bind p in visual mode to paste without overriding the current register
-        {
-            "before": [
-                "p",
-            ],
-            "after": [
-                "p",
-                "g",
-                "v",
-                "y"
-            ]
-        },
-        // Bind > and < in visual mode to indent/outdent lines (repeatable)
-        {
-            "before": [
-                ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
-        },
-        {
-            "before": [
-                "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
-        },
-    ],
-    // Allow VSCodeVim to change status bar color based on mode
-    "vim.statusBarColorControl": true,
-    "vim.mouseSelectionGoesIntoVisualMode": false,
-    // Enable some vim ctrl key commands that override otherwise common operations, like ctrl+c
-    "vim.useCtrlKeys": true,
-    // Color of the search highlight.
-    "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
-    // Use system clipboard for unnamed register.
-    "vim.useSystemClipboard": true,
-    // Override VSCode's copy command with our own copy command, which works better with VSCodeVim. Turn this off if copying is not working.
-    // "vim.overrideCopy": true,
-    "vim.overrideCopy": false,
-    // Non-recursive keybinding overrides to use for insert mode. Allows mapping to vim commands or vscode actions. See README for more.
-    "vim.insertModeKeyBindingsNonRecursive": [],
-    // Width to word-wrap to when using gq.
-    "vim.textwidth": 80,
-    // Timeout in milliseconds for remapped commands
-    "vim.timeout": 1000,
-    // Number of lines to scroll with CTRL-U and CTRL-D commands.
-    "vim.scroll": 20,
-    // Show the text of any command you are in the middle of writing.
-    "vim.showcmd": true,
-    // keywords contain alphanumeric characters and '_'
-    "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?",
-    // Ignore case in search patterns.
-    "vim.ignorecase": true,
-    // Override the 'ignorecase' option if the search pattern contains upper case characters.
-    "vim.smartcase": true,
-    // Enable the EasyMotion plugin for Vim.
-    "vim.easymotion": true,
-    // Set a custom background color for EasyMotion markers.
-    "vim.easymotionMarkerBackgroundColor": "#000000",
-    // Set a custom color for the text on one character long markers.
-    "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
-    // Set the font weight of the marker text.
-    "vim.easymotionMarkerFontWeight": "normal",
-    // Enable the Surround plugin for Vim.
-    "vim.surround": true,
-    // Show all matches of the most recent search pattern
-    "vim.hlsearch": true,
-    // Show where a / search matches as you type it.
-    "vim.incsearch": true,
-    // How much search or command history should be remembered
-    "vim.history": 100,
-    "vim.autoindent": true,
-    // Start in Insert Mode.
-    "vim.startInInsertMode": false,
-    // In visual mode, start a search with * or # using the current selection
-    "vim.visualstar": false,
-    // Uses a hack to move around folds properly
-    "vim.foldfix": false,
-    "vim.enableNeovim": true,
-    // Path to run neovim executable. For example, /usr/bin/nvim, or
-    // "vim.neovimPath": "nvim",
-    //
-    // FILE CONFIG
-    //
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/.swp": true
-    },
-    "files.watcherExclude": {
-        "**/.git/**": true,
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/node_modules/**": true
-    },
-    "files.hotExit": "off",
-    "files.trimTrailingWhitespace": true,
-    "files.autoSave": "off",
-    //
-    // Ansible
-    //
-    "[ansible]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.formatOnSave": false
-    },
-    "redhat.telemetry.enabled": false,
-    //
-    // YAML
-    //
-    "yaml.completion": true,
-    "yaml.format.enable": true,
-    "[yaml]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-    },
-    "yaml.customTags": [
-        "!encrypted/pkcs1-oaep scalar",
-        "!vault scalar",
-        "!And",
-        "!And sequence",
-        "!If",
-        "!If sequence",
-        "!Not",
-        "!Not sequence",
-        "!Equals",
-        "!Equals sequence",
-        "!Or",
-        "!Or sequence",
-        "!FindInMap",
-        "!FindInMap sequence",
-        "!Base64",
-        "!Join",
-        "!Join sequence",
-        "!Cidr",
-        "!Ref",
-        "!Sub",
-        "!Sub sequence",
-        "!GetAtt",
-        "!GetAZs",
-        "!ImportValue",
-        "!ImportValue sequence",
-        "!Select",
-        "!Select sequence",
-        "!Split",
-        "!Split sequence"
-    ],
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-galaxy.json": [
-            "examples/**/*.yml",
-            "galaxy.yml"
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-lint.json": [
-            ".ansible-lint",
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-vars.json": [
-            "playbooks/vars/*.yml",
-            "**/playbooks/vars/*.yml",
-            "playbooks/vars/*.yaml",
-            "**/playbooks/vars/*.yaml",
-            "host_playbooks/vars/*.yaml",
-            "**/host_playbooks/vars/*.yaml",
-            "host_playbooks/vars/*.yml",
-            "**/host_playbooks/vars/*.yml",
-            "vars/*.yml",
-            "vars/*.yaml",
-            "defaults/*.yml",
-            "defaults/*.yaml",
-            "host_vars/*.yml",
-            "host_vars/*.yaml",
-            "group_vars/*.yml",
-            "group_vars/*.yaml"
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json": [
-            "tasks/*.yml",
-            "**/tasks/*.yml",
-            "tasks/*.yaml",
-            "**/tasks/*.yaml",
-            "handlers/*.yml",
-            "**/handlers/*.yml",
-            "handlers/*.yaml",
-            "**/handlers/*.yaml",
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/molecule.json": [
-            "molecule.yml"
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-meta.json": [
-            "meta/*.yml",
-            "**/meta/*.yml",
-            "**/meta/*.yaml",
-            "**/meta/**/*",
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-requirements.json": [
-            "**/requirements.yml",
-            "**/requirements.yaml",
-            "**/*/requirements.yml",
-            "**/*/requirements.yaml",
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/zuul.json": [
-            "zuul.d/**/*.yml",
-            "zuul.d/**/*.yaml",
-        ],
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-playbook.json": [
-            "playbooks/*.yml",
-            "**/playbooks/*.yml",
-            "playbooks/*.yaml",
-            "**/playbooks/*.yaml",
-            "host_playbooks/*.yml",
-            "**/host_playbooks/*.yml",
-            "host_playbooks/*.yaml",
-            "**/host_playbooks/*.yaml",
-            "*ansible/*.yml",
-            "*ansible*/*.yaml",
-        ]
-    },
-    //
-    // Terraform
-    //
-    "[terraform]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file",
-        "editor.detectIndentation": true,
-        "editor.tabSize": 2
-    },
-    "[terraform-vars]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file",
-        // "editor.codeActionsOnSave": {
-        //     "source.fixAll": true,
-        //     "source.formatAll.terraform": true
-        // },
-        "editor.tabSize": 2
-    },
-    "terraform.experimentalFeatures.validateOnSave": true,
-    "terraform.experimentalFeatures.prefillRequiredFields": true,
-    "emeraldwalk.runonsave": {
-        "commands": [
-            {
-                "match": "\\.hcl$",
-                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
-            },
-            {
-                "match": "\\.hcl.json$",
-                "cmd": "terragrunt hclfmt --terragrunt-hclfmt-file ${file}"
-            }
-        ]
-    },
-    "files.associations": {
-        // "*.hcl": "terraform"
-        "*.tf.tpl": "terraform",
-        "*.json.j2": "jinja-json",
-        "*.html.j2": "jinja-html",
-    },
-    //
-    // Jinja
-    //
-    "[jinja-json]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.formatOnSave": true
-    },
-    "[go]": {
-        "editor.insertSpaces": true,
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "golang.go"
-    },
-    //
-    // TERMINAL CONFIG
-    //
-    // "terminal.integrated.fontFamily": "Cousine Nerd Font",
-    "terminal.integrated.fontFamily": "Hack Nerd Font",
-    "terminal.integrated.fontSize": 14,
-    "terminal.integrated.lineHeight": 1.2,
-    "terminal.external.linuxExec": "alacritty",
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "terminal.integrated.scrollback": 100000,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.external.osxExec": "Alacritty.app",
-    "terminal.integrated.profiles.osx": {
-        "bash": {
-            "path": "bash",
-            "args": [
-                "-l"
-            ],
-            "icon": "terminal-bash",
-        },
-        "zsh": {
-            "path": "zsh",
-            "args": [
-                "-l"
-            ],
-            "icon": "terminal",
-        },
-        "pwsh": {
-            "path": "pwsh",
-            "icon": "terminal-powershell",
-        },
-        "python3-repl": {
-            "path": "python3",
-            "args": [
-                "-q"
-            ]
-        }
-    },
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    //
-    // TELEMETRY
-    //
-    "telemetry.telemetryLevel": "off",
-    "window.openFilesInNewWindow": "off",
-    "window.openFoldersInNewWindow": "off",
-    // "window.nativeFullScreen": false,
-    "window.newWindowDimensions": "inherit",
-    "window.commandCenter": true,
-    "workbench.editor.enablePreview": true,
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f",
-        "statusBar.foreground": "#ffffff",
-        "statusBar.debuggingForeground": "#ffffff"
-    },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "workbench.startupEditor": "newUntitledFile",
-    //
-    //EXPLORER CONFIG
-    //
-    "explorer.autoReveal": false,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    //
-    "extensions.ignoreRecommendations": false,
-    //
-    // Markdown config
-    //
-    // "markdown-pdf.executablePath": "/usr/sbin/chromium",
-    "markdown-pdf.highlightStyle": "gruvbox-dark.css",
-    "markdown-pdf.breaks": true,
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-    },
-    "markdown.extension.tableFormatter.normalizeIndentation": true,
-    //
-    // Json config
-    //
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    //
-    // Python config
-    //
-    // "python.languageServer": "Jedi","
-    "python.analysis.autoImportCompletions": true,
-    "python.terminal.activateEnvironment": true,
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit",
-            "source.fixAll": "explicit",
-            "source.fixAll.eslint": "explicit"
-        },
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    },
-    "pylint.args": [
-        "--disable=C0111",
-        "--disable=C0103",
-        "--disable=R0904",
-        "--disable=W1203",
-        "--disable=C0301",
-        "--disable=C0413",
-    ],
-    "isort.args": [
-        "--profile",
-        "black"
-    ],
-    //
-    // JavaScript config
-    //
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "security.workspace.trust.untrustedFiles": "open",
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "go.toolsManagement.autoUpdate": true,
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "git.enableSmartCommit": true,
-    "git.confirmSync": false,
-    "aws.telemetry": false,
-    "material-icon-theme.activeIconPack": "react",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    //
-    // CodeSnap
-    //
-    "codesnap.transparentBackground": true,
-    "codesnap.showWindowTitle": false,
-    "codesnap.roundedCorners": true,
-    "codesnap.showLineNumbers": false,
-    "codesnap.target": "window",
-    "codesnap.shutterAction": "copy",
-    "githubPullRequests.terminalLinksHandler": "github",
-    "workbench.colorTheme": "Gruvbox Dark Hard",
-    "githubPullRequests.remotes": [
-        "origin"
-    ],
-    "[plaintext]": {
-        "editor.unicodeHighlight.ambiguousCharacters": false,
-        "editor.unicodeHighlight.invisibleCharacters": false
-    },
-    "window.clickThroughInactive": false,
-    "diffEditor.maxComputationTime": 0,
-    "githubPullRequests.notifications": "pullRequests",
-    "github.copilot.editor.enableAutoCompletions": true,
-    "git.openRepositoryInParentFolders": "never"
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "pylint.args": [
+    "--disable=C0111",
+    "--disable=C0103",
+    "--disable=R0904",
+    "--disable=W1203",
+    "--disable=C0301",
+    "--disable=C0413"
+  ],
+  "isort.args": ["--profile", "black"],
+  //
+  // JavaScript config
+  //
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "security.workspace.trust.untrustedFiles": "open",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "aws.telemetry": false,
+  "material-icon-theme.activeIconPack": "react",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  //
+  // CodeSnap
+  //
+  "codesnap.transparentBackground": true,
+  "codesnap.showWindowTitle": false,
+  "codesnap.roundedCorners": true,
+  "codesnap.showLineNumbers": false,
+  "codesnap.target": "window",
+  "codesnap.shutterAction": "copy",
+  "githubPullRequests.terminalLinksHandler": "github",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "githubPullRequests.remotes": ["origin"],
+  "[plaintext]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false
+  },
+  "window.clickThroughInactive": false,
+  "diffEditor.maxComputationTime": 0,
+  "githubPullRequests.notifications": "pullRequests",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "git.openRepositoryInParentFolders": "never",
+  "makefile.configureOnOpen": false,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  }
 }

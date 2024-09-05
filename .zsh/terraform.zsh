@@ -11,7 +11,7 @@ function tf_prompt_info() {
     echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
 }
 
-alias tg='terragrunt'
+alias tg='terragrunt --terragrunt-forward-tf-stdout'
 alias tf='terraform'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
@@ -62,4 +62,6 @@ compdef tg='terragrunt'
 compdef av='aws-vault'
 
 # use same completion as terraform
-complete -o nospace -C ~/bin/terraform tg
+complete -o nospace -C ~/bin/terragrunt tg
+complete -o nospace -C ~/bin/terraform tf
+
