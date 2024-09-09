@@ -79,6 +79,15 @@ pyenv_version_name = false
 detect_files = ['__init__.py', 'Pipfile', 'setup.py']
 
 [aws]
-disabled = false
-format = '(\[$profile\])($style)'
-# format = 'on [$symbol($profile )(\($region\) )]($style)'
+# disabled = false
+format = '[(\[$profile\])( - \($region\)) - (\[$duration\])(- \[$expiration_symbol\])]($style)'
+style = 'bold blue'
+symbol = "☁️"
+expiration_symbol = "❌"
+# format = 'on [$symbol($profile)(\($region\))]($style)'
+
+# [aws.region_aliases]
+# ap-southeast-2 = 'au'
+# us-east-1 = 'us'
+# eu-west-1 = 'eu'
+
