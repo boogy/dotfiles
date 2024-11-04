@@ -203,7 +203,6 @@
   // Uses a hack to move around folds properly
   "vim.foldfix": false,
   "vim.enableNeovim": true,
-  // Path to run neovim executable. For example, /usr/bin/nvim, or
   // "vim.neovimPath": "nvim",
   //
   // FILE CONFIG

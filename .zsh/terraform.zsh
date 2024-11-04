@@ -45,8 +45,6 @@ function tg_prompt_info() {
 compdef _terragrunt tg
 setopt tg
 
-
-
 ## ALL
 alias tf-plan="terraform plan -compact-warnings"
 alias tg-plan="terragrunt plan -compact-warnings"

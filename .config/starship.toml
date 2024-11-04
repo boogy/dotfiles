@@ -38,7 +38,7 @@ vicmd_symbol = "[V](bold green) "
 [directory]
 home_symbol = "~"
 truncate_to_repo = false
-truncation_length = 4
+truncation_length = 3
 truncation_symbol = "…/"
 
 [cmd_duration]
@@ -79,10 +79,10 @@ pyenv_version_name = false
 detect_files = ['__init__.py', 'Pipfile', 'setup.py']
 
 [aws]
-# disabled = false
-format = '[(\[$profile\])( - \($region\)) - (\[$duration\])(- \[$expiration_symbol\])]($style)'
-style = 'bold blue'
-symbol = "☁️"
+# format = '[[(\[$profile\])](bold green)( - \[$region\]) - (\[$duration\])(- $expiration_symbol)]($style)'
+format = '[[\[$profile\]](bold green)( - \[$region\])( - $duration)($expiration_symbol)]($style)'
+style = 'bold yellow'
+# symbol = "☁️"
 expiration_symbol = "❌"
 # format = 'on [$symbol($profile)(\($region\))]($style)'
 
