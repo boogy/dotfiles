@@ -60,6 +60,7 @@ compdef tg='terragrunt'
 compdef av='aws-vault'
 
 # use same completion as terraform
-complete -o nospace -C ~/bin/terragrunt tg
-complete -o nospace -C ~/bin/terraform tf
+# complete -o nospace -C terraform tf
+# complete -o nospace -C terragrunt tg
+complete -o nospace -C /opt/homebrew/bin/terragrunt -C /opt/homebrew/bin/terraform tg
 
