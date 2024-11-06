@@ -14,7 +14,7 @@ style = "Bold"
 
 [font.glyph_offset]
 x = 1
-y = 1
+y = 0
 
 [font.italic]
 family = "Hack Nerd Font"
@@ -26,7 +26,7 @@ style = "Regular"
 
 [font.offset]
 x = 0
-y = 0
+y = 1
 
 [mouse]
 hide_when_typing = true
@@ -49,7 +49,7 @@ lines = 100
 
 [window.padding]
 x = 1
-y = 2
+y = 0
 
 #-------------------------------------------------------------------
 # Keyboard shortcuts
