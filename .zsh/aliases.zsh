@@ -132,3 +132,8 @@ list-sub-folders() {
   fd -d $DEPTH -t d ".*" $FOLDER_NAME
 }
 
+ansi-nvim () {
+  local FILE="$1"
+  sed 's|\x1b\[[;0-9]*m||g' $FILE | nvim -
+}
+

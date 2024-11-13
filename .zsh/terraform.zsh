@@ -54,6 +54,10 @@ alias tga="terragrunt apply -compact-warnings"
 alias av="aws-vault"
 alias ave="aws-vault exec"
 
+alias tf-init-all="terragrunt run-all init -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
+alias tf-plan-all="terragrunt run-all plan -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
+alias tf-apply-all="terragrunt run-all apply -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
+
 # shortcut with completions
 compdef tf='terraform'
 compdef tg='terragrunt'
