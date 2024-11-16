@@ -2,6 +2,9 @@
 
 # Applies system and application defaults.
 
+printf "%s\n" "Enable press and hold for key repeat"
+defaults write -g ApplePressAndHoldEnabled -bool true
+
 printf "%s\n" "System - Disable boot sound effects."
 sudo nvram SystemAudioVolume=" "
 
@@ -213,4 +216,3 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 
 printf "%s\n" "App Store - Enable Debug Menu in the Mac App Store."
 defaults write com.apple.appstore ShowDebugMenu -bool true
-

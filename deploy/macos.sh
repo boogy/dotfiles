@@ -59,7 +59,7 @@ brew install alacritty
 brew install 1password
 brew install 1password-cli
 brew install ripgrep
-brew install exa
+brew install eza
 brew install bat
 brew install fd
 brew install fzf
