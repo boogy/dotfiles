@@ -91,9 +91,7 @@ bindkey "\033[4~" end-of-line
 # zle -N my-backward-delete-word
 # bindkey '^W' my-backward-delete-word
 
-
 alias aws-whoami="aws sts get-caller-identity ; echo \"Creds expiration time: $AWS_CREDENTIAL_EXPIRATION\""
-
 
 if [[ -n "$BROWSER" ]]; then
     _browser_fts=(htm html de org net com at cx nl se dk)
@@ -114,13 +112,10 @@ for ft in $_media_fts; do alias -s $ft=mplayer; done
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/config,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-
 alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>&1 |grep -v "ermi"'
-
 
 [[ $(uname -s) =~ Darwin ]] \
     && code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
-
 
 pyclean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete

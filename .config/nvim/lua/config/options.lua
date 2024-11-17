@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Set $PATH
-vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/opt/node@18/bin"
+vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/opt/node@22/bin"
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin"
 
 -----------------------------------------------------------
