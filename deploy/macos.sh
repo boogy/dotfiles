@@ -24,6 +24,8 @@ defaults write com.apple.dock autohide-time-modifier -float 0.12;killall Dock
 
 # Enable key repeat
 defaults write -g ApplePressAndHoldEnabled -bool true
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ## ---------------------------------------------------------
 ## Packages
