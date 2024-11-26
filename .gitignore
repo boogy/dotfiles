@@ -75,3 +75,7 @@ deploy/conf/VSCode/User/*
 
 ## neovim packer_compiled.lua
 .config/nvim/plugin/*
+
+## Karabiner config
+.config/karabiner/automatic_backups
+

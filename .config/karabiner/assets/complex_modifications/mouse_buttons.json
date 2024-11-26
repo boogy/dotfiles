@@ -1,0 +1,152 @@
+{
+  "title": "Mouse buttons",
+  "rules": [
+    {
+      "description": "Mouse button4 and button5 to back/forward in Finder (CH-fr)",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com.apple.finder"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "semicolon",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com.apple.finder"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "key_code": "quote",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
+      "description": "Mouse button4 and button5 to back/forward in web",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^org\\.mozilla\\.[Ff]irefox$",
+                "^com\\.apple\\.[Ss]afari$",
+                "^com\\.google\\.[Cc]hrome$"
+              ],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^org\\.mozilla\\.[Ff]irefox$",
+                "^com\\.apple\\.[Ss]afari$",
+                "^com\\.google\\.[Cc]hrome$"
+              ],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
+      "description": "Mouse Cmd + button4/5 move prev/next workspace",
+      "manipulators": [
+        {
+          "from": {
+            "modifiers": {
+              "mandatory": ["command"]
+            },
+            "pointing_button": "button4"
+          },
+          "parameters": {
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["left_control"],
+              "repeat": true
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "modifiers": {
+              "mandatory": ["command"]
+            },
+            "pointing_button": "button5"
+          },
+          "parameters": {
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["left_control"],
+              "repeat": true
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

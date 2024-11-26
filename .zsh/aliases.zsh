@@ -51,22 +51,9 @@ os_is macOS && {
 
 ## directory shortcuts
 hash -d dotfiles=~/dotfiles
-hash -d dunst=~/.config/dunst
-hash -d rofi=~/.config/rofi
-hash -d ranger=~/.config/ranger
-hash -d termite=~/.config/termite
 hash -d tmux=~/.config/tmux
 hash -d alacritty=~/.config/alacritty
 hash -d nvim=~/.config/nvim/
-hash -d polybar=~/.config/polybar
-hash -d bspwm=~/.config/bspwm
-hash -d sxhkd=~/.config/sxhkd
-hash -d sxiv=~/.config/sxiv/
-hash -d sxiv=~/.config/sxiv/
-hash -d picom=~/.config/picom
-hash -d awesome=~/.config/awesome
-hash -d xmonad=~/.config/xmonad
-hash -d conf-scripts=~/.config/scripts
 
 ## use delete key to delete
 bindkey "^[[3~"  delete-char

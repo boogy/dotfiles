@@ -19,7 +19,6 @@ MANAGED_FILES=(
   ~/.vimrc
   ~/.tmux.conf
   ~/.pythonrc.py
-  ~/.screenrc
 )
 
 test -d ${INSTALLDIR} || mkdir -p ${INSTALLDIR}
@@ -55,9 +54,9 @@ for DOT_FILE in $(ls .config); do
 done
 
 ## Alacritty OS specific config
-cd ~/.config/alacritty &&
-  ln -sf alacritty-$(uname -s).yml alacritty.yml &&
-  cd $THIS_DIR
+# cd ~/.config/alacritty &&
+#   ln -sf alacritty-$(uname -s).yml alacritty.yml &&
+#   cd $THIS_DIR
 
 ## link scripts
 for FILE in $(ls $THIS_DIR/.config/scripts); do
@@ -69,25 +68,10 @@ for FILE in $(ls $THIS_DIR/.config/scripts); do
   sudo ln -sf $THIS_DIR/.config/scripts/$FILE /usr/local/bin/
 done
 
-## Install Plug for neovim
-mkdir -p $HOME/.config/nvim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim +PlugInstall +qall
-nvim +UpdateRemotePlugins +qall
-nvim -c 'CocInstall -sync coc-python coc-json coc-powershell coc-snippets coc-explorer coc-rls coc-go coc-tsserver coc-vimlsp coc-lists coc-sh coc-xml coc-yaml coc-pairs|q'
-
 ## map all the configuration for vim
 ln -sf ~/.config/nvim/init.vim ~/.vimrc
 ln -sf ~/.config/nvim ~/.vim
 ln -sf ~/.config/nvim ~/.vim/nvim
-
-## Install powerline fonts
-cd /tmp && git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts &&
-  ./install.sh &&
-  cd .. &&
-  rm -rf fonts
 
 ## Copy firefox user.js in all profiles
 case $(uname -s) in
@@ -101,10 +85,10 @@ Linux)
   ;;
 esac
 
-# FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ~/.mozilla/firefox/profiles.ini))
-FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' ${firefox_ini_pth}))
-for P in ${FF_PROFILES_PATHS[@]}; do
-  cp ${THIS_DIR}/deploy/conf/firefox/user.js ${firefox_profile}/${P}
+# Copy firefox preferences configuration
+FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' "${firefox_ini_pth}"))
+for P in "${FF_PROFILES_PATHS[@]}"; do
+  cp "${THIS_DIR}/deploy/conf/firefox/user.js" "${firefox_profile}/${P}"
 done
 
 ## Make sure .bash_aliases is loaded and more

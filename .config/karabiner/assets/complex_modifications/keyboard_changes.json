@@ -1,0 +1,95 @@
+{
+  "title": "Keyboard remapping for Ducky",
+  "rules": [
+    {
+      "description": "Ducky Normal Backslash key",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 25345,
+                  "vendor_id": 12851
+                },
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 854,
+                  "vendor_id": 1241
+                },
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 291,
+                  "vendor_id": 1046
+                }
+              ],
+              "type": "device_if"
+            }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "mandatory": ["right_option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "7",
+              "modifiers": ["right_option", "right_shift"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Ducky Normal @ symbol key",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 25345,
+                  "vendor_id": 12851
+                },
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 854,
+                  "vendor_id": 1241
+                },
+                {
+                  "is_keyboard": true,
+                  "is_pointing_device": false,
+                  "product_id": 291,
+                  "vendor_id": 1046
+                }
+              ],
+              "type": "device_if"
+            }
+          ],
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": ["right_option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "g",
+              "modifiers": ["right_option"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

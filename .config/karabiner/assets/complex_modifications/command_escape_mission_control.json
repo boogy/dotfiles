@@ -1,0 +1,89 @@
+{
+  "title": "macOS triggering keys",
+  "rules": [
+    {
+      "description": "Command + Escape trigger mission_control",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "mandatory": ["left_command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "mission_control"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
+      "description": "Change right_shift x2 to mission_control",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "name": "left_shift pressed",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "mission_control"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "left_shift pressed",
+                "value": 1
+              }
+            },
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_delayed_action": {
+            "to_if_canceled": [
+              {
+                "set_variable": {
+                  "name": "left_shift pressed",
+                  "value": 0
+                }
+              }
+            ],
+            "to_if_invoked": [
+              {
+                "set_variable": {
+                  "name": "left_shift pressed",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
