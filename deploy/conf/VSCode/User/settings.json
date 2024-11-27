@@ -152,7 +152,7 @@
     }
   ],
   // Allow VSCodeVim to change status bar color based on mode
-  "vim.statusBarColorControl": true,
+  "vim.statusBarColorControl": false,
   "vim.mouseSelectionGoesIntoVisualMode": false,
   // Enable some vim ctrl key commands that override otherwise common operations, like ctrl+c
   "vim.useCtrlKeys": true,
@@ -543,20 +543,13 @@
   "[plaintext]": {
     "editor.unicodeHighlight.ambiguousCharacters": false,
     "editor.unicodeHighlight.invisibleCharacters": false
-  },
+ },
   "window.clickThroughInactive": false,
   "diffEditor.maxComputationTime": 0,
   "githubPullRequests.notifications": "pullRequests",
   "github.copilot.editor.enableAutoCompletions": true,
   "git.openRepositoryInParentFolders": "never",
   "makefile.configureOnOpen": false,
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f",
-    "statusBar.foreground": "#ffffff",
-    "statusBar.debuggingForeground": "#ffffff"
-  },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   }
