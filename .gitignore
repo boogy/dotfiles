@@ -78,4 +78,5 @@ deploy/conf/VSCode/User/*
 
 ## Karabiner config
 .config/karabiner/automatic_backups
+.config/nvim/lazy-lock.json
 
