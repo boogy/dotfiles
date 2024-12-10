@@ -543,7 +543,7 @@
   "[plaintext]": {
     "editor.unicodeHighlight.ambiguousCharacters": false,
     "editor.unicodeHighlight.invisibleCharacters": false
- },
+  },
   "window.clickThroughInactive": false,
   "diffEditor.maxComputationTime": 0,
   "githubPullRequests.notifications": "pullRequests",

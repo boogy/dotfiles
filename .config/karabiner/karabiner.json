@@ -1,1111 +1,1039 @@
 {
-  "global": { "check_for_updates_on_startup": false },
-  "profiles": [
-    {
-      "complex_modifications": {
-        "parameters": {
-          "basic.to_if_alone_timeout_milliseconds": 200,
-          "basic.to_if_held_down_threshold_milliseconds": 200
-        },
-        "rules": [
-          {
-            "description": "Remap Tab to Hyper key when held, Tab when tapped",
-            "manipulators": [
-              {
-                "from": { "key_code": "tab" },
-                "to": [
-                  {
-                    "key_code": "left_shift",
-                    "modifiers": ["any"]
-                  },
-                  {
-                    "set_variable": {
-                      "name": "hyper",
-                      "value": 1
+    "global": { "check_for_updates_on_startup": false },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 200,
+                    "basic.to_if_held_down_threshold_milliseconds": 200
+                },
+                "rules": [
+                    {
+                        "description": "Remap Tab to Hyper key when held, Tab when tapped",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "tab" },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["any"]
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyper Key sublayer e",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 0
+                                    }
+                                ],
+                                "description": "Toggle Hyper sublayer e",
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_sublayer_e",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_sublayer_e",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open Firefox",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Firefox.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open Alacritty",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Alacritty.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open Finder",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Finder.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open VS Code",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Visual Studio Code.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open Spotify",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'Spotify.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Open System Settings",
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -a 'System Settings.app'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyper Key sublayer w",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                        "name": "hyper_sublayer_e",
+                                        "type": "variable_if",
+                                        "value": 0
+                                    }
+                                ],
+                                "description": "Toggle Hyper sublayer w",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_sublayer_w",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_sublayer_w",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: left-half",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=left-half" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: right-half",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=right-half" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: center-half",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=center-half" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: maximize",
+                                "from": {
+                                    "key_code": "return_or_enter",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=maximize" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: almost maximize",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=almost-maximize" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: first three fourths",
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-three-fourths" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: last three fourths",
+                                "from": {
+                                    "key_code": "period",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=last-three-fourths" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: first three thirds",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-two-thirds" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: last three thirds",
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=last-two-thirds" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: first third",
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-third" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: last third",
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=last-third" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: first fourth",
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-fourth" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: last fourth",
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=last-fourth" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: make larger",
+                                "from": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=larger" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: make smaller",
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=smaller" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: Rectangle custom size",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "n",
+                                        "modifiers": ["left_command", "left_option", "left_control", "left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: next window",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": ["right_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_sublayer_w",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "Window: next window",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "non_us_backslash",
+                                        "modifiers": ["right_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "CAPS_LOCK to HYPER (SHIFT+COMMAND+OPTION+CONTROL) or ESCAPE (If Alone)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {}
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,",
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+.",
+                                "from": {
+                                    "key_code": "period",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
+                                    "key_code": "slash",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Mouse button4 and button5 to back/forward in web",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^org\\.mozilla\\.[Ff]irefox$",
+                                            "^com\\.apple\\.[Ss]afari$",
+                                            "^com\\.google\\.[Cc]hrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button4" },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^org\\.mozilla\\.[Ff]irefox$",
+                                            "^com\\.apple\\.[Ss]afari$",
+                                            "^com\\.google\\.[Cc]hrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button5" },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Mouse button4 and button5 to back/forward in Finder (CH-fr)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.finder"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button4" },
+                                "to": [
+                                    {
+                                        "key_code": "semicolon",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.finder"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button5" },
+                                "to": [
+                                    {
+                                        "key_code": "quote",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ducky Normal Backslash key",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 25345,
+                                                "vendor_id": 12851
+                                            },
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 854,
+                                                "vendor_id": 1241
+                                            },
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 291,
+                                                "vendor_id": 1046
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "non_us_backslash",
+                                    "modifiers": { "mandatory": ["right_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "7",
+                                        "modifiers": ["right_option", "right_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ducky Normal @ symbol key",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 25345,
+                                                "vendor_id": 12851
+                                            },
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 854,
+                                                "vendor_id": 1241
+                                            },
+                                            {
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false,
+                                                "product_id": 291,
+                                                "vendor_id": 1046
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "2",
+                                    "modifiers": { "mandatory": ["right_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "g",
+                                        "modifiers": ["right_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Mouse Cmd + button4/5 move prev/next workspace",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": { "mandatory": ["command"] },
+                                    "pointing_button": "button4"
+                                },
+                                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 250 },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": ["left_control"],
+                                        "repeat": true
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "modifiers": { "mandatory": ["command"] },
+                                    "pointing_button": "button5"
+                                },
+                                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 250 },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": ["left_control"],
+                                        "repeat": true
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Command + Escape to Mission Control",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "mandatory": ["left_option"] }
+                                },
+                                "to": [{ "key_code": "f3" }],
+                                "type": "basic"
+                            }
+                        ]
                     }
-                  }
-                ],
-                "to_after_key_up": [
-                  {
-                    "set_variable": {
-                      "name": "hyper",
-                      "value": 0
-                    }
-                  }
-                ],
-                "to_if_alone": [{ "key_code": "tab" }],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper Key sublayer e",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "name": "hyper",
-                    "type": "variable_if",
-                    "value": 1
-                  },
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 0
-                  }
-                ],
-                "description": "Toggle Hyper sublayer e",
-                "from": {
-                  "key_code": "e",
-                  "modifiers": { "optional": ["any"] }
+                ]
+            },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 50475,
+                        "vendor_id": 1133
+                    },
+                    "manipulate_caps_lock_led": false
                 },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "hyper_sublayer_e",
-                      "value": 1
-                    }
-                  }
-                ],
-                "to_after_key_up": [
-                  {
-                    "set_variable": {
-                      "name": "hyper_sublayer_e",
-                      "value": 0
-                    }
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open Firefox",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'Firefox.app'" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open Alacritty",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'Alacritty.app'" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open Finder",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'Finder.app'" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open VS Code",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'Visual Studio Code.app'" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open Spotify",
-                "from": {
-                  "key_code": "m",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'Spotify.app'" }],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Open System Settings",
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "shell_command": "open -a 'System Settings.app'" }],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper Key sublayer w",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "name": "hyper",
-                    "type": "variable_if",
-                    "value": 1
-                  },
-                  {
-                    "name": "hyper_sublayer_e",
-                    "type": "variable_if",
-                    "value": 0
-                  }
-                ],
-                "description": "Toggle Hyper sublayer w",
-                "from": {
-                  "key_code": "w",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "hyper_sublayer_w",
-                      "value": 1
-                    }
-                  }
-                ],
-                "to_after_key_up": [
-                  {
-                    "set_variable": {
-                      "name": "hyper_sublayer_w",
-                      "value": 0
-                    }
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: left-half",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=left-half"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: right-half",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=right-half"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: center-half",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=center-half"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: maximize",
-                "from": {
-                  "key_code": "return_or_enter",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=maximize"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: almost maximize",
-                "from": {
-                  "key_code": "spacebar",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=almost-maximize"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: first three fourths",
-                "from": {
-                  "key_code": "n",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=first-three-fourths"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: last three fourths",
-                "from": {
-                  "key_code": "period",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=last-three-fourths"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: first three thirds",
-                "from": {
-                  "key_code": "m",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=first-two-thirds"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: last three thirds",
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=last-two-thirds"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: first third",
-                "from": {
-                  "key_code": "y",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=first-third"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: last third",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=last-third"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: first fourth",
-                "from": {
-                  "key_code": "u",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=first-fourth"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: last fourth",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=last-fourth"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: make larger",
-                "from": {
-                  "key_code": "equal_sign",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=larger"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: make smaller",
-                "from": {
-                  "key_code": "hyphen",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -g rectangle://execute-action?name=smaller"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: Rectangle custom size",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "key_code": "n",
-                    "modifiers": [
-                      "left_command",
-                      "left_option",
-                      "left_control",
-                      "left_shift"
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 50475,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "consumer_key_code": "ac_back" },
+                            "to": [{ "pointing_button": "button4" }]
+                        },
+                        {
+                            "from": { "consumer_key_code": "ac_forward" },
+                            "to": [{ "pointing_button": "button5" }]
+                        }
                     ]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: next window",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": { "optional": ["any"] }
                 },
-                "to": [
-                  {
-                    "key_code": "grave_accent_and_tilde",
-                    "modifiers": ["right_command"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "name": "hyper_sublayer_w",
-                    "type": "variable_if",
-                    "value": 1
-                  }
-                ],
-                "description": "Window: next window",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "key_code": "non_us_backslash",
-                    "modifiers": ["right_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "CAPS_LOCK to HYPER (SHIFT+COMMAND+OPTION+CONTROL) or ESCAPE (If Alone)",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": {}
-                },
-                "to": [
-                  {
-                    "key_code": "left_shift",
-                    "modifiers": ["left_command", "left_control", "left_option"]
-                  }
-                ],
-                "to_if_alone": [{ "key_code": "escape" }],
-                "type": "basic"
-              },
-              {
-                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,",
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "option", "control"]
-                  }
-                },
-                "to": [],
-                "type": "basic"
-              },
-              {
-                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+.",
-                "from": {
-                  "key_code": "period",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "option", "control"]
-                  }
-                },
-                "to": [],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
-                  "key_code": "slash",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "option", "control"]
-                  }
-                },
-                "to": [],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Mouse button4 and button5 to back/forward in web",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^org\\.mozilla\\.[Ff]irefox$",
-                      "^com\\.apple\\.[Ss]afari$",
-                      "^com\\.google\\.[Cc]hrome$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": { "pointing_button": "button4" },
-                "to": [
-                  {
-                    "key_code": "left_arrow",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^org\\.mozilla\\.[Ff]irefox$",
-                      "^com\\.apple\\.[Ss]afari$",
-                      "^com\\.google\\.[Cc]hrome$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": { "pointing_button": "button5" },
-                "to": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Mouse button4 and button5 to back/forward in Finder (CH-fr)",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.apple.finder"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": { "pointing_button": "button4" },
-                "to": [
-                  {
-                    "key_code": "semicolon",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.apple.finder"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": { "pointing_button": "button5" },
-                "to": [
-                  {
-                    "key_code": "quote",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Ducky Normal Backslash key",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
+                {
+                    "identifiers": {
                         "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 25345,
-                        "vendor_id": 12851
-                      },
-                      {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 854,
-                        "vendor_id": 1241
-                      },
-                      {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
                         "product_id": 291,
                         "vendor_id": 1046
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "non_us_backslash",
-                  "modifiers": { "mandatory": ["right_option"] }
+                    },
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "escape" }]
+                        },
+                        {
+                            "from": { "key_code": "non_us_backslash" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        }
+                    ]
                 },
-                "to": [
-                  {
-                    "key_code": "7",
-                    "modifiers": ["right_option", "right_shift"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Ducky Normal @ symbol key",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
+                {
+                    "identifiers": {
                         "is_keyboard": true,
-                        "is_pointing_device": false,
+                        "product_id": 1031,
+                        "vendor_id": 4176
+                    },
+                    "manipulate_caps_lock_led": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 49291,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "pointing_button": "button4" },
+                            "to": [{ "pointing_button": "button4" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button5" },
+                            "to": [{ "pointing_button": "button5" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 49291,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "pointing_button": "button4" },
+                            "to": [{ "pointing_button": "button4" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button5" },
+                            "to": [{ "pointing_button": "button5" }]
+                        }
+                    ]
+                },
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f11" },
+                            "to": [{ "key_code": "f11" }]
+                        },
+                        {
+                            "from": { "key_code": "f12" },
+                            "to": [{ "key_code": "f12" }]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
                         "product_id": 25345,
                         "vendor_id": 12851
-                      },
-                      {
+                    },
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
+                        },
+                        {
+                            "from": { "key_code": "non_us_backslash" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
                         "is_keyboard": true,
-                        "is_pointing_device": false,
                         "product_id": 854,
                         "vendor_id": 1241
-                      },
-                      {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 291,
-                        "vendor_id": 1046
-                      }
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
+                        },
+                        {
+                            "from": { "key_code": "non_us_backslash" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        }
+                    ]
+                },
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f1" },
+                            "to": [{ "consumer_key_code": "display_brightness_decrement" }]
+                        },
+                        {
+                            "from": { "key_code": "f2" },
+                            "to": [{ "consumer_key_code": "display_brightness_increment" }]
+                        },
+                        {
+                            "from": { "key_code": "f3" },
+                            "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }]
+                        },
+                        {
+                            "from": { "key_code": "f4" },
+                            "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
+                        },
+                        {
+                            "from": { "key_code": "f5" },
+                            "to": [{ "consumer_key_code": "dictation" }]
+                        },
+                        {
+                            "from": { "key_code": "f6" },
+                            "to": [{ "apple_vendor_keyboard_key_code": "dashboard" }]
+                        },
+                        {
+                            "from": { "key_code": "f7" },
+                            "to": [{ "consumer_key_code": "rewind" }]
+                        },
+                        {
+                            "from": { "key_code": "f8" },
+                            "to": [{ "consumer_key_code": "play_or_pause" }]
+                        },
+                        {
+                            "from": { "key_code": "f9" },
+                            "to": [{ "consumer_key_code": "fast_forward" }]
+                        },
+                        {
+                            "from": { "key_code": "f10" },
+                            "to": [{ "consumer_key_code": "mute" }]
+                        },
+                        {
+                            "from": { "key_code": "f11" },
+                            "to": [{ "consumer_key_code": "volume_decrement" }]
+                        },
+                        {
+                            "from": { "key_code": "f12" },
+                            "to": [{ "consumer_key_code": "volume_increment" }]
+                        }
                     ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "2",
-                  "modifiers": { "mandatory": ["right_option"] }
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 835,
+                        "vendor_id": 1452
+                    }
                 },
-                "to": [
-                  {
-                    "key_code": "g",
-                    "modifiers": ["right_option"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Mouse Cmd + button4/5 move prev/next workspace",
-            "manipulators": [
-              {
-                "from": {
-                  "modifiers": { "mandatory": ["command"] },
-                  "pointing_button": "button4"
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 45098,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false
                 },
-                "parameters": {
-                  "basic.to_if_held_down_threshold_milliseconds": 250
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f1" },
+                            "to": [{ "consumer_key_code": "display_brightness_decrement" }]
+                        },
+                        {
+                            "from": { "key_code": "f2" },
+                            "to": [{ "consumer_key_code": "display_brightness_increment" }]
+                        }
+                    ],
+                    "identifiers": { "is_keyboard": true }
+                }
+            ],
+            "fn_function_keys": [
+                {
+                    "from": { "key_code": "f4" },
+                    "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
                 },
-                "to": [
-                  {
-                    "key_code": "left_arrow",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": ["left_control"],
-                    "repeat": true
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "modifiers": { "mandatory": ["command"] },
-                  "pointing_button": "button5"
+                {
+                    "from": { "key_code": "f5" },
+                    "to": [{ "apple_vendor_top_case_key_code": "illumination_down" }]
                 },
-                "parameters": {
-                  "basic.to_if_held_down_threshold_milliseconds": 250
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": ["left_control"],
-                    "repeat": true
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Command + Escape to Mission Control",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": { "mandatory": ["command"] }
-                },
-                "to": [{ "key_code": "f3" }],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
-      },
-      "devices": [
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 50475,
-            "vendor_id": 1133
-          },
-          "manipulate_caps_lock_led": false
+                {
+                    "from": { "key_code": "f6" },
+                    "to": [{ "apple_vendor_top_case_key_code": "illumination_up" }]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
-          "identifiers": {
-            "is_pointing_device": true,
-            "product_id": 50475,
-            "vendor_id": 1133
-          },
-          "ignore": false,
-          "simple_modifications": [
-            {
-              "from": { "consumer_key_code": "ac_back" },
-              "to": [{ "pointing_button": "button4" }]
-            },
-            {
-              "from": { "consumer_key_code": "ac_forward" },
-              "to": [{ "pointing_button": "button5" }]
-            }
-          ]
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 291,
-            "vendor_id": 1046
-          },
-          "manipulate_caps_lock_led": false,
-          "simple_modifications": [
-            {
-              "from": { "key_code": "grave_accent_and_tilde" },
-              "to": [{ "key_code": "escape" }]
-            },
-            {
-              "from": { "key_code": "non_us_backslash" },
-              "to": [{ "key_code": "grave_accent_and_tilde" }]
-            }
-          ]
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 1031,
-            "vendor_id": 4176
-          },
-          "manipulate_caps_lock_led": false
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 49291,
-            "vendor_id": 1133
-          },
-          "ignore": true,
-          "manipulate_caps_lock_led": false,
-          "simple_modifications": [
-            {
-              "from": { "pointing_button": "button4" },
-              "to": [{ "pointing_button": "button4" }]
-            },
-            {
-              "from": { "pointing_button": "button5" },
-              "to": [{ "pointing_button": "button5" }]
-            }
-          ]
-        },
-        {
-          "identifiers": {
-            "is_pointing_device": true,
-            "product_id": 49291,
-            "vendor_id": 1133
-          },
-          "ignore": false,
-          "simple_modifications": [
-            {
-              "from": { "pointing_button": "button4" },
-              "to": [{ "pointing_button": "button4" }]
-            },
-            {
-              "from": { "pointing_button": "button5" },
-              "to": [{ "pointing_button": "button5" }]
-            }
-          ]
-        },
-        {
-          "fn_function_keys": [
-            {
-              "from": { "key_code": "f11" },
-              "to": [{ "key_code": "f11" }]
-            },
-            {
-              "from": { "key_code": "f12" },
-              "to": [{ "key_code": "f12" }]
-            }
-          ],
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 25345,
-            "vendor_id": 12851
-          },
-          "manipulate_caps_lock_led": false,
-          "simple_modifications": [
-            {
-              "from": { "key_code": "grave_accent_and_tilde" },
-              "to": [{ "key_code": "non_us_backslash" }]
-            },
-            {
-              "from": { "key_code": "non_us_backslash" },
-              "to": [{ "key_code": "grave_accent_and_tilde" }]
-            }
-          ]
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 854,
-            "vendor_id": 1241
-          },
-          "simple_modifications": [
-            {
-              "from": { "key_code": "grave_accent_and_tilde" },
-              "to": [{ "key_code": "non_us_backslash" }]
-            },
-            {
-              "from": { "key_code": "non_us_backslash" },
-              "to": [{ "key_code": "grave_accent_and_tilde" }]
-            }
-          ]
-        },
-        {
-          "fn_function_keys": [
-            {
-              "from": { "key_code": "f1" },
-              "to": [{ "consumer_key_code": "display_brightness_decrement" }]
-            },
-            {
-              "from": { "key_code": "f2" },
-              "to": [{ "consumer_key_code": "display_brightness_increment" }]
-            },
-            {
-              "from": { "key_code": "f3" },
-              "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }]
-            },
-            {
-              "from": { "key_code": "f4" },
-              "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
-            },
-            {
-              "from": { "key_code": "f5" },
-              "to": [{ "consumer_key_code": "dictation" }]
-            },
-            {
-              "from": { "key_code": "f6" },
-              "to": [{ "apple_vendor_keyboard_key_code": "dashboard" }]
-            },
-            {
-              "from": { "key_code": "f7" },
-              "to": [{ "consumer_key_code": "rewind" }]
-            },
-            {
-              "from": { "key_code": "f8" },
-              "to": [{ "consumer_key_code": "play_or_pause" }]
-            },
-            {
-              "from": { "key_code": "f9" },
-              "to": [{ "consumer_key_code": "fast_forward" }]
-            },
-            {
-              "from": { "key_code": "f10" },
-              "to": [{ "consumer_key_code": "mute" }]
-            },
-            {
-              "from": { "key_code": "f11" },
-              "to": [{ "consumer_key_code": "volume_decrement" }]
-            },
-            {
-              "from": { "key_code": "f12" },
-              "to": [{ "consumer_key_code": "volume_increment" }]
-            }
-          ],
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 835,
-            "vendor_id": 1452
-          }
-        },
-        {
-          "identifiers": {
-            "is_pointing_device": true,
-            "product_id": 45098,
-            "vendor_id": 1133
-          },
-          "ignore": false
-        },
-        {
-          "fn_function_keys": [
-            {
-              "from": { "key_code": "f1" },
-              "to": [{ "consumer_key_code": "display_brightness_decrement" }]
-            },
-            {
-              "from": { "key_code": "f2" },
-              "to": [{ "consumer_key_code": "display_brightness_increment" }]
-            }
-          ],
-          "identifiers": { "is_keyboard": true }
+            "name": "Clean Profile - No Config",
+            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
         }
-      ],
-      "fn_function_keys": [
-        {
-          "from": { "key_code": "f4" },
-          "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
-        },
-        {
-          "from": { "key_code": "f5" },
-          "to": [{ "apple_vendor_top_case_key_code": "illumination_down" }]
-        },
-        {
-          "from": { "key_code": "f6" },
-          "to": [{ "apple_vendor_top_case_key_code": "illumination_up" }]
-        }
-      ],
-      "name": "Default profile",
-      "selected": true,
-      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
-    },
-    {
-      "name": "Clean Profile - No Config",
-      "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
-    }
-  ]
+    ]
 }
-
