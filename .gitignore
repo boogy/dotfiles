@@ -80,3 +80,7 @@ deploy/conf/VSCode/User/*
 .config/karabiner/automatic_backups
 .config/nvim/lazy-lock.json
 
+# Zed editor
+.config/zed/conversations/*
+.config/zed/prompts/*
+

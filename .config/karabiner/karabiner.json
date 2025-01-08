@@ -681,7 +681,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "non_us_backslash",
+                                    "key_code": "grave_accent_and_tilde",
                                     "modifiers": { "mandatory": ["right_option"] }
                                 },
                                 "to": [
@@ -814,17 +814,7 @@
                         "product_id": 50475,
                         "vendor_id": 1133
                     },
-                    "ignore": false,
-                    "simple_modifications": [
-                        {
-                            "from": { "consumer_key_code": "ac_back" },
-                            "to": [{ "pointing_button": "button4" }]
-                        },
-                        {
-                            "from": { "consumer_key_code": "ac_forward" },
-                            "to": [{ "pointing_button": "button5" }]
-                        }
-                    ]
+                    "ignore": false
                 },
                 {
                     "identifiers": {

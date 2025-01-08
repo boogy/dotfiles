@@ -203,10 +203,6 @@
   // Uses a hack to move around folds properly
   "vim.foldfix": false,
   "vim.enableNeovim": true,
-  // "vim.neovimPath": "nvim",
-  //
-  // FILE CONFIG
-  //
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -552,5 +548,8 @@
   "makefile.configureOnOpen": false,
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
