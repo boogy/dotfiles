@@ -69,10 +69,12 @@
   "show_completions_on_input": true,
   "show_completion_documentation": true,
   // "line_height": "standard",
-  "buffer_line_height": { "custom": 1.5 },
-  //
+  "buffer_line_height": {
+    "custom": 1.5
+  },
+  //-------------------------------------------------
   // Project
-  //
+  //-------------------------------------------------
   "project_panel": {
     "button": true,
     "default_width": 240,
@@ -84,12 +86,14 @@
     // "indent_guides": true,
     "auto_reveal_entries": true,
     "auto_fold_dirs": true,
-    "scrollbar": { "show": "auto" }
+    "scrollbar": {
+      "show": "auto"
+    }
     // "indent_guides": {"show": "always"}
   },
-  //
+  //-------------------------------------------------
   // Vim Mode
-  //
+  //-------------------------------------------------
   "vim": {
     "use_system_clipboard": "always",
     "use_multiline_find": true,
@@ -103,9 +107,9 @@
       "show": "auto"
     }
   },
-  //
+  //-------------------------------------------------
   // Terminal
-  //
+  //-------------------------------------------------
   "terminal": {
     "alternate_scroll": "off",
     "blinking": "terminal_controlled",
@@ -128,9 +132,9 @@
       "breadcrumbs": true
     }
   },
-  //
+  //-------------------------------------------------
   // Language specific settings
-  //
+  //-------------------------------------------------
   "lsp": {
     "pyright": {
       "settings": {
@@ -157,26 +161,43 @@
     "yaml-language-server": {
       "settings": {
         "yaml": {
-          "keyOrdering": false,
-          "schemaStore": {
-            "enable": true
-          }
+          "keyOrdering": false
+          // "schemaStore": {
+          //   "enable": true
+          // }
+          // "schemas": {
+          //   "https://json.schemastore.org/github-action.json": [
+          //     "/.github/workflows/*.yaml",
+          //     "/.github/workflows/*.yml"
+          //   ]
+          //   // "https://json.schemastore.org/github-workflow.json": [
+          //   //   "/.github/workflows/*.yaml",
+          //   //   "/.github/workflows/*.yml"
+          //   // ]
+          // }
         }
       }
     }
   },
   "languages": {
     "Python": {
-      // "format_on_save": "language_server",
-      "format_on_save": "on",
-      // "language_servers": ["pyright", "ruff"]
-      "language_servers": ["ruff"],
+      "format_on_save": "language_server",
+      "language_servers": ["ruff"], // ["pyright", "ruff"]
       "soft_wrap": "preferred_line_length"
     },
     "JSON": {
       "format_on_save": "language_server",
+      "tab_size": 2
+    },
+    "JSONC": {
+      "format_on_save": "on",
       "tab_size": 2,
-      "soft_wrap": null
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
     },
     "YAML": {
       "format_on_save": "language_server",
@@ -205,8 +226,42 @@
       "code_actions_on_format": {
         "source.organizeImports": true
       }
+    },
+    "Terraform": {
+      "formatter": {
+        "external": {
+          "command": "terraform",
+          "arguments": ["fmt", "-"]
+        }
+      }
+    },
+    "HCL": {
+      "format_on_save": {
+        "external": {
+          "command": "sh",
+          "arguments": [
+            "-c",
+            "TMPFILE=$(mktemp) && cat - > $TMPFILE && terragrunt hclfmt --terragrunt-hclfmt-file $TMPFILE && cat $TMPFILE && rm $TMPFILE"
+          ]
+        }
+      }
     }
   },
+  "language_overrides": {
+    "Scheme": {
+      "formatter": {
+        "external": {
+          "command": "terraform",
+          "arguments": ["fmt", "-"]
+        }
+      }
+    }
+  },
+  // "file_types": {
+  //   "C++": ["c"],
+  //   "TOML": ["MyLockFile"],
+  //   "Dockerfile": ["Dockerfile*"]
+  // },
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
@@ -232,10 +287,11 @@
       "enabled": false
     }
   },
-  "formatter": {
-    "external": {
-      "command": "prettier",
-      "arguments": ["--stdin-filepath", "{buffer_path}"]
-    }
-  }
+  "formatter": "language_server"
+  // "formatter": {
+  //   "external": {
+  //     "command": "prettier",
+  //     "arguments": ["--stdin-filepath", "{buffer_path}"]
+  //   }
+  // }
 }

@@ -1,0 +1,12 @@
+font-family = Hack Nerd Font Mono
+font-size = 16
+theme = GruvboxDark
+#theme = GruvboxDarkHard
+
+window-save-state = always
+
+unfocused-split-opacity = 0.98
+background-opacity = 0.98
+
+#macos-titlebar-style = hidden
+

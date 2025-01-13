@@ -54,5 +54,41 @@
       // "ctrl-a": "editor::SelectAll" // vim default: increment
       "ctrl-f": "workspace::ToggleZoom"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-+": "zed::IncreaseUiFontSize"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-_": "zed::DecreaseUiFontSize"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-'": "zed::ResetUiFontSize"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-=": "zed::IncreaseBufferFontSize"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd--": "zed::DecreaseBufferFontSize"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-p": "file_finder::Toggle"
+    }
   }
 ]
