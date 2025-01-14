@@ -139,8 +139,7 @@
     "pyright": {
       "settings": {
         "python.analysis": {
-          "diagnosticMode": "workspace",
-          "typeCheckingMode": "strict"
+          "diagnosticMode": "workspace"
         },
         "python": {
           "pythonPath": ".venv/bin/python3"
@@ -149,11 +148,17 @@
     },
     "ruff": {
       "initialization_options": {
+        "python": {
+          "pythonPath": ".venv/bin/python3"
+        },
         "settings": {
-          // Ruff server settings goes here
           "lineLength": 120,
           "lint": {
             "extendSelect": ["I"]
+          },
+          "python.analysis": {
+            "diagnosticMode": "workspace"
+            // "typeCheckingMode": "strict"
           }
         }
       }
@@ -182,8 +187,7 @@
   "languages": {
     "Python": {
       "format_on_save": "language_server",
-      "language_servers": ["ruff"], // ["pyright", "ruff"]
-      "soft_wrap": "preferred_line_length"
+      "language_servers": ["pyright", "ruff"] // ["pyright", "ruff"]
     },
     "JSON": {
       "format_on_save": "language_server",
@@ -223,6 +227,7 @@
       }
     },
     "TSX": {
+      "enable_language_server": true,
       "code_actions_on_format": {
         "source.organizeImports": true
       }
@@ -256,6 +261,26 @@
         }
       }
     }
+    // "Python": {
+    //   "format_on_save": {
+    //     "external": {
+    //       "command": "ruff",
+    //       "arguments": [
+    //         "check",
+    //         "--fix",
+    //         "--stdin-filename",
+    //         "{buffer_path}",
+    //         "-"
+    //       ]
+    //     }
+    //   },
+    //   "linter": {
+    //     "external": {
+    //       "command": "ruff",
+    //       "arguments": ["check", "--stdin-filename", "{buffer_path}", "-"]
+    //     }
+    //   }
+    // }
   },
   // "file_types": {
   //   "C++": ["c"],
