@@ -142,14 +142,16 @@
           "diagnosticMode": "workspace"
         },
         "python": {
-          "pythonPath": ".venv/bin/python3"
+          "pythonPath": ".venv/bin/python",
+          "venv": ".venv",
+          "venvPath": "."
         }
       }
     },
     "ruff": {
       "initialization_options": {
         "python": {
-          "pythonPath": ".venv/bin/python3"
+          "pythonPath": ".venv/bin/python"
         },
         "settings": {
           "lineLength": 120,
