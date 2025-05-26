@@ -68,9 +68,7 @@
   // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "C-x"
-      ],
+      "before": ["C-x"],
       "after": [],
       "commands": [
         {
@@ -80,9 +78,7 @@
       ]
     },
     {
-      "before": [
-        "C-c"
-      ],
+      "before": ["C-c"],
       "after": [],
       "commands": [
         {
@@ -92,9 +88,7 @@
       ]
     },
     {
-      "before": [
-        "C-d"
-      ],
+      "before": ["C-d"],
       "after": [],
       "commands": [
         {
@@ -104,10 +98,7 @@
       ]
     },
     {
-      "before": [
-        "C-k",
-        "C-d"
-      ],
+      "before": ["C-k", "C-d"],
       "after": [],
       "commands": [
         {
@@ -119,89 +110,49 @@
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "<leader>",
-        "d"
-      ],
-      "after": [
-        "d",
-        "d"
-      ]
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
     },
     {
       // "before": [ "<C-n>" ],
-      "before": [
-        "<leader>",
-        "<Enter>"
-      ],
-      "commands": [
-        ":nohl"
-      ]
+      // "before": [
+      //   "<leader>",
+      //   "<Enter>"
+      // ],
+      "before": ["<ESC>"],
+      "commands": [":nohl"]
     },
     {
-      "before": [
-        ";"
-      ],
-      "commands": [
-        "workbench.action.showCommands"
-      ]
+      "before": [";"],
+      "commands": ["workbench.action.showCommands"]
     },
     {
-      "before": [
-        "Z",
-        "Z"
-      ],
-      "commands": [
-        ":wq"
-      ]
+      "before": ["Z", "Z"],
+      "commands": [":wq"]
     },
     {
-      "before": [
-        "<leader>",
-        "w"
-      ],
-      "commands": [
-        "workbench.action.files.save"
-      ]
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.files.save"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "<Delete>"
-      ],
-      "commands": [
-        "editor.action.deleteLines"
-      ]
+      "before": ["<Delete>"],
+      "commands": ["editor.action.deleteLines"]
     },
     // Bind p in visual mode to paste without overriding the current register
     {
-      "before": [
-        "p"
-      ],
-      "after": [
-        "p",
-        "g",
-        "v",
-        "y"
-      ]
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
     },
     // Bind > and < in visual mode to indent/outdent lines (repeatable)
     {
-      "before": [
-        ">"
-      ],
-      "commands": [
-        "editor.action.indentLines"
-      ]
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
     },
     {
-      "before": [
-        "<"
-      ],
-      "commands": [
-        "editor.action.outdentLines"
-      ]
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
     }
   ],
   // Allow VSCodeVim to change status bar color based on mode
@@ -461,16 +412,12 @@
   "terminal.integrated.profiles.osx": {
     "bash": {
       "path": "bash",
-      "args": [
-        "-l"
-      ],
+      "args": ["-l"],
       "icon": "terminal-bash"
     },
     "zsh": {
       "path": "zsh",
-      "args": [
-        "-l"
-      ],
+      "args": ["-l"],
       "icon": "terminal"
     },
     "pwsh": {
@@ -479,9 +426,7 @@
     },
     "python3-repl": {
       "path": "python3",
-      "args": [
-        "-q"
-      ]
+      "args": ["-q"]
     }
   },
   "terminal.integrated.enableMultiLinePasteWarning": false,
@@ -553,10 +498,7 @@
     "--disable=C0301",
     "--disable=C0413"
   ],
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
+  "isort.args": ["--profile", "black"],
   //
   // JavaScript config
   //
@@ -597,9 +539,7 @@
   "codesnap.shutterAction": "copy",
   "githubPullRequests.terminalLinksHandler": "github",
   "workbench.colorTheme": "Gruvbox Dark Hard",
-  "githubPullRequests.remotes": [
-    "origin"
-  ],
+  "githubPullRequests.remotes": ["origin"],
   "[plaintext]": {
     "editor.unicodeHighlight.ambiguousCharacters": false,
     "editor.unicodeHighlight.invisibleCharacters": false
@@ -615,5 +555,13 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "python.createEnvironment.trigger": "off",
+  "remote.defaultExtensionsIfInstalledLocally": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "GitHub.vscode-pull-request-github"
+  ],
+  "workbench.activityBar.location": "top",
+  "github.copilot.chat.terminalChatLocation": "quickChat"
 }

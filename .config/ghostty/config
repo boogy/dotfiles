@@ -1,12 +1,67 @@
 font-family = Hack Nerd Font Mono
 font-size = 16
-theme = GruvboxDark
-#theme = GruvboxDarkHard
+
+# theme = gruvbox-material
+theme = GruvboxDarkHard
+# theme = GruvboxDark
 
 window-save-state = always
+macos-titlebar-style = tabs
 
-unfocused-split-opacity = 0.98
-background-opacity = 0.98
+unfocused-split-opacity = 0.99
+background-opacity = 0.92
+background-blur = 75
 
-#macos-titlebar-style = hidden
+###############################################
+# keybindings
+###############################################
+
+# Disable super+d
+keybind = super+d=unbind
+
+# toggle quick terminal
+keybind = global:cmd+à=toggle_quick_terminal
+
+# Copy to clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
+
+# Vim-like keybindings for splits and navigation
+keybind = cmd+-=new_split:down
+keybind = cmd+p>-=new_split:down
+
+# Vim-like keybindings for splits and navigation
+keybind = cmd+|=new_split:right
+keybind = cmd+p>l=new_split:right
+
+# Vim-like keybindings for split movements
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+j=goto_split:down
+keybind = super+shift+k=goto_split:up
+keybind = super+shift+l=goto_split:right
+
+# Move between tabs
+# keybind = shift+l=next_tab
+# keybind = shift+h=previous_tab
+keybind = cmd+right=next_tab
+keybind = cmd+left=previous_tab
+
+# open new window (default cmd+n)
+# keybind = ctrl+a>n=new_window
+
+# Close split
+keybind = cmd+q>k=close_surface
+
+# keybind = super+l=text:\C-bl
+# keybind = ignore:super+l
+# keybind = super+l=send_text=\C-bl
+
+#-------------------------------------------------
+# Tmux keybindings
+#-------------------------------------------------
+
+# tmux :: go to previous tab
+keybind = super+l=text:\x1bl
+
+# tmux :: create new tab
+keybind = alt+t=text:\x18c
 

@@ -8,7 +8,9 @@
 
 # source <(kubectl completion zsh | sed 's/kubectl/k/g')
 
-alias k="kubectl"
-compdef k="kubectl"
+alias k=kubectl
+compdef k='kubectl'
 
-source <(kubectl completion zsh)
+source <(kubectl completion zsh | sed 's/kubectl/k/g')
+# complete -o default -F __start_kubectl k
+

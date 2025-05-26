@@ -9,6 +9,52 @@
                 },
                 "rules": [
                     {
+                        "description": "CAPS_LOCK to HYPER (SHIFT+COMMAND+OPTION+CONTROL) or CAPS_LOCK (If Alone)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {}
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,",
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+.",
+                                "from": {
+                                    "key_code": "period",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
+                                    "key_code": "slash",
+                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                                },
+                                "to": [],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Remap Tab to Hyper key when held, Tab when tapped",
                         "manipulators": [
                             {
@@ -40,6 +86,7 @@
                     },
                     {
                         "description": "Hyper Key sublayer e",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -177,6 +224,7 @@
                     },
                     {
                         "description": "Hyper Key sublayer w",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -521,6 +569,7 @@
                     },
                     {
                         "description": "CAPS_LOCK to HYPER (SHIFT+COMMAND+OPTION+CONTROL) or ESCAPE (If Alone)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -979,7 +1028,17 @@
                         "is_keyboard": true,
                         "product_id": 835,
                         "vendor_id": 1452
-                    }
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
+                        },
+                        {
+                            "from": { "key_code": "non_us_backslash" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        }
+                    ]
                 },
                 {
                     "identifiers": {
@@ -1001,6 +1060,14 @@
                         }
                     ],
                     "identifiers": { "is_keyboard": true }
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 50503,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false
                 }
             ],
             "fn_function_keys": [
@@ -1019,7 +1086,7 @@
             ],
             "name": "Default profile",
             "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
         },
         {
             "name": "Clean Profile - No Config",

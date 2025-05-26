@@ -79,6 +79,8 @@ bindkey "\033[4~" end-of-line
 # bindkey '^W' my-backward-delete-word
 
 alias aws-whoami="aws sts get-caller-identity ; echo \"Creds expiration time: $AWS_CREDENTIAL_EXPIRATION\""
+alias work='~/.local/bin/tmux-work.sh'
+alias work-ghostty='~/.local/bin/ghostty-work.sh'
 
 if [[ -n "$BROWSER" ]]; then
     _browser_fts=(htm html de org net com at cx nl se dk)
