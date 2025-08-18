@@ -18,7 +18,6 @@ MANAGED_FILES=(
   ~/.vim
   ~/.vimrc
   ~/.tmux.conf
-  ~/.pythonrc.py
 )
 
 test -d ${INSTALLDIR} || mkdir -p ${INSTALLDIR}
