@@ -7,12 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
+  "agent": {
     "default_model": {
-      // "provider": "zed.dev",
-      // "model": "claude-3-5-sonnet-latest"
       "provider": "copilot_chat",
-      "model": "gpt-4o"
+      "model": "claude-sonnet-4"
     },
     "version": "2",
     "enabled": true
@@ -38,7 +36,7 @@
   },
   "buffer_font_family": "Hack Nerd Font",
   "features": {
-    "inline_completion_provider": "copilot"
+    "edit_prediction_provider": "copilot"
   },
   "indent_guides": {
     "enabled": true,

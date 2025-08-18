@@ -248,6 +248,11 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)" # && eval "$(pyenv init --path)"
 fi
 
+
+# zoxide cd replacement
+eval "$(zoxide init zsh)"
+export _ZO_ECHO=1 # print folder before cding into it
+
 ## load prompt
 # eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
 eval "$(starship init zsh)"
