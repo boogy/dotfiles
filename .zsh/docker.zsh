@@ -103,3 +103,18 @@ compdef '_arguments "1: :($(_list_images_names))"' drun
 # compdef _docker_img_list drun
 
 } # end check docker command
+
+# Source podman completion
+if [[ ! -f ~/.zsh/completion/_podman ]]; then
+    mkdir -p ~/.zsh/completion
+    podman completion zsh > ~/.zsh/completion/_podman 2>/dev/null
+fi
+
+# alias pm='podman'
+# compdef pm=podman
+
+pm() {
+    podman "$@"
+}
+compdef pm=podman
+

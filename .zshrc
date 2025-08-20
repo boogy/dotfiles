@@ -67,16 +67,19 @@ export PATH="${PATH}:${HOME}/.cargo/bin"
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="${PATH}:${GOPATH}/bin"
 
-## Add zsh completions folder
-fpath=(~/.zsh/completion $fpath)
-
-# Basic auto/tab complete:
+# Initialize completion system (consolidated)
 autoload -Uz compinit
 zstyle ':completion:*' menu select
-# Auto complete with case insenstivity
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
+zmodload zsh/complist
+fpath=(~/.zsh/completion $fpath)
+compinit
 
-## enable bash completions in zsh
+_comp_options+=(globdots)  # Include hidden files
+setopt COMPLETE_ALIASES
+
+# Enable bash completions
 autoload -U +X bashcompinit && bashcompinit
 
 ## ../../ completion
@@ -250,7 +253,7 @@ fi
 
 
 # zoxide cd replacement
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd j)"
 export _ZO_ECHO=1 # print folder before cding into it
 
 ## load prompt

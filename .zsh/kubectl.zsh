@@ -14,3 +14,9 @@
 # source <(kubectl completion zsh | sed 's/kubectl/k/g')
 # complete -o default -F __start_kubectl k
 
+
+k() {
+    kubectl "$@"
+}
+compdef k=kubectl
+
