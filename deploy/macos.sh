@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+## brew bundle install --file=Brewfile
+## OR
+## xargs brew install < formulae.txt
+## xargs brew install --cask < casks.txt
+
 ## ---------------------------------------------------------
 ## Settings / Options
 ## ---------------------------------------------------------
@@ -38,20 +43,18 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ## Install brew formulas
 brew tap homebrew/cask-fonts
-brew tap hashicorp/tap
 
 brew install --cask font-cousine-nerd-font
 brew install --cask the-unarchiver
-# brew install --cask xmind
-
 brew install zsh
 brew install zsh-autosuggestions
 brew install zsh-completions
 brew install zsh-syntax-highlighting
 brew install zsh-fast-syntax-highlighting
-brew install pyenv
+brew install uv
 brew install alacritty
-brew install 1password
+brew install --cask ghostty
+brew install --cask 1password
 brew install 1password-cli
 brew install ripgrep
 brew install eza
@@ -72,6 +75,10 @@ brew install direnv
 brew install jq
 brew install p7zip
 brew install tenv
+brew install zoxide
+brew install podman
+brew install --cask podman-desktop
+
 # brew install pinentry
 # brew install pinentry-mac
 # brew install yubikey-agent
