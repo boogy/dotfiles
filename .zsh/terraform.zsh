@@ -68,3 +68,8 @@ compdef av='aws-vault'
 # complete -o nospace -C terragrunt tg
 complete -o nospace -C /opt/homebrew/bin/terragrunt -C /opt/homebrew/bin/terraform tg
 
+tg() {
+    terragrunt --terragrunt-forward-tf-stdout "$@"
+}
+compdef tg=terragrunt
+
