@@ -58,6 +58,7 @@ deploy/conf/VSCode/User/*
 !deploy/conf/VSCode/User/settings.json
 !deploy/conf/VSCode/User/*.json
 !deploy/conf/VSCode/User/snippets/*
+deploy/conf/VSCode/User/mcp.json
 
 ## VIFM
 .config/vifm/*
