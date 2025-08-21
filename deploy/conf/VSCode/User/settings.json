@@ -29,7 +29,7 @@
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
-  "editor.minimap.autohide": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never",
     "source.fixAll": "never",
