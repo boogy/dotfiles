@@ -563,5 +563,8 @@
     "GitHub.vscode-pull-request-github"
   ],
   "workbench.activityBar.location": "top",
-  "github.copilot.chat.terminalChatLocation": "quickChat"
+  "github.copilot.chat.terminalChatLocation": "quickChat",
+  "python.analysis.typeCheckingMode": "basic",
+  "docker.extension.enableComposeLanguageServer": false,
+  "docker.extension.dockerEngineAvailabilityPrompt": false
 }
