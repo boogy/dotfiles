@@ -108,8 +108,8 @@ alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>
 
 pyclean () {
     if command -v fd &> /dev/null; then
-        fd -t f -e pyc -e pyo -x rm {} \; 
-        fd -t d -e __pycache__ -x rm -r {} \;
+        fd -t f -e '*.py[co]' -X rm {} \; 
+        fd -t d __pycache__ -X rm -r {} \;
         return
     fi
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
