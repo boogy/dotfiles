@@ -112,6 +112,11 @@ fi
 
 # alias pm='podman'
 # compdef pm=podman
+dk() {
+  docker "$@"
+}
+compdef dk=docker
+
 
 pm() {
     podman "$@"

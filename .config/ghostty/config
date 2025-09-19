@@ -2,7 +2,7 @@ font-family = Hack Nerd Font Mono
 font-size = 16
 
 # theme = gruvbox-material
-theme = GruvboxDarkHard
+theme = Gruvbox Dark Hard
 # theme = GruvboxDark
 
 window-save-state = always
