@@ -126,3 +126,7 @@ ansi-nvim () {
   sed 's|\x1b\[[;0-9]*m||g' $FILE | nvim -
 }
 
+clean-completions () {
+  rm ~/.zcompdump*; compinit
+}
+
