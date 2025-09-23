@@ -1,4 +1,4 @@
-1password
+#1password
 1password-cli
 alacritty
 aws-vault

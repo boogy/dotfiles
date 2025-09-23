@@ -1,7 +1,6 @@
 tap "common-fate/granted"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "joemiller/taps"
 tap "warrensbox/tap"
 brew "xz"
 brew "ansible"

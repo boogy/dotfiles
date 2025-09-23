@@ -32,6 +32,11 @@ defaults write -g ApplePressAndHoldEnabled -bool true
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+# Dock speed
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+killall Dock
+
 ## ---------------------------------------------------------
 ## Packages
 ## ---------------------------------------------------------
