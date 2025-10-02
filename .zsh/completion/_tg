@@ -1,0 +1,38 @@
+#compdef run-tg
+
+_arguments \
+    '(-a --account)'{-a,--account}'[Regex pattern to match account folder names]:account pattern:' \
+    '(-r --resource)'{-r,--resource}'[Regex pattern to match resource folder names]:resource pattern:' \
+    '(-m --module)'{-m,--module}'[Search for terragrunt.hcl files containing this terraform module name]:module name:' \
+    '(-b --base-dir)'{-b,--base-dir}'[Base directory containing account folders]:directory:_files -/' \
+    '--run-all[Run terragrunt run-all command across matched resource folders]' \
+    '(-p --parallelism)'{-p,--parallelism}'[Number of parallel jobs for run-all]:parallelism:(1 2 4 8 16)' \
+    '(-l --list)'{-l,--list}'[List the folders that would be processed without executing any commands]' \
+    '(-v --verbose)'{-v,--verbose}'[Show the full command being executed and all output in real-time]' \
+    '(-L --limit)'{-L,--limit}'[Limit processing to the first N matching folders]:limit:' \
+    '(-i --interactive)'{-i,--interactive}'[Interactively select which folders to process from the matched list]' \
+    '(-I --interactive-apply)'{-I,--interactive-apply}'[Allow interactive confirmation for apply/destroy commands]' \
+    '--help[Show help message]' \
+    '1:action:(plan init apply destroy)'
+
+##########################################################################################
+# This function can be added to the .zshrc file in place of the above completion code
+##########################################################################################
+# _run_tg() {
+#   _arguments \
+#     '(-a --account)'{-a,--account}'[Regex pattern to match account folder names]:account pattern:' \
+#     '(-r --resource)'{-r,--resource}'[Regex pattern to match resource folder names]:resource pattern:' \
+#     '(-m --module)'{-m,--module}'[Search for terragrunt.hcl files containing this terraform module name]:module name:' \
+#     '(-b --base-dir)'{-b,--base-dir}'[Base directory containing account folders]:directory:_files -/' \
+#     '--run-all[Run terragrunt run-all command across matched resource folders]' \
+#     '(-p --parallelism)'{-p,--parallelism}'[Number of parallel jobs for run-all]:parallelism:(1 2 4 8 16)' \
+#     '(-l --list)'{-l,--list}'[List the folders that would be processed without executing any commands]' \
+#     '(-v --verbose)'{-v,--verbose}'[Show the full command being executed and all output in real-time]' \
+#     '(-L --limit)'{-L,--limit}'[Limit processing to the first N matching folders]:limit:' \
+#     '(-i --interactive)'{-i,--interactive}'[Interactively select which folders to process from the matched list]' \
+#     '(-I --interactive-apply)'{-I,--interactive-apply}'[Allow interactive confirmation for apply/destroy commands]' \
+#     '--help[Show help message]' \
+#     '1:action:(plan init apply destroy)'
+# }
+# compdef _run_tg run-tg
+

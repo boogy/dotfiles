@@ -20,7 +20,7 @@ background-blur = 75
 keybind = super+d=unbind
 
 # toggle quick terminal
-keybind = global:cmd+à=toggle_quick_terminal
+# keybind = global:cmd+$=toggle_quick_terminal
 
 # Copy to clipboard
 keybind = performable:ctrl+c=copy_to_clipboard

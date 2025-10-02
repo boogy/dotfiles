@@ -11,7 +11,9 @@ function tf_prompt_info() {
     echo "${ZSH_THEME_TF_PROMPT_PREFIX-[}${workspace:gs/%/%%}${ZSH_THEME_TF_PROMPT_SUFFIX-]}"
 }
 
-alias tg='terragrunt --terragrunt-forward-tf-stdout'
+# alias tg='terragrunt --terragrunt-forward-tf-stdout'
+# alias tg='terragrunt --tf-forward-stdout'
+alias tg='terragrunt'
 alias tf='terraform'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
@@ -45,18 +47,37 @@ function tg_prompt_info() {
 compdef _terragrunt tg
 setopt tg
 
-## ALL
+# Terraform
 alias tf-plan="terraform plan -compact-warnings"
-alias tg-plan="terragrunt plan -compact-warnings"
 alias tf-apply="terraform apply -compact-warnings"
-alias tg-apply="terragrunt apply -compact-warnings"
-alias tga="terragrunt apply -compact-warnings"
+
+# Terragrunt
+alias tg-plan="terragrunt run plan --tf-forward-stdout"
+alias tg-apply="terragrunt run apply --tf-forward-stdout"
+alias tga="terragrunt apply --tf-forward-stdout"
+
 alias av="aws-vault"
 alias ave="aws-vault exec"
 
-alias tg-init-all="terragrunt run-all init -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
-alias tg-plan-all="terragrunt run-all plan -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
-alias tg-apply-all="terragrunt run-all apply -compact-warnings --terragrunt-forward-tf-stdout --terragrunt-non-interactive"
+alias tg-init-all="terragrunt run --all init --tf-forward-stdout --non-interactive"
+alias tg-plan-all="terragrunt run --all plan --tf-forward-stdout --non-interactive"
+alias tg-apply-all="terragrunt run --all apply --tf-forward-stdout --non-interactive"
+
+function tg-plan-parallel (){
+  terragrunt run plan \
+    --compact-warnings \
+    --non-interactive \
+    --parallelism 10 \
+    --tf-forward-stdout "$@"
+}
+
+function tg-apply-parallel (){
+  terragrunt run apply \
+    --compact-warnings \
+    --non-interactive \
+    --parallelism 10 \
+    --tf-forward-stdout "$@"
+}
 
 # shortcut with completions
 compdef tf='terraform'
