@@ -50,11 +50,13 @@ setopt tg
 # Terraform
 alias tf-plan="terraform plan -compact-warnings"
 alias tf-apply="terraform apply -compact-warnings"
+alias tf-destroy="terraform destroy -compact-warnings"
 
 # Terragrunt
-alias tg-plan="terragrunt run plan --tf-forward-stdout"
-alias tg-apply="terragrunt run apply --tf-forward-stdout"
-alias tga="terragrunt apply --tf-forward-stdout"
+alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
+alias tg-apply="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
+alias tg-apply="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
+alias tga="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
 
 alias av="aws-vault"
 alias ave="aws-vault exec"
