@@ -55,7 +55,7 @@ alias tf-destroy="terraform destroy -compact-warnings"
 # Terragrunt
 alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
 alias tg-apply="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
-alias tg-apply="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
+alias tg-destroy="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
 alias tga="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
 
 alias av="aws-vault"
