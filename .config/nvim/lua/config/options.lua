@@ -10,6 +10,9 @@ vim.g.maplocalleader = "\\"
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/opt/node@22/bin"
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin"
 
+-- Suppress Node.js experimental warnings (SQLite warnings from LSP servers)
+vim.env.NODE_NO_WARNINGS = "1"
+
 -----------------------------------------------------------
 -- Neovide UI
 -----------------------------------------------------------
