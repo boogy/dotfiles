@@ -65,10 +65,6 @@ alias svi="sudo -E $EDITOR"
 alias svim="sudo -E $EDITOR"
 alias v-conf="$EDITOR ~/.vimrc"
 
-has rg &>/dev/null && {
-  alias rg='rg --hidden'
-}
-
 ##
 ## safety features
 ##
