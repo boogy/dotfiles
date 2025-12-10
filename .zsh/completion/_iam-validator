@@ -8,7 +8,7 @@ _iam_validator() {
 
     # Cached AWS services
     local -a aws_services
-    aws_services=('acm' 'apigateway' 'autoscaling' 'backup' 'batch' 'bedrock' 'cloudformation' 'cloudfront' 'cloudtrail' 'cloudwatch' 'config' 'dynamodb' 'ec2' 'ec2-instance-connect' 'ecr' 'ecs' 'eks' 'elasticache' 'elasticloadbalancing' 'events' 'firehose' 'glacier' 'glue' 'guardduty' 'iam' 'imagebuilder' 'inspector2' 'kinesis' 'kms' 'lambda' 'logs' 'rds' 'route53' 's3' 'scheduler' 'secretsmanager' 'securityhub' 'sns' 'sqs' 'sts' 'support' 'waf' 'wafv2')
+    aws_services=('acm' 'apigateway' 'autoscaling' 'aws-marketplace' 'backup' 'batch' 'bedrock' 'cloudformation' 'cloudfront' 'cloudtrail' 'cloudwatch' 'config' 'dynamodb' 'ec2' 'ec2-instance-connect' 'ecr' 'ecs' 'eks' 'elasticache' 'elasticloadbalancing' 'events' 'firehose' 'glacier' 'glue' 'guardduty' 'iam' 'imagebuilder' 'inspector2' 'kinesis' 'kms' 'lakeformation' 'lambda' 'logs' 'rds' 'route53' 'route53resolver' 's3' 'scheduler' 'secretsmanager' 'securityhub' 'sns' 'sqs' 'ssm' 'states' 'sts' 'support' 'waf' 'wafv2')
 
     _arguments -C \
         '1: :_iam_validator_commands' \
@@ -72,7 +72,11 @@ _iam_validator() {
                         '--stream[Process files one-by-one]' \
                         '--batch-size[Policies per batch]:number:' \
                         '--summary[Show Executive Summary section]' \
-                        '--severity-breakdown[Show Issue Severity Breakdown section]'
+                        '--severity-breakdown[Show Issue Severity Breakdown section]' \
+                        '--allow-owner-ignore[Allow CODEOWNERS to ignore findings]' \
+                        '--no-owner-ignore[Disable CODEOWNERS ignore feature]' \
+                        '--ci[CI mode - print enhanced output, write JSON to file]' \
+                        '--ci-output[Output file for JSON report in CI mode]:file:_files'
                     ;;
                 post-to-pr)
                     _arguments \
