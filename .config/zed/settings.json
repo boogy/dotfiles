@@ -44,6 +44,10 @@
   "terminal": {
     "blinking": "terminal_controlled",
     "shell": "system",
+    "env": {
+      "LC_ALL": "",
+      "LANG": "en_US.UTF-8"
+    },
     "scrollbar": {
       "show": "never"
     },
