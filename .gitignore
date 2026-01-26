@@ -85,3 +85,6 @@ deploy/conf/VSCode/User/mcp.json
 .config/zed/conversations/*
 .config/zed/prompts/*
 
+# ZSH completion local files
+.zsh/completion-local/
+
