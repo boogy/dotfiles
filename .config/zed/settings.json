@@ -7,25 +7,291 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_buffer_font_size": 14.0,
+  "ui_font_family": ".SystemUIFont",
+  "buffer_line_height": "comfortable",
+  "buffer_font_weight": 400.0,
+  "agent_ui_font_size": 14.0,
+  "cursor_shape": "bar",
+  "autosave": "off",
+  "buffer_font_family": "Hack Nerd Font",
+  "colorize_brackets": true,
+  "format_on_save": "on",
+  // "formatter": "prettier",
+  "ui_font_size": 14.0,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Material Dark Hard",
+  },
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "active_line_width": 2,
+    "coloring": "indent_aware",
+    "background_coloring": "disabled",
+    // "background_coloring": "indent_aware",
+  },
+  "vim_mode": true,
+  "icon_theme": "Material Icon Theme",
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": false,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+  },
+  "terminal": {
+    "blinking": "terminal_controlled",
+    "shell": "system",
+    "scrollbar": {
+      "show": "never"
+    },
+    "toolbar": {
+      "breadcrumbs": true
+    },
+    "font_size": 14.0,
+    "font_family": "Hack Nerd Font",
+    // "line_height": {
+    //     "custom": 1.4,
+    // },
+    "copy_on_select": true,
+    "max_scroll_history_lines": 100000,
+    "detect_venv": {
+      "on": {
+        "directories": [
+          ".env",
+          "env",
+          ".venv",
+          "venv"
+        ],
+        "activate_script": "default"
+      }
+    },
+  },
+  "minimap": {
+    "display_in": "active_editor",
+    "show": "auto",
+  },
+  "context_servers": {
+    "serena-context-server": {
+      "enabled": true,
+      "settings": {
+        "python_executable": "~/.pyenv/shims/python3",
+      },
+    },
+  },
+  "git_panel": {
+    "tree_view": false,
+  },
+  "bottom_dock_layout": "contained",
+  "tabs": {
+    "activate_on_close": "left_neighbour",
+    "file_icons": true,
+    "git_status": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": true,
+  },
+  "prettier": {
+    "allowed": false,
+  },
+  "which_key": {
+    "enabled": true,
+  },
+  "project_panel": {
+    // automatically focus selected the file in the file tree
+    "auto_reveal_entries": true,
+  },
+  "jsx_tag_auto_close": {
+    "enabled": true
+  },
+  "show_whitespaces": "selection",
+  "whitespace_map": {
+    "space": "•",
+    "tab": "→"
+  },
+  "base_keymap": "VSCode",
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": false,
+  },
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "relative_line_numbers": "enabled",
+  "gutter": {
+    "line_numbers": true,
+  },
+  "ensure_final_newline_on_save": true,
+  "preferred_line_length": 80,
+  "tab_size": 4,
   "agent": {
     "play_sound_when_agent_done": true,
     "always_allow_tool_actions": false,
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-opus-4-1-latest"
-    }
+      "model": "claude-opus-4-1-latest",
+    },
   },
+  // Disable Telemetry
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
-  "vim_mode": true,
-  "icon_theme": "Material Icon Theme",
-  "ui_font_size": 14,
-  "buffer_font_size": 13,
-  "theme": {
-    "mode": "dark",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark Hard"
-  }
+  "file_types": {
+    //"OpenTofu": ["tf"],
+    //"OpenTofu Vars": ["tfvars"],
+    "Terragrunt": [
+      "terragrunt.hcl",
+      "*.js.tpl",
+      "terragrunt.hcl.json" // if you ever use JSON variant
+    ],
+    "terraform": [
+      "*.tf",
+      "*.tf.tpl"
+    ],
+    "HCL": [
+      "terragrunt.hcl",
+      "*.hcl"
+    ],
+    "jinja-json": [
+      "*.json.j2",
+      "*.json"
+    ],
+    "jinja-html": [
+      "*.html.j2"
+    ],
+    "TOML": [
+      "MyLockFile"
+    ],
+    "Dockerfile": [
+      "Dockerfile*"
+    ],
+  },
+  "languages": {
+    "JSON": {
+      // "formatter": "language_server",
+      "tab_size": 2,
+      "colorize_brackets": true
+    },
+    "JSONC": {
+      "tab_size": 2,
+      "colorize_brackets": true
+    },
+    "HCL": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "terragrunt",
+          "arguments": [
+            "hcl",
+            "fmt",
+            "--stdin",
+            "{buffer_path}"
+          ]
+        }
+      },
+    },
+    // "Terragrunt": {
+    //     "formatter": {
+    //         "external": {
+    //             "command": "terragrunt",
+    //             "arguments": [
+    //                 "hcl",
+    //                 "fmt",
+    //                 "--terragrunt-hclfmt-file",
+    //                 "{buffer_path}"
+    //             ]
+    //         }
+    //     },
+    //     "format_on_save": "on",
+    //     "grammar": "terraform", // reuse tree-sitter-hcl queries & highlights
+    //     "language_server": {
+    //         "name": "terraform-ls" // optional – if you want diagnostics/completion on terragrunt.hcl too
+    //     }
+    // },
+    "Python": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "bash",
+          "arguments": [
+            "-c",
+            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path}",
+          ],
+        },
+      },
+    },
+    // "YAML": {
+    //     "formatter": "language_server",
+    // },
+    "Markdown": {
+      "format_on_save": "on",
+      // "indent_list_on_tab": true,
+      "remove_trailing_whitespace_on_save": false,
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ],
+        },
+      },
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ],
+        },
+      },
+      "format_on_save": "on",
+    },
+  },
+  "lsp": {
+    "terraform-ls": {
+      "initialization_options": {
+        "experimentalFeatures": {
+          "prefillRequiredFields": true,
+        },
+      },
+    },
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "keyOrdering": false,
+          // "format": {
+          //     "singleQuote": true,
+          // },
+          "schemaStore": {
+            "enable": true,
+          },
+          // "schemas": {
+          //     "https://getcomposer.org/schema.json": [
+          //         "/*"
+          //     ],
+          //     //"../relative/path/schema.json": ["/config*.yaml"],
+          // },
+        },
+      },
+    },
+    "gopls": {
+      "initialization_options": {
+        "hints": {
+          "assignVariableTypes": true,
+          "compositeLiteralFields": true,
+          "compositeLiteralTypes": true,
+          "constantValues": true,
+          "functionTypeParameters": true,
+          "parameterNames": true,
+          "rangeVariableTypes": true,
+        },
+      },
+    },
+  },
 }

@@ -74,6 +74,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 zmodload zsh/complist
 fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completion-local $fpath)
 compinit
 
 _comp_options+=(globdots)  # Include hidden files
