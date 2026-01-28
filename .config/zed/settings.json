@@ -7,11 +7,22 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "context_servers": {
+    "serena-context-server": {
+      "enabled": true,
+      "settings": {},
+    },
+  },
+  "text_rendering_mode": "platform_default",
+  "ui_font_weight": 400.0,
+  "vim": {
+    "toggle_relative_line_numbers": false,
+  },
   "agent_buffer_font_size": 14.0,
   "ui_font_family": ".SystemUIFont",
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
-  "agent_ui_font_size": 14.0,
+  "agent_ui_font_size": 15.0,
   "cursor_shape": "bar",
   "autosave": "off",
   "buffer_font_family": "Hack Nerd Font",
@@ -30,8 +41,7 @@
     "line_width": 1,
     "active_line_width": 2,
     "coloring": "indent_aware",
-    "background_coloring": "disabled",
-    // "background_coloring": "indent_aware",
+    "background_coloring": "disabled", // "indent_aware"
   },
   "vim_mode": true,
   "icon_theme": "Material Icon Theme",
@@ -46,13 +56,13 @@
     "shell": "system",
     "env": {
       "LC_ALL": "",
-      "LANG": "en_US.UTF-8"
+      "LANG": "en_US.UTF-8",
     },
     "scrollbar": {
-      "show": "never"
+      "show": "never",
     },
     "toolbar": {
-      "breadcrumbs": true
+      "breadcrumbs": true,
     },
     "font_size": 14.0,
     "font_family": "Hack Nerd Font",
@@ -63,30 +73,38 @@
     "max_scroll_history_lines": 100000,
     "detect_venv": {
       "on": {
-        "directories": [
-          ".env",
-          "env",
-          ".venv",
-          "venv"
-        ],
-        "activate_script": "default"
-      }
-    },
-  },
-  "minimap": {
-    "display_in": "active_editor",
-    "show": "auto",
-  },
-  "context_servers": {
-    "serena-context-server": {
-      "enabled": true,
-      "settings": {
-        "python_executable": "~/.pyenv/shims/python3",
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default",
       },
     },
   },
+  "minimap": {
+    "max_width_columns": 80,
+    "thumb": "always",
+    "display_in": "active_editor",
+    "show": "auto",
+  },
+  // "context_servers": {
+  //   "serena-context-server": {
+  //     "enabled": true,
+  //     "settings": {
+  //       "python_executable": "~/.pyenv/shims/python3",
+  //     },
+  //   },
+  // },
   "git_panel": {
     "tree_view": false,
+    // Whether to show the git panel button in the status bar.
+    "button": true,
+    // Default width of the git panel.
+    "default_width": 360,
+    // Style of the git status indicator in the panel.
+    //
+    // Choices: label_color, icon
+    // Default: icon
+    "status_style": "icon",
+    // Default: main
+    "fallback_branch_name": "main",
   },
   "bottom_dock_layout": "contained",
   "tabs": {
@@ -105,16 +123,69 @@
     "enabled": true,
   },
   "project_panel": {
-    // automatically focus selected the file in the file tree
+    // Whether to show the project panel button in the status bar
+    "button": true,
+    // Whether to hide the gitignore entries in the project panel.
+    "hide_gitignore": false,
+    // Default width of the project panel.
+    "default_width": 240,
+    // Where to dock the project panel. Can be 'left' or 'right'.
+    "dock": "left",
+    // Spacing between worktree entries in the project panel. Can be 'comfortable' or 'standard'.
+    "entry_spacing": "comfortable",
+    // Whether to show file icons in the project panel.
+    "file_icons": true,
+    // Whether to show folder icons or chevrons for directories in the project panel.
+    "folder_icons": true,
+    // Whether to show the git status in the project panel.
+    "git_status": true,
+    // Amount of indentation for nested items.
+    "indent_size": 20,
+    // Whether to reveal it in the project panel automatically,
+    // when a corresponding project entry becomes active.
+    // Gitignored entries are never auto revealed.
     "auto_reveal_entries": true,
+    // Whether the project panel should open on startup.
+    "starts_open": true,
+    // Whether to fold directories automatically and show compact folders
+    // (e.g. "a/b/c" ) when a directory has only one subdirectory inside.
+    "auto_fold_dirs": true,
+    // Scrollbar-related settings
+    "scrollbar": {
+      // When to show the scrollbar in the project panel.
+      // This setting can take five values:
+      //
+      // 1. null (default): Inherit editor settings
+      // 2. Show the scrollbar if there's important information or
+      //    follow the system's configured behavior (default):
+      //   "auto"
+      // 3. Match the system's configured behavior:
+      //    "system"
+      // 4. Always show the scrollbar:
+      //    "always"
+      // 5. Never show the scrollbar:
+      //    "never"
+      "show": null,
+    },
+    // Whether to enable drag-and-drop operations in the project panel.
+    "drag_and_drop": true,
+    // Whether to hide the root entry when only one folder is open in the window.
+    "hide_root": false,
+    // Whether to hide the hidden entries in the project panel.
+    "hide_hidden": false,
   },
+  // Whether to stick parent directories at top of the project panel.
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  // Settings for auto-closing of JSX tags.
   "jsx_tag_auto_close": {
-    "enabled": true
+    "enabled": true,
   },
   "show_whitespaces": "selection",
   "whitespace_map": {
     "space": "•",
-    "tab": "→"
+    "tab": "→",
   },
   "base_keymap": "VSCode",
   "preview_tabs": {
@@ -130,132 +201,205 @@
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
+    "enable": true,
+    // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
+    "preferred_completion_mode": "normal",
     "play_sound_when_agent_done": true,
     "always_allow_tool_actions": false,
-    "default_model": {
-      "provider": "anthropic",
-      "model": "claude-opus-4-1-latest",
-    },
+    // "default_model": {
+    //   "provider": "anthropic",
+    //   "model": "claude-opus-4-1-latest",
+    // },
   },
   // Disable Telemetry
   "telemetry": {
     "diagnostics": false,
     "metrics": false,
   },
+  // Configuration for how direnv configuration should be loaded. May take 2 values:
+  // 1. Load direnv configuration using `direnv export json` directly.
+  //      "load_direnv": "direct"
+  // 2. Load direnv configuration through the shell hook, works for POSIX shells and fish.
+  //      "load_direnv": "shell_hook"
+  "load_direnv": "direct",
+  "edit_predictions": {
+    // A list of globs representing files that edit predictions should be disabled for.
+    // There's a sensible default list of globs already included.
+    // Any addition to this list will be merged with the default list.
+    // Globs are matched relative to the worktree root,
+    // except when starting with a slash (/) or equivalent in Windows.
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/.dev.vars",
+      "**/secrets.yml",
+      "**/.zed/settings.json", // zed project settings
+      "/**/zed/settings.json", // zed user settings
+      "/**/zed/keymap.json",
+    ],
+    // Files or globs of files that will be excluded by Zed entirely. They will be skipped during file
+    // scans, file searches, and not be displayed in the project file tree. Takes precedence over `file_scan_inclusions`.
+    "file_scan_exclusions": [
+      "**/.git",
+      "**/.svn",
+      "**/.hg",
+      "**/.jj",
+      "**/.repo",
+      "**/CVS",
+      "**/.DS_Store",
+      "**/Thumbs.db",
+      "**/.classpath",
+      "**/.settings",
+    ],
+  },
+  //--------------------------------------------------------------
+  // File types
+  //--------------------------------------------------------------
   "file_types": {
     //"OpenTofu": ["tf"],
     //"OpenTofu Vars": ["tfvars"],
     "Terragrunt": [
       "terragrunt.hcl",
       "*.js.tpl",
-      "terragrunt.hcl.json" // if you ever use JSON variant
+      "terragrunt.hcl.json", // if you ever use JSON variant
     ],
-    "terraform": [
-      "*.tf",
-      "*.tf.tpl"
-    ],
-    "HCL": [
-      "terragrunt.hcl",
-      "*.hcl"
-    ],
-    "jinja-json": [
-      "*.json.j2",
-      "*.json"
-    ],
-    "jinja-html": [
-      "*.html.j2"
-    ],
-    "TOML": [
-      "MyLockFile"
-    ],
-    "Dockerfile": [
-      "Dockerfile*"
-    ],
+    "terraform": ["*.tf", "*.tf.tpl"],
+    "HCL": ["terragrunt.hcl", "*.hcl"],
+    "jinja-json": ["*.json.j2", "*.json"],
+    "jinja-html": ["*.html.j2"],
+    "TOML": ["MyLockFile"],
+    "Dockerfile": ["Dockerfile*"],
   },
+  //--------------------------------------------------------------
+  // Languages
+  //--------------------------------------------------------------
   "languages": {
     "JSON": {
       // "formatter": "language_server",
+      "prettier": {
+        "allowed": true,
+      },
       "tab_size": 2,
-      "colorize_brackets": true
+      "colorize_brackets": true,
     },
     "JSONC": {
+      "prettier": {
+        "allowed": true,
+      },
       "tab_size": 2,
-      "colorize_brackets": true
+      "colorize_brackets": true,
     },
     "HCL": {
       "format_on_save": "on",
       "formatter": {
         "external": {
           "command": "terragrunt",
-          "arguments": [
-            "hcl",
-            "fmt",
-            "--stdin",
-            "{buffer_path}"
-          ]
-        }
+          "arguments": ["hcl", "fmt", "--stdin", "{buffer_path}"],
+        },
       },
     },
-    // "Terragrunt": {
-    //     "formatter": {
-    //         "external": {
-    //             "command": "terragrunt",
-    //             "arguments": [
-    //                 "hcl",
-    //                 "fmt",
-    //                 "--terragrunt-hclfmt-file",
-    //                 "{buffer_path}"
-    //             ]
-    //         }
-    //     },
-    //     "format_on_save": "on",
-    //     "grammar": "terraform", // reuse tree-sitter-hcl queries & highlights
-    //     "language_server": {
-    //         "name": "terraform-ls" // optional – if you want diagnostics/completion on terragrunt.hcl too
-    //     }
-    // },
     "Python": {
+      // "language_servers": ["!basedpyright", "PyLSP"],
+      "preferred_line_length": 120,
       "format_on_save": "on",
       "formatter": {
         "external": {
           "command": "bash",
           "arguments": [
             "-c",
-            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path}",
+            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path} --line-length 120",
           ],
         },
       },
     },
-    // "YAML": {
-    //     "formatter": "language_server",
-    // },
+    "YAML": {
+      "tab_size": 2,
+    },
     "Markdown": {
       "format_on_save": "on",
       // "indent_list_on_tab": true,
       "remove_trailing_whitespace_on_save": false,
-      "formatter": {
-        "external": {
-          "command": "prettier",
-          "arguments": [
-            "--stdin-filepath",
-            "{buffer_path}"
-          ],
-        },
+      "prettier": {
+        "allowed": true,
       },
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": ["--stdin-filepath", "{buffer_path}"],
+      //   },
+      // },
     },
     "JavaScript": {
       "tab_size": 2,
       "formatter": {
         "external": {
           "command": "prettier",
-          "arguments": [
-            "--stdin-filepath",
-            "{buffer_path}"
-          ],
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
         },
       },
       "format_on_save": "on",
     },
+    "Go": {
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+      },
+      "debuggers": ["Delve"],
+    },
+    "Diff": {
+      "show_edit_predictions": false,
+      "remove_trailing_whitespace_on_save": false,
+      "ensure_final_newline_on_save": false,
+    },
+    "CSS": {
+      "prettier": {
+        "allowed": true,
+      },
+    },
+    "TSX": {
+      "language_servers": ["!typescript-language-server", "vtsls", "..."],
+      "prettier": {
+        "allowed": true,
+      },
+    },
+    "TypeScript": {
+      "language_servers": ["!typescript-language-server", "vtsls", "..."],
+      "prettier": {
+        "allowed": true,
+      },
+    },
+    "XML": {
+      "prettier": {
+        "allowed": true,
+        "plugins": ["@prettier/plugin-xml"],
+      },
+    },
+    "Java": {
+      "prettier": {
+        "allowed": true,
+        "plugins": ["prettier-plugin-java"],
+      },
+    },
+    "GraphQL": {
+      "prettier": {
+        "allowed": true,
+      },
+    },
+    "C++": {
+      "format_on_save": "off",
+      "use_on_type_format": false,
+      "prettier": {
+        "allowed": false,
+      },
+    },
+  },
+  //--------------------------------------------------------------
+  // LSP Settings
+  //--------------------------------------------------------------
+  "global_lsp_settings": {
+    "button": true,
   },
   "lsp": {
     "terraform-ls": {
@@ -280,7 +424,7 @@
           //         "/*"
           //     ],
           //     //"../relative/path/schema.json": ["/config*.yaml"],
-          // },
+          // }
         },
       },
     },
