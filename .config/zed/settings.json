@@ -7,10 +7,43 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "context_servers": {
-    "serena-context-server": {
-      "enabled": true,
-      "settings": {},
+  "features": {
+    // "edit_prediction_provider": "copilot",
+    "edit_prediction_provider": "zed",
+  },
+  "language_models": {
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "auto_discover": false,
+      "available_models": [
+        {
+          "name": "qwen3-coder:30b",
+          "display_name": "qwen 3 coder 30b",
+          "max_tokens": 32768,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+          "keep_alive": "5m",
+        },
+        {
+          "name": "gpt-oss:120b",
+          "display_name": "gpt-oss 120b",
+          "max_tokens": 32768,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+          "keep_alive": "5m",
+        },
+        {
+          "name": "qwen3-vl:32b",
+          "display_name": "qwen3-vl 32b",
+          "max_tokens": 32768,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+          "keep_alive": "5m",
+        },
+      ],
     },
   },
   "text_rendering_mode": "platform_default",
@@ -84,14 +117,6 @@
     "display_in": "active_editor",
     "show": "auto",
   },
-  // "context_servers": {
-  //   "serena-context-server": {
-  //     "enabled": true,
-  //     "settings": {
-  //       "python_executable": "~/.pyenv/shims/python3",
-  //     },
-  //   },
-  // },
   "git_panel": {
     "tree_view": false,
     // Whether to show the git panel button in the status bar.
@@ -201,6 +226,49 @@
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
+    "default_profile": "ask",
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "claude-haiku-4.5",
+      },
+      {
+        "provider": "ollama",
+        "model": "gpt-oss:20b",
+      },
+      {
+        "provider": "ollama",
+        "model": "qwen3-coder:30b",
+      },
+      {
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-latest",
+      },
+      {
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5-thinking-latest",
+      },
+      {
+        "provider": "anthropic",
+        "model": "claude-opus-4-5-latest",
+      },
+      {
+        "provider": "anthropic",
+        "model": "claude-opus-4-5-thinking-latest",
+      },
+      {
+        "provider": "ollama",
+        "model": "gpt-oss:120b",
+      },
+      {
+        "provider": "ollama",
+        "model": "qwen3-vl:32b",
+      },
+    ],
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-5-thinking-latest",
+    },
     "enable": true,
     // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
     "preferred_completion_mode": "normal",
@@ -404,7 +472,7 @@
   "lsp": {
     "terraform-ls": {
       "initialization_options": {
-        "experimentalFeatures": {
+        "experimentaleatures": {
           "prefillRequiredFields": true,
         },
       },

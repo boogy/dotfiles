@@ -247,6 +247,10 @@ fi
 # source ~/.zsh/prompt/prompt.zsh
 # eval $(/opt/homebrew/bin/brew shellenv zsh)
 
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
 # setup pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)" # && eval "$(pyenv init --path)"
