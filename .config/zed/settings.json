@@ -269,9 +269,7 @@
       "provider": "anthropic",
       "model": "claude-opus-4-5-thinking-latest",
     },
-    "enable": true,
     // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
-    "preferred_completion_mode": "normal",
     "play_sound_when_agent_done": true,
     "always_allow_tool_actions": false,
     // "default_model": {
@@ -307,20 +305,6 @@
       "**/.zed/settings.json", // zed project settings
       "/**/zed/settings.json", // zed user settings
       "/**/zed/keymap.json",
-    ],
-    // Files or globs of files that will be excluded by Zed entirely. They will be skipped during file
-    // scans, file searches, and not be displayed in the project file tree. Takes precedence over `file_scan_inclusions`.
-    "file_scan_exclusions": [
-      "**/.git",
-      "**/.svn",
-      "**/.hg",
-      "**/.jj",
-      "**/.repo",
-      "**/CVS",
-      "**/.DS_Store",
-      "**/Thumbs.db",
-      "**/.classpath",
-      "**/.settings",
     ],
   },
   //--------------------------------------------------------------
@@ -423,11 +407,13 @@
       "ensure_final_newline_on_save": false,
     },
     "CSS": {
+      "tab_size": 2,
       "prettier": {
         "allowed": true,
       },
     },
     "TSX": {
+      "tab_size": 2,
       "language_servers": ["!typescript-language-server", "vtsls", "..."],
       "prettier": {
         "allowed": true,
