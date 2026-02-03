@@ -845,6 +845,16 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Mouse button6 to Mission Control",
+                        "manipulators": [
+                            {
+                                "from": { "pointing_button": "button6" },
+                                "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
