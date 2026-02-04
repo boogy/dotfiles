@@ -223,6 +223,8 @@
     "line_numbers": true,
   },
   "ensure_final_newline_on_save": true,
+  // Whether to start a new line with a comment when a previous line is a comment as well
+  "extend_comment_on_newline": false,
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
