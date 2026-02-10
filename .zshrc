@@ -186,7 +186,6 @@ zsh_plugins=(
     aliases
     directories
     expandalias
-    systemd
     # python
     docker
     ssh
