@@ -1,0 +1,97 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // {
+  //   "context": "Workspace",
+  //   "bindings": {
+  //     "shift shift": "file_finder::Toggle",
+  //   },
+  // },
+  // {
+  //   "context": "Editor && vim_mode == insert",
+  //   "bindings": {
+  //     // "j k": "vim::NormalBefore"
+  //   },
+  // },
+
+  // Focus terminal if in editor
+  {
+    "context": "Editor",
+    "bindings": {
+      // "cmd-shift-j": "terminal_panel::ToggleFocus",
+      "cmd-j": "terminal_panel::ToggleFocus",
+    },
+  },
+
+  // Set terminal to full zoom
+  {
+    "context": "Terminal || Editor || Workspace",
+    "bindings": {
+      "cmd-shift-j": "workspace::ToggleZoom",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": false }],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-z": "zed::Zoom",
+    },
+  },
+  // Shift focus to editor from terminal
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-w e": "terminal_panel::ToggleFocus",
+    },
+  },
+  // Shift focus to terminal from editor
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-w e": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-k l": "language_selector::Toggle",
+    },
+  },
+  // {
+  //   "context": "Editor",
+  //   "bindings": {
+  //     "cmd-k f": "editor::Format",
+  //   },
+  // },
+
+  // Replicate tmux movements
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-x h": "workspace::ActivatePaneLeft",
+      "ctrl-x l": "workspace::ActivatePaneRight",
+      "ctrl-x j": "workspace::ActivatePaneDown",
+      "ctrl-x k": "workspace::ActivatePaneUp",
+
+      "alt-shift-h": "workspace::ActivatePaneLeft",
+      "alt-shift-l": "workspace::ActivatePaneRight",
+      "alt-shift-j": "workspace::ActivatePaneDown",
+      "alt-shift-k": "workspace::ActivatePaneUp",
+    },
+  },
+]

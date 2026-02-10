@@ -34,19 +34,19 @@ alias duf='du -sh *'
 alias ff='find . -type f -name'
 alias ffd='find . -type d -name'
 os_is Linux && {
-    alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+  alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 }
 alias go-root="sudo -u root -s"
 alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
 
 os_is macOS && {
-    alias b-update='brew update && brew upgrade && brew cleanup'
-    alias b-clean='brew cleanup'
-    alias b-inst='brew install'
-    alias b-list='brew list'
-    alias b-list-formula='brew list --formula'
-    alias b-list-cask='brew list --cask'
+  alias b-update='brew update && brew upgrade && brew cleanup'
+  alias b-clean='brew cleanup'
+  alias b-inst='brew install'
+  alias b-list='brew list'
+  alias b-list-formula='brew list --formula'
+  alias b-list-cask='brew list --cask'
 }
 
 ## directory shortcuts
@@ -56,7 +56,7 @@ hash -d alacritty=~/.config/alacritty
 hash -d nvim=~/.config/nvim/
 
 ## use delete key to delete
-bindkey "^[[3~"  delete-char
+bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 ## shift+tab backward menu key
 bindkey '^[[Z' reverse-menu-complete
@@ -83,16 +83,16 @@ alias work='~/.local/bin/tmux-work.sh'
 alias work-ghostty='~/.local/bin/ghostty-work.sh'
 
 if [[ -n "$BROWSER" ]]; then
-    _browser_fts=(htm html de org net com at cx nl se dk)
-    for ft in $_browser_fts; do alias -s $ft=$BROWSER; done
+  _browser_fts=(htm html de org net com at cx nl se dk)
+  for ft in $_browser_fts; do alias -s $ft=$BROWSER; done
 fi
 
 _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
 for ft in $_editor_fts; do alias -s $ft=$EDITOR; done
 
 if [[ -n "$XIVIEWER" ]]; then
-    _image_fts=(jpg jpeg png gif mng tiff tif xpm)
-    for ft in $_image_fts; do alias -s $ft=$XIVIEWER; done
+  _image_fts=(jpg jpeg png gif mng tiff tif xpm)
+  for ft in $_image_fts; do alias -s $ft=$XIVIEWER; done
 fi
 
 _media_fts=(ape avi flv m4a mkv mov mp3 mpeg mpg ogg ogm rm wav webm)
@@ -101,73 +101,6 @@ for ft in $_media_fts; do alias -s $ft=mplayer; done
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/config,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-alias find-outlook-temp-files='find /var/folders -iname com.microsoft.outlook 2>&1 |grep -v "ermi"'
-
-[[ $(uname -s) =~ Darwin ]] \
-    && code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
-
-pyclean () {
-    if command -v fd &> /dev/null; then
-        fd -t f -e '*.py[co]' -X rm {} \; 
-        fd -t d __pycache__ -X rm -r {} \;
-        return
-    fi
-    find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
-}
-
-list-sub-folders() {
-  FOLDER_NAME="$1"
-  DEPTH="${2:2}"
-  fd -d $DEPTH -t d ".*" $FOLDER_NAME
-}
-
-ansi-nvim () {
-  local FILE="$1"
-  sed 's|\x1b\[[;0-9]*m||g' $FILE | nvim -
-}
-
-clean-completions () {
-  rm ~/.zcompdump*; autoload -U compinit; compinit
-}
-
-fzf_open() {
-  local selected
-
-  # Build a list of files and directories (skip .git). Adjust -maxdepth or other find args as you like.
-  # We print paths relative to current directory.
-  # selected=$(
-  #   find . -path './.git' -prune -o -print 2> /dev/null \
-  #     | sed 's#^\./##' \
-  #     | fzf --height=40% --layout=reverse --border \
-  #           --preview '[[ -d {} ]] && ls -la --color=always {} || (bat --style=numbers --color=always {} 2>/dev/null || sed -n "1,200p" {})' \
-  #           --preview-window='right:50%' \
-  #           --pointer='➜' \
-  #           --prompt='Open> ' \
-  #           --ansi
-  # ) || return 0
-  selected=$(
-    fd --hidden --exclude '.git' . 2> /dev/null \
-      | sed 's#^\./##' \
-      | fzf --height=40% --layout=reverse --border \
-            --preview '[[ -d {} ]] && ls -la --color=always {} || (bat --style=numbers --color=always {} 2>/dev/null || sed -n "1,200p" {})' \
-            --preview-window='right:50%' \
-            --pointer='➜' \
-            --prompt='Open> ' \
-            --ansi
-  ) || return 0
-
-  # If nothing selected, do nothing
-  [[ -z $selected ]] && return 0
-
-  # If it's a directory, cd into it (preserves in current shell)
-  if [[ -d $selected ]]; then
-    cd -- "$selected" || return $?
-  else
-    # Otherwise open the file in vim
-    nvim -- "$selected"
-  fi
-}
-
-# Short alias
-alias fo='fzf_open'
-
+# VSCode open from CLI
+[[ $(uname -s) =~ Darwin ]] &&
+  code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }

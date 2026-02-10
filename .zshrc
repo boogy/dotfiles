@@ -99,7 +99,7 @@ export KEYTIMEOUT=1
 
 ## Edit line in vim buffer ctrl-v
 autoload edit-command-line; zle -N edit-command-line
-bindkey '^v' edit-command-line
+bindkey '^v' edit-command-line # Open in vim buffer
 ## Enter vim buffer from normal mode
 autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
 
@@ -165,11 +165,11 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 ## Control bindings for programs
-bindkey -s "^g" "vifm $PWD\n"
+# bindkey -s "^g" "vifm $PWD\n"
 # bindkey -s "^o" "open_with_fzf\n"
-bindkey -s "^g" "cd_with_fzf\n"
-bindkey -s '^o' "bolt --fzf-search\n"
-bindkey -s '^s' "bolt --rofi-search\n"
+# bindkey -s "^g" "cd_with_fzf\n"
+# bindkey -s '^o' "bolt --fzf-search\n"
+# bindkey -s '^s' "bolt --rofi-search\n"
 
 ## zsh bindings for HOME and END keys
 bindkey  "^[[H"   beginning-of-line
@@ -195,6 +195,8 @@ zsh_plugins=(
     aws
     terraform
     kubectl
+    widgets
+    functions
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"
@@ -263,4 +265,3 @@ export _ZO_ECHO=1 # print folder before cding into it
 ## load prompt
 # eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
 eval "$(starship init zsh)"
-

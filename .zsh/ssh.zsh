@@ -31,4 +31,3 @@ if [[ $#h -gt 0 ]]; then
   zstyle ':completion:*:(ssh|scp|rsync):*' hosts $h
   zstyle ':completion:*:slogin:*' hosts $h
 fi
-

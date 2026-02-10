@@ -400,4 +400,3 @@ msf-payload()
         MSF_TEMPLATE_PATH SSL_CHECK SSL_CERT SSL_CERTS_PATH
 }
 complete -F _msf_payload_complete msf-payload
-

@@ -7,10 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "features": {
-    // "edit_prediction_provider": "copilot",
-    "edit_prediction_provider": "zed",
-  },
   "language_models": {
     "ollama": {
       "api_url": "http://localhost:11434",
@@ -371,6 +367,16 @@
     },
     "YAML": {
       "tab_size": 2,
+    },
+    "Shell Script": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "shfmt",
+          // Change `--indent 2` to match your preferred tab_size
+          "arguments": ["--filename", "{buffer_path}", "--indent", "2"],
+        },
+      },
     },
     "Markdown": {
       "format_on_save": "on",

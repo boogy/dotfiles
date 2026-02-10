@@ -2,7 +2,6 @@
 1password-cli
 alacritty
 aws-vault
-aws-vault-binary
 docker
 docker-desktop
 flameshot
@@ -25,4 +24,3 @@ the-unarchiver
 vimr
 visual-studio-code
 zed
-

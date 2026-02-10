@@ -22,10 +22,12 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 # remove dock animation
 # restore default
 # defaults delete com.apple.dock autohide-time-modifier;killall Dock
-defaults write com.apple.dock autohide-time-modifier -int 0;killall Dock
+defaults write com.apple.dock autohide-time-modifier -int 0
+killall Dock
 
 # set ultra fast dock hide
-defaults write com.apple.dock autohide-time-modifier -float 0.12;killall Dock
+defaults write com.apple.dock autohide-time-modifier -float 0.12
+killall Dock
 
 # Enable key repeat
 defaults write -g ApplePressAndHoldEnabled -bool true
@@ -42,9 +44,8 @@ killall Dock
 ## ---------------------------------------------------------
 
 # Install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || \
-    /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" ||
+  /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ## Install brew formulas
 brew tap homebrew/cask-fonts
@@ -88,4 +89,3 @@ brew install --cask podman-desktop
 # brew install pinentry-mac
 # brew install yubikey-agent
 # brew install ykman
-

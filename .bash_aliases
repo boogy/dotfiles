@@ -3,7 +3,7 @@
 # Main configufation file which also loads
 # all the scripts from init
 #
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ###
 ### ACTIVATE SOME BASH MAGIC
@@ -78,9 +78,9 @@ stty -ixon
 
 ##### Load all the goods
 for config_file in $(ls "${ROOT_DIR}"/.bash/*.bash); do
-    # echo -n $config_file
-    # time source $config_file
-    source $config_file
+  # echo -n $config_file
+  # time source $config_file
+  source $config_file
 done
 
 ###
@@ -110,8 +110,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # command -v vim &>/dev/null && export EDITOR='vim'
 # command -v vim &>/dev/null && export VISUAL='vim'
 
-PS1="\[\033[1;32m\][\w]\[\033[0m\]"     # current directory
-PS1+="\n\[\033[1;33m\]\h\[\033[0m\]"    # hostname
+PS1="\[\033[1;32m\][\w]\[\033[0m\]"                   # current directory
+PS1+="\n\[\033[1;33m\]\h\[\033[0m\]"                  # hostname
 PS1+="\[\033[1;33m\]\$(git-branch-prompt)\[\033[0m\]" # git branch prompt
 PS1+="\[\033[1;33m\] >> \[\033[0m\]"
 
@@ -119,29 +119,29 @@ PS1+="\[\033[1;33m\] >> \[\033[0m\]"
 ### Linux specific
 ###
 [ $(uname) = "Linux" ] && {
-    # Load autojump environment
-    test -f /usr/share/autojump/autojump.bash   && source $_ &>/dev/null
-    test -f /usr/bin/virtualenvwrapper.sh       && source $_ &>/dev/null
-    test -f /usr/share/fzf/key-bindings.bash    && source $_ &>/dev/null
-    test -f /usr/share/fzf/completion.bash      && source $_ &>/dev/null
+  # Load autojump environment
+  test -f /usr/share/autojump/autojump.bash && source $_ &>/dev/null
+  test -f /usr/bin/virtualenvwrapper.sh && source $_ &>/dev/null
+  test -f /usr/share/fzf/key-bindings.bash && source $_ &>/dev/null
+  test -f /usr/share/fzf/completion.bash && source $_ &>/dev/null
 
-    ## show history from top to bottom
-    export FZF_CTRL_R_OPTS='--reverse'
+  ## show history from top to bottom
+  export FZF_CTRL_R_OPTS='--reverse'
 
-    export PATH="${HOME}/.rvm/bin:${PATH}"
-    export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    export PATH=${PATH}:${HOME}/bin
-    export PATH=${PATH}:/home/boogy/.cargo/bin
-    export PATH=${PATH}:${HOME}/.local/bin
-    export PATH=${PATH}:/opt/homebrew/bin
+  export PATH="${HOME}/.rvm/bin:${PATH}"
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  export PATH=${PATH}:${HOME}/bin
+  export PATH=${PATH}:/home/boogy/.cargo/bin
+  export PATH=${PATH}:${HOME}/.local/bin
+  export PATH=${PATH}:/opt/homebrew/bin
 
-    # export TERM=screen-256color
-    export EDITOR=$(which nvim)
-    export VIEW=$(which nvim)
+  # export TERM=screen-256color
+  export EDITOR=$(which nvim)
+  export VIEW=$(which nvim)
 
-    ## if using rvm load it
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+  ## if using rvm load it
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-    ## overwriting option with the local file
-    test -f ~/.bash_local && source $_
+  ## overwriting option with the local file
+  test -f ~/.bash_local && source $_
 }

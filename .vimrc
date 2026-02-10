@@ -82,4 +82,3 @@ exec "source " . s:editor_root . "/functions.vim"
 exec "source " . s:editor_root . "/config.vim"
 exec "source " . s:editor_root . "/mappings.vim"
 exec "source " . s:editor_root . "/autocmds.vim"
-

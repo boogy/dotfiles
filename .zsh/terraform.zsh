@@ -95,4 +95,3 @@ tg() {
     terragrunt --terragrunt-forward-tf-stdout "$@"
 }
 compdef tg=terragrunt
-

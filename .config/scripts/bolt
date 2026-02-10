@@ -10,99 +10,99 @@ LAUNCH_DIRECTORIES=thunar
 # "head" alternative
 # Forked from https://github.com/dylanaraps/pure-bash-bible#get-the-first-n-lines-of-a-file
 thead() {
-    while read -r line; do
-        echo "$line"
-        i=$((i + 1))
-        [ "$i" = "$1" ] && return
-    done < /dev/stdin
-    [ -n "$line" ] && printf %s "$line"
+  while read -r line; do
+    echo "$line"
+    i=$((i + 1))
+    [ "$i" = "$1" ] && return
+  done </dev/stdin
+  [ -n "$line" ] && printf %s "$line"
 }
 
 searchnlaunch() {
-    RESULT=$(grep "$1" "$SEARCHLIST" | thead 1)
-    if [ "$RESULT" ]; then
-        "$0" --launch "$RESULT"
-    else
-        "$BROWSER" google.com/search\?q="$1"
-    fi
+  RESULT=$(grep "$1" "$SEARCHLIST" | thead 1)
+  if [ "$RESULT" ]; then
+    "$0" --launch "$RESULT"
+  else
+    "$BROWSER" google.com/search\?q="$1"
+  fi
 }
 
 while :; do
-    case $1 in
-        --launch)
-            shift
-            #========================================================
-            # Modify this section according to your preference
-            #========================================================
-            case $(file --mime-type "$*" -bL) in
-                #====================================================
-                # Find out the mimetype of the file you wannna launch
-                #====================================================
-                video/*)
-                    #================================================
-                    # Launch using your favorite programs
-                    #================================================
-                    # mpv "$*"
-                    $LAUNCH_VIDEO "$*" || mpv "$*"
-                    ;;
-                #================================================
-                # So on and so forth
-                #================================================
-                application/pdf | application/postscript)
-                    $LAUNCH_PDF "$*"
-                    ;;
-                inode/directory)
-                    $LAUNCH_DIRECTORIES "$*"
-                    ;;
-                text/* | inode/x-empty | application/json | application/octet-stream | x-shellscript)
-                    "$EDITOR" "$*"
-                    ;;
-                image/*)
-                    eog "$*"
-                    ;;
-            esac
-            ;;
-
-        --fzf-search)
-            QUERY=$(awk -F / '{print $(NF-1)"/"$NF}' "$SEARCHLIST" |
-                fzf --reverse -e -i -m \
-                    --border --margin 15%,25% \
-                    --info hidden \
-                    --prompt "launch " \
-                    --bind=tab:down,btab:up)
-            [ "$QUERY" ] && searchnlaunch "$QUERY"
-            ;;
-
-        --tmux-search)
-            [ "$(tmux ls)" ] || tmux new-session -d
-            tmux new-window "$0 --fzf-search"
-            if pidof "$TERMINAL"; then
-                [ "$(pidof "$TERMINAL")" != "$(xdo pid)" ] &&
-                    xdo activate -N Alacritty
-            else
-                "$TERMINAL" -e tmux attach
-            fi
-            ;;
-
-        --rofi-search)
-            QUERY=$(awk -F / '{print $(NF-1)"/"$NF}' "$SEARCHLIST" | rofi -sort true -sorting-method fzf -dmenu -i -p Open)
-            [ "$QUERY" ] && searchnlaunch "$QUERY"
-            ;;
-
-        --generate)
-            PATHS=$(grep -v "^#" ~/.config/bolt/paths)
-            FILTERS=$(grep -Ev "^#|^$" ~/.config/bolt/filters | sed 's/^\./\\./' | tr '\n' '|' | sed 's/|$//')
-            find -L $PATHS -maxdepth $MAXDEPTH | grep -Ev "$FILTERS" > "$SEARCHLIST"
-            ;;
-
-        --watch)
-            PATHS=$(grep -v "^#" ~/.config/bolt/paths)
-            inotifywait -m -r -e create,delete,move $PATHS |
-                while read -r line; do
-                    "$0" --generate
-                done &
-            ;;
-        *) break ;;
-    esac
+  case $1 in
+  --launch)
     shift
+    #========================================================
+    # Modify this section according to your preference
+    #========================================================
+    case $(file --mime-type "$*" -bL) in
+    #====================================================
+    # Find out the mimetype of the file you wannna launch
+    #====================================================
+    video/*)
+      #================================================
+      # Launch using your favorite programs
+      #================================================
+      # mpv "$*"
+      $LAUNCH_VIDEO "$*" || mpv "$*"
+      ;;
+    #================================================
+    # So on and so forth
+    #================================================
+    application/pdf | application/postscript)
+      $LAUNCH_PDF "$*"
+      ;;
+    inode/directory)
+      $LAUNCH_DIRECTORIES "$*"
+      ;;
+    text/* | inode/x-empty | application/json | application/octet-stream | x-shellscript)
+      "$EDITOR" "$*"
+      ;;
+    image/*)
+      eog "$*"
+      ;;
+    esac
+    ;;
+
+  --fzf-search)
+    QUERY=$(awk -F / '{print $(NF-1)"/"$NF}' "$SEARCHLIST" |
+      fzf --reverse -e -i -m \
+        --border --margin 15%,25% \
+        --info hidden \
+        --prompt "launch " \
+        --bind=tab:down,btab:up)
+    [ "$QUERY" ] && searchnlaunch "$QUERY"
+    ;;
+
+  --tmux-search)
+    [ "$(tmux ls)" ] || tmux new-session -d
+    tmux new-window "$0 --fzf-search"
+    if pidof "$TERMINAL"; then
+      [ "$(pidof "$TERMINAL")" != "$(xdo pid)" ] &&
+        xdo activate -N Alacritty
+    else
+      "$TERMINAL" -e tmux attach
+    fi
+    ;;
+
+  --rofi-search)
+    QUERY=$(awk -F / '{print $(NF-1)"/"$NF}' "$SEARCHLIST" | rofi -sort true -sorting-method fzf -dmenu -i -p Open)
+    [ "$QUERY" ] && searchnlaunch "$QUERY"
+    ;;
+
+  --generate)
+    PATHS=$(grep -v "^#" ~/.config/bolt/paths)
+    FILTERS=$(grep -Ev "^#|^$" ~/.config/bolt/filters | sed 's/^\./\\./' | tr '\n' '|' | sed 's/|$//')
+    find -L $PATHS -maxdepth $MAXDEPTH | grep -Ev "$FILTERS" >"$SEARCHLIST"
+    ;;
+
+  --watch)
+    PATHS=$(grep -v "^#" ~/.config/bolt/paths)
+    inotifywait -m -r -e create,delete,move $PATHS |
+      while read -r line; do
+        "$0" --generate
+      done &
+    ;;
+  *) break ;;
+  esac
+  shift
 done
