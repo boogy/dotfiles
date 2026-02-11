@@ -214,6 +214,7 @@ zsh_plugins=(
     aws-vault
     aws
     terraform
+    terragrunt
     kubectl
     widgets
     functions
