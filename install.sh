@@ -20,6 +20,7 @@ MANAGED_FILES=(
   ~/.tmux.conf
 )
 
+echo "[+] Checking if ${INSTALLDIR} exists"
 test -d ${INSTALLDIR} || mkdir -p ${INSTALLDIR}
 
 cd ${INSTALLDIR}
@@ -33,11 +34,12 @@ CLEAN_EXISTING_FILES=${1:-Y}
 
 if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
   for FILE in ${MANAGED_FILES[@]}; do
-    echo "Deleting $FILE" && rm -rf "$FILE"
+    echo "[+] Deleting $FILE" && rm -rf "$FILE"
   done
 fi
 
 ## copy/symlink files to installdir
+echo "[+] Copying files to ${INSTALLDIR}"
 for FILE in ${MANAGED_FILES[@]}; do
   STRIPED_FILE_NAME=${FILE##*/}
   echo "Copying ${THIS_DIR}/${STRIPED_FILE_NAME} to ${INSTALLDIR}"
@@ -45,6 +47,7 @@ for FILE in ${MANAGED_FILES[@]}; do
 done
 
 ## link .config files
+echo "[+] Linking .config files"
 for DOT_FILE in $(ls .config); do
   if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
     rm -rf ~/.config/$DOT_FILE
@@ -52,12 +55,8 @@ for DOT_FILE in $(ls .config); do
   ln -sf $THIS_DIR/.config/$DOT_FILE ~/.config/
 done
 
-## Alacritty OS specific config
-# cd ~/.config/alacritty &&
-#   ln -sf alacritty-$(uname -s).yml alacritty.yml &&
-#   cd $THIS_DIR
-
 ## link scripts
+echo "[+] Linking scripts from ${THIS_DIR}/.config/scripts to /usr/local/bin/"
 for FILE in $(ls $THIS_DIR/.config/scripts); do
   # if [[ $CLEAN_EXISTING_FILES =~ [Y|y] ]]; then
   #     for RM_FILE in $(ls $THIS_DIR/.config/scripts); do
@@ -68,26 +67,47 @@ for FILE in $(ls $THIS_DIR/.config/scripts); do
 done
 
 ## map all the configuration for vim
+echo "[+] Linking NeoVim configuration"
 ln -sf ~/.config/nvim/init.vim ~/.vimrc
 ln -sf ~/.config/nvim ~/.vim
 ln -sf ~/.config/nvim ~/.vim/nvim
 
 ## Copy firefox user.js in all profiles
-case $(uname -s) in
+case "$(uname -s)" in
 Darwin)
-  firefox_profile="/Users/$USER/Library/Application Support/Firefox/Profiles"
-  firefox_ini_pth="/Users/$USER/Library/Application Support/Firefox/profiles.ini"
+  firefox_base="$HOME/Library/Application Support/Firefox"
   ;;
 Linux)
-  firefox_profile=~/.mozilla/firefox
-  firefox_ini_pth=$firefox_profile
+  firefox_base="$HOME/.mozilla/firefox"
+  ;;
+*)
+  echo "Unsupported OS"
+  exit 1
   ;;
 esac
 
-# Copy firefox preferences configuration
-FF_PROFILES_PATHS=($(awk -F"=" '/Path=/{print $2}' "${firefox_ini_pth}"))
-for P in "${FF_PROFILES_PATHS[@]}"; do
-  cp "${THIS_DIR}/deploy/conf/firefox/user.js" "${firefox_profile}/${P}"
+profiles_ini="$firefox_base/profiles.ini"
+userjs_src="$THIS_DIR/deploy/conf/firefox/user.js"
+
+[[ -f "$profiles_ini" ]] || {
+  echo "[-] profiles.ini not found"
+  exit 1
+}
+[[ -f "$userjs_src" ]] || {
+  echo "[-] user.js not found"
+  exit 1
+}
+
+echo "[+] Copying user.js to all Firefox profiles..."
+
+# Extract profile paths
+awk -F= '/^Path=/{print $2}' "$profiles_ini" | while read -r path; do
+  profile_dir="$firefox_base/$path"
+
+  if [[ -d "$profile_dir" ]]; then
+    cp "$userjs_src" "$profile_dir/user.js"
+    echo "  ✔ Copied to $profile_dir"
+  fi
 done
 
 ## Make sure .bash_aliases is loaded and more
@@ -96,13 +116,6 @@ case $(uname) in
   grep -qEo ".bash_aliases" ~/.bashrc ||
     echo "source ~/.bash_aliases" >>~/.bashrc
   (test -f ~/.bashrc && chmod 0700 $_ && source $_) &>/dev/null
-
-  ## setup xmonad
-  # command -v ghc && {
-  #     (mkdir -p $HOME/.local/share/xmonad \
-  #         && ln -s ${THIS_DIR}/.config/xmonad $HOME/.xmonad \
-  #         && cd $HOME/.config/xmonad/ && ghc -dynamic xmonadctl.hs) &>/dev/null
-  # }
   ;;
 
 [Dd]arwin)
@@ -113,7 +126,8 @@ case $(uname) in
     echo "source ~/.bash_aliases" >>~/.profile
   (test -f ~/.profile && chmod 0700 $_ && source $_) &>/dev/null
 
-  ## setup VSCode
+  ## Setup VSCode
+  echo "[+] Linking VSCode configuration"
   ln -sf ${THIS_DIR}/deploy/conf/VSCode/User "/Users/$USER/Library/Application Support/Code/"
   ;;
 *)

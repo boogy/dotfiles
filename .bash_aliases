@@ -120,8 +120,6 @@ PS1+="\[\033[1;33m\] >> \[\033[0m\]"
 ###
 [ $(uname) = "Linux" ] && {
   # Load autojump environment
-  test -f /usr/share/autojump/autojump.bash && source $_ &>/dev/null
-  test -f /usr/bin/virtualenvwrapper.sh && source $_ &>/dev/null
   test -f /usr/share/fzf/key-bindings.bash && source $_ &>/dev/null
   test -f /usr/share/fzf/completion.bash && source $_ &>/dev/null
 
