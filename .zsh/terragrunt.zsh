@@ -28,12 +28,12 @@ tg-run() {
   local include_external=0
   local tf_cmd="init"
 
-  # Parse our wrapper options + terraform command, stop at --
+  # Parse wrapper options + terraform command, stop at --
   while (($#)); do
     case "$1" in
     -d | --depth)
       shift
-      depth="${1:-3}"
+      depth="${1:-4}"
       shift
       ;;
     -e | --include-external)
@@ -55,7 +55,7 @@ tg-run() {
     esac
   done
 
-  # Everything remaining (after --) is Terraform args
+  # Remaining args are terraform args
   local -a tf_args
   tf_args=("$@")
 
@@ -73,12 +73,12 @@ tg-run() {
     ))
   fi
 
-  ((${#dirs[@]} == 0)) && {
+  if ((${#dirs[@]} == 0)); then
     echo "No terragrunt.hcl files found."
     return 1
-  }
+  fi
 
-  # Select dirs
+  # Select directories via fzf
   local picked
   picked=$(
     printf '%s\n' "${dirs[@]}" |
@@ -90,13 +90,13 @@ tg-run() {
 
   [[ -z "$picked" ]] && return 1
 
+  # Build include args
   local -a include_args
   while IFS= read -r d; do
     [[ -n "$d" ]] && include_args+=(--queue-include-dir "$d")
   done <<<"$picked"
 
-  # Build final command:
-  # terragrunt flags ... -- <terraform cmd> <terraform args...>
+  # Build full command array (safe execution)
   local -a full_cmd
   full_cmd=(
     terragrunt run --all
@@ -109,15 +109,33 @@ tg-run() {
 
   full_cmd+=(-- "$tf_cmd" -compact-warnings "${tf_args[@]}")
 
+  # Pretty print command
   echo
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   echo "Command to run:"
   echo
-  printf '  %q ' "${full_cmd[@]}"
+
+  echo "terragrunt run --all --tf-forward-stdout --non-interactive \\"
+
+  for ((i = 1; i <= ${#include_args[@]}; i += 2)); do
+    printf "  %q %q \\\\\n" "${include_args[i]}" "${include_args[i + 1]}"
+  done
+
+  if ((include_external)); then
+    echo "  --queue-include-external \\"
+  fi
+
+  printf "  -- %q -compact-warnings" "$tf_cmd"
+  for arg in "${tf_args[@]}"; do
+    printf " %q" "$arg"
+  done
+  echo
+
   echo
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   echo
 
+  # Confirmation
   read -q "REPLY?Run this command? [y/N] "
   echo
 
