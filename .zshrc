@@ -50,9 +50,6 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 # export TERM=xterm-256color
 export PYTHONSTARTUP=~/.pythonrc.py
 export GOPATH=$HOME/go
-
-## bspwm java applications problem
-export _JAVA_AWT_WM_NONREPARENTING=1
 export PYENV_ROOT="$HOME/.pyenv"
 
 ##
@@ -91,7 +88,7 @@ zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(
 
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)       # Include hidden files.
+_comp_options+=(globdots) # Include hidden files (ex: ../).
 
 ## vi mode
 bindkey -v
@@ -137,6 +134,7 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 
+## vim change in "", '', ``
 ## ci", ci', ci`, di", etc
 autoload -U select-quoted
 zle -N select-quoted
@@ -146,6 +144,7 @@ for m in visual viopp; do
     done
 done
 
+## vim change in {}, (), <>
 ## ci{, ci(, ci<, di{, etc
 autoload -U select-bracketed
 zle -N select-bracketed
@@ -155,13 +154,25 @@ for m in visual viopp; do
     done
 done
 
+
+#-----------------------------------
+# Cursor Styles
+#-----------------------------------
+# | Code     | Cursor Style       |
+# | -------- | ------------------ |
+# | `\e[1 q` | blinking block     |
+# | `\e[2 q` | steady block       |
+# | `\e[3 q` | blinking underline |
+# | `\e[4 q` | steady underline   |
+# | `\e[5 q` | blinking bar       |
+# | `\e[6 q` | steady bar         |
 zle-line-init() {
     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
 
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
+echo -ne '\e[5 q'               # Use beam shape cursor on startup.
 precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 ## Control bindings for programs
@@ -174,7 +185,17 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 ## zsh bindings for HOME and END keys
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
+bindkey  "^[[3~"  delete-char # CTRL-DELETE
+
+# Make Meta/Option sequences reliable (important for vi-mode)
+# KEYTIMEOUT=40   # 0.4s; bump to 80 if you type slowly
+
+# Option+Left / Option+Right should move by word in vi *insert* mode
+bindkey -M viins '^[b' backward-word
+bindkey -M viins '^[f' forward-word
+# Also bind in vi *command* mode (optional but avoids weirdness)
+bindkey -M vicmd '^[b' backward-word
+bindkey -M vicmd '^[f' forward-word
 
 ##
 ## source plugins from oh-my-zsh

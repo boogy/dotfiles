@@ -1,3 +1,119 @@
+# Replace multiple tokens from the current command line using fzf (loop)
+fzf-replace-tokens() {
+  emulate -L zsh
+  setopt localoptions no_aliases pipefail
+
+  command -v fzf >/dev/null 2>&1 || { zle -M "fzf not found"; return 1; }
+
+  local -a words choices
+  local picked idx replacement
+  local i
+
+  # Keep looping until user aborts
+  while true; do
+    words=(${(z)BUFFER})
+    (( ${#words} == 0 )) && break
+
+    # Build indexed list (index + TAB + token)
+    choices=()
+    for i in {1..${#words}}; do
+      choices+=("${i}"$'\t'"${words[$i]}")
+    done
+
+    zle -I
+    picked=$(
+      printf '%s\n' "${choices[@]}" |
+        fzf --height=40% --reverse \
+            --prompt="replace token> " \
+            --header=$'Enter: select  Esc/Ctrl-C: done' \
+            --delimiter=$'\t' --with-nth=2..
+    ) || break
+
+    [[ -n "$picked" ]] || break
+
+    idx="${picked%%$'\t'*}"
+    [[ "$idx" == <-> ]] || continue
+
+    # Prompt for replacement
+    print -rn -- "Replace '${words[$idx]}' with (empty = skip, Ctrl-C = done): " > /dev/tty
+    IFS= read -r replacement < /dev/tty || break
+
+    # Empty => skip this token, continue loop
+    [[ -z "$replacement" ]] && continue
+
+    # Quote only if needed
+    if [[ "$replacement" == *[[:space:]\;\&\|\<\>\(\)\[\]\{\}\'\"\`\\]* ]]; then
+      words[$idx]="${(q)replacement}"
+    else
+      words[$idx]="$replacement"
+    fi
+
+    BUFFER="${(j: :)words}"
+    CURSOR=${#BUFFER}
+    zle reset-prompt
+  done
+
+  zle reset-prompt
+}
+zle -N fzf-replace-tokens
+bindkey -M emacs '^XR' fzf-replace-tokens # CTRL-X Shift-R
+bindkey -M viins '^XR' fzf-replace-tokens # CTRL-X Shift-R
+
+# Replace a token from the current command line using fzf
+fzf-replace-token() {
+  emulate -L zsh
+  setopt localoptions no_aliases pipefail
+
+  command -v fzf >/dev/null 2>&1 || { zle -M "fzf not found"; return 1; }
+
+  local -a words choices
+  local picked idx replacement
+  local i
+
+  # Split BUFFER into shell tokens (respects existing quotes)
+  words=(${(z)BUFFER})
+  (( ${#words} == 0 )) && return 0
+
+  # Build indexed list (index + TAB + token)
+  choices=()
+  for i in {1..${#words}}; do
+    choices+=("${i}"$'\t'"${words[$i]}")
+  done
+
+  # Run fzf cleanly
+  zle -I
+  picked=$(
+    printf '%s\n' "${choices[@]}" |
+      fzf --height=40% --reverse --prompt="replace token> " \
+          --delimiter=$'\t' --with-nth=2..
+  ) || { zle reset-prompt; return 0; }
+
+  [[ -n "$picked" ]] || { zle reset-prompt; return 0; }
+
+  idx="${picked%%$'\t'*}"
+  [[ "$idx" == <-> ]] || { zle -M "Bad selection"; zle reset-prompt; return 1; }
+
+  # Ask for replacement via /dev/tty (reliable with ZLE + Ghostty)
+  print -rn -- "Replace '${words[$idx]}' with: " > /dev/tty
+  IFS= read -r replacement < /dev/tty || { zle reset-prompt; return 0; }
+  [[ -z "$replacement" ]] && { zle reset-prompt; return 0; }
+
+  # Quote only if needed (spaces/shell metacharacters)
+  if [[ "$replacement" == *[[:space:]\;\&\|\<\>\(\)\[\]\{\}\'\"\`\\]* ]]; then
+    words[$idx]="${(q)replacement}"
+  else
+    words[$idx]="$replacement"
+  fi
+
+  # Rebuild without over-quoting everything
+  BUFFER="${(j: :)words}"
+  CURSOR=${#BUFFER}
+  zle reset-prompt
+}
+zle -N fzf-replace-token
+bindkey -M emacs '^Xr' fzf-replace-token # CTRL-X r
+bindkey -M viins '^Xr' fzf-replace-token # CTRL-X r
+
 # Jump to word in command line (CTRL-X CTRL-X)
 jump-to-word(){
     # BUFFER = entire command line contents
@@ -263,3 +379,85 @@ EOF
 }
 zle -N insert-snippet
 bindkey '^Xs' insert-snippet # (CTRL-X s)
+
+# ------------------------------------------------------------
+# Refactor mode: replace tokens repeatedly using fzf
+# In fzf:
+#   Tab        -> select token to replace
+#   Enter      -> replace one occurrence
+#   Esc/Ctrl-C -> quit
+# Fast refactor mode (Ctrl-X h): multi-select tokens and replace them
+fzf-refactor-fast() {
+  emulate -L zsh
+  setopt localoptions no_aliases pipefail
+
+  command -v fzf >/dev/null 2>&1 || { zle -M "fzf not found"; return 1; }
+
+  local -a words choices selected_lines
+  local tmp out line idx token replacement
+  local i
+
+  _rf_quote_if_needed() {
+    local s="$1"
+    if [[ "$s" == *[[:space:]\;\&\|\<\>\(\)\[\]\{\}\'\"\`\\]* ]]; then
+      print -r -- "${(q)s}"
+    else
+      print -r -- "$s"
+    fi
+  }
+
+  words=(${(z)BUFFER})
+  if (( ${#words} == 0 )); then
+    zle -M "No command to refactor (type a command first)"
+    return 0
+  fi
+
+  choices=()
+  for (( i=1; i<=${#words}; i++ )); do
+    choices+=("${i}"$'\t'"${words[$i]}")
+  done
+
+  # Write candidates to a temp file (makes fzf fast+stable in ZLE/ghostty)
+  tmp="$(mktemp -t zsh-fzf-refactor.XXXXXX)" || return 1
+  {
+    printf '%s\n' "${choices[@]}"
+  } >| "$tmp"
+
+  zle -I
+  # Override heavy global FZF_DEFAULT_OPTS (previews/etc.) for speed
+  out="$(
+    FZF_DEFAULT_OPTS='' \
+    fzf --height=50% --reverse --multi \
+        --prompt="refactor> " \
+        --header=$'TAB=mark | ENTER=apply | ESC=quit' \
+        --delimiter=$'\t' --with-nth=2.. \
+        < "$tmp"
+  )"
+
+  rm -f -- "$tmp"
+
+  [[ -n "$out" ]] || { zle reset-prompt; return 0; }
+
+  selected_lines=("${(@f)out}")
+  (( ${#selected_lines} == 0 )) && { zle reset-prompt; return 0; }
+
+  # Replace each selected token
+  for line in "${selected_lines[@]}"; do
+    idx="${line%%$'\t'*}"
+    [[ "$idx" == <-> ]] || continue
+
+    token="${words[$idx]}"
+    print -rn -- "Replace '$token' with (empty=skip): " > /dev/tty
+    IFS= read -r replacement < /dev/tty || break
+    [[ -z "$replacement" ]] && continue
+
+    words[$idx]="$(_rf_quote_if_needed "$replacement")"
+  done
+
+  BUFFER="${(j: :)words}"
+  CURSOR=${#BUFFER}
+  zle reset-prompt
+}
+zle -N fzf-refactor-fast
+bindkey -M emacs '^Xh' fzf-refactor-fast # CTRL-X h
+bindkey -M viins '^Xh' fzf-refactor-fast # CTRL-X h
