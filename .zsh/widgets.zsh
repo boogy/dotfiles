@@ -461,3 +461,4 @@ fzf-refactor-fast() {
 zle -N fzf-refactor-fast
 bindkey -M emacs '^Xh' fzf-refactor-fast # CTRL-X h
 bindkey -M viins '^Xh' fzf-refactor-fast # CTRL-X h
+

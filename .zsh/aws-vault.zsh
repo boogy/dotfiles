@@ -13,7 +13,7 @@ alias av='aws-vault'
 alias avs='aws-vault server'
 alias avl='aws-vault login'
 alias avll='aws-vault login -s'
-alias ave='aws-vault exec'
+# ave is defined as a function in aws.zsh with profile completion
 
 #--------------------------------------------------------------------#
 # Convenience Functions                                              #
@@ -156,3 +156,4 @@ function _find_browser() {
     # TODO - other platforms
   fi
 }
+
