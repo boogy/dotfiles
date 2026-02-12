@@ -164,6 +164,72 @@
           "type": "basic"
         }
       ]
+    },
+
+    {
+      "description": "Mouse button7 + button2/button1 for tab switching",
+      "manipulators": [
+        {
+          "from": {
+            "pointing_button": "button7"
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "mouse_button7_held",
+                "value": 1
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "set_variable": {
+                "name": "mouse_button7_held",
+                "value": 0
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "name": "mouse_button7_held",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "pointing_button": "button2"
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "name": "mouse_button7_held",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "pointing_button": "button1"
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_control", "left_shift"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
