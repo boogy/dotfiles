@@ -172,8 +172,8 @@ alias tg-apply="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
 alias tgd="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
 alias tg-destroy="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
 
-alias tgpp="terragrunt run --tf-forward-stdout --all --parallelism 10 -- plan -compact-warnings"
-alias tgpa="terragrunt run --tf-forward-stdout --all --parallelism 10 -- apply -compact-warnings"
+alias tgap="terragrunt run --tf-forward-stdout --all --parallelism 10 -- plan -compact-warnings"
+alias tgaa="terragrunt run --tf-forward-stdout --all --parallelism 10 -- apply -compact-warnings"
 
 # alias tgia="terragrunt run --all init --tf-forward-stdout --non-interactive"
 # alias tg-init-all="terragrunt run --all init --tf-forward-stdout --non-interactive"
