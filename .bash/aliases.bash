@@ -5,12 +5,12 @@
 source $HOME/.bash/utils.bash
 
 ## colors
-red=$(tput setaf 1)       # Issues/Errors
-green=$(tput setaf 2)     # Success
-yellow=$(tput setaf 3)    # Warnings/Information
-blue=$(tput setaf 4)      # Heading
-bold=$(tput bold setaf 7) # Highlight
-reset=$(tput setaf 7)     # Norma
+RED=$(tput setaf 1)       # Issues/Errors
+GREEN=$(tput setaf 2)     # Success
+YELLOW=$(tput setaf 3)    # Warnings/Information
+BLUE=$(tput setaf 4)      # Heading
+BOLD=$(tput bold setaf 7) # Highlight
+RESET=$(tput setaf 7)     # Norma
 
 [[ "$(uname -s)" =~ Darwin ]] &&
   export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
