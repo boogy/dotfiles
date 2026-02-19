@@ -34,9 +34,22 @@ CONFIG_EXCLUDE=(
 SCRIPTS_SUBDIR=".config/scripts"
 
 # Behavior flags
+# - First positional arg kept for backward compatibility: CLEAN
 CLEAN="${1:-N}"         # Y -> replace existing
 DRY_RUN="${DRY_RUN:-0}" # DRY_RUN=1 ./install.sh
 BACKUP_DIR="${HOME}/.dotfiles_backup/$(date +%Y%m%d-%H%M%S)"
+
+# macOS bootstrap control:
+#   --bootstrap-macos        force run
+#   --no-bootstrap-macos     force skip
+#   otherwise: ask if interactive, skip if non-interactive
+BOOTSTRAP_MACOS="ask"
+for arg in "$@"; do
+  case "$arg" in
+  --bootstrap-macos) BOOTSTRAP_MACOS="yes" ;;
+  --no-bootstrap-macos) BOOTSTRAP_MACOS="no" ;;
+  esac
+done
 
 # -----------------------------
 # Helpers
@@ -105,6 +118,59 @@ safe_link() {
   log "Linked: $dest -> $src"
 }
 
+confirm() {
+  local prompt="$1"
+  local reply
+  read -r -p "$prompt" reply
+  case "$reply" in
+  [yY] | [yY][eE][sS]) return 0 ;;
+  *) return 1 ;;
+  esac
+}
+
+run_macos_bootstrap() {
+  local script="$REPO_DIR/deploy/osx"
+
+  if [[ ! -f "$script" ]]; then
+    warn "macOS bootstrap script not found: $script"
+    return 1
+  fi
+
+  # It's a zsh script, but bash can run it if it has a proper shebang.
+  # We'll run it directly (respects its shebang).
+  log "Running macOS bootstrap: $script"
+  if [[ "$DRY_RUN" == "1" ]]; then
+    run "$script"
+  else
+    "$script"
+  fi
+}
+
+maybe_run_macos_bootstrap() {
+  [[ "$(uname -s)" == "Darwin" ]] || return 0
+
+  if [[ "$BOOTSTRAP_MACOS" == "yes" ]]; then
+    run_macos_bootstrap || warn "macOS bootstrap failed; continuing"
+    return 0
+  fi
+
+  if [[ "$BOOTSTRAP_MACOS" == "no" ]]; then
+    log "Skipping macOS bootstrap (--no-bootstrap-macos)"
+    return 0
+  fi
+
+  # ask mode: only prompt if interactive
+  if [[ -t 0 ]]; then
+    if confirm "Run macOS bootstrap (Homebrew + Brewfile + macOS defaults)? [y/N]: "; then
+      run_macos_bootstrap || warn "macOS bootstrap failed; continuing"
+    else
+      log "Skipping macOS bootstrap"
+    fi
+  else
+    log "Non-interactive shell detected; skipping macOS bootstrap"
+  fi
+}
+
 # -----------------------------
 # Clone / update repo
 # -----------------------------
@@ -127,7 +193,6 @@ for dest in "${MANAGED_PATHS[@]}"; do
   name="$(basename "$dest")"
   src="$REPO_DIR/$name"
 
-  # Special-case: linking a directory like ~/bin may exist in repo as "bin"
   # This assumes your repo contains entries named exactly like basename(dest).
   [[ -e "$src" ]] || {
     warn "Missing in repo, skipping: $src"
@@ -251,6 +316,11 @@ Darwin)
   warn "Unsupported OS: $(uname -s)"
   ;;
 esac
+
+# -----------------------------
+# Optional: macOS bootstrap (brew bundle + defaults)
+# -----------------------------
+maybe_run_macos_bootstrap
 
 log "Done."
 if [[ "$CLEAN" =~ ^[Yy]$ ]]; then
