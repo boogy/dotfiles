@@ -1,0 +1,259 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; kanata_macos_fr_CH_homerow_advanced.kbd
+;;
+;; macOS + Swiss French (fr_CH) + ISO keyboard
+;; Advanced Home-Row Mods + Per-Key Timing (HRM) + Hyper key on CapsLock
+;;
+;; ============================================================================
+;; IMPORTANT: MOUSE BUTTON REMAPS (Karabiner-style)
+;; ============================================================================
+;;
+;; Karabiner can remap mouse buttons directly (button4/button5/button6).
+;; Kanata on macOS generally cannot use mouse buttons as *inputs*.
+;;
+;; WORKAROUND:
+;;   Map mouse buttons to unused keyboard keys (F13/F14/F15) using:
+;;     - your mouse vendor tool, OR
+;;     - BetterTouchTool / SteerMouse, OR
+;;     - Karabiner (only for the mouse buttons)
+;;
+;; Suggested:
+;;   button6 -> F13  (Mission Control)
+;;   button4 -> F14  (Prev Space)
+;;   button5 -> F15  (Next Space)
+;;
+;; Then Kanata maps:
+;;   F13 -> MissionControl
+;;   F14 -> Ctrl+Left
+;;   F15 -> Ctrl+Right
+;;
+;; NOTE:
+;; This file implements the *keyboard side* only.
+;;
+;; ============================================================================
+;; WHAT THIS FILE DOES
+;; ============================================================================
+;;
+;; • Advanced home-row mods (tap letters, hold modifiers)
+;; • Per-key timing tuning for each HRM key
+;; • “nomods” layer after a tap to reduce accidental modifier triggers
+;; • ISO fix: swaps grv<->nubs in OUTPUT so <> is next to left shift
+;; • CapsLock = Hyper (Shift+Ctrl+Alt+Cmd) when held/pressed
+;; • Optional F13/F14/F15 mappings for mouse buttons
+;;
+;; ============================================================================
+;; LAYOUT vs KEYCODES (fr_CH)
+;; ============================================================================
+;;
+;; Kanata remaps HARDWARE keycodes (grv, nubs, y, etc.).
+;; macOS handles character layout.
+;;
+;; Keep macOS input source:
+;;   System Settings → Keyboard → Input Sources → Français (Suisse)
+;;
+;; DO NOT swap y/z inside Kanata for fr_CH.
+;;
+;; ============================================================================
+;; THE < > ISSUE (WHY WE SWAP grv <-> nubs)
+;; ============================================================================
+;;
+;; Your Karabiner EventViewer:
+;;   - key next to left shift = non_us_backslash   (ISO key) -> Kanata: nubs
+;;   - key left of "1"        = grave_accent...    ( §° key) -> Kanata: grv
+;;
+;; On your machine, you want <> to come from the ISO key next to left shift,
+;; so we do the same swap you used in Karabiner:
+;;
+;;   Physical grv  outputs nubs
+;;   Physical nubs outputs grv
+;;
+;; This is applied in deflayer base/nomods (output), not in defsrc (physical).
+;;
+;; ============================================================================
+;; HOME ROW MODS (YOUR REQUEST)
+;; ============================================================================
+;;
+;; Left hand:
+;;   A = Left Command (lmet)
+;;   S = Left Option  (lalt)
+;;   D = Left Shift   (lsft)
+;;   F = Left Control (lctl)
+;;
+;; Right hand:
+;;   J = Right Control (rctl)
+;;   K = Right Shift   (rsft)
+;;   L = Right Option  (ralt)
+;;   ; = Right Command (rmet)
+;;
+;; NOTE ABOUT ';'
+;;   ';' starts a comment at the beginning of a token/line.
+;;   So the alias is named "sc" and used as @sc in layers.
+;;
+;; ============================================================================
+;; CAPSLOCK = HYPER
+;; ============================================================================
+;;
+;; CapsLock acts as Hyper = Shift+Ctrl+Alt+Cmd (left-side modifiers).
+;;
+;; ============================================================================
+;; PERMISSIONS (MACOS)
+;; ============================================================================
+;;
+;; System Settings → Privacy & Security:
+;;   - Accessibility: enable for kanata + your terminal app
+;;   - Input Monitoring: enable for kanata + your terminal app
+;;
+;; ============================================================================
+;; RUNNING
+;; ============================================================================
+;;
+;; sudo kanata -c ~/.config/kanata/kanata_macos_fr_CH_homerow_advanced.kbd \
+;;   --no-wait --nodelay --quiet
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+
+  ;; Only internal keyboard
+  macos-dev-names-include (
+    "Apple Internal Keyboard / Trackpad"
+  )
+)
+
+(defvar
+  ;; -------------------------
+  ;; Per-key HRM timings (ms)
+  ;; -------------------------
+  a-tap 200   a-hold 150
+  s-tap 200   s-hold 150
+  d-tap 210   d-hold 165
+  f-tap 200   f-hold 160
+
+  j-tap 200   j-hold 160
+  k-tap 210   k-hold 165
+  l-tap 200   l-hold 150
+  sc-tap 200  sc-hold 150
+
+  ;; Same-hand detection groups (physical keys per side)
+  left-hand-keys  ( q w e r t a s d f g z x c v b )
+  right-hand-keys ( y u i o p h j k l ; n m , . / )
+
+  ;; Mouse-macro hold threshold (ms) for “tap vs repeat while held”
+  mouse-hold-threshold 250
+)
+
+;; ---------------------------------------------------------------------------
+;; defsrc = PHYSICAL keyboard layout (ISO).
+;; Do not apply swaps here.
+;; We add an extra row with F-keys so we can map F13/F14/F15 cleanly.
+;; ---------------------------------------------------------------------------
+(defsrc
+  esc  grv  1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w e r t y u i o p [ ] \
+  caps a s d f g h j k l ; ' ret
+  lsft nubs z x c v b n m , . / rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+
+  ;; Extra row: function keys used for mouse-button mappings
+  f13  f14  f15
+)
+
+;; ---------------------------------------------------------------------------
+;; base layer
+;; - output swap grv<->nubs
+;; - Caps = Hyper
+;; - HRM on home row
+;; - F13/F14/F15 mapped to macOS actions
+;; ---------------------------------------------------------------------------
+(deflayer base
+  esc  nubs 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w e r t y u i o p [ ] \
+  @hyper @a @s @d @f g h @j @k @l @sc ' ret
+  lsft grv  z x c v b n m , . / rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+
+  ;; Mouse button actions (via F13/F14/F15)
+  ;; - F13: Mission Control
+  ;; - F14: Previous Space (Ctrl+Left)
+  ;; - F15: Next Space     (Ctrl+Right)
+  @mc  @space-prev  @space-next
+)
+
+;; ---------------------------------------------------------------------------
+;; nomods layer
+;; - output swap grv<->nubs
+;; - Caps = Hyper
+;; - NO HRM on home row (plain letters)
+;; - Keep F13/F14/F15 mappings working even when nomods is active
+;; ---------------------------------------------------------------------------
+(deflayer nomods
+  esc  nubs 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w e r t y u i o p [ ] \
+  @hyper a s d f g h j k l ; ' ret
+  lsft grv  z x c v b n m , . / rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+
+  ;; Same mouse actions in nomods
+  @mc  @space-prev  @space-next
+)
+
+(deffakekeys
+  ;; Used by @tap to return from nomods to base after a short idle period
+  to-base (layer-switch base)
+)
+
+(defalias
+  ;; -------------------------------------------------------------------------
+  ;; HRM helper: nomods-after-tap
+  ;; -------------------------------------------------------------------------
+  ;; When an HRM key is tapped:
+  ;;   - switch to nomods (prevents accidental holds during rapid typing)
+  ;;   - after ~20ms idle, switch back to base
+  tap (multi
+        (layer-switch nomods)
+        (on-idle-fakekey to-base tap 20))
+
+  ;; -------------------------------------------------------------------------
+  ;; CapsLock = Hyper
+  ;; -------------------------------------------------------------------------
+  ;; Hyper = Shift+Ctrl+Alt+Cmd (left-side)
+  hyper (multi lsft lctl lalt lmet)
+
+  ;; -------------------------------------------------------------------------
+  ;; Home-row mods (per-key timing)
+  ;; -------------------------------------------------------------------------
+  a  (tap-hold-release-keys $a-tap  $a-hold  (multi a  @tap) lmet $left-hand-keys)
+  s  (tap-hold-release-keys $s-tap  $s-hold  (multi s  @tap) lalt $left-hand-keys)
+  d  (tap-hold-release-keys $d-tap  $d-hold  (multi d  @tap) lsft $left-hand-keys)
+  f  (tap-hold-release-keys $f-tap  $f-hold  (multi f  @tap) lctl $left-hand-keys)
+
+  j  (tap-hold-release-keys $j-tap  $j-hold  (multi j  @tap) rctl $right-hand-keys)
+  k  (tap-hold-release-keys $k-tap  $k-hold  (multi k  @tap) rsft $right-hand-keys)
+  l  (tap-hold-release-keys $l-tap  $l-hold  (multi l  @tap) ralt $right-hand-keys)
+
+  ;; Semicolon HRM alias: name is "sc" because ';' can start comments
+  sc (tap-hold-release-keys $sc-tap $sc-hold (multi ; @tap) rmet $right-hand-keys)
+
+  ;; -------------------------------------------------------------------------
+  ;; Mouse button outputs (to mimic Karabiner rules)
+  ;; -------------------------------------------------------------------------
+  ;; Mission Control: Kanata supports this key name on macOS builds.
+  mc MissionControl
+
+  ;; Switch Spaces: Ctrl+Left / Ctrl+Right (standard macOS shortcut)
+  space-prev C-left
+  space-next C-right
+
+  ;; OPTIONAL (not wired by default):
+  ;; “tap once vs repeat while held” behavior for Space switching.
+  ;; To use this, change the f14/f15 mapping in deflayer base/nomods to:
+  ;;   @space-prev-th   @space-next-th
+  ;;
+  ;; space-prev-rpt (macro-repeat C-left)
+  ;; space-next-rpt (macro-repeat C-right)
+  ;; space-prev-th  (tap-hold $mouse-hold-threshold $mouse-hold-threshold @space-prev @space-prev-rpt)
+  ;; space-next-th  (tap-hold $mouse-hold-threshold $mouse-hold-threshold @space-next @space-next-rpt)
+)
+
