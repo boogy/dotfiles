@@ -129,7 +129,7 @@ confirm() {
 }
 
 run_macos_bootstrap() {
-  local script="$REPO_DIR/deploy/osx"
+  local script="$REPO_DIR/deploy/macos.sh"
 
   if [[ ! -f "$script" ]]; then
     warn "macOS bootstrap script not found: $script"
