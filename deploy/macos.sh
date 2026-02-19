@@ -50,8 +50,6 @@ killall Dock
 ## Install brew formulas
 brew tap homebrew/cask-fonts
 
-brew install --cask font-cousine-nerd-font
-brew install --cask the-unarchiver
 brew install zsh
 brew install zsh-autosuggestions
 brew install zsh-completions
@@ -59,8 +57,6 @@ brew install zsh-syntax-highlighting
 brew install zsh-fast-syntax-highlighting
 brew install uv
 brew install alacritty
-brew install --cask ghostty
-brew install --cask 1password
 brew install 1password-cli
 brew install ripgrep
 brew install eza
@@ -83,9 +79,15 @@ brew install p7zip
 brew install tenv
 brew install zoxide
 brew install podman
+
 brew install --cask podman-desktop
+brew install --cask font-cousine-nerd-font
+brew install --cask the-unarchiver
+brew install --cask ghostty
+brew install --cask 1password
 
 # brew install pinentry
 # brew install pinentry-mac
 # brew install yubikey-agent
 # brew install ykman
+
