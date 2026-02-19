@@ -1,93 +1,173 @@
 #!/usr/bin/env zsh
+set -euo pipefail
+IFS=$'\n\t'
 
-## brew bundle install --file=Brewfile
-## OR
-## xargs brew install < formulae.txt
-## xargs brew install --cask < casks.txt
+# ------------------------------------------------------------------------------
+# macOS Bootstrap Script
+# ------------------------------------------------------------------------------
+#
+# This script:
+#   - Applies macOS UI defaults
+#   - Installs Homebrew (if missing)
+#   - Installs all packages using the Brewfile located in the same directory
+#
+#       brew bundle --file "<script_dir>/Brewfile"
+#
+# The Brewfile is the single source of truth.
+#
+# Environment variables:
+#   DRY_RUN=1        -> Print commands without executing
+#   NONINTERACTIVE=1 -> Non-interactive Homebrew install
+#
+# Example:
+#   ./deploy/osx
+#   DRY_RUN=1 ./deploy/osx
+#
+# Cleanup all software and only keep what's listed in Brewfile:
+#   brew bundle cleanup --global --force
+# ------------------------------------------------------------------------------
 
-## ---------------------------------------------------------
-## Settings / Options
-## ---------------------------------------------------------
+: "${DRY_RUN:=0}"
+: "${NONINTERACTIVE:=0}"
 
-## speed up time machine backups
-# sudo sysctl debug.lowpri_throttle_enabled=0
-# restore
-# sudo sysctl debug.lowpri_throttle_enabled=1
+# Resolve script directory (works even if executed via symlink)
+SCRIPT_DIR="$(cd "$(dirname "${(%):-%N}")" && pwd)"
+BREWFILE="$SCRIPT_DIR/Brewfile"
 
-## enable window drag with ctrl+cmd + mouse
-# to remove
-# defaults delete -g NSWindowShouldDragOnGesture
-defaults write -g NSWindowShouldDragOnGesture -bool true
+run() {
+  if [[ "$DRY_RUN" == "1" ]]; then
+    print -r -- "[DRY] $*"
+  else
+    eval "$@"
+  fi
+}
 
-# remove dock animation
-# restore default
-# defaults delete com.apple.dock autohide-time-modifier;killall Dock
-defaults write com.apple.dock autohide-time-modifier -int 0
-killall Dock
+log()  { print -r -- "[+] $*"; }
+warn() { print -r -- "[!] $*" >&2; }
 
-# set ultra fast dock hide
-defaults write com.apple.dock autohide-time-modifier -float 0.12
-killall Dock
+is_macos() { [[ "$(uname -s)" == "Darwin" ]]; }
 
-# Enable key repeat
-defaults write -g ApplePressAndHoldEnabled -bool true
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# ------------------------------------------------------------------------------
+# Sanity Check
+# ------------------------------------------------------------------------------
+is_macos || { warn "This script is macOS-only."; exit 1; }
 
-# Dock speed
-defaults write com.apple.dock autohide-delay -float 0
-defaults write com.apple.dock autohide-time-modifier -float 0
-killall Dock
+[[ -f "$BREWFILE" ]] || {
+  warn "Brewfile not found at: $BREWFILE"
+  exit 1
+}
 
-## ---------------------------------------------------------
-## Packages
-## ---------------------------------------------------------
+# ------------------------------------------------------------------------------
+# macOS Defaults (UI tweaks)
+# ------------------------------------------------------------------------------
+apply_macos_defaults() {
+  log "Applying macOS defaults…"
 
-# Install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" ||
-  /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  log "Enable window drag with ctrl+cmd + mouse"
+  run 'defaults write -g NSWindowShouldDragOnGesture -bool true'
 
-## Install brew formulas
-brew tap homebrew/cask-fonts
+  log "Dock behavior (instant hide)"
+  run 'defaults write com.apple.dock autohide -bool true'
+  run 'defaults write com.apple.dock autohide-delay -float 0'
+  run 'defaults write com.apple.dock autohide-time-modifier -float 0.12'
 
-brew install zsh
-brew install zsh-autosuggestions
-brew install zsh-completions
-brew install zsh-syntax-highlighting
-brew install zsh-fast-syntax-highlighting
-brew install uv
-brew install alacritty
-brew install 1password-cli
-brew install ripgrep
-brew install eza
-brew install bat
-brew install fd
-brew install fzf
-brew install aws-vault
-brew install awscli
-brew install git
-brew install bash
-brew install bash-completions
-brew install openssl
-brew install gnupg
-brew install go
-brew install tmux
-brew install neovim
-brew install direnv
-brew install jq
-brew install p7zip
-brew install tenv
-brew install zoxide
-brew install podman
+  log "Enable key repeat (disable press-and-hold accents)"
+  run 'defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false'
+  run 'defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false'
 
-brew install --cask podman-desktop
-brew install --cask font-cousine-nerd-font
-brew install --cask the-unarchiver
-brew install --cask ghostty
-brew install --cask 1password
+  log "Avoid creating .DS_Store files on network volumes"
+  run 'defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true'
 
-# brew install pinentry
-# brew install pinentry-mac
-# brew install yubikey-agent
-# brew install ykman
+  log "Set a fast keyboard repeat rate"
+  run 'defaults write NSGlobalDomain KeyRepeat -int 0'
+
+  log "Enable tap to click for current user and login screen"
+  run 'defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true'
+  run 'defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1'
+  run 'defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1'
+
+  log "Finder - Show filename extensions"
+  run 'defaults write NSGlobalDomain AppleShowAllExtensions -bool true'
+
+  log "Finder - Show path bar"
+  run 'defaults write com.apple.finder ShowPathbar -bool true'
+
+  log "Use list view in all Finder windows"
+  run 'defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"'
+
+  log "Finder - Allow quitting via COMMAND+Q"
+  run 'defaults write com.apple.finder QuitMenuItem -bool true'
+
+  log "Finder - Allow text selection in Quick Look"
+  run 'defaults write com.apple.finder QLEnableTextSelection -bool true'
+
+  log "Game Center - Disable Game Center"
+  run 'defaults write com.apple.gamed Disabled -bool true'
+
+  log "Restart Finder and Dock"
+  run 'killall Finder >/dev/null 2>&1 || true'
+  run 'killall Dock >/dev/null 2>&1 || true'
+}
+
+# ------------------------------------------------------------------------------
+# Homebrew Setup
+# ------------------------------------------------------------------------------
+ensure_brew() {
+  if command -v brew >/dev/null 2>&1; then
+    log "Homebrew already installed."
+    return 0
+  fi
+
+  log "Installing Homebrew…"
+  if [[ "$NONINTERACTIVE" == "1" ]]; then
+    run 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  else
+    run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  fi
+}
+
+ensure_brew_in_path() {
+  if command -v brew >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  command -v brew >/dev/null 2>&1 || {
+    warn "brew not found on PATH after installation."
+    exit 1
+  }
+}
+
+brew_install_from_brewfile() {
+  log "Updating Homebrew…"
+  run 'brew update'
+
+  log "Installing packages from Brewfile…"
+  run "brew bundle --file \"$BREWFILE\" --no-upgrade"
+}
+
+brew_cleanup() {
+  log "Cleaning up Homebrew…"
+  run 'brew cleanup -s || true'
+}
+
+# ------------------------------------------------------------------------------
+# Main
+# ------------------------------------------------------------------------------
+main() {
+  apply_macos_defaults
+  ensure_brew
+  ensure_brew_in_path
+  brew_install_from_brewfile
+  brew_cleanup
+
+  log "Bootstrap complete."
+}
+
+main "$@"
 

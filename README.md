@@ -9,12 +9,6 @@ This repository contains my shell, editor, terminal, and development environment
 - Symlink-based (single source of truth)
 - Backup-aware when replacing files
 
-If you want to use the Vim/Neovim configuration with Powerline and tmux, install the required Powerline fonts from:
-
-```
-deploy/conf/fonts
-```
-
 ---
 
 # Installation
@@ -33,7 +27,7 @@ The installer will:
 - Create symlinks for managed files
 - Link `.config` directories (with optional exclusions)
 - Link scripts into `/usr/local/bin`
-- Configure Vim/Neovim compatibility
+- Configure Vim/NeoVim compatibility
 - Copy `user.js` into all Firefox profiles (if present)
 
 ---
@@ -140,29 +134,20 @@ echo "source ~/.bash_aliases" >> ~/.bash_profile
 ## macOS
 
 ```bash
-bash ~/dotfiles/deploy/osx
+bash ~/dotfiles/deploy/macos.sh
 ```
 
-## Linux
+This will:
+
+- Install Homebrew (if missing)
+- Install required packages and fonts
+- Configure the macOS development environment
+
+The `Homebrew` packages can be installed without running the full bootstrap by using:
 
 ```bash
-bash ~/dotfiles/deploy/linux
+brew bundle --file=~/dotfiles/Brewfile
 ```
-
-These scripts install system packages and dependencies required by the configuration.
-
----
-
-# Features
-
-- Zsh and Bash configuration
-- Vim + Neovim unified setup
-- Tmux configuration
-- Firefox hardened `user.js`
-- VSCode configuration (macOS)
-- Custom scripts linked to `/usr/local/bin`
-- Backup-aware installation
-- Safe symlink management
 
 ---
 
@@ -175,10 +160,3 @@ cd ~/dotfiles
 git pull
 ./install.sh
 ```
-
----
-
-# Repository
-
-GitHub:  
-https://github.com/boogy/dotfiles
