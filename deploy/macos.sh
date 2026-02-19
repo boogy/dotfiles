@@ -75,6 +75,14 @@ apply_macos_defaults() {
   run 'defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false'
   run 'defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false'
 
+  log "Enable three finger drag"
+  run 'defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true'
+  run 'defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true'
+
+  log "Also enable dragging in accessibility"
+  run 'defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true'
+  run 'defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 0'
+
   log "Avoid creating .DS_Store files on network volumes"
   run 'defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true'
 
@@ -107,6 +115,8 @@ apply_macos_defaults() {
   log "Restart Finder and Dock"
   run 'killall Finder >/dev/null 2>&1 || true'
   run 'killall Dock >/dev/null 2>&1 || true'
+  run 'killall SystemUIServer'
+
 }
 
 # ------------------------------------------------------------------------------
