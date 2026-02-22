@@ -47,6 +47,7 @@
   "vim": {
     "toggle_relative_line_numbers": false,
   },
+  "when_closing_with_no_tabs": "close_window",
   "agent_buffer_font_size": 14.0,
   "ui_font_family": ".SystemUIFont",
   "buffer_line_height": "comfortable",
@@ -269,7 +270,6 @@
     },
     // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
     "play_sound_when_agent_done": true,
-    "always_allow_tool_actions": false,
     // "default_model": {
     //   "provider": "anthropic",
     //   "model": "claude-opus-4-1-latest",
