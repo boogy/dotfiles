@@ -56,14 +56,14 @@
   {
     "context": "Terminal",
     "bindings": {
-      "cmd-w e": "terminal_panel::ToggleFocus",
+      "cmd-g e": "terminal_panel::ToggleFocus",
     },
   },
   // Shift focus to terminal from editor
   {
     "context": "Editor",
     "bindings": {
-      "cmd-w e": "terminal_panel::ToggleFocus",
+      "cmd-g e": "terminal_panel::ToggleFocus",
     },
   },
   {
@@ -92,6 +92,12 @@
       "alt-shift-l": "workspace::ActivatePaneRight",
       "alt-shift-j": "workspace::ActivatePaneDown",
       "alt-shift-k": "workspace::ActivatePaneUp",
+    },
+  },
+  // Close active tab immediately
+  {
+    "bindings": {
+      "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }],
     },
   },
 ]
