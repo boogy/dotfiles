@@ -118,7 +118,7 @@ bindkey "^N" down-line-or-search
 ## word delimiters
 # export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export WORDCHARS='*?_-/.[]~=&;!#$%^(){}<>'
-bindkey '^W' backward-kill-word
+bindkey '^[^?' backward-kill-word
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
