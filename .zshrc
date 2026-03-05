@@ -218,6 +218,7 @@ zsh_plugins=(
     kubectl
     widgets
     functions
+    tools
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"

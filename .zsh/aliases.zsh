@@ -52,7 +52,6 @@ os_is macOS && {
 ## directory shortcuts
 hash -d dotfiles=~/dotfiles
 hash -d tmux=~/.config/tmux
-hash -d alacritty=~/.config/alacritty
 hash -d nvim=~/.config/nvim/
 
 ## use delete key to delete

@@ -358,9 +358,13 @@
       "formatter": {
         "external": {
           "command": "bash",
+          // "arguments": [
+          //   "-c",
+          //   "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path} --line-length 120",
+          // ],
           "arguments": [
             "-c",
-            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path} --line-length 120",
+            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path}",
           ],
         },
       },
