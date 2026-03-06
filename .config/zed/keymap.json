@@ -42,13 +42,6 @@
     },
   },
   {
-    "context": "Editor && Vim::Insert",
-    "bindings": {
-      "cmd-shift-7": "editor::ToggleComments",
-      "cmd-shift-/": "editor::ToggleComments",
-    },
-  },
-  {
     "context": "Workspace",
     "bindings": {
       "cmd-shift-g": "git_panel::ToggleFocus",
