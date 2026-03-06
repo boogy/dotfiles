@@ -12,6 +12,9 @@ unfocused-split-opacity = 0.99
 background-opacity = 0.92
 background-blur = 75
 
+# Make Option key act as Alt/Meta
+macos-option-as-alt = true
+
 # Enable ghostty shell integration
 shell-integration = zsh
 
