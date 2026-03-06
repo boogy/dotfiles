@@ -157,11 +157,7 @@ function tg_prompt_info() {
     echo "[${workspace}]"
   fi
 }
-compdef _terragrunt tg
-setopt tg
-
 # Terragrunt
-alias tg='terragrunt'
 
 alias tgp="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
 alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
@@ -174,6 +170,7 @@ alias tg-destroy="terragrunt run --tf-forward-stdout -- destroy -compact-warning
 
 alias tgap="terragrunt run --tf-forward-stdout --all --parallelism 10 -- plan -compact-warnings"
 alias tgaa="terragrunt run --tf-forward-stdout --all --parallelism 10 -- apply -compact-warnings"
+alias tg-find="terragrunt find --filter "
 
 # alias tgia="terragrunt run --all init --tf-forward-stdout --non-interactive"
 # alias tg-init-all="terragrunt run --all init --tf-forward-stdout --non-interactive"
@@ -181,6 +178,18 @@ alias tgaa="terragrunt run --tf-forward-stdout --all --parallelism 10 -- apply -
 # alias tg-plan-all="terragrunt run --all --tf-forward-stdout --non-interactive -- apply -compact-warnings"
 # alias tgaa="terragrunt run --all --tf-forward-stdout --non-interactive -- apply -compact-warnings"
 # alias tg-apply-all="terragrunt run --all --tf-forward-stdout --non-interactive -- apply -compact-warnings"
+
+function tg-init-filter() {
+  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- init
+}
+
+function tg-plan-filter() {
+  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- plan
+}
+
+function tg-apply-filter() {
+  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- apply
+}
 
 function tg-plan-parallel() {
   terragrunt run plan \
@@ -198,16 +207,8 @@ function tg-apply-parallel() {
     --tf-forward-stdout "$@"
 }
 
-# shortcut with completions
-compdef tf='terraform'
-compdef tg='terragrunt'
-
-# use same completion as terraform
-# complete -o nospace -C terraform tf
-# complete -o nospace -C terragrunt tg
-complete -o nospace -C /opt/homebrew/bin/terragrunt -C /opt/homebrew/bin/terraform tg
-
-tg() {
-  terragrunt --tf-forward-stdout "$@"
+function tg() {
+  terragrunt "$@"
 }
-compdef tg=terragrunt
+
+compdef _terragrunt tg
