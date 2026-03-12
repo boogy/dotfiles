@@ -33,6 +33,7 @@ alias gca='git commit -v -a'
 alias gcm='git commit -v -m'
 alias gci='git commit --interactive'
 alias gb='git branch'
+alias gbd='git branch -D'
 alias gba='git branch -a'
 alias gbt='git branch --track'
 alias gcount='git shortlog -sn'
@@ -297,3 +298,4 @@ function gsb() {
     fi
   git checkout "$(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")"
 }
+
