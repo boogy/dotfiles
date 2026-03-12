@@ -92,12 +92,43 @@
       "alt-shift-l": "workspace::ActivatePaneRight",
       "alt-shift-j": "workspace::ActivatePaneDown",
       "alt-shift-k": "workspace::ActivatePaneUp",
+
+      // Global "back to editor" button
+      "ctrl-alt-enter": "workspace::ActivateNextPane",
+
+      // Open recent
+      "ctrl-r": "projects::OpenRecent",
     },
   },
   // Close active tab immediately
   {
     "bindings": {
       "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }],
+    },
+  },
+  // Git
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "ctrl-z": "git::Uncommit",
+      "ctrl-delete": "git::RestoreTrackedFiles",
+      "ctrl-s": "git::Fetch",
+    },
+  },
+  // Pane
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+      "ctrl-tab": "pane::ActivateNextItem",
+    },
+  },
+  // Project panel
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-n": "project_panel::NewFile",
+      "ctrl-shift-n": "project_panel::NewDirectory",
     },
   },
 ]
