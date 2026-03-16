@@ -115,6 +115,10 @@ bindkey "^?" backward-delete-char
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
+# zsh auto-completions shortcuts
+bindkey '^w' autosuggest-execute
+bindkey '^e' autosuggest-accept
+
 ## word delimiters
 # export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export WORDCHARS='*?_-/.[]~=&;!#$%^(){}<>'
@@ -287,3 +291,4 @@ export _ZO_ECHO=1 # print folder before cding into it
 ## load prompt
 # eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
 eval "$(starship init zsh)"
+
