@@ -47,10 +47,9 @@ export VIEW="$EDITOR"
 export FZF_DEFAULT_OPTS='--history-size=100000 '
 export FZF_CTRL_R_OPTS="--reverse --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-# export TERM=xterm-256color
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 export PYTHONSTARTUP=~/.pythonrc.py
 export GOPATH=$HOME/go
-export PYENV_ROOT="$HOME/.pyenv"
 
 ##
 ## set PATH
@@ -61,7 +60,6 @@ export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
 export PATH="${PATH}:${HOME}/.cargo/bin"
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="${PATH}:${GOPATH}/bin"
 
 # Initialize completion system (consolidated)
@@ -279,16 +277,16 @@ if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
     source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
 fi
 
-# setup pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)" # && eval "$(pyenv init --path)"
-fi
-
 # zoxide cd replacement
 eval "$(zoxide init zsh --cmd j)"
 export _ZO_ECHO=1 # print folder before cding into it
 
-## load prompt
-# eval "source <(/opt/homebrew/bin/starship init zsh --print-full-init)"
+# setup direnv hook
+eval "$(direnv hook zsh)"
+
+## load staship prompt
 eval "$(starship init zsh)"
+
+# load mise
+eval "$(mise activate zsh)"
 

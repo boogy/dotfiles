@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
   "language_models": {
     "ollama": {
       "api_url": "http://localhost:11434",
@@ -228,10 +233,6 @@
     "default_profile": "ask",
     "favorite_models": [
       {
-        "provider": "copilot_chat",
-        "model": "claude-haiku-4.5",
-      },
-      {
         "provider": "ollama",
         "model": "gpt-oss:20b",
       },
@@ -264,10 +265,6 @@
         "model": "qwen3-vl:32b",
       },
     ],
-    "default_model": {
-      "provider": "anthropic",
-      "model": "claude-opus-4-5-thinking-latest",
-    },
     // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
     "play_sound_when_agent_done": true,
     // "default_model": {

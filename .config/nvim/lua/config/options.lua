@@ -10,6 +10,9 @@ vim.g.maplocalleader = "\\"
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/opt/node@22/bin"
 vim.env.PATH = vim.env.PATH .. ":/opt/homebrew/bin"
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 -- Suppress Node.js experimental warnings (SQLite warnings from LSP servers)
 vim.env.NODE_NO_WARNINGS = "1"
 
