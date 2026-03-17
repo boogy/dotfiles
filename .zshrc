@@ -109,13 +109,18 @@ bindkey -M menuselect 'up' vi-up-line-or-history
 bindkey -M menuselect 'right' vi-forward-char
 ## Fix backspace bug when switching modes
 bindkey "^?" backward-delete-char
+
 ## search in history
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
-# zsh auto-completions shortcuts
-bindkey '^w' autosuggest-execute
-bindkey '^e' autosuggest-accept
+# zsh auto-completions shortcuts (alt+w/e)
+# bindkey '^[w' autosuggest-execute
+# bindkey '^[e' autosuggest-accept
+
+# zsh auto-completions shortcuts (alt+w/e)
+bindkey '^k' autosuggest-execute
+bindkey '^p' autosuggest-accept
 
 ## word delimiters
 # export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
