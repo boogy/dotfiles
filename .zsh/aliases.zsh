@@ -3,17 +3,11 @@
 ## helper fucntion
 source $HOME/.bash/utils.bash
 
-alias ipa='ip -c=always a s'
-alias ipaj="ip -j a s|jq -c '.[]|select(.ifname|match(\"(eth[0-9]{1})\")).addr_info[0].local'|tr -d '\"'"
-alias ipaa="ip -j a s|jq '.[].addr_info[]|select(.family|match(\"inet$\"))|select(.label|match(\"[^(lo)]\"))|.label,.local'|sed -e ':a;N;\$!ba;s/\"//g;s/\([0-9]\{,3\}\.[0-9]\{,3\}.[0-9]\{,3\}\.[0-9]\{,3\}\)/\1\n/g'"
-
 # Command line head / tail shortcuts
 alias -g H='| head'
 alias -g T='| tail'
 alias -g G='| grep'
 alias -g R='| rg -i -e'
-alias -g grep_ipv4='| egrep -o "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"'
-alias -g grep_ipv6='| egrep -o "(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))"'
 alias -g L="| less"
 alias -g M="| most"
 alias -g C="| wc -l"
@@ -39,6 +33,8 @@ os_is Linux && {
 alias go-root="sudo -u root -s"
 alias xopen="xdg-open"
 alias exiftool="/usr/bin/vendor_perl/exiftool"
+
+alias lg=lazygit
 
 os_is macOS && {
   alias b-update='brew update && brew upgrade && brew cleanup'
@@ -103,3 +99,4 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 # VSCode open from CLI
 [[ $(uname -s) =~ Darwin ]] &&
   code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
+
