@@ -131,4 +131,11 @@
       "ctrl-shift-n": "project_panel::NewDirectory",
     },
   },
+
+  // Show all tabs
+  {
+    "bindings": {
+      "alt-shift-p": "tab_switcher::ToggleAll",
+    },
+  },
 ]

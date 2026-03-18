@@ -120,7 +120,7 @@ bindkey "^N" down-line-or-search
 
 # zsh auto-completions shortcuts (alt+w/e)
 bindkey '^k' autosuggest-execute
-bindkey '^p' autosuggest-accept
+bindkey '^j' autosuggest-accept
 
 ## word delimiters
 # export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -293,5 +293,6 @@ eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 
 # load mise
+# eval "$(mise activate zsh --shims)"
 eval "$(mise activate zsh)"
 

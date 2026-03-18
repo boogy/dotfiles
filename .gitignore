@@ -88,3 +88,9 @@ deploy/conf/VSCode/User/mcp.json
 # ZSH completion local files
 .zsh/completion-local/
 
+# Mise lock file
+.config/mise/mise.lock
+
+# Claude Code
+.claude/
+

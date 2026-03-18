@@ -1,0 +1,21 @@
+[tools]
+node = "24"
+opentofu = "1.11.5"
+python = "3.14"
+terraform = "1.14.7"
+terraform-docs = "0.21.0"
+terragrunt = "0.99.4"
+uv = "latest"
+
+[settings]
+env_shell_expand = true
+experimental = true
+status.show_env = true
+
+[settings.python]
+compile = false
+
+[env]
+# UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+# MISE_PYTHON_DEFAULT_PACKAGES_FILE="~/.config/mise/default-python-packages"
+
