@@ -72,6 +72,13 @@ fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
 compinit
 
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 _comp_options+=(globdots)  # Include hidden files
 setopt COMPLETE_ALIASES
 
