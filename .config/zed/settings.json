@@ -352,6 +352,12 @@
       // "language_servers": ["!basedpyright", "PyLSP"],
       "preferred_line_length": 120,
       "format_on_save": "on",
+      // "formatter": {
+      //   "external": {
+      //     "command": "ruff",
+      //     "arguments": ["format", "--line-length=120", "-"],
+      //   },
+      // },
       "formatter": {
         "external": {
           "command": "bash",
