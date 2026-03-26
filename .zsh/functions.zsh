@@ -73,3 +73,96 @@ fzf-open() {
 }
 alias fo='fzf-open'
 zle -N fzf-open && bindkey '^o' fzf-open
+
+# Open browser to the current repository
+repo() {
+  local base
+  base=$(git remote get-url origin) || return 1
+
+  if [[ $base == git@* ]]; then
+    base=${base#git@}          # remove leading git@
+    base=${base/:/\/}          # github.com/user/repo.git
+    base="https://$base"       # https://github.com/user/repo.git
+  elif [[ $base == http://* || $base == https://* ]]; then
+    :
+  else
+    echo "Don't know how to handle remote URL: $base" >&2
+    return 1
+  fi
+
+  base=${base%.git}
+
+  case "$1" in
+    issues) open "$base/issues" ;;
+    pr|prs|pulls) open "$base/pulls" ;;
+    *) open "$base" ;;
+  esac
+}
+
+# Show a list of all repos in the folder and fuzyfind the one to open in broweser
+repobrowse() {
+  local mode root selection repo remote url browser_cmd
+
+  mode="${1:-repo}"
+  root="${2:-$PWD}"
+
+  selection=$(
+    {
+      fd --hidden --follow --type d '^\.git$' "$root" 2>/dev/null
+      fd --hidden --follow --type f '^\.git$' "$root" 2>/dev/null
+    } |
+    while IFS= read -r git_path; do
+      repo_path=$(git -C "$(dirname "$git_path")" rev-parse --show-toplevel 2>/dev/null) || continue
+      printf '%s\t%s\n' "$(basename "$repo_path")" "$repo_path"
+    done |
+    sort -u |
+    fzf --prompt="repo> " \
+        --height=40% \
+        --reverse \
+        --with-nth=1
+  ) || return 1
+
+  repo=$(printf '%s\n' "$selection" | cut -f2-)
+
+  remote=$(git -C "$repo" remote get-url origin 2>/dev/null) || {
+    echo "No origin remote found for: $repo" >&2
+    return 1
+  }
+
+  case "$remote" in
+    git@github.com:*)
+      url="https://github.com/${remote#git@github.com:}"
+      ;;
+    https://github.com/*)
+      url="$remote"
+      ;;
+    http://github.com/*)
+      url="https://${remote#http://}"
+      ;;
+    *)
+      echo "Unsupported remote: $remote" >&2
+      return 1
+      ;;
+  esac
+
+  url=${url%.git}
+
+  case "$mode" in
+    repo) ;;
+    issues) url="$url/issues" ;;
+    pr|prs|pulls) url="$url/pulls" ;;
+    *)
+      echo "Usage: repobrowse [repo|issues|pulls] [root]" >&2
+      return 1
+      ;;
+  esac
+
+  if command -v open >/dev/null 2>&1; then
+    browser_cmd=open
+  else
+    browser_cmd=xdg-open
+  fi
+
+  "$browser_cmd" "$url"
+}
+
