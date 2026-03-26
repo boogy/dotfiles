@@ -138,4 +138,9 @@
       "alt-shift-p": "tab_switcher::ToggleAll",
     },
   },
+  {
+    "bindings": {
+      "alt-n": "workspace::NewCenterTerminal"
+    }
+  }
 ]
