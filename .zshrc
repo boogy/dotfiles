@@ -72,9 +72,8 @@ fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
 compinit
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions/:$FPATH
-
+if type brew >/dev/null 2>&1; then
+  fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
   autoload -Uz compinit
   compinit
 fi
