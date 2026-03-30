@@ -19,3 +19,7 @@ compile = false
 # UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 # MISE_PYTHON_DEFAULT_PACKAGES_FILE="~/.config/mise/default-python-packages"
 
+[tasks.install-python-package]
+description = "Install a Python package using UV."
+run = "pip install iam-policy-validator ruff"
+
