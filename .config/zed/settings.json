@@ -63,7 +63,7 @@
   "buffer_font_family": "Hack Nerd Font",
   "colorize_brackets": true,
   "format_on_save": "on",
-  // "formatter": "prettier",
+  // "formatter": "prettier"m
   "ui_font_size": 14.0,
   "buffer_font_size": 14.0,
   "theme": {

@@ -140,7 +140,7 @@
   },
   {
     "bindings": {
-      "alt-n": "workspace::NewCenterTerminal"
-    }
-  }
+      "ctrl-n": "workspace::NewCenterTerminal",
+    },
+  },
 ]

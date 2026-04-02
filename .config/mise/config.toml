@@ -1,7 +1,9 @@
 [tools]
+act = "latest"
+just = "latest"
 node = "latest"
 opentofu = "1.11.5"
-python = "3.14"
+python = "latest"
 terraform = "1.14.8"
 terraform-docs = "0.21.0"
 terragrunt = "0.99.4"
@@ -11,6 +13,7 @@ uv = "latest"
 env_shell_expand = true
 experimental = true
 status.show_env = true
+# always_keep_download = true
 
 [settings.python]
 compile = false
