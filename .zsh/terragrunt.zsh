@@ -180,23 +180,33 @@ alias tg-find="terragrunt find --filter "
 # alias tg-apply-all="terragrunt run --all --tf-forward-stdout --non-interactive -- apply -compact-warnings"
 
 function tg-init-filter() {
-  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- init
+  PARALLEL=${1:-10}
+  terragrunt run --tf-forward-stdout --all --parallelism $PARALLEL --filter $@ -- init
 }
 
 function tg-plan-filter() {
-  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- plan
+  PARALLEL=${1:-10}
+  terragrunt run --tf-forward-stdout --all --parallelism $PARALLEL --filter $@ -- plan
 }
 
 function tg-apply-filter() {
-  terragrunt run --tf-forward-stdout --all --parallelism 20 --filter $@ -- apply
+  PARALLEL=${1:-10}
+  terragrunt run --tf-forward-stdout --all --parallelism $PARALLEL --filter $@ -- apply
+}
+
+function tg-init-parallel() {
+  PARALLEL=${1:-10}
+  terragrunt run --non-interactive --tf-forward-stdout --parallelism $PARALLEL --all -- plan -compact-warnings
 }
 
 function tg-plan-parallel() {
-  terragrunt run --non-interactive --tf-forward-stdout --parallelism 10 --all -- plan -compact-warnings
+  PARALLEL=${1:-10}
+  terragrunt run --non-interactive --tf-forward-stdout --parallelism $PARALLEL --all -- plan -compact-warnings
 }
 
 function tg-apply-parallel() {
-  terragrunt run --non-interactive --tf-forward-stdout --parallelism 10 --all -- apply -compact-warnings
+  PARALLEL=${1:-10}
+  terragrunt run --non-interactive --tf-forward-stdout --parallelism $PARALLEL --all -- apply -compact-warnings
 }
 
 function tg() {
