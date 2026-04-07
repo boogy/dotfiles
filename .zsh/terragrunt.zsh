@@ -160,7 +160,7 @@ function tg_prompt_info() {
 # Terragrunt
 
 alias tgp="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
-alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
+alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings -lock=false"
 
 alias tga="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
 alias tg-apply="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
