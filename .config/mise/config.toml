@@ -6,6 +6,7 @@ opentofu = "1.11.5"
 python = "latest"
 terraform = "1.14.8"
 terraform-docs = "0.21.0"
+terraform-ls = "latest"
 terragrunt = "0.99.4"
 uv = "latest"
 
