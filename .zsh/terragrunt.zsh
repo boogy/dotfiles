@@ -192,19 +192,17 @@ function tg-apply-filter() {
 }
 
 function tg-plan-parallel() {
-  terragrunt run plan \
-    --compact-warnings \
+  terragrunt run \
     --non-interactive \
     --parallelism 10 \
-    --tf-forward-stdout "$@"
+    --tf-forward-stdout "$@" -- plan -compact-warnings
 }
 
 function tg-apply-parallel() {
-  terragrunt run apply \
-    --compact-warnings \
+  terragrunt run \
     --non-interactive \
     --parallelism 10 \
-    --tf-forward-stdout "$@"
+    --tf-forward-stdout "$@" -- apply -compact-warnings
 }
 
 function tg() {
@@ -212,3 +210,4 @@ function tg() {
 }
 
 compdef _terragrunt tg
+

@@ -1,7 +1,7 @@
 [tools]
 act = "latest"
 just = "latest"
-node = "latest"
+node = "24"
 opentofu = "1.11.5"
 python = "latest"
 terraform = "1.14.8"
