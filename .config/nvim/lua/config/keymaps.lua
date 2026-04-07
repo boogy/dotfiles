@@ -61,9 +61,9 @@ map("n", "<leader>C", '"_C', { desc = "Change until EOL without yanking" })
 --------------------------------------------------------------------------------------------------
 -- Floating terminal
 --------------------------------------------------------------------------------------------------
-map("n", "<leader>fP", function()
-  Util.float_term("ipython3", { cwd = Util.get_root() })
-end, { desc = "Terminal ipython3 (cwd)", silent = true })
+-- map("n", "<leader>fP", function()
+--   Util.float_term("ipython3", { cwd = Util.get_root() })
+-- end, { desc = "Terminal ipython3 (cwd)", silent = true })
 
 --------------------------------------------------------------------------------------------------
 -- Harpoon
@@ -104,3 +104,8 @@ map(
   ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
   { desc = "Open telescope file browser from the current buffer", noremap = true }
 )
+
+-- Close currently open buffer
+map("n", "<space>k", function()
+  vim.api.nvim_buf_delete(0, { force = true })
+end, { desc = "Delete currnt buffer", noremap = true })

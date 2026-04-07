@@ -1,6 +1,5 @@
 [tools]
 act = "latest"
-just = "latest"
 node = "24"
 opentofu = "1.11.5"
 python = "latest"
@@ -25,5 +24,5 @@ compile = false
 
 [tasks.install-python-package]
 description = "Install a Python package using UV."
-run = "pip install iam-policy-validator ruff"
+run = "pip install iam-policy-validator ruff httpx requests"
 
