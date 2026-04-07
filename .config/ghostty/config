@@ -15,6 +15,9 @@ background-blur = 75
 # Enable ghostty shell integration
 shell-integration = zsh
 
+# Use option as alt but only the left one
+macos-option-as-alt = left
+
 ###############################################
 # keybindings
 ###############################################
