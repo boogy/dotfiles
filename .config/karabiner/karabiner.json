@@ -9,7 +9,7 @@
                 },
                 "rules": [
                     {
-                        "description": "Mouse button7 + button2/button1 for tab switching",
+                        "description": "Mouse button7 + button2/button1 for tab switching, button7 alone for App Exposé",
                         "manipulators": [
                             {
                                 "from": { "pointing_button": "button7" },
@@ -27,6 +27,12 @@
                                             "name": "mouse_button7_held",
                                             "value": 0
                                         }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "down_arrow",
+                                        "modifiers": ["left_control"]
                                     }
                                 ],
                                 "type": "basic"
