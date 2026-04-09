@@ -313,7 +313,10 @@
       "*.js.tpl",
       "terragrunt.hcl.json", // if you ever use JSON variant
     ],
-    "terraform": ["*.tf", "*.tf.tpl"],
+    "OpenTofu": ["tf", "tf.tpl"],
+    "OpenTofu Vars": ["tfvars", "tfvars.yaml", "tfvars.json"],
+    // "Terraform": ["*.tf", "*.tf.tpl"],
+    // "Terraform Vars": ["*.tfvars.json", "*.tfvars"],
     "HCL": ["terragrunt.hcl", "*.hcl"],
     "jinja-json": ["*.json.j2", "*.json"],
     "jinja-html": ["*.html.j2"],
