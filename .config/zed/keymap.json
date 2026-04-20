@@ -24,53 +24,59 @@
     "context": "Editor",
     "bindings": {
       // "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-j": "terminal_panel::ToggleFocus",
-    },
+      "cmd-j": "terminal_panel::ToggleFocus"
+    }
   },
 
   // Set terminal to full zoom
   {
     "context": "Terminal || Editor || Workspace",
     "bindings": {
-      "cmd-shift-j": "workspace::ToggleZoom",
-    },
+      "cmd-shift-j": "workspace::ToggleZoom"
+    }
   },
   {
     "context": "Editor",
     "bindings": {
-      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": false }],
-    },
+      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": false }]
+    }
   },
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-shift-g": "git_panel::ToggleFocus",
-    },
+      "cmd-shift-g": "git_panel::ToggleFocus"
+    }
   },
   {
     "bindings": {
-      "cmd-shift-z": "zed::Zoom",
-    },
+      "cmd-shift-z": "zed::Zoom"
+    }
   },
   // Shift focus to editor from terminal
   {
     "context": "Terminal",
     "bindings": {
-      "cmd-g e": "terminal_panel::ToggleFocus",
-    },
+      "cmd-g e": "terminal_panel::ToggleFocus"
+    }
   },
   // Shift focus to terminal from editor
   {
     "context": "Editor",
     "bindings": {
-      "cmd-g e": "terminal_panel::ToggleFocus",
-    },
+      "cmd-g e": "terminal_panel::ToggleFocus"
+    }
   },
   {
     "context": "Editor",
     "bindings": {
-      "cmd-k l": "language_selector::Toggle",
-    },
+      "cmd-k l": "language_selector::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-alt-s": "editor::SortLinesCaseInsensitive"
+    }
   },
   // {
   //   "context": "Editor",
@@ -97,14 +103,14 @@
       "ctrl-alt-enter": "workspace::ActivateNextPane",
 
       // Open recent
-      "ctrl-r": "projects::OpenRecent",
-    },
+      "ctrl-r": "projects::OpenRecent"
+    }
   },
   // Close active tab immediately
   {
     "bindings": {
-      "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }],
-    },
+      "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }]
+    }
   },
   // Git
   {
@@ -112,35 +118,35 @@
     "bindings": {
       "ctrl-z": "git::Uncommit",
       "ctrl-delete": "git::RestoreTrackedFiles",
-      "ctrl-s": "git::Fetch",
-    },
+      "ctrl-s": "git::Fetch"
+    }
   },
   // Pane
   {
     "context": "Pane",
     "bindings": {
       "ctrl-shift-tab": "pane::ActivatePreviousItem",
-      "ctrl-tab": "pane::ActivateNextItem",
-    },
+      "ctrl-tab": "pane::ActivateNextItem"
+    }
   },
   // Project panel
   {
     "context": "ProjectPanel",
     "bindings": {
       "ctrl-n": "project_panel::NewFile",
-      "ctrl-shift-n": "project_panel::NewDirectory",
-    },
+      "ctrl-shift-n": "project_panel::NewDirectory"
+    }
   },
 
   // Show all tabs
   {
     "bindings": {
-      "alt-shift-p": "tab_switcher::ToggleAll",
-    },
+      "alt-shift-p": "tab_switcher::ToggleAll"
+    }
   },
   {
     "bindings": {
-      "ctrl-n": "workspace::NewCenterTerminal",
-    },
-  },
+      "ctrl-n": "workspace::NewCenterTerminal"
+    }
+  }
 ]
