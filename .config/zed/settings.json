@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
@@ -120,6 +126,7 @@
     "show": "auto",
   },
   "git_panel": {
+    "dock": "left",
     "tree_view": false,
     // Whether to show the git panel button in the status bar.
     "button": true,
@@ -230,6 +237,7 @@
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
+    "dock": "right",
     "default_profile": "ask",
     "favorite_models": [
       {
