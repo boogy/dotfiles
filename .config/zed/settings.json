@@ -407,7 +407,14 @@
       "formatter": {
         "external": {
           "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"],
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}",
+            "--prose-wrap",
+            "always",
+            "--print-width",
+            "200",
+          ],
         },
       },
     },
