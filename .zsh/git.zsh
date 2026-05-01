@@ -190,6 +190,10 @@ function git-show-changed-dirs {
   git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
 }
 
+function git-show-changed-files {
+  git diff --name-only HEAD~1 | sort | uniq
+}
+
 function git-push-pr {
   CURRENT_BRANCH=$(git branch --show-current)
   BRANCH=${1:-CURRENT_BRANCH}
