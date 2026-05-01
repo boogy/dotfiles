@@ -147,8 +147,8 @@
     "git_status": true,
   },
   "title_bar": {
-    "show_branch_status_icon": true,
     "show_menus": false,
+    "show_branch_icon": true,
   },
   "prettier": {
     "allowed": false,
@@ -274,7 +274,7 @@
       },
     ],
     // What completion mode to start new threads in, if available. Can be 'normal' or 'burn'.
-    "play_sound_when_agent_done": "always",
+    "play_sound_when_agent_done": true,
     // "default_model": {
     //   "provider": "anthropic",
     //   "model": "claude-opus-4-1-latest",
@@ -399,17 +399,17 @@
     "Markdown": {
       "format_on_save": "on",
       "tab_size": 2,
-      "remove_trailing_whitespace_on_save": false,
       // "indent_list_on_tab": true,
-      // "prettier": {
-      //   "allowed": true,
-      // },
-      "formatter": {
-        "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"],
-        },
+      "remove_trailing_whitespace_on_save": false,
+      "prettier": {
+        "allowed": true,
       },
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": ["--stdin-filepath", "{buffer_path}"],
+      //   },
+      // },
     },
     "JavaScript": {
       "tab_size": 2,
@@ -496,7 +496,6 @@
           "keyOrdering": false,
           "format": {
             "singleQuote": true,
-            "printWidth": 200,
           },
           "schemaStore": {
             "enable": true,
