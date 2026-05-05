@@ -401,22 +401,22 @@
       "tab_size": 2,
       "remove_trailing_whitespace_on_save": false,
       // "indent_list_on_tab": true,
-      // "prettier": {
-      //   "allowed": true,
-      // },
-      "formatter": {
-        "external": {
-          "command": "prettier",
-          "arguments": [
-            "--stdin-filepath",
-            "{buffer_path}",
-            "--prose-wrap",
-            "always",
-            "--print-width",
-            "200",
-          ],
-        },
+      "prettier": {
+        "allowed": true,
       },
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": [
+      //       "--stdin-filepath",
+      //       "{buffer_path}",
+      //       "--prose-wrap",
+      //       "always",
+      //       "--print-width",
+      //       "200",
+      //     ],
+      //   },
+      // },
     },
     "JavaScript": {
       "tab_size": 2,

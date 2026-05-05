@@ -58,6 +58,7 @@ export GOPATH=$HOME/go
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="${PATH}:${HOME}/bin"
+# export PATH="${PATH}:$HOME/.local/share/mise/shims"
 export PATH="${PATH}:${HOME}/.local/bin"
 export PATH="${PATH}:${HOME}/.cargo/bin"
 export PATH="${PATH}:${GOPATH}/bin"
@@ -298,7 +299,7 @@ eval "$(direnv hook zsh)"
 ## load staship prompt
 eval "$(starship init zsh)"
 
-# load mise
-# eval "$(mise activate zsh --shims)"
+# setup mise in non-interactive sessions
+# echo 'eval "$(mise activate zsh --shims)"' >> ~/.zprofile
 eval "$(mise activate zsh)"
 

@@ -65,6 +65,10 @@ map("n", "<leader>C", '"_C', { desc = "Change until EOL without yanking" })
 --   Util.float_term("ipython3", { cwd = Util.get_root() })
 -- end, { desc = "Terminal ipython3 (cwd)", silent = true })
 
+-- Exit insert mode in terminal
+vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { silent = true })
+vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n><C-w>h", { silent = true })
+
 --------------------------------------------------------------------------------------------------
 -- Harpoon
 --------------------------------------------------------------------------------------------------

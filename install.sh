@@ -326,3 +326,8 @@ log "Done."
 if [[ "$CLEAN" =~ ^[Yy]$ ]]; then
   log "Backups (if any) stored in: $BACKUP_DIR"
 fi
+
+# Setup mise for non-interactive sessions
+[ -f ~/.zprofile ] || touch ~/.zprofile
+grep -qxF 'eval "$(mise activate zsh --shims)"' ~/.zprofile ||
+  printf '\n%s\n' 'eval "$(mise activate zsh --shims)"' >>~/.zprofile
