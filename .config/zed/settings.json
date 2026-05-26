@@ -85,7 +85,11 @@
     "background_coloring": "disabled", // "indent_aware"
   },
   "vim_mode": true,
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
   "inlay_hints": {
     "enabled": true,
     "show_type_hints": false,

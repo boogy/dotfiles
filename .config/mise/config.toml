@@ -27,4 +27,3 @@ compile = false
 [tasks.install-python-package]
 description = "Install a Python package using UV."
 run = "pip install iam-policy-validator ruff httpx requests"
-

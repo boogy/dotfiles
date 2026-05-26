@@ -303,3 +303,6 @@ eval "$(starship init zsh)"
 # echo 'eval "$(mise activate zsh --shims)"' >> ~/.zprofile
 eval "$(mise activate zsh)"
 
+
+# Pi <-> Claude Code skills mirror
+alias pi-sync-skills='~/.pi/agent/scripts/sync-claude-plugin-skills.sh'
