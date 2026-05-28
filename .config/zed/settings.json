@@ -88,7 +88,7 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Material Icon Theme",
-    "dark": "Material Icon Theme"
+    "dark": "Material Icon Theme",
   },
   "inlay_hints": {
     "enabled": true,
@@ -241,6 +241,7 @@
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "default_profile": "ask",
     "favorite_models": [
@@ -389,6 +390,16 @@
     },
     "YAML": {
       "tab_size": 2,
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": [
+      //       "--stdin-filepath",
+      //       "{buffer_path}",
+      //       "--single-quote=false",
+      //     ],
+      //   },
+      // },
     },
     "Shell Script": {
       "format_on_save": "on",
@@ -506,7 +517,7 @@
         "yaml": {
           "keyOrdering": false,
           "format": {
-            "singleQuote": true,
+            "singleQuote": false,
             "printWidth": 200,
           },
           "schemaStore": {

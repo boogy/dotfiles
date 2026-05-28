@@ -144,6 +144,13 @@
       "alt-shift-p": "tab_switcher::ToggleAll"
     }
   },
+  // Toggle agent thread switcher (cycle through open threads)
+  {
+    "context": "AgentPanel || ThreadSwitcher || ThreadsSidebar || Workspace",
+    "bindings": {
+      "alt-shift-l": "agents_sidebar::ToggleThreadSwitcher"
+    }
+  },
   {
     "bindings": {
       "ctrl-n": "workspace::NewCenterTerminal"
