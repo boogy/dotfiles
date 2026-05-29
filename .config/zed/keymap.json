@@ -66,6 +66,13 @@
       "cmd-g e": "terminal_panel::ToggleFocus"
     }
   },
+  // Focus agent panel (open + focus, never hides)
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-g a": "agent::FocusAgent"
+    }
+  },
   {
     "context": "Editor",
     "bindings": {
