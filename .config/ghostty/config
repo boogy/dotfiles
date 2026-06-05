@@ -69,14 +69,14 @@ keybind = cmd+q>q=quit
 #-------------------------------------------------
 
 # tmux :: move between panes (ctrl+cmd+hjkl)
-keybind = ctrl+super+h=text:\x18h
-keybind = ctrl+super+j=text:\x18j
-keybind = ctrl+super+k=text:\x18k
-keybind = ctrl+super+l=text:\x18l
+keybind = ctrl+super+h=text:\x02h
+keybind = ctrl+super+j=text:\x02j
+keybind = ctrl+super+k=text:\x02k
+keybind = ctrl+super+l=text:\x02l
 
-# tmux :: go to previous tab
-keybind = super+l=text:\x1bl
+# tmux :: last-window (cmd+l -> M-L, distinct from alt+l pane nav)
+keybind = super+l=text:\x1bL
 
 # tmux :: create new tab
-keybind = alt+t=text:\x18c
+keybind = alt+t=text:\x02c
 
