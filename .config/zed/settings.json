@@ -14,6 +14,12 @@
     "dock": "left",
   },
   "agent_servers": {
+    "pi-acp": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
     "claude-acp": {
       "default_config_options": {
         "model": "default"
@@ -29,6 +35,24 @@
         {
           "name": "qwen3-coder:30b",
           "display_name": "qwen 3 coder 30b",
+          "max_tokens": 32768,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+          "keep_alive": "5m",
+        },
+        {
+          "name": "qwen3.6:35b",
+          "display_name": "qwen3.6:35b",
+          "max_tokens": 32768,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+          "keep_alive": "5m",
+        },
+        {
+          "name": "qwen3.6:27b",
+          "display_name": "qwen3.6:27b",
           "max_tokens": 32768,
           "supports_tools": true,
           "supports_thinking": true,
@@ -244,9 +268,14 @@
   "preferred_line_length": 80,
   "tab_size": 4,
   "agent": {
+    "default_model": {
+      "provider": "ollama",
+      "model": "qwen3-coder:30b",
+      "enable_thinking": false,
+    },
     "sidebar_side": "right",
     "dock": "right",
-    "default_profile": "ask",
+    "default_profile": "write",
     "favorite_models": [
       {
         "provider": "ollama",
