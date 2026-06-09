@@ -1,6 +1,5 @@
 [tools]
-act = "latest"
-node = "24"
+node = "lts"
 opentofu = "1.11.5"
 python = "latest"
 terraform = "1.14.8"

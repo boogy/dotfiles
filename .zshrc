@@ -306,3 +306,4 @@ eval "$(mise activate zsh)"
 
 # Pi <-> Claude Code skills mirror
 alias pi-sync-skills='~/.pi/agent/scripts/sync-claude-plugin-skills.sh'
+
