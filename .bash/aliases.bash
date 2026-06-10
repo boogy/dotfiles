@@ -23,6 +23,8 @@ if has eza &>/dev/null; then
   alias ls="eza -g --color=auto --time-style=long-iso"
   alias ll="ls -l --color=auto"
   alias l=ll
+  alias lt="ls -T"
+  alias lst="ls -la -T"
   alias la="ls -la --color=always"
   alias llm="ls -l -s modified"
   alias llmr="ls -lr -s modified"
