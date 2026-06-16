@@ -22,7 +22,8 @@
     },
     "claude-acp": {
       "default_config_options": {
-        "model": "default"
+        "effort": "high",
+        "model": "default",
       },
       "type": "registry",
     },
@@ -275,7 +276,7 @@
     },
     "sidebar_side": "right",
     "dock": "right",
-    "default_profile": "write",
+    "default_profile": "ask",
     "favorite_models": [
       {
         "provider": "ollama",
