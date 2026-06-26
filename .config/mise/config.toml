@@ -1,11 +1,11 @@
 [tools]
 node = "lts"
-opentofu = "1.11.5"
+opentofu = "1.12.3"
 python = "latest"
-terraform = "1.14.8"
-terraform-docs = "0.21.0"
+terraform = "1.15.6"
+terraform-docs = "0.24.0"
 terraform-ls = "latest"
-terragrunt = "1.0.0"
+terragrunt = "1.0.8"
 tflint = "latest"
 uv = "latest"
 
