@@ -1,3 +1,13 @@
+# Go to the root of the repository
+cdr() {
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "Not inside a Git repository." >&2
+    return 1
+  }
+  cd "$root"
+}
+
 # Clean python cache and temporary files
 pyclean() {
   if command -v fd &>/dev/null; then
