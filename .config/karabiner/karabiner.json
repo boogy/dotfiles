@@ -1,5 +1,5 @@
 {
-    "global": { "check_for_updates_on_startup": false },
+    "global": { "check_for_updates": false },
     "profiles": [
         {
             "complex_modifications": {

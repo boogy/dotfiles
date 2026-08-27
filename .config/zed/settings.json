@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cli_default_open_behavior": "new_window",
   "outline_panel": {
     "dock": "left",
   },
@@ -448,10 +449,11 @@
       "format_on_save": "on",
       "tab_size": 2,
       "remove_trailing_whitespace_on_save": false,
-      // "indent_list_on_tab": true,
+      // "soft_wrap": "none",
       "prettier": {
         "allowed": true,
       },
+      // "indent_list_on_tab": true,
       // "formatter": {
       //   "external": {
       //     "command": "prettier",

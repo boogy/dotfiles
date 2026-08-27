@@ -64,14 +64,16 @@ export PATH="${PATH}:${HOME}/.cargo/bin"
 export PATH="${PATH}:${GOPATH}/bin"
 
 # Initialize completion system (consolidated)
-autoload -Uz compinit
+# autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 zmodload zsh/complist
 fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
-compinit
+fpath=('~/.local/share/zsh/site-functions' $fpath)
+# compinit
+autoload -Uz compinit && compinit
 
 if type brew >/dev/null 2>&1; then
   fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
