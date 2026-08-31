@@ -161,9 +161,11 @@ function tg_prompt_info() {
 
 alias tgp="terragrunt run --tf-forward-stdout -- plan -compact-warnings"
 alias tg-plan="terragrunt run --tf-forward-stdout -- plan -compact-warnings -lock=false"
+alias tg-plan-all="terragrunt run --tf-forward-stdout --all -- plan -compact-warnings -lock=false"
 
 alias tga="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
 alias tg-apply="terragrunt run --tf-forward-stdout -- apply -compact-warnings"
+alias tg-apply-all="terragrunt run --tf-forward-stdout --all -- apply -compact-warnings"
 
 alias tgd="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
 alias tg-destroy="terragrunt run --tf-forward-stdout -- destroy -compact-warnings"
@@ -201,7 +203,7 @@ function tg-init-parallel() {
 
 function tg-plan-parallel() {
   PARALLEL=${1:-10}
-  terragrunt run --non-interactive --tf-forward-stdout --parallelism $PARALLEL --all -- plan -compact-warnings
+  terragrunt run --non-interactive --tf-forward-stdout --parallelism $PARALLEL --all -- plan -compact-warnings -lock=false
 }
 
 function tg-apply-parallel() {

@@ -71,7 +71,7 @@ zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(
 zmodload zsh/complist
 fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
-fpath=('~/.local/share/zsh/site-functions' $fpath)
+fpath=(~/.local/share/zsh/site-functions $fpath)
 # compinit
 autoload -Uz compinit && compinit
 
