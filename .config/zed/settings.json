@@ -102,8 +102,8 @@
   "ui_font_size": 14.0,
   "buffer_font_size": 14.0,
   "theme": {
-    "mode": "dark",
-    "light": "Gruvbox Light",
+    "mode": "system",
+    "light": "One Light",
     "dark": "Gruvbox Material Dark Hard",
   },
   "indent_guides": {
