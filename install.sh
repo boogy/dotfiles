@@ -21,6 +21,7 @@ MANAGED_PATHS=(
   "$HOME/.vim"
   "$HOME/.vimrc"
   "$HOME/.tmux.conf"
+  "$HOME/.prettierrc.json"
 )
 
 # Exclude some ~/.config entries from being linked
