@@ -202,10 +202,9 @@
     "entry_spacing": "comfortable",
     // Whether to show file icons in the project panel.
     "file_icons": true,
-    // Whether to show folder icons or chevrons for directories in the project panel.
-    "folder_icons": true,
     // Whether to show the git status in the project panel.
     "git_status": true,
+    "folder_indicator": "icon",
     // Amount of indentation for nested items.
     "indent_size": 20,
     // Whether to reveal it in the project panel automatically,
