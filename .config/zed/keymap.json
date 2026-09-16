@@ -6,43 +6,6 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-  {
-    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
-    "bindings": {
-      // visual, visual line & visual block modes
-      "g c": "editor::ToggleComments",
-    },
-  },
-
-  // Focus terminal if in editor
-  {
-    "context": "Editor",
-    "bindings": {
-      // "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-j": "terminal_panel::ToggleFocus",
-    },
-  },
-
-  // Set terminal to full zoom
-  {
-    "context": "Terminal || Editor || Workspace",
-    "bindings": {
-      "cmd-shift-j": "workspace::ToggleZoom",
-    },
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": false }],
-    },
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "cmd-shift-g": "git_panel::ToggleFocus",
-    },
-  },
-
   // Shift focus to editor from terminal
   {
     "context": "Terminal",
@@ -66,27 +29,19 @@
   {
     "context": "Editor",
     "bindings": {
+      "cmd-j": "terminal_panel::ToggleFocus",
+      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": false }],
       "cmd-g e": "terminal_panel::ToggleFocus",
+      "cmd-k l": "language_selector::Toggle",
+      "cmd-alt-s": "editor::SortLinesCaseInsensitive",
     },
   },
 
-  // Focus agent panel (open + focus, never hides)
   {
-    "context": "Workspace",
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
-      "cmd-g a": "agent::FocusAgent",
-    },
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "cmd-k l": "language_selector::Toggle",
-    },
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "cmd-alt-s": "editor::SortLinesCaseInsensitive",
+      // visual, visual line & visual block modes
+      "g c": "editor::ToggleComments",
     },
   },
 
@@ -94,6 +49,10 @@
   {
     "context": "Workspace",
     "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus",
+
+      "cmd-g a": "agent::FocusAgent",
+
       "ctrl-x h": "workspace::ActivatePaneLeft",
       "ctrl-x l": "workspace::ActivatePaneRight",
       "ctrl-x j": "workspace::ActivatePaneDown",
@@ -111,12 +70,7 @@
       "ctrl-r": "projects::OpenRecent",
     },
   },
-  // Close active tab immediately
-  {
-    "bindings": {
-      "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }],
-    },
-  },
+
   // Git
   {
     "context": "GitPanel",
@@ -126,6 +80,7 @@
       "ctrl-s": "git::Fetch",
     },
   },
+
   // Pane
   {
     "context": "Pane",
@@ -143,22 +98,11 @@
     },
   },
 
-  // Show all tabs
-  {
-    "bindings": {
-      "alt-shift-p": "tab_switcher::ToggleAll",
-    },
-  },
   // Toggle agent thread switcher (cycle through open threads)
   {
     "context": "AgentPanel || ThreadSwitcher || ThreadsSidebar || Workspace",
     "bindings": {
       "alt-shift-l": "agents_sidebar::ToggleThreadSwitcher",
-    },
-  },
-  {
-    "bindings": {
-      "ctrl-t": "workspace::NewCenterTerminal",
     },
   },
 
@@ -196,6 +140,7 @@
       "s j": "workspace::ActivatePaneDown",
     },
   },
+
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
@@ -222,9 +167,18 @@
     },
   },
 
-  // Move to any pane with ALT+hjkl
   {
     "bindings": {
+      "cmd-shift-j": "workspace::ToggleZoom",
+
+      // Close active tab immediately
+      "cmd-w": ["pane::CloseActiveItem", { "close_pinned": false }],
+
+      "ctrl-t": "workspace::NewCenterTerminal",
+
+      // Show all tabs
+      "alt-shift-p": "tab_switcher::ToggleAll",
+
       "alt-h": "workspace::ActivatePaneLeft",
       "alt-j": "workspace::ActivatePaneDown",
       "alt-k": "workspace::ActivatePaneUp",
