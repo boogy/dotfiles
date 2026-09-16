@@ -6,18 +6,13 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-  // {
-  //   "context": "Workspace",
-  //   "bindings": {
-  //     "shift shift": "file_finder::Toggle",
-  //   },
-  // },
-  // {
-  //   "context": "Editor && vim_mode == insert",
-  //   "bindings": {
-  //     // "j k": "vim::NormalBefore"
-  //   },
-  // },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      // visual, visual line & visual block modes
+      "g c": "editor::ToggleComments",
+    },
+  },
 
   // Focus terminal if in editor
   {
@@ -47,16 +42,24 @@
       "cmd-shift-g": "git_panel::ToggleFocus",
     },
   },
-  {
-    "bindings": {
-      "cmd-shift-z": "zed::Zoom",
-    },
-  },
+
   // Shift focus to editor from terminal
   {
     "context": "Terminal",
     "bindings": {
       "cmd-g e": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Terminal",
+    "use_key_equivalents": true,
+    "bindings": {
+      // Key-bindings for being in terminal
+      "ctrl-w i": "terminal_panel::ToggleFocus",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w l": "workspace::ActivatePaneRight",
     },
   },
   // Shift focus to terminal from editor
@@ -66,6 +69,7 @@
       "cmd-g e": "terminal_panel::ToggleFocus",
     },
   },
+
   // Focus agent panel (open + focus, never hides)
   {
     "context": "Workspace",
@@ -85,12 +89,6 @@
       "cmd-alt-s": "editor::SortLinesCaseInsensitive",
     },
   },
-  // {
-  //   "context": "Editor",
-  //   "bindings": {
-  //     "cmd-k f": "editor::Format",
-  //   },
-  // },
 
   // Replicate tmux movements
   {
@@ -161,6 +159,76 @@
   {
     "bindings": {
       "ctrl-t": "workspace::NewCenterTerminal",
+    },
+  },
+
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // TODO: Maybe check for another keybinding and other ways to do this.
+      // FIXME: Right now the active pane is also split to the right due to async nature
+      // (related to https://github.com/zed-industries/zed/issues/42555).
+      // "space t v": [
+      //   "action::Sequence",
+      //   ["workspace::NewCenterTerminal", "pane::SplitRight"],
+      // ],
+      "space t l": ["action::Sequence", ["workspace::NewCenterTerminal", "pane::SplitRight"]],
+      "space t h": ["action::Sequence", ["workspace::NewCenterTerminal", "pane::SplitLeft"]],
+
+      "space f": "editor::Format",
+
+      // Finders & Formats
+      "space p f": "file_finder::Toggle",
+      "space p r": "pane::DeploySearch",
+      "space p t": "tab_switcher::Toggle",
+
+      // Buffer Navigation
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+
+      // Window Creation
+      "s v": "pane::SplitRight",
+      "s s": "pane::SplitDown",
+      // Window Navigation
+      "s l": "workspace::ActivatePaneRight",
+      "s h": "workspace::ActivatePaneLeft",
+      "s k": "workspace::ActivatePaneUp",
+      "s j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // Key-bindings for normal & visual mode
+
+      // Open markdown preview
+      "space m p": "markdown::OpenPreview",
+      "space m P": "markdown::OpenPreviewToTheSide",
+      // Git
+      "space g h d": "editor::ToggleSelectedDiffHunks",
+      "space g h r": "git::Restore",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "g l": "vim::SelectNext",
+      "g L": "vim::SelectPrevious",
+      "g a": "editor::SelectAllMatches",
+      "g shift-a": "editor::FindAllReferences",
+      "g f": "project_symbols::Toggle",
+      "space p e": "diagnostics::Deploy", // Zed specific
+      "space z": "workspace::ToggleZoom", // Zed specific
+    },
+  },
+
+  // Move to any pane with ALT+hjkl
+  {
+    "bindings": {
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-j": "workspace::ActivatePaneDown",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-l": "workspace::ActivatePaneRight",
     },
   },
 ]
