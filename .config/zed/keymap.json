@@ -183,6 +183,11 @@
       "alt-j": "workspace::ActivatePaneDown",
       "alt-k": "workspace::ActivatePaneUp",
       "alt-l": "workspace::ActivatePaneRight",
+
+      // create a new terminal agent
+      // "alt+a n": "agent::NewTerminalThread",
+      // "alt+a s": "agent::NewThread",
+      // "alt+p": "agent::CycleNextInlineAssist",
     },
   },
 ]
