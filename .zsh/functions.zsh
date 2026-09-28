@@ -84,9 +84,10 @@ fzf-open() {
 alias fo='fzf-open'
 zle -N fzf-open && bindkey '^o' fzf-open
 
-# Open browser to the current repository
+# Open browser to the current repository (subfolder-aware)
 repo() {
-  local base
+  local base prefix branch
+
   base=$(git remote get-url origin) || return 1
 
   if [[ $base == git@* ]]; then
@@ -105,7 +106,16 @@ repo() {
   case "$1" in
     issues) open "$base/issues" ;;
     pr|prs|pulls) open "$base/pulls" ;;
-    *) open "$base" ;;
+    *)
+      prefix=$(git rev-parse --show-prefix 2>/dev/null)
+      prefix=${prefix%/}
+      if [[ -n $prefix ]]; then
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        open "$base/tree/$branch/$prefix"
+      else
+        open "$base"
+      fi
+      ;;
   esac
 }
 
