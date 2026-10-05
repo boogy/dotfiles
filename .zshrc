@@ -305,6 +305,8 @@ eval "$(starship init zsh)"
 # echo 'eval "$(mise activate zsh --shims)"' >> ~/.zprofile
 eval "$(mise activate zsh)"
 
+# export ripgrep configuration file
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Pi <-> Claude Code skills mirror
 alias pi-sync-skills='~/.pi/agent/scripts/sync-claude-plugin-skills.sh'
