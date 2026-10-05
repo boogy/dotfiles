@@ -89,7 +89,6 @@
   },
   "when_closing_with_no_tabs": "close_window",
   "agent_buffer_font_size": 14.0,
-  "ui_font_family": ".SystemUIFont",
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
   "agent_ui_font_size": 15.0,
@@ -360,7 +359,7 @@
       "terragrunt.hcl.json", // if you ever use JSON variant
     ],
     "OpenTofu": ["tf", "tf.tpl"],
-    "OpenTofu Vars": ["tfvars", "tfvars.yaml", "tfvars.json"],
+    "OpenTofu Vars": ["tfvars"],
     // "Terraform": ["*.tf", "*.tf.tpl"],
     // "Terraform Vars": ["*.tfvars.json", "*.tfvars"],
     "HCL": ["terragrunt.hcl", "*.hcl"],
