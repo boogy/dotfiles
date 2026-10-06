@@ -296,7 +296,7 @@ eval "$(zoxide init zsh --cmd j)"
 export _ZO_ECHO=1 # print folder before cding into it
 
 # setup direnv hook
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 
 ## load staship prompt
 eval "$(starship init zsh)"
@@ -307,7 +307,4 @@ eval "$(mise activate zsh)"
 
 # export ripgrep configuration file
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
-# Pi <-> Claude Code skills mirror
-alias pi-sync-skills='~/.pi/agent/scripts/sync-claude-plugin-skills.sh'
 
