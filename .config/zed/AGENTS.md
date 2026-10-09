@@ -17,4 +17,3 @@ Follow good Git style:
 - Use the imperative mood in the subject line
 - Wrap the body at 72 characters
 - Keep the body short and concise (omit it entirely if not useful)
-- ALWAYS sign commits and tags

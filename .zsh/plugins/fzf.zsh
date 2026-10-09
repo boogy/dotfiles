@@ -23,7 +23,7 @@ function setup_using_base_dir() {
         done
 
         if [[ -z "${fzf_base}" ]]; then
-            if (( ${+commands[brew]} )) && dir="$(brew --prefix fzf 2>/dev/null)"; then
+            if (( ${+commands[brew]} )) && dir="$HOMEBREW_PREFIX/opt/fzf"; then
                 if [[ -d "${dir}" ]]; then
                     fzf_base="${dir}"
                 fi

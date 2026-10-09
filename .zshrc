@@ -55,6 +55,7 @@ export GOPATH=$HOME/go
 ## set PATH
 ##
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="${PATH}:${HOME}/bin"
@@ -73,13 +74,14 @@ fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
 fpath=(~/.local/share/zsh/site-functions $fpath)
 # compinit
-autoload -Uz compinit && compinit
-
 if type brew >/dev/null 2>&1; then
-  fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
-  autoload -Uz compinit
-  compinit
+  fpath=("$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
 fi
+
+autoload -Uz compinit
+_zcd=${ZDOTDIR:-$HOME}/.zcompdump
+if [[ -n $_zcd(#qN.mh+24) ]]; then compinit -d $_zcd; else compinit -C -d $_zcd; fi
+unset _zcd
 
 _comp_options+=(globdots)  # Include hidden files
 setopt COMPLETE_ALIASES
@@ -94,7 +96,6 @@ autoload -U +X bashcompinit && bashcompinit
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 
 zmodload zsh/complist
-compinit
 _comp_options+=(globdots) # Include hidden files (ex: ../).
 
 ## vi mode
@@ -235,6 +236,7 @@ zsh_plugins=(
     widgets
     functions
     tools
+    ai_agents
 )
 ZSH_FULL_PLUGIN_PATHS=(
     "${HOME}/.zsh/plugins/"
@@ -276,8 +278,8 @@ fi
 } || true
 ## macos brew
 [[ $(uname -s) =~ Darwin ]] && {
-    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" &>/dev/null
-    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" &>/dev/null
+    source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" &>/dev/null
+    source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" &>/dev/null
 } || true
 
 # rebuild compinit with

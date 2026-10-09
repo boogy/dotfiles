@@ -1,6 +1,6 @@
 # autoload bashcompinit && bashcompinit
 # autoload -Uz compinit && compinit
-complete -C "$(brew --prefix)/bin/aws_completer" aws
+complete -C "$HOMEBREW_PREFIX/bin/aws_completer" aws
 
 # shortcut completion for aws-vault
 alias av="aws-vault"
