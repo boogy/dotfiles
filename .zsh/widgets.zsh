@@ -134,6 +134,7 @@ jump-to-word(){
 zle -N jump-to-word # Register widget
 bindkey '^X^X' jump-to-word # (CTRL-X CTRL-X)
 
+
 # Fuzzy open (ALT-c): cd into dirs, open files in vim
 fzf-open-widget() {
   emulate -L zsh
@@ -145,36 +146,48 @@ fzf-open-widget() {
   root="${root/#\~/$PWD}"
 
   target="$(
-    command find "$root" \
-      \( -path '*/.*' -o -path '*/.git' -o -path '*/node_modules' -o -path '*/.terraform' \) -prune -o \
-      \( -type d -o -type f \) -print 2>/dev/null \
-    | fzf --height=40% --reverse --prompt="open> " \
-          --bind 'esc:abort,ctrl-c:abort' \
-          --preview-window 'right:60%:wrap' \
-          --preview '
-            p="{}"
-            if [[ -d "$p" ]]; then
-              if command -v eza >/dev/null 2>&1; then
-                eza -la --color=always --group-directories-first "$p" 2>/dev/null | head -200
-              else
-                ls -la "$p" 2>/dev/null | head -200
-              fi
-            else
-              if command -v bat >/dev/null 2>&1; then
-                bat --style=numbers --color=always "$p" 2>/dev/null | head -200
-              else
-                sed -n "1,200p" "$p" 2>/dev/null
-              fi
-            fi
-          '
-  )" || { zle reset-prompt; return 0; }
+    fd . "$root" \
+      -tf -td \
+      -E node_modules \
+      -E .terraform \
+      --no-ignore \
+      --absolute-path 2>/dev/null |
+    fzf \
+      --height=40% \
+      --reverse \
+      --prompt='open> ' \
+      --bind='esc:abort,ctrl-c:abort' \
+      --preview-window='right:60%:wrap' \
+      --preview='bash -c '"'"'
+        p="$1"
 
-  [[ -n "$target" ]] || { zle reset-prompt; return 0; }
+        if [ -d "$p" ]; then
+          if command -v eza >/dev/null 2>&1; then
+            eza -la --color=always --group-directories-first "$p" 2>/dev/null | head -200
+          else
+            ls -la "$p" 2>/dev/null | head -200
+          fi
+        elif [ -f "$p" ]; then
+          bat --style=numbers --color=always --line-range=:200 "$p" 2>/dev/null
+        fi
+      '"'"' _ {}'
+  )" || {
+    zle reset-prompt
+    return 0
+  }
+
+  [[ -n "$target" ]] || {
+    zle reset-prompt
+    return 0
+  }
 
   if [[ -d "$target" ]]; then
-    builtin cd -- "$target" || { zle -M "cd failed: $target"; zle reset-prompt; return 1; }
+    builtin cd -- "$target" || {
+      zle -M "cd failed: $target"
+      zle reset-prompt
+      return 1
+    }
   elif [[ -f "$target" ]]; then
-    # Use vim explicitly; change to ${EDITOR:-vim} if you prefer
     nvim "$target"
   else
     zle -M "Not found: $target"
@@ -183,42 +196,59 @@ fzf-open-widget() {
   zle reset-prompt
 }
 zle -N fzf-open-widget
-bindkey '^F' fzf-open-widget # (CTRL-F)
+bindkey '^F' fzf-open-widget
 
-# Edit file with fzf (CTRL-X CTRL-E)
-# Edits a file selected from fzf. Uses fd or find to list files, excluding .git.
-# The preview window shows the contents of the selected file using bat or head.
-# fzf-edit-file() {
-#   local file
-#   file=$(
-#     (command fd --type f --hidden --follow --exclude .git . 2>/dev/null || command find . -type f 2>/dev/null) \
-#     | fzf --height=40% --reverse --prompt="edit> " \
-#           --preview 'f={}; (command bat --style=numbers --color=always "$f" || sed -n "1,200p" "$f") 2>/dev/null'
-#   ) || return
-
-#   [[ -n "$file" ]] && ${EDITOR:-vi} "$file"
-#   zle redisplay
+# Fuzzy open (ALT-c): cd into dirs, open files in vim
+# fzf-open-widget() {
+#   emulate -L zsh
+#   setopt localoptions no_aliases
+#
+#   local root="${1:-$PWD}"
+#   local target
+#
+#   root="${root/#\~/$PWD}"
+#
+#   target="$(
+#     command find "$root" \
+#       \( -path '*/.*' -o -path '*/.git' -o -path '*/node_modules' -o -path '*/.terraform' \) -prune -o \
+#       \( -type d -o -type f \) -print 2>/dev/null \
+#     | fzf --height=40% --reverse --prompt="open> " \
+#           --bind 'esc:abort,ctrl-c:abort' \
+#           --preview-window 'right:60%:wrap' \
+#           --preview '
+#             p="{}"
+#             if [[ -d "$p" ]]; then
+#               if command -v eza >/dev/null 2>&1; then
+#                 eza -la --color=always --group-directories-first "$p" 2>/dev/null | head -200
+#               else
+#                 ls -la "$p" 2>/dev/null | head -200
+#               fi
+#             else
+#               if command -v bat >/dev/null 2>&1; then
+#                 bat --style=numbers --color=always "$p" 2>/dev/null | head -200
+#               else
+#                 sed -n "1,200p" "$p" 2>/dev/null
+#               fi
+#             fi
+#           '
+#   )" || { zle reset-prompt; return 0; }
+#
+#   [[ -n "$target" ]] || { zle reset-prompt; return 0; }
+#
+#   if [[ -d "$target" ]]; then
+#     builtin cd -- "$target" || { zle -M "cd failed: $target"; zle reset-prompt; return 1; }
+#   elif [[ -f "$target" ]]; then
+#     # Use vim explicitly; change to ${EDITOR:-vim} if you prefer
+#     nvim "$target"
+#   else
+#     zle -M "Not found: $target"
+#   fi
+#
+#   zle reset-prompt
 # }
-# zle -N fzf-edit-file
-# bindkey '^X^E' fzf-edit-file
+# zle -N fzf-open-widget
+# bindkey '^F' fzf-open-widget # (CTRL-F)
 
-# fzf-history-insert() {
-#   local selected
-#   selected=$(
-#     fc -rl 1 \
-#     | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' \
-#     | awk '!seen[$0]++' \
-#     | fzf --height=40% --reverse --prompt="history> " \
-#           --preview 'echo {}' \
-#           --bind 'ctrl-y:execute-silent(echo -n {} | pbcopy || true)+abort'
-#   ) || return
-
-#   BUFFER="$selected"
-#   CURSOR=${#BUFFER}
-#   zle redisplay
-# }
-# zle -N fzf-history-insert
-# bindkey '^R' fzf-history-insert
 
 # Kill process fuzzy search (CTRL-X k)
 fzf-kill-process() {
@@ -365,6 +395,8 @@ insert-snippet() {
   local snippet
   snippet=$(
     cat <<'EOF' | fzf --height=40% --reverse --prompt="snippet> "
+tg run --all --tf-forward-stdout
+tg run --all plan
 aws --no-cli-pager --output json
 kubectl get -o yaml
 | jq -r '.'
