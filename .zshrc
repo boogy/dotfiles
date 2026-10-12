@@ -68,7 +68,6 @@ export PATH="${PATH}:${GOPATH}/bin"
 # autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 zmodload zsh/complist
 fpath=(~/.zsh/completion $fpath)
 fpath=(~/.zsh/completion-local $fpath)
@@ -93,10 +92,7 @@ autoload -U +X bashcompinit && bashcompinit
 # zstyle ':completion:*' special-dirs true
 
 ## avoid ./ and ../ being proposed
-zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
-
-zmodload zsh/complist
-_comp_options+=(globdots) # Include hidden files (ex: ../).
+zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(.|..) ]] && reply=(..)'
 
 ## vi mode
 bindkey -v
