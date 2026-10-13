@@ -80,3 +80,6 @@ keybind = super+l=text:\x1bL
 # tmux :: create new tab
 keybind = alt+t=text:\x02c
 
+# default keybindings to zoom (ghostty +list-keybinds | rg -i zoom)
+# keybind = super+shift+enter=toggle_split_zoom
+
