@@ -20,7 +20,7 @@ RESET=$(tput setaf 7)     # Norma
 ## or rust equivalent 'exa'
 ##
 if has eza &>/dev/null; then
-  alias ls="eza -g --color=auto --time-style=long-iso"
+  alias ls="eza -g --color=auto --time-style=long-iso --sort date"
   alias ll="ls -l --color=auto"
   alias l=ll
   alias lt="ls -T"
