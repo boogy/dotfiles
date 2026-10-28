@@ -1,11 +1,12 @@
 [tools]
+aws-cli = { version = "latest", symlink_bins = "true" }
 node = "24.16.0"
 opentofu = "1.13.1"
-python = "latest"
-terraform = "1.16.5"
+python = "3.14.9"
+terraform = "1.17.0"
 terraform-docs = "0.24.0"
 terraform-ls = "latest"
-terragrunt = "1.1.6"
+terragrunt = "1.2.0"
 tflint = "latest"
 uv = "latest"
 
@@ -14,6 +15,26 @@ jobs = 8
 env_shell_expand = true
 experimental = true
 status.show_env = true
+# disable_backends = [
+#   "asdf",
+#   "cargo",
+#   "conda",
+#   "dotnet",
+#   "forgejo",
+#   "gem",
+#   "github",
+#   "gitlab",
+#   "go",
+#   "packslip",
+#   "pypi",
+#   "spinel",
+#   "spm",
+#   "http",
+#   "s3",
+#   "ubi",
+#   "vfox",
+# ]
+locked = true
 # always_keep_download = true
 
 [settings.python]

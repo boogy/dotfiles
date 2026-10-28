@@ -11,6 +11,10 @@ local map = require("utils").map
 -- map("n", "<C-l>", "<C-w>l")
 -- map("n", "<C-k>", "<C-w>k")
 
+-- for _, k in ipairs({ ",", ".", ";" }) do
+--   vim.keymap.del("i", k)
+-- end
+
 -- Resize with arrows
 map("n", "<Up>", ":resize -2<CR>", { desc = "Resize pane up -2" })
 map("n", "<Down>", ":resize +2<CR>", { desc = "Resize pane down +2" })
