@@ -1,5 +1,5 @@
-[hooks]
-enter = ["mise install -q"]
+# [hooks]
+# enter = ["mise install -q"]
 
 [tools]
 claude = { version = "latest", auto_update = true }
@@ -55,50 +55,50 @@ compile = false
 [settings.task]
 run_auto_install = true
 
-[bootstrap.mise_shell_activate]
-zsh = true
-
-# [tasks.bootstrap]
-# run = "node --version"
-
-[bootstrap.packages]
-"brew-cask:firefox" = "latest"
-"brew-cask:1password-cli" = "latest"
-"brew-cask:zed" = "latest"
-"brew-cask:karabiner-elements" = "latest"
-"brew-cask:ghostty" = "latest"
-"brew-cask:docker-desktop" = "latest"
-"brew-cask:neovide" = "latest"
-"brew-cask:obsidian" = "latest"
-# "brew-cask:font-jetbrains-mono" = { os = ["linux", "macos"] }
-"brew:zsh-autosuggestions" = "latest"
-"brew:zsh-completions" = "latest"
-"brew:zsh-fast-syntax-highlighting" = "latest"
-"brew:zsh-syntax-highlighting" = "latest"
-"brew:tmux" = "latest"
-"brew:neovim" = "latest"
-"brew:eza" = "latest"
-"brew:jq" = "latest"
-"brew:yq" = "latest"
-"brew:go" = "latest"
-"brew:ruff" = "latest"
-"brew:starship" = "latest"
-"brew:prettier" = "latest"
-"brew:ripgrep" = "latest"
-"brew:fzf" = "latest"
-
-# [tasks."global:upgrade-interactive"]
-# description = "Upgrade all tools and packages interactively."
-# run = "mise upgrade --interactive --bump"
+# [bootstrap.mise_shell_activate]
+# zsh = true
 #
-# [tasks."gloal:outdatedl"]
-# description = "Check for outdated global packages."
-# run = "mise outdated --global"
+# # [tasks.bootstrap]
+# # run = "node --version"
 #
-# [tasks.install-system-tools]
-# description = "Install Python System Tools with UV"
-# run = ["uv tool install iam-policy-validator"]
+# [bootstrap.packages]
+# "brew-cask:firefox" = "latest"
+# "brew-cask:1password-cli" = "latest"
+# "brew-cask:zed" = "latest"
+# "brew-cask:karabiner-elements" = "latest"
+# "brew-cask:ghostty" = "latest"
+# "brew-cask:docker-desktop" = "latest"
+# "brew-cask:neovide" = "latest"
+# "brew-cask:obsidian" = "latest"
+# # "brew-cask:font-jetbrains-mono" = { os = ["linux", "macos"] }
+# "brew:zsh-autosuggestions" = "latest"
+# "brew:zsh-completions" = "latest"
+# "brew:zsh-fast-syntax-highlighting" = "latest"
+# "brew:zsh-syntax-highlighting" = "latest"
+# "brew:tmux" = "latest"
+# "brew:neovim" = "latest"
+# "brew:eza" = "latest"
+# "brew:jq" = "latest"
+# "brew:yq" = "latest"
+# "brew:go" = "latest"
+# "brew:ruff" = "latest"
+# "brew:starship" = "latest"
+# "brew:prettier" = "latest"
+# "brew:ripgrep" = "latest"
+# "brew:fzf" = "latest"
 #
-# [tasks.install-python-package]
-# description = "Install a Python package using UV."
-# run = "uv pip install --system ruff httpx requests pydantic"
+# # [tasks."global:upgrade-interactive"]
+# # description = "Upgrade all tools and packages interactively."
+# # run = "mise upgrade --interactive --bump"
+# #
+# # [tasks."gloal:outdatedl"]
+# # description = "Check for outdated global packages."
+# # run = "mise outdated --global"
+# #
+# # [tasks.install-system-tools]
+# # description = "Install Python System Tools with UV"
+# # run = ["uv tool install iam-policy-validator"]
+# #
+# # [tasks.install-python-package]
+# # description = "Install a Python package using UV."
+# # run = "uv pip install --system ruff httpx requests pydantic"
