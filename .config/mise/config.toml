@@ -1,6 +1,5 @@
-[env]
-UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
-MISE_PYTHON_DEFAULT_PACKAGES_FILE = "~/.config/mise/default-python-packages"
+[hooks]
+enter = ["mise install -q"]
 
 [tools]
 claude = { version = "latest", auto_update = true }
@@ -14,6 +13,10 @@ terraform-ls = "latest"
 terragrunt = "1.2.1"
 tflint = "latest"
 uv = "latest"
+
+[env]
+UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+MISE_PYTHON_DEFAULT_PACKAGES_FILE = "~/.config/mise/default-python-packages"
 
 [settings]
 lockfile = true

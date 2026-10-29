@@ -1,4 +1,15 @@
 httpx
 requests
 pydantic
+pydantic[email]
+neovim
+boto3
+botocore
+ipython
+pre-commit
+aws_lambda_powertools
+keyring
+jinja2
+ruff
+questionary
 
