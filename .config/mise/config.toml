@@ -13,6 +13,7 @@ terraform-ls = "latest"
 terragrunt = "1.2.1"
 tflint = "latest"
 uv = "latest"
+pnpm = "latest"
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
