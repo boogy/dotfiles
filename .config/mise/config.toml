@@ -2,11 +2,11 @@
 # enter = ["mise install -q"]
 
 [tools]
-claude = { version = "latest", auto_update = true }
+# claude = { version = "latest", auto_update = true, minimum_release_age = "0d" }
 node = { version = "lts", minimum_release_age = "1d", auto_update = "12h" }
-aws-cli = { version = "latest", auto_update = "12h", symlink_bins = "true" }
+aws-cli = { version = "latest", symlink_bins = "true", auto_update = "12h" }
 opentofu = "1.13.2"
-python = "3.15.2"
+python = "3.14.10"
 terraform = "1.17.0"
 terraform-docs = "0.24.0"
 terraform-ls = "latest"
@@ -27,25 +27,26 @@ jobs = 8
 env_shell_expand = true
 experimental = true
 status.show_env = true
-disable_backends = [
-  "asdf",
-  "cargo",
-  "conda",
-  "dotnet",
-  "forgejo",
-  "gem",
-  # "github",
-  # "go",
-  # "pypi",
-  # "http",
-  # "s3",
-  "gitlab",
-  "packslip",
-  "spinel",
-  "spm",
-  "ubi",
-  "vfox",
-]
+# disable_backends = [
+#   "asdf",
+#   "cargo",
+#   "conda",
+#   "dotnet",
+#   "forgejo",
+#   "gem",
+#   "github",
+#   "gitlab",
+#   "go",
+#   "packslip",
+#   "pypi",
+#   "spinel",
+#   "spm",
+#   "http",
+#   "s3",
+#   "ubi",
+#   "vfox",
+# ]
+locked = true
 # locked = true
 # always_keep_download = true
 
