@@ -16,7 +16,7 @@ tflint = "latest"
 # pnpm = "latest"
 
 [env]
-UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+# UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 # MISE_PYTHON_DEFAULT_PACKAGES_FILE = "~/.config/mise/default-python-packages"
 
 [settings]

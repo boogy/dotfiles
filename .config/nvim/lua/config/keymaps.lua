@@ -48,7 +48,9 @@ map("n", "<leader>tk", "<C-w>t<C-w>K", { desc = "Change split orientation left",
 map("n", "<leader>th", "<C-w>t<C-w>H", { desc = "Change split orientation right", silent = true }) -- change horizontal to vertical
 
 -- format current buffer
-map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format current buffer", silent = true })
+map("n", "<leader>f", function()
+  require("conform").format({ lsp_format = "fallback" })
+end, { desc = "Format current buffer", silent = true })
 
 -- Copy Pasting
 map("x", "<leader>p", '"_dP', { desc = "Replace without yanking" })
