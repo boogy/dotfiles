@@ -2,9 +2,9 @@
 # enter = ["mise install -q"]
 
 [tools]
-# claude = { version = "latest", auto_update = true, minimum_release_age = "0d" }
 node = { version = "lts", minimum_release_age = "1d", auto_update = "12h" }
-aws-cli = { version = "latest", symlink_bins = "true", auto_update = "12h" }
+# aws-cli = { version = "latest", symlink_bins = "true", auto_update = "12h" }
+# claude = { version = "latest", auto_update = true, minimum_release_age = "0d" }
 opentofu = "1.13.2"
 python = "3.14.10"
 terraform = "1.17.0"
